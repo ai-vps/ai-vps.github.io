@@ -1,0 +1,2111 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI-VPS | Инфраструктура для искусственного интеллекта</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Fira+Sans:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0a0908;
+  --bg-secondary: #100e0c;
+  --surface: #161412;
+  --surface-hover: #1c1a17;
+  --border: #2a2520;
+  --border-light: #3a3530;
+  --accent: #e8a838;
+  --accent-dim: #c4872a;
+  --accent-glow: rgba(232,168,56,0.15);
+  --copper: #d4785a;
+  --copper-dim: rgba(212,120,90,0.2);
+  --sage: #7a9e7e;
+  --sage-dim: rgba(122,158,126,0.15);
+  --text: #f0ece4;
+  --text-muted: #8a8278;
+  --text-subtle: #5a5550;
+  --font-display: 'Playfair Display', Georgia, serif;
+  --font-body: 'Fira Sans', -apple-system, sans-serif;
+  --font-mono: 'Fira Code', 'Courier New', monospace;
+}
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; font-size: 16px; }
+body {
+  font-family: var(--font-body);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.7;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+  opacity: 0.025;
+  pointer-events: none;
+  z-index: 9999;
+}
+::selection { background: var(--accent); color: var(--bg); }
+a { color: var(--accent); text-decoration: none; transition: color 0.3s; }
+a:hover { color: var(--copper); }
+.container { max-width: 1340px; margin: 0 auto; padding: 0 clamp(1.5rem, 4vw, 3rem); }
+
+/* ==================== NAVIGATION ==================== */
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  padding: 1rem 0;
+  background: rgba(10,9,8,0.88);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(42,37,32,0.5);
+  transition: all 0.4s;
+}
+.nav.scrolled { padding: 0.6rem 0; background: rgba(10,9,8,0.96); }
+.nav-inner {
+  max-width: 1340px;
+  margin: 0 auto;
+  padding: 0 clamp(1.5rem, 4vw, 3rem);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: 1.3rem;
+  color: var(--text);
+  letter-spacing: 0.02em;
+}
+.nav-logo .logo-accent { color: var(--accent); }
+.nav-links { display: flex; gap: 0.25rem; flex-wrap: wrap; }
+.nav-links a {
+  padding: 0.45rem 0.85rem;
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  border-radius: 6px;
+  transition: all 0.3s;
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+}
+.nav-links a:hover, .nav-links a.active {
+  color: var(--accent);
+  background: var(--accent-glow);
+}
+.nav-burger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  padding: 4px;
+}
+.nav-burger span {
+  width: 24px;
+  height: 2px;
+  background: var(--text);
+  border-radius: 2px;
+  transition: 0.3s;
+}
+
+/* ==================== PAGE SECTIONS ==================== */
+.page {
+  min-height: 100vh;
+  padding: 8rem 0 5rem;
+  position: relative;
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+.page.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.page-divider {
+  position: relative;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--border-light) 20%, var(--border-light) 80%, transparent);
+  margin: 0;
+}
+.page-divider::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 8px;
+  height: 5px;
+  background: var(--accent);
+  border-radius: 50%;
+  box-shadow: 0 0 12px var(--accent-glow);
+}
+.section-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.4rem 1rem;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--accent);
+  background: var(--accent-glow);
+  border: 1px solid rgba(232,168,56,0.2);
+  border-radius: 100px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 1.5rem;
+}
+.section-title {
+  font-family: var(--font-display);
+  font-size: clamp(2.2rem, 5vw, 3.5rem);
+  font-weight: 900;
+  line-height: 1.15;
+  color: var(--text);
+  margin-bottom: 1rem;
+  letter-spacing: -0.01em;
+}
+.section-subtitle {
+  font-size: 1.1rem;
+  color: var(--text-muted);
+  max-width: 680px;
+  line-height: 1.7;
+  margin-bottom: 3rem;
+}
+
+/* ==================== HERO ==================== */
+#hero {
+  padding-top: 10rem;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+}
+#hero .hero-mesh {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+.hero-content {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+}
+.hero-text .hero-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--accent);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-bottom: 1.5rem;
+}
+.hero-text h1 {
+  font-family: var(--font-display);
+  font-size: clamp(2.8rem, 6vw, 5rem);
+  font-weight: 900;
+  line-height: 1.08;
+  color: var(--text);
+  margin-bottom: 1.5rem;
+}
+.hero-text h1 .accent { color: var(--accent); }
+.hero-text .hero-desc {
+  font-size: 1.15rem;
+  color: var(--text-muted);
+  line-height: 1.8;
+  max-width: 540px;
+  margin-bottom: 2.5rem;
+}
+.hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.85rem 1.8rem;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.92rem;
+  border-radius: 8px;
+  cursor: pointer;
+  border: none;
+  transition: all 0.3s;
+  letter-spacing: 0.02em;
+}
+.btn-primary {
+  background: var(--accent);
+  color: var(--bg);
+}
+.btn-primary:hover {
+  background: #f0b84a;
+  color: var(--bg);
+  box-shadow: 0 0 30px rgba(232,168,56,0.3);
+  transform: translateY(-2px);
+}
+.btn-outline {
+  background: transparent;
+  color: var(--text);
+  border: 1px solid var(--border-light);
+}
+.btn-outline:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: var(--accent-glow);
+}
+.hero-visual {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.hero-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
+  margin-top: 4rem;
+  padding-top: 3rem;
+  border-top: 1px solid var(--border);
+  position: relative;
+  z-index: 1;
+}
+.hero-stat {
+  text-align: left;
+}
+.hero-stat .stat-number {
+  font-family: var(--font-display);
+  font-size: 2.4rem;
+  font-weight: 900;
+  color: var(--accent);
+  line-height: 1.1;
+}
+.hero-stat .stat-label {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-top: 0.3rem;
+}
+
+/* ==================== PROVIDER CARDS ==================== */
+.providers-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+.provider-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 2rem;
+  transition: all 0.4s;
+  position: relative;
+  overflow: hidden;
+}
+.provider-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--accent), transparent);
+  opacity: 0;
+  transition: opacity 0.4s;
+}
+.provider-card:hover {
+  border-color: var(--border-light);
+  background: var(--surface-hover);
+  transform: translateY(-4px);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+}
+.provider-card:hover::before { opacity: 1; }
+.card-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+}
+.card-logo {
+  width: 48px;
+  height: 48px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.card-header h3 {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1.2;
+}
+.card-header .card-region {
+  font-size: 0.75rem;
+  font-family: var(--font-mono);
+  color: var(--text-subtle);
+  letter-spacing: 0.05em;
+}
+.card-desc {
+  font-size: 0.92rem;
+  color: var(--text-muted);
+  line-height: 1.65;
+  margin-bottom: 1.25rem;
+}
+.card-features {
+  list-style: none;
+  margin-bottom: 1.5rem;
+}
+.card-features li {
+  padding: 0.35rem 0;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  display: flex;
+  align-items: baseline;
+  gap: 0.6rem;
+}
+.card-features li::before {
+  content: '';
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--accent);
+  flex-shrink: 0;
+  margin-top: 0.15rem;
+}
+.card-price {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border);
+}
+.card-price .price-from {
+  font-size: 0.75rem;
+  color: var(--text-subtle);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.card-price .price-val {
+  font-family: var(--font-mono);
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: var(--accent);
+}
+.card-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--accent);
+  margin-top: 1rem;
+  transition: gap 0.3s;
+}
+.card-link:hover { gap: 0.8rem; }
+
+/* ==================== COMPARISON TABLE ==================== */
+.table-wrap {
+  overflow-x: auto;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: var(--surface);
+  margin-bottom: 2rem;
+}
+.table-wrap table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.88rem;
+}
+.table-wrap thead {
+  background: var(--bg-secondary);
+}
+.table-wrap th {
+  padding: 1rem 1.25rem;
+  text-align: left;
+  font-weight: 600;
+  color: var(--text-muted);
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  border-bottom: 1px solid var(--border);
+  white-space: nowrap;
+}
+.table-wrap td {
+  padding: 0.9rem 1.25rem;
+  border-bottom: 1px solid var(--border);
+  color: var(--text-muted);
+  vertical-align: top;
+}
+.table-wrap tr:last-child td { border-bottom: none; }
+.table-wrap tr:hover td { background: rgba(232,168,56,0.03); }
+.table-wrap .highlight-cell { color: var(--accent); font-weight: 500; font-family: var(--font-mono); font-size: 0.85rem; }
+.table-wrap .provider-name {
+  font-weight: 600;
+  color: var(--text);
+  white-space: nowrap;
+}
+
+/* ==================== GUIDE / INFO CARDS ==================== */
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+.info-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 2rem;
+  transition: border-color 0.3s;
+}
+.info-card:hover { border-color: var(--border-light); }
+.info-card .info-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.25rem;
+}
+.info-card h3 {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+  color: var(--text);
+}
+.info-card p {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  line-height: 1.65;
+}
+.info-card ul {
+  list-style: none;
+  margin-top: 0.75rem;
+}
+.info-card ul li {
+  padding: 0.3rem 0;
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  display: flex;
+  gap: 0.5rem;
+  align-items: baseline;
+}
+.info-card ul li::before {
+  content: '—';
+  color: var(--text-subtle);
+}
+
+/* ==================== PRICING TIERS ==================== */
+.pricing-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+.price-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 2.5rem 2rem;
+  transition: all 0.4s;
+  position: relative;
+}
+.price-card.featured {
+  border-color: var(--accent);
+  background: linear-gradient(180deg, rgba(232,168,56,0.06) 0%, var(--surface) 40%);
+}
+.price-card.featured::before {
+  content: 'РЕКОМЕНДУЕТСЯ';
+  position: absolute;
+  top: 1.25rem;
+  right: 1.25rem;
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  padding: 0.3rem 0.7rem;
+  background: var(--accent);
+  color: var(--bg);
+  border-radius: 100px;
+  font-weight: 600;
+}
+.price-card:hover { transform: translateY(-4px); box-shadow: 0 20px 50px rgba(0,0,0,0.3); }
+.price-card h3 {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  margin-bottom: 0.5rem;
+}
+.price-card .price-tag {
+  font-family: var(--font-display);
+  font-size: 2.4rem;
+  font-weight: 900;
+  color: var(--accent);
+  margin-bottom: 0.5rem;
+}
+.price-card .price-tag span {
+  font-size: 1rem;
+  font-family: var(--font-body);
+  color: var(--text-subtle);
+  font-weight: 400;
+}
+.price-card .price-desc {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  margin-bottom: 1.5rem;
+  line-height: 1.6;
+}
+.price-card ul {
+  list-style: none;
+}
+.price-card ul li {
+  padding: 0.5rem 0;
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  gap: 0.6rem;
+  align-items: baseline;
+}
+.price-card ul li:last-child { border-bottom: none; }
+.price-card ul li::before {
+  content: '';
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--sage);
+  flex-shrink: 0;
+  margin-top: 0.15rem;
+}
+
+/* ==================== FAQ ==================== */
+.faq-item {
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  margin-bottom: 1rem;
+  overflow: hidden;
+  background: var(--surface);
+  transition: border-color 0.3s;
+}
+.faq-item:hover { border-color: var(--border-light); }
+.faq-q {
+  padding: 1.25rem 1.5rem;
+  font-weight: 600;
+  font-size: 1rem;
+  color: var(--text);
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: color 0.3s;
+}
+.faq-q:hover { color: var(--accent); }
+.faq-q svg { flex-shrink: 0; transition: transform 0.3s; }
+.faq-a {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease, padding 0.4s ease;
+  padding: 0 1.5rem;
+}
+.faq-item.open .faq-a {
+  max-height: 300px;
+  padding: 0 1.5rem 1.25rem;
+}
+.faq-item.open .faq-q svg { transform: rotate(45deg); }
+.faq-a p {
+  font-size: 0.92rem;
+  color: var(--text-muted);
+  line-height: 1.7;
+}
+
+/* ==================== FOOTER ==================== */
+.footer {
+  padding: 4rem 0 2rem;
+  border-top: 1px solid var(--border);
+  background: var(--bg-secondary);
+}
+.footer-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 3rem;
+  margin-bottom: 3rem;
+}
+.footer-brand p {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  line-height: 1.7;
+  margin-top: 1rem;
+  max-width: 340px;
+}
+.footer h4 {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  margin-bottom: 1rem;
+  color: var(--text);
+}
+.footer ul { list-style: none; }
+.footer ul li { padding: 0.35rem 0; }
+.footer ul a { font-size: 0.88rem; color: var(--text-muted); }
+.footer ul a:hover { color: var(--accent); }
+.footer-bottom {
+  padding-top: 2rem;
+  border-top: 1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.82rem;
+  color: var(--text-subtle);
+}
+
+/* ==================== TABS ==================== */
+.tabs-nav {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+}
+.tab-btn {
+  padding: 0.6rem 1.3rem;
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+.tab-btn:hover { border-color: var(--border-light); color: var(--text); }
+.tab-btn.active {
+  background: var(--accent-glow);
+  border-color: rgba(232,168,56,0.3);
+  color: var(--accent);
+}
+.tab-panel { display: none; }
+.tab-panel.active { display: block; }
+
+/* ==================== TWO COL LAYOUT ==================== */
+.two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  align-items: start;
+}
+.col-text h3 {
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  margin-bottom: 1rem;
+}
+.col-text p {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  line-height: 1.75;
+  margin-bottom: 1rem;
+}
+.col-text ul {
+  list-style: none;
+}
+.col-text ul li {
+  padding: 0.4rem 0;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  display: flex;
+  gap: 0.6rem;
+  align-items: baseline;
+}
+.col-text ul li::before {
+  content: '';
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--accent);
+  flex-shrink: 0;
+}
+
+/* ==================== RESPONSIVE ==================== */
+@media (max-width: 1024px) {
+  .hero-content { grid-template-columns: 1fr; }
+  .hero-visual { display: none; }
+  .hero-stats { grid-template-columns: repeat(2, 1fr); }
+  .two-col { grid-template-columns: 1fr; }
+  .footer-grid { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 768px) {
+  .nav-links { display: none; }
+  .nav-burger { display: flex; }
+  .nav-links.open {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: rgba(10,9,8,0.98);
+    padding: 1rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .providers-grid { grid-template-columns: 1fr; }
+  .hero-stats { grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+  .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
+  .footer-bottom { flex-direction: column; gap: 1rem; text-align: center; }
+}
+
+/* ==================== ANIMATIONS ==================== */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+@keyframes rotateSlow { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+.animate-delay-1 { animation-delay: 0.1s; }
+.animate-delay-2 { animation-delay: 0.2s; }
+.animate-delay-3 { animation-delay: 0.3s; }
+.animate-delay-4 { animation-delay: 0.4s; }
+.animate-delay-5 { animation-delay: 0.5s; }
+</style>
+</head>
+<body>
+
+<!-- ===================== NAVIGATION ===================== -->
+<nav class="nav" id="mainNav">
+  <div class="nav-inner">
+    <a href="#hero" class="nav-logo">
+      <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+        <rect x="2" y="8" width="24" height="14" rx="2" stroke="#e8a838" stroke-width="1.5" fill="none"/>
+        <line x1="8" y1="8" x2="8" y2="22" stroke="#e8a838" stroke-width="1" opacity="0.5"/>
+        <line x1="14" y1="8" x2="14" y2="22" stroke="#e8a838" stroke-width="1" opacity="0.5"/>
+        <line x1="20" y1="8" x2="20" y2="22" stroke="#e8a838" stroke-width="1" opacity="0.5"/>
+        <circle cx="6" cy="5" r="2" fill="#e8a838" opacity="0.8"/>
+        <circle cx="14" cy="4" r="1.5" fill="#e8a838"/>
+        <line x1="6" y1="7" x2="8" y2="8" stroke="#e8a838" stroke-width="1" opacity="0.6"/>
+        <line x1="14" y1="5.5" x2="14" y2="8" stroke="#e8a838" stroke-width="1" opacity="0.6"/>
+        <rect x="4" y="11" width="2" height="1.5" rx="0.5" fill="#e8a838" opacity="0.7"/>
+        <rect x="10" y="11" width="2" height="1.5" rx="0.5" fill="#e8a838" opacity="0.7"/>
+        <rect x="16" y="11" width="2" height="1.5" rx="0.5" fill="#e8a838" opacity="0.7"/>
+        <rect x="22" y="11" width="2" height="1.5" rx="0.5" fill="#e8a838" opacity="0.7"/>
+      </svg>
+      AI<span class="logo-accent">-</span>VPS
+    </a>
+    <div class="nav-links" id="navLinks">
+      <a href="#page-intro">Обзор</a>
+      <a href="#page-cloud-ru">РФ облака</a>
+      <a href="#page-cloud-intl">Мировые облака</a>
+      <a href="#page-cloud-cn">Китай</a>
+      <a href="#page-ai-intl">AI мир</a>
+      <a href="#page-ai-ru">AI Россия</a>
+      <a href="#page-compare">Сравнение</a>
+      <a href="#page-pricing">Тарифы</a>
+      <a href="#page-guide">Гид</a>
+      <a href="#page-faq">FAQ</a>
+    </div>
+    <div class="nav-burger" id="navBurger" onclick="document.getElementById('navLinks').classList.toggle('open')">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</nav>
+
+<!-- ===================== HERO ===================== -->
+<section class="page visible" id="hero">
+  <div class="hero-mesh">
+    <svg width="100%" height="100%" style="position:absolute;inset:0;opacity:0.06;">
+      <defs>
+        <radialGradient id="hm1" cx="25%" cy="30%" r="45%">
+          <stop offset="0%" stop-color="#e8a838" stop-opacity="0.4"/>
+          <stop offset="100%" stop-color="transparent"/>
+        </radialGradient>
+        <radialGradient id="hm2" cx="75%" cy="70%" r="40%">
+          <stop offset="0%" stop-color="#d4785a" stop-opacity="0.3"/>
+          <stop offset="100%" stop-color="transparent"/>
+        </radialGradient>
+        <radialGradient id="hm3" cx="60%" cy="20%" r="35%">
+          <stop offset="0%" stop-color="#7a9e7e" stop-opacity="0.2"/>
+          <stop offset="100%" stop-color="transparent"/>
+        </radialGradient>
+      </defs>
+      <rect width="100%" height="100%" fill="url(#hm1)"/>
+      <rect width="100%" height="100%" fill="url(#hm2)"/>
+      <rect width="100%" height="100%" fill="url(#hm3)"/>
+    </svg>
+    <!-- circuit lines -->
+    <svg width="100%" height="100%" style="position:absolute;inset:0;opacity:0.03;">
+      <defs><pattern id="circ" x="0" y="0" width="80" height="80" patternUnits="userSpaceOnUse">
+        <path d="M40 0 V30 H80 M40 50 V80 M0 40 H30 V60 H50 V40 H80" stroke="#e8a838" stroke-width="0.5" fill="none"/>
+        <circle cx="40" cy="40" r="3" fill="none" stroke="#e8a838" stroke-width="0.5"/>
+      </pattern></defs>
+      <rect width="100%" height="100%" fill="url(#circ)"/>
+    </svg>
+  </div>
+  <div class="container">
+    <div class="hero-content">
+      <div class="hero-text">
+        <div class="hero-eyebrow">Инфраструктура для ИИ нового поколения</div>
+        <h1>VPS и облачные <span class="accent">ресурсы</span> для <span class="accent">ИИ</span>-задач</h1>
+        <p class="hero-desc">Комплексное руководство по выбору серверных мощностей и ИИ-платформ. Сравнение провайдеров из России, Китая, США и Европы. GPU-инстансы, модели с открытым кодом, управляемый Kubernetes и многое другое.</p>
+        <div class="hero-actions">
+          <a href="#page-cloud-ru" class="btn btn-primary">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Начать обзор
+          </a>
+          <a href="#page-compare" class="btn btn-outline">Сравнить решения</a>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <!-- Server Rack SVG -->
+        <svg width="400" height="440" viewBox="0 0 400 440" fill="none">
+          <defs>
+            <linearGradient id="rackGrad" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#1c1a17"/>
+              <stop offset="100%" stop-color="#100e0c"/>
+            </linearGradient>
+            <filter id="glow"><feGaussianBlur stdDeviation="3" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+          </defs>
+          <!-- rack frame -->
+          <rect x="50" y="20" width="300" height="400" rx="12" fill="url(#rackGrad)" stroke="#2a2520" stroke-width="1.5"/>
+          <!-- server units -->
+          <g>
+            <!-- unit 1 -->
+            <rect x="70" y="40" width="260" height="50" rx="6" fill="#161412" stroke="#2a2520" stroke-width="1"/>
+            <rect x="82" y="52" width="30" height="8" rx="2" fill="#2a2520"/>
+            <rect x="118" y="52" width="30" height="8" rx="2" fill="#2a2520"/>
+            <rect x="154" y="52" width="30" height="8" rx="2" fill="#2a2520"/>
+            <circle cx="300" cy="56" r="3" fill="#7a9e7e" filter="url(#glow)"><animate attributeName="opacity" values="1;0.3;1" dur="2s" repeatCount="indefinite"/></circle>
+            <circle cx="315" cy="56" r="3" fill="#e8a838"><animate attributeName="opacity" values="1;0.5;1" dur="1.5s" repeatCount="indefinite"/></circle>
+            <rect x="200" y="52" width="80" height="8" rx="2" fill="#1c1a17" stroke="#2a2520" stroke-width="0.5"/>
+            <rect x="200" y="52" width="55" height="8" rx="2" fill="#e8a838" opacity="0.3"/>
+            <!-- unit 2 -->
+            <rect x="70" y="100" width="260" height="50" rx="6" fill="#161412" stroke="#2a2520" stroke-width="1"/>
+            <rect x="82" y="112" width="30" height="8" rx="2" fill="#2a2520"/>
+            <rect x="118" y="112" width="30" height="8" rx="2" fill="#2a2520"/>
+            <rect x="154" y="112" width="30" height="8" rx="2" fill="#2a2520"/>
+            <circle cx="300" cy="116" r="3" fill="#7a9e7e" filter="url(#glow)"><animate attributeName="opacity" values="1;0.3;1" dur="2.3s" repeatCount="indefinite"/></circle>
+            <circle cx="315" cy="116" r="3" fill="#e8a838"><animate attributeName="opacity" values="1;0.5;1" dur="1.8s" repeatCount="indefinite"/></circle>
+            <rect x="200" y="112" width="80" height="8" rx="2" fill="#1c1a17" stroke="#2a2520" stroke-width="0.5"/>
+            <rect x="200" y="112" width="30" height="8" rx="2" fill="#7a9e7e" opacity="0.3"/>
+            <!-- unit 3 -->
+            <rect x="70" y="160" width="260" height="50" rx="6" fill="#161412" stroke="#2a2520" stroke-width="1"/>
+            <rect x="82" y="172" width="30" height="8" rx="2" fill="#2a2520"/>
+            <rect x="118" y="172" width="30" height="8" rx="2" fill="#2a2520"/>
+            <circle cx="300" cy="176" r="3" fill="#d4785a"><animate attributeName="opacity" values="0.5;1;0.5" dur="1s" repeatCount="indefinite"/></circle>
+            <circle cx="315" cy="176" r="3" fill="#7a9e7e" filter="url(#glow)"><animate attributeName="opacity" values="1;0.3;1" dur="2.5s" repeatCount="indefinite"/></circle>
+            <rect x="200" y="172" width="80" height="8" rx="2" fill="#1c1a17" stroke="#2a2520" stroke-width="0.5"/>
+            <rect x="200" y="172" width="70" height="8" rx="2" fill="#d4785a" opacity="0.25"/>
+            <!-- unit 4 - GPU -->
+            <rect x="70" y="220" width="260" height="65" rx="6" fill="#161412" stroke="#e8a838" stroke-width="1" opacity="0.8"/>
+            <rect x="82" y="232" width="60" height="14" rx="3" fill="#e8a838" opacity="0.15" stroke="#e8a838" stroke-width="0.5" stroke-opacity="0.4"/>
+            <text x="112" y="243" font-family="Fira Code, monospace" font-size="8" fill="#e8a838" text-anchor="middle" opacity="0.8">GPU</text>
+            <rect x="150" y="232" width="60" height="14" rx="3" fill="#e8a838" opacity="0.15" stroke="#e8a838" stroke-width="0.5" stroke-opacity="0.4"/>
+            <text x="180" y="243" font-family="Fira Code, monospace" font-size="8" fill="#e8a838" text-anchor="middle" opacity="0.8">GPU</text>
+            <rect x="218" y="232" width="60" height="14" rx="3" fill="#e8a838" opacity="0.15" stroke="#e8a838" stroke-width="0.5" stroke-opacity="0.4"/>
+            <text x="248" y="243" font-family="Fira Code, monospace" font-size="8" fill="#e8a838" text-anchor="middle" opacity="0.8">GPU</text>
+            <circle cx="300" cy="256" r="3" fill="#e8a838" filter="url(#glow)"><animate attributeName="opacity" values="1;0.4;1" dur="0.8s" repeatCount="indefinite"/></circle>
+            <circle cx="315" cy="256" r="3" fill="#e8a838" filter="url(#glow)"><animate attributeName="opacity" values="1;0.4;1" dur="1.2s" repeatCount="indefinite"/></circle>
+            <rect x="200" y="252" width="80" height="8" rx="2" fill="#1c1a17" stroke="#2a2520" stroke-width="0.5"/>
+            <rect x="200" y="252" width="78" height="8" rx="2" fill="#e8a838" opacity="0.4">
+              <animate attributeName="width" values="78;40;78" dur="3s" repeatCount="indefinite"/>
+            </rect>
+            <!-- unit 5 -->
+            <rect x="70" y="295" width="260" height="50" rx="6" fill="#161412" stroke="#2a2520" stroke-width="1"/>
+            <rect x="82" y="307" width="30" height="8" rx="2" fill="#2a2520"/>
+            <circle cx="300" cy="311" r="3" fill="#7a9e7e" filter="url(#glow)"><animate attributeName="opacity" values="1;0.3;1" dur="2.7s" repeatCount="indefinite"/></circle>
+            <circle cx="315" cy="311" r="3" fill="#7a9e7e" filter="url(#glow)"><animate attributeName="opacity" values="1;0.3;1" dur="1.9s" repeatCount="indefinite"/></circle>
+            <rect x="200" y="307" width="80" height="8" rx="2" fill="#1c1a17" stroke="#2a2520" stroke-width="0.5"/>
+            <rect x="200" y="307" width="60" height="8" rx="2" fill="#7a9e7e" opacity="0.3"/>
+            <!-- unit 6 -->
+            <rect x="70" y="355" width="260" height="50" rx="6" fill="#161412" stroke="#2a2520" stroke-width="1"/>
+            <rect x="82" y="367" width="30" height="8" rx="2" fill="#2a2520"/>
+            <rect x="118" y="367" width="30" height="8" rx="2" fill="#2a2520"/>
+            <circle cx="300" cy="371" r="3" fill="#7a9e7e" filter="url(#glow)"><animate attributeName="opacity" values="1;0.3;1" dur="2.1s" repeatCount="indefinite"/></circle>
+            <circle cx="315" cy="371" r="3" fill="#e8a838"><animate attributeName="opacity" values="1;0.5;1" dur="1.4s" repeatCount="indefinite"/></circle>
+          </g>
+          <!-- network lines -->
+          <g opacity="0.08">
+            <line x1="50" y1="200" x2="0" y2="180" stroke="#e8a838" stroke-width="1"/>
+            <line x1="350" y1="200" x2="400" y2="220" stroke="#e8a838" stroke-width="1"/>
+            <line x1="50" y1="300" x2="0" y2="320" stroke="#7a9e7e" stroke-width="1"/>
+            <line x1="350" y1="100" x2="400" y2="80" stroke="#d4785a" stroke-width="1"/>
+            <circle cx="0" cy="180" r="4" fill="#e8a838" opacity="0.5"/>
+            <circle cx="400" cy="220" r="4" fill="#e8a838" opacity="0.5"/>
+            <circle cx="0" cy="320" r="4" fill="#7a9e7e" opacity="0.5"/>
+            <circle cx="400" cy="80" r="4" fill="#d4785a" opacity="0.5"/>
+          </g>
+        </svg>
+      </div>
+    </div>
+    <div class="hero-stats">
+      <div class="hero-stat"><div class="stat-number">45+</div><div class="stat-label">Облачных провайдеров</div></div>
+      <div class="hero-stat"><div class="stat-number">28</div><div class="stat-label">ИИ-платформ</div></div>
+      <div class="hero-stat"><div class="stat-number">12</div><div class="stat-label">Географических регионов</div></div>
+      <div class="hero-stat"><div class="stat-number">2026</div><div class="stat-label">Актуальные данные</div></div>
+    </div>
+  </div>
+</section>
+
+<div class="page-divider"></div>
+
+<!-- ===================== PAGE 1: INTRODUCTION ===================== -->
+<section class="page" id="page-intro">
+  <div class="container">
+    <div class="section-badge">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="6" stroke="currentColor" stroke-width="1.2"/><path d="M7 4v6M4 7h6" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+      Страница 01 — Введение
+    </div>
+    <div class="section-title">Зачем нужна<br>ИИ-инфраструктура?</div>
+    <div class="section-subtitle">Искусственный интеллект требует значительных вычислительных ресурсов. Правильный выбор провайдера определяет скорость обучения моделей, стоимость инференса и надёжность продакшена.</div>
+
+    <div class="two-col">
+      <div class="col-text">
+        <h3>Современный ландшафт облачных вычислений</h3>
+        <p>Рынок облачных вычислений в 2026 году переживает период беспрецедентного роста. По данным отраслевых аналитиков, дефицит ключевого оборудования — трансформаторов для электросетей — буквально сдерживает развитие ИИ-сферы в США, причём около 40% новых ЦОД в этом году будут запущены с опозданием (citation:7). Это создаёт уникальные возможности для провайдеров из других регионов.</p>
+        <p>В России активно развивается собственная облачная экосистема. Появляются отечественные решения для Serverless-вычислений, которые позволяют отказаться от иностранных сервисов и работать в рамках требований по локализации данных (citation:8).</p>
+        <p>Китай остаётся одним из крупнейших технологических рынков мира. Компании вроде Alibaba, Tencent и Huawei не просто конкурируют друг с другом — они создают новые категории индустрии и переписывают правила игры (citation:2).</p>
+      </div>
+      <div class="col-text">
+        <h3>Что мы предлагаем</h3>
+        <p>Наш портал — комплексное руководство для разработчиков, DevOps-инженеров и руководителей, которые выбирают облачную инфраструктуру для ИИ-проектов. Мы охватываем:</p>
+        <ul>
+          <li>Облачные провайдеры из России, Китая, США и Европы</li>
+          <li>Платформы для ИИ-инференса и обучения моделей</li>
+          <li>GPU-инстансы и специализированные решения для ML</li>
+          <li>Serverless-подходы и управляемый Kubernetes</li>
+          <li>Сравнение тарифов и рекомендации по выбору</li>
+          <li>Лучшие практики развёртывания автоматизации на VPS</li>
+        </ul>
+        <p>Для каждого провайдера представлены актуальные характеристики: поддержка языков программирования, лимиты на время выполнения, возможности масштабирования и модели ценообразования (citation:8).</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="page-divider"></div>
+
+<!-- ===================== PAGE 2: RUSSIAN CLOUD PROVIDERS ===================== -->
+<section class="page" id="page-cloud-ru">
+  <div class="container">
+    <div class="section-badge">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><rect x="2" y="2" width="10" height="10" rx="2" stroke="currentColor" stroke-width="1.2"/><path d="M5 2v10M2 5h10" stroke="currentColor" stroke-width="0.8" opacity="0.5"/></svg>
+      Страница 02 — Облака России
+    </div>
+    <div class="section-title">Российские облачные<br>платформы</div>
+    <div class="section-subtitle">Отечественные провайдеры предлагают решения, адаптированные для работы в российской юрисдикции с полным соответствием требованиям законодательства о персональных данных.</div>
+
+    <div class="providers-grid">
+      <!-- Yandex Cloud -->
+      <div class="provider-card">
+        <div class="card-header">
+          <div class="card-logo" style="background:rgba(255,204,0,0.1);">
+            <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><path d="M6 8h8c5 0 8 3 8 6s-3 6-8 6H10V8h-4z" fill="#FFCC00" opacity="0.9"/><path d="M10 8v12" stroke="#0a0908" stroke-width="1.5"/><rect x="3" y="6" width="22" height="16" rx="3" stroke="#FFCC00" stroke-width="1" fill="none"/></svg>
+          </div>
+          <div><h3>Yandex Cloud</h3><span class="card-region">Россия, Москва</span></div>
+        </div>
+        <p class="card-desc">Крупнейшая российская облачная платформа от Яндекса. Полный спектр сервисов для машинного обучения, включая Yandex DataSphere и собственную ИИ-платформу. Поддержка GPU-кластеров на базе NVIDIA A100 и H100.</p>
+        <ul class="card-features">
+          <li>DataSphere для ML-пайплайнов</li>
+          <li>Yandex GPT и встраиваемые модели</li>
+          <li>Managed Kubernetes с GPU-пулами</li>
+          <li>Объектное хранилище S3-совместимое</li>
+          <li>Функции как сервис (Serverless)</li>
+        </ul>
+        <div class="card-price">
+          <span class="price-from">от</span>
+          <span class="price-val">$0.05/час — VPS</span>
+        </div>
+      </div>
+
+      <!-- VK Cloud -->
+      <div class="provider-card">
+        <div class="card-header">
+          <div class="card-logo" style="background:rgba(39,135,245,0.1);">
+            <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><path d="M4 10c0-2 1-4 4-4h12c3 0 4 2 4 4v8c0 2-1 4-4 4H8c-3 0-4-2-4-4V10z" fill="#2787F5" opacity="0.15" stroke="#2787F5" stroke-width="1.2"/><path d="M8 13l3 5 3-3 3 3 3-5" stroke="#2787F5" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <div><h3>VK Cloud (Mail.ru)</h3><span class="card-region">Россия</span></div>
+        </div>
+        <p class="card-desc">Облачная платформа от VK (ранее Mail.ru Group). Облачные функции с поддержкой Node.js, PHP, Python, Go, Java, C# и R. Интеграция с экосистемой VK для бизнеса.</p>
+        <ul class="card-features">
+          <li>Cloud Functions — Serverless</li>
+          <li>AI-платформа с предобученными моделями</li>
+          <li>Managed PostgreSQL и MySQL</li>
+          <li>Контейнерная платформа на Kubernetes</li>
+          <li>CDN и балансировка нагрузки</li>
+        </ul>
+        <div class="card-price">
+          <span class="price-from">от</span>
+          <span class="price-val">$0.04/час — VPS</span>
+        </div>
+      </div>
+
+      <!-- Selectel -->
+      <div class="provider-card">
+        <div class="card-header">
+          <div class="card-logo" style="background:rgba(98,77,255,0.1);">
+            <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><rect x="5" y="7" width="18" height="14" rx="3" stroke="#624DFF" stroke-width="1.3" fill="none"/><circle cx="11" cy="14" r="2" fill="#624DFF" opacity="0.7"/><circle cx="17" cy="14" r="2" fill="#624DFF"/><path d="M5 10h18" stroke="#624DFF" stroke-width="0.8" opacity="0.5"/></svg>
+          </div>
+          <div><h3>Selectel</h3><span class="card-region">Россия</span></div>
+        </div>
+        <p class="card-desc">Провайдер облачной и дата-центровой инфраструктуры. Выделенные серверы с GPU, облачные VPS и управляемые сервисы. Собственные дата-центры в России.</p>
+        <ul class="card-features">
+          <li>GPU-серверы для ML (NVIDIA)</li>
+          <li>VDS с NVMe SSD</li>
+          <li>Managed Kubernetes</li>
+          <li>Облачные хранилища и CDN</li>
+          <li>Colocation и выделенные серверы</li>
+        </ul>
+        <div class="card-price">
+          <span class="price-from">от</span>
+          <span class="price-val">$0.03/час — VPS</span>
+        </div>
+      </div>
+
+      <!-- SberCloud -->
+      <div class="provider-card">
+        <div class="card-header">
+          <div class="card-logo" style="background:rgba(34,139,34,0.1);">
+            <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><circle cx="14" cy="14" r="10" stroke="#228B22" stroke-width="1.3" fill="none"/><path d="M10 14l3 3 5-6" stroke="#228B22" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <div><h3>SberCloud</h3><span class="card-region">Россия</span></div>
+        </div>
+        <p class="card-desc">Облачная платформа Сбера для корпоративных клиентов. Интеграция с экосистемой SberDevices и GigaChat. Фокус на корпоративном сегменте и крупных проектах.</p>
+        <ul class="card-features">
+          <li>Compute Cloud с GPU</li>
+          <li>Интеграция с GigaChat</li>
+          <li>AI/ML Studio</li>
+          <li>Объёмное хранилище и базы данных</li>
+          <li>Корпоративный уровень SLA</li>
+        </ul>
+        <div class="card-price">
+          <span class="price-from">от</span>
+          <span class="price-val">$0.06/час — VPS</span>
+        </div>
+      </div>
+
+      <!-- Timeweb Cloud -->
+      <div class="provider-card">
+        <div class="card-header">
+          <div class="card-logo" style="background:rgba(232,168,56,0.1);">
+            <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><circle cx="14" cy="14" r="10" stroke="#e8a838" stroke-width="1.2" fill="none"/><path d="M14 7v7l5 3" stroke="#e8a838" stroke-width="1.5" stroke-linecap="round"/></svg>
+          </div>
+          <div><h3>Timeweb Cloud</h3><span class="card-region">Россия</span></div>
+        </div>
+        <p class="card-desc">Доступный хостинг и VPS с удобной панелью управления. Популярен среди разработчиков малого и среднего бизнеса. Быстрое развёртывание приложений.</p>
+        <ul class="card-features">
+          <li>VPS с NVMe накопителями</li>
+          <li>Автоматические бэкапы</li>
+          <li>Установка CMS в один клик</li>
+          <li>Docker-поддержка</li>
+          <li>Панель управления Cloud</li>
+        </ul>
+        <div class="card-price">
+          <span class="price-from">от</span>
+          <span class="price-val">$0.02/час — VPS</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="page-divider"></div>
+
+<!-- ===================== PAGE 3: INTERNATIONAL CLOUD PROVIDERS ===================== -->
+<section class="page" id="page-cloud-intl">
+  <div class="container">
+    <div class="section-badge">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="5.5" stroke="currentColor" stroke-width="1.1"/><ellipse cx="7" cy="7" rx="2.5" ry="5.5" stroke="currentColor" stroke-width="0.8"/><path d="M1.5 5h11M1.5 9h11" stroke="currentColor" stroke-width="0.7"/></svg>
+      Страница 03 — Мировые облака
+    </div>
+    <div class="section-title">Мировые облачные<br>гиганты</div>
+    <div class="section-subtitle">Глобальные провайдеры с присутствием на всех континентах. Максимальный набор сервисов, развитая экосистема и передовые GPU-ресурсы для ИИ.</div>
+
+    <div class="providers-grid">
+      <!-- AWS -->
+      <div class="provider-card">
+        <div class="card-header">
+          <div class="card-logo" style="background:rgba(255,153,0,0.1);">
+            <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><path d="M6 16c3 4 8 5 12 3" stroke="#FF9900" stroke-width="2" stroke-linecap="round"/><path d="M4 12l4-2 4 1 4-2 4 1" stroke="#FF9900" stroke-width="1.3" stroke-linecap="round" opacity="0.6"/><path d="M8 20c1 1 3 2 6 2s5-1 6-2" stroke="#232F3E" stroke-width="1.5" stroke-linecap="round"/></svg>
+          </div>
+          <div><h3>Amazon Web Services</h3><span class="card-region">Глобально, 30+ регионов</span></div>
+        </div>
+        <p class="card-desc">Крупнейший в мире провайдер облачных вычислений. Огромный спектр сервисов: от базовых EC2-инстансов до SageMaker для ML и специализированных чипов Inferentia и Trainium для ИИ.</p>
+        <ul class="card-features">
+          <li>EC2 P5 — инстансы с NVIDIA H100</li>
+          <li>SageMaker для полного ML-цикла</li>
+          <li>Lambda — Serverless Functions</li>
+          <li>EKS — управляемый Kubernetes</li>
+          <li>Bedrock — доступ к моделям ИИ</li>
+        </ul>
+        <div class="card-price">
+          <span class="price-from">от</span>
+          <span class="price-val">$0.01/час — Lambda</span>
+        </div>
+      </div>
+
+      <!-- Azure -->
+      <div class="provider-card">
+        <div class="card-header">
+          <div class="card-logo" style="background:rgba(0,120,215,0.1);">
+            <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><path d="M5 20l8-16 4 8-6 10H5z" fill="#0078D7" opacity="0.7"/><path d="M13 12l8-4 2 10-4 6H13l-2-4" fill="#0078D7" opacity="0.4"/></svg>
+          </div>
+          <div><h3>Microsoft Azure</h3><span class="card-region">Глобально, 60+ зон</span></div>
+        </div>
+        <p class="card-desc">Облачная платформа Microsoft с глубокой интеграцией с продуктами Microsoft 365. Azure OpenAI Service предоставляет доступ к моделям GPT-4, DALL-E и Whisper.</p>
+        <ul class="card-features">
+          <li>Azure OpenAI Service</li>
+          <li>Azure ML Studio</li>
+          <li>AKS — управляемый Kubernetes (бесплатный control plane)</li>
+          <li>Virtual Machines с NVIDIA GPU</li>
+          <li>Cognitive Services</li>
+        </ul>
+        <div class="card-price">
+          <span class="price-from">от</span>
+          <span class="price-val">$0.012/час — Functions</span>
+        </div>
+      </div>
+
+      <!-- GCP -->
+      <div class="provider-card">
+        <div class="card-header">
+          <div class="card-logo" style="background:rgba(66,133,244,0.1);">
+            <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><circle cx="10" cy="11" r="4" fill="#4285F4" opacity="0.7"/><circle cx="18" cy="11" r="4" fill="#34A853" opacity="0.7"/><circle cx="14" cy="18" r="4" fill="#FBBC05" opacity="0.7"/><circle cx="14" cy="14" r="2" fill="#EA4335" opacity="0.8"/></svg>
+          </div>
+          <div><h3>Google Cloud Platform</h3><span class="card-region">Глобально, 37+ регионов</span></div>
+        </div>
+        <p class="card-desc">Облачная платформа Google с уникальными TPU-ускорителями для машинного обучения. Vertex AI предоставляет полный набор инструментов для обучения и развёртывания моделей.</p>
+        <ul class="card-features">
+          <li>TPU v5 и NVIDIA GPU H100/A100</li>
+          <li>Vertex AI — платформа для ML</li>
+          <li>GKE — управляемый Kubernetes</li>
+          <li>Gemini API — модели ИИ от Google</li>
+          <li>Cloud Functions 2-го поколения</li>
+        </ul>
+        <div class="card-price">
+          <span class="price-from">от</span>
+          <span class="price-val">$0.01/час — Cloud Functions</span>
+        </div>
+      </div>
+
+      <!-- DigitalOcean -->
+      <div class="provider-card">
+        <div class="card-header">
+          <div class="card-logo" style="background:rgba(0,105,255,0.1);">
+            <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><circle cx="14" cy="17" r="6" stroke="#0069FF" stroke-width="1.5" fill="none"/><circle cx="14" cy="17" r="2.5" fill="#0069FF"/><circle cx="14" cy="8" r="2" fill="#0069FF" opacity="0.5"/></svg>
+          </div>
+          <div><h3>DigitalOcean</h3><span class="card-region">Глобально, 15 ДЦ</span></div>
+        </div>
+        <p class="card-desc">Популярный провайдер с простым интерфейсом и предсказуемым ценообразованием. Отличный выбор для стартапов. Поддержка Kubernetes, App Platform и GPU-дроплетов.</p>
+        <ul class="card-features">
+          <li>Droplets с NVMe SSD</li>
+          <li>Managed Kubernetes (бесплатный control plane)</li>
+          <li>App Platform для развёртывания</li>
+          <li>GPU-дроплеты для ML</li>
+          <li>Предсказуемое ценообразование</li>
+        </ul>
+        <div class="card-price">
+          <span class="price-from">от</span>
+          <span class="price-val">$4/мес — Droplet</span>
+        </div>
+      </div>
+
+      <!-- Hetzner -->
+      <div class="provider-card">
+        <div class="card-header">
+          <div class="card-logo" style="background:rgba(200,40,40,0.1);">
+            <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><rect x="6" y="7" width="16" height="14" rx="2" stroke="#C82828" stroke-width="1.3" fill="none"/><path d="M11 11h6v2h-6z" fill="#C82828" opacity="0.5"/><path d="M11 15h4v2h-4z" fill="#C82828" opacity="0.3"/></svg>
+          </div>
+          <div><h3>Hetzner</h3><span class="card-region">Германия, Финляндия, США</span></div>
+        </div>
+        <p class="card-desc">Немецкий провайдер с одним из лучших соотношений цена/производительность в Европе. Выделенные серверы и облачные VPS с высокой производительностью. Популярен среди разработчиков ИИ.</p>
+        <ul class="card-features">
+          <li>Cloud Servers с AMD EPYC</li>
+          <li>Выделенные серверы с GPU</li>
+          <li>Robot — API для управления</li>
+          <li>Самые низкие цены в ЕС</li>
+          <li>Волюмные хранилища и балансировщики</li>
+        </ul>
+        <div class="card-price">
+          <span class="price-from">от</span>
+          <span class="price-val">$3.85/мес — VPS</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="page-divider"></div>
+
+<!-- ===================== PAGE 4: CHINESE CLOUD PROVIDERS ===================== -->
+<section class="page" id="page-cloud-cn">
+  <div class="container">
+    <div class="section-badge">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 2l2 4h4l-3 3 1 4-4-2-4 2 1-4-3-3h4z" stroke="currentColor" stroke-width="1" fill="currentColor" opacity="0.5"/></svg>
+      Страница 04 — Облака Китая
+    </div>
+    <div class="section-title">Китайские облачные<br>платформы</div>
+    <div class="section-subtitle">Мощнейшая экосистема облачных вычислений с уникальными возможностями для ИИ и машинного обучения. Alibaba Cloud, Huawei Cloud, Tencent Cloud и другие.</div>
+
+    <div class="providers-grid">
+      <!-- Alibaba Cloud -->
+      <div class="provider-card">
+        <div class="card-header">
+          <div class="card-logo" style="background:rgba(255,106,0,0.1);">
+            <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><circle cx="14" cy="14" r="10" stroke="#FF6A00" stroke-width="1.2" fill="none"/><path d="M9 16c1-4 3-6 5-6s4 2 5 6" stroke="#FF6A00" stroke-width="1.5" stroke-linecap="round"/><circle cx="14" cy="10" r="1.5" fill="#FF6A00"/></svg>
+          </div>
+          <div><h3>Alibaba Cloud</h3><span class="card-region">Китай, Глобально</span></div>
+        </div>
+        <p class="card-desc">Крупнейший облачный провайдер в Азии и третий в мире. Alibaba Cloud — ведущий игрок с мощной ИИ-экосистемой. Серия моделей Qwen (Tongyi Qianwen) сопоставима с лучшими западными аналогами (citation:2).</p>
+        <ul class="card-features">
+          <li>ECS — GPU-инстансы для ML</li>
+          <li>Model Studio — платформа для ИИ</li>
+          <li>Function Compute — Serverless</li>
+          <li>Container Service для Kubernetes</li>
+          <li>Qwen 3.5 — агентный ИИ (2026)</li>
+        </ul>
+        <div class="card-price">
+          <span class="price-from">от</span>
+          <span class="price-val">$0.015/час — Function Compute</span>
+        </div>
+      </div>
+
+      <!-- Tencent Cloud -->
+      <div class="provider-card">
+        <div class="card-header">
+          <div class="card-logo" style="background:rgba(36,130,255,0.1);">
+            <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><path d="M7 10a7 7 0 0 1 14 0v4a5 5 0 0 1-5 5h-4a5 5 0 0 1-5-5v-4z" fill="#2482FF" opacity="0.15" stroke="#2482FF" stroke-width="1.2"/><circle cx="12" cy="12" r="1.5" fill="#2482FF"/><circle cx="16" cy="12" r="1.5" fill="#2482FF"/></svg>
+          </div>
+          <div><h3>Tencent Cloud</h3><span class="card-region">Китай, Глобально</span></div>
+        </div>
+        <p class="card-desc">Облачная платформа Tencent — компании, стоящей за WeChat и крупнейшей в мире игровой индустрией. Облачные вычисления и ИИ — стратегическое направление развития (citation:2)(citation:3).</p>
+        <ul class="card-features">
+          <li>CVM — GPU-инстансы</li>
+          <li>Hunyuan — собственные ИИ-модели</li>
+          <li>TKE — управляемый Kubernetes</li>
+          <li>Serverless Cloud Functions</li>
+          <li>Интеграция с WeChat экосистемой</li>
+        </ul>
+        <div class="card-price">
+          <span class="price-from">от</span>
+          <span class="price-val">$0.012/час — Functions</span>
+        </div>
+      </div>
+
+      <!-- Huawei Cloud -->
+      <div class="provider-card">
+        <div class="card-header">
+          <div class="card-logo" style="background:rgba(207,0,15,0.1);">
+            <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><path d="M8 8h12v3H8z" fill="#CF000F" opacity="0.6" rx="1"/><path d="M6 13h16v3H6z" fill="#CF000F" opacity="0.4" rx="1"/><path d="M8 18h12v3H8z" fill="#CF000F" opacity="0.2" rx="1"/></svg>
+          </div>
+          <div><h3>Huawei Cloud</h3><span class="card-region">Китай, Глобально</span></div>
+        </div>
+        <p class="card-desc">Облачная платформа Huawei с фокусом на собственную технологическую инфраструктуру. Чипы Ascend AI, модели Pangu и операционная система HarmonyOS формируют параллельную технологическую платформу (citation:2).</p>
+        <ul class="card-features">
+          <li>ECS с GPU Ascend и NVIDIA</li>
+          <li>ModelArts — платформа для ML</li>
+          <li>Pangu — семейство ИИ-моделей</li>
+          <li>CCE — контейнерный движок</li>
+          <li>CloudMarketplace для решений</li>
+        </ul>
+        <div class="card-price">
+          <span class="price-from">от</span>
+          <span class="price-val">$0.013/час — FunctionGraph</span>
+        </div>
+      </div>
+
+      <!-- Baidu AI Cloud -->
+      <div class="provider-card">
+        <div class="card-header">
+          <div class="card-logo" style="background:rgba(34,77,255,0.1);">
+            <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><circle cx="10" cy="12" r="3.5" fill="#224DFF" opacity="0.6"/><circle cx="18" cy="12" r="3.5" fill="#224DFF" opacity="0.6"/><circle cx="14" cy="18" r="3" fill="#224DFF" opacity="0.4"/><path d="M12 9a5 5 0 0 1 4 0" stroke="#224DFF" stroke-width="1"/></svg>
+          </div>
+          <div><h3>Baidu AI Cloud</h3><span class="card-region">Китай</span></div>
+        </div>
+        <p class="card-desc">Облачная платформа от крупнейшей поисковой системы Китая. Специализируется на ИИ-сервисах, включая собственную модель Ernie и платформу для автономного вождения Apollo.</p>
+        <ul class="card-features">
+          <li>Ernie — генеративные ИИ-модели</li>
+          <li>GPU Cloud для ML</li>
+          <li>PaddlePaddle — фреймворк ИИ</li>
+          <li>Управляемый Kubernetes</li>
+          <li>Apollo — автономное вождение</li>
+        </ul>
+        <div class="card-price">
+          <span class="price-from">от</span>
+          <span class="price-val">$0.014/час — CFC</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="page-divider"></div>
+
+<!-- ===================== PAGE 5: INTERNATIONAL AI PROVIDERS ===================== -->
+<section class="page" id="page-ai-intl">
+  <div class="container">
+    <div class="section-badge">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="5" r="3" stroke="currentColor" stroke-width="1"/><path d="M4 10c0-1.5 1.5-3 3-3s3 1.5 3 3" stroke="currentColor" stroke-width="1" stroke-linecap="round"/><path d="M2 13h10" stroke="currentColor" stroke-width="1" stroke-linecap="round"/></svg>
+      Страница 05 — ИИ-платформы мира
+    </div>
+    <div class="section-title">ИИ-платформы:<br>международные решения</div>
+    <div class="section-subtitle">Ведущие мировые компании, предоставляющие API для генеративного ИИ, модели для инференса и платформы для обучения нейронных сетей.</div>
+
+    <div class="providers-grid">
+      <!-- OpenAI -->
+      <div class="provider-card">
+        <div class="card-header">
+          <div class="card-logo" style="background:rgba(16,163,127,0.1);">
+            <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><path d="M14 4l-2 5h-5l4 3-1.5 5L14 14l4.5 3-1.5-5 4-3h-5z" stroke="#10A37F" stroke-width="1.3" fill="#10A37F" fill-opacity="0.15"/></svg>
+          </div>
+          <div><h3>OpenAI</h3><span class="card-region">США</span></div>
+        </div>
+        <p class="card-desc">Создатели ChatGPT, GPT-4o, DALL-E 3 и Sora. Самая популярная API для генеративного ИИ в мире. Премиум-качество моделей для текста, изображений, аудио и видео.</p>
+        <ul class="card-features">
+          <li>GPT-4o — мультимодальная модель</li>
+          <li>DALL-E 3 — генерация изображений</li>
+          <li>Whisper — распознавание речи</li>
+          <li>Sora — генерация видео</li>
+          <li>Assistants API с функциями</li>
+        </ul>
+        <div class="card-price">
+          <span class="price-from">от</span>
+          <span class="price-val">$2.50/1M токенов</span>
+        </div>
+      </div>
+
+      <!-- Anthropic -->
+      <div class="provider-card">
+        <div class="card-header">
+          <div class="card-logo" style="background:rgba(204,148,79,0.1);">
+            <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><path d="M14 5L8 23h4l1.5-5h1l1.5 5h4L14 5z" stroke="#CC944F" stroke-width="1.3" fill="none"/><line x1="11" y1="16" x2="17" y2="16" stroke="#CC944F" stroke-width="1"/></svg>
+          </div>
+          <div><h3>Anthropic</h3><span class="card-region">США</span></div>
+        </div>
+        <p class="card-desc">Создатели Claude — одного из наиболее безопасных и мощных ИИ-ассистентов. Фокус на Constitutional AI и выравнивании моделей. Один из ключевых конкурентов OpenAI.</p>
+        <ul class="card-features">
+          <li>Claude 4 Opus — топовая модель</li>
+          <li>Claude Sonnet — баланс скорость/качество</li>
+          <li>Claude Haiku — быстрая и дешёвая</li>
+          <li>200K контекстное окно</li>
+          <li>Tool Use и агентные возможности</li>
+        </ul>
+        <div class="card-price">
+          <span class="price-from">от</span>
+          <span class="price-val">$0.25/1M токенов</span>
+        </div>
+      </div>
+
+      <!-- Google AI -->
+      <div class="provider-card">
+        <div class="card-header">
+          <div class="card-logo" style="background:rgba(66,133,244,0.1);">
+            <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><path d="M7 14c0-4 3-7 7-7 2 0 3.5.5 5 1.5l-2 3C15.5 10.5 14 10 13 10c-2.5 0-4.5 2-4.5 4.5S10.5 19 13 19c1.5 0 2.5-.5 3.5-1.5h-3.5V14h7c.1.5.1 1 .1 1.5 0 4-2.5 7-6.6 7C9.5 22.5 7 19 7 14z" fill="#4285F4" opacity="0.6"/></svg>
+          </div>
+          <div><h3>Google AI (Gemini)</h3><span class="card-region">США, Глобально</span></div>
+        </div>
+        <p class="card-desc">Семейство моделей Gemini от Google DeepMind. Мультимодальные модели с поддержкой текста, изображений, видео и кода. Доступ через Vertex AI и AI Studio.</p>
+        <ul class="card-features">
+          <li>Gemini 2.5 Ultra — максимальная мощность</li>
+          <li>Gemini Flash — быстрый инференс</li>
+          <li>1M+ контекстное окно</li>
+          <li>Встроенная генерация кода</li>
+          <li>Google Search Grounding</li>
+        </ul>
+        <div class="card-price">
+          <span class="price-from">от</span>
+          <span class="price-val">$0.075/1M токенов</span>
+        </div>
+      </div>
+
+      <!-- Meta AI (Llama) -->
+      <div class="provider-card">
+        <div class="card-header">
+          <div class="card-logo" style="background:rgba(24,119,242,0.1);">
+            <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><circle cx="14" cy="14" r="9" stroke="#1877F2" stroke-width="1.2" fill="none"/><circle cx="10" cy="12" r="2" fill="none" stroke="#1877F2" stroke-width="1"/><circle cx="18" cy="12" r="2" fill="none" stroke="#1877F2" stroke-width="1"/><path d="M10 18c0 0 2 2 4 2s4-2 4-2" stroke="#1877F2" stroke-width="1" stroke-linecap="round"/></svg>
+          </div>
+          <div><h3>Meta AI (Llama)</h3><span class="card-region">США</span></div>
+        </div>
+        <p class="card-desc">Семейство открытых моделей Llama от Meta. Llama 3.3 и Llama 4 — одни из лучших open-source моделей, доступных для самохостинга и коммерческого использования.</p>
+        <ul class="card-features">
+          <li>Llama 4 Scout и Maverick</li>
+          <li>Полностью open-source</li>
+          <li>Коммерческая лицензия</li>
+          <li>Самохостинг на любом VPS с GPU</li>
+          <li>Глобальное комьюнити</li>
+        </ul>
+        <div class="card-price">
+          <span class="price-from">от</span>
+          <span class="price-val">Бесплатно (open-source)</span>
+        </div>
+      </div>
+
+      <!-- Mistral -->
+      <div class="provider-card">
+        <div class="card-header">
+          <div class="card-logo" style="background:rgba(255,122,0,0.1);">
+            <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><path d="M7 8h14M7 14h14M7 20h14" stroke="#FF7A00" stroke-width="1.5" stroke-linecap="round"/><circle cx="14" cy="8" r="2" fill="#FF7A00" opacity="0.5"/></svg>
+          </div>
+          <div><h3>Mistral AI</h3><span class="card-region">Франция, ЕС</span></div>
+        </div>
+        <p class="card-desc">Европейский конкурент OpenAI из Франции. Mistral Large и Mixtral — мощные модели с отличной производительностью на европейских языках. Акцент на суверенном ИИ для ЕС.</p>
+        <ul class="card-features">
+          <li>Mistral Large 2 — топовая модель</li>
+          <li>Mixtral — смесь экспертов (MoE)</li>
+          <li>Le Chat — собственный ассистент</li>
+          <li>Открытые веса моделей</li>
+          <li>API с низкой задержкой в ЕС</li>
+        </ul>
+        <div class="card-price">
+          <span class="price-from">от</span>
+          <span class="price-val">$0.20/1M токенов</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="page-divider"></div>
+
+<!-- ===================== PAGE 6: RUSSIAN AI PROVIDERS ===================== -->
+<section class="page" id="page-ai-ru">
+  <div class="container">
+    <div class="section-badge">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><rect x="3" y="3" width="8" height="8" rx="4" stroke="currentColor" stroke-width="1"/><circle cx="7" cy="7" r="1.5" fill="currentColor" opacity="0.6"/></svg>
+      Страница 06 — ИИ в России и Китае
+    </div>
+    <div class="section-title">ИИ-платформы:<br>Россия и Китай</div>
+    <div class="section-subtitle">Растущая экосистема отечественных ИИ-решений и китайские модели, которые уже конкурируют с лучшими западными аналогами (citation:2).</div>
+
+    <div class="providers-grid">
+      <!-- Yandex GPT -->
+      <div class="provider-card">
+        <div class="card-header">
+          <div class="card-logo" style="background:rgba(255,204,0,0.1);">
+            <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><path d="M9 7h6c4 0 6 3 6 7s-2 7-6 7H12V7H9z" fill="#FFCC00" opacity="0.3" stroke="#FFCC00" stroke-width="1"/><text x="14" y="17" font-family="Fira Code" font-size="8" fill="#FFCC00" text-anchor="middle">Ya</text></svg>
+          </div>
+          <div><h3>YandexGPT</h3><span class="card-region">Россия</span></div>
+        </div>
+        <p class="card-desc">Семейство больших языковых моделей от Яндекса. YandexGPT 4 демонстрирует высокое качество на русском языке. Доступен через API Yandex Cloud и встроенные сервисы Яндекса.</p>
+        <ul class="card-features">
+          <li>YandexGPT 4 — последняя версия</li>
+          <li>API через Yandex Cloud</li>
+          <li>Генерация текста и кода</li>
+          <li>Ассистенты для бизнеса</li>
+          <li>Оптимизация для русского языка</li>
+        </ul>
+        <div class="card-price">
+          <span class="price-from">от</span>
+          <span class="price-val">от 0.20 руб./1K токенов</span>
+        </div>
+      </div>
+
+      <!-- GigaChat -->
+      <div class="provider-card">
+        <div class="card-header">
+          <div class="card-logo" style="background:rgba(34,139,34,0.1);">
+            <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><rect x="6" y="8" width="16" height="12" rx="3" stroke="#228B22" stroke-width="1.2" fill="none"/><path d="M10 13h8M10 17h5" stroke="#228B22" stroke-width="1" stroke-linecap="round"/></svg>
+          </div>
+          <div><h3>GigaChat</h3><span class="card-region">Россия</span></div>
+        </div>
+        <p class="card-desc">ИИ-ассистент от Сбера на базе собственных LLM. Интеграция с экосистемой SberCloud. Поддержка генерации текста, изображений и работы с функциями.</p>
+        <ul class="card-features">
+          <li>GigaChat Pro и GigaChat Max</li>
+          <li>Генерация изображений</li>
+          <li>Функциональные вызовы (tools)</li>
+          <li>API для разработчиков</li>
+          <li>Интеграция с SberCloud</li>
+        </ul>
+        <div class="card-price">
+          <span class="price-from">от</span>
+          <span class="price-val">от 0.50 руб./1K токенов</span>
+        </div>
+      </div>
+
+      <!-- Qwen -->
+      <div class="provider-card">
+        <div class="card-header">
+          <div class="card-logo" style="background:rgba(255,106,0,0.1);">
+            <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><circle cx="14" cy="14" r="8" stroke="#FF6A00" stroke-width="1" fill="none"/><text x="14" y="17" font-family="Fira Code" font-size="7" fill="#FF6A00" text-anchor="middle">QW</text></svg>
+          </div>
+          <div><h3>Qwen (Tongyi Qianwen)</h3><span class="card-region">Китай — Alibaba</span></div>
+        </div>
+        <p class="card-desc">Мощное семейство открытых моделей от Alibaba. Серию Qwen признают одной из лучших open-source LLM в мире. В 2026 году Alibaba представила Qwen 3.5 для агентного ИИ (citation:2).</p>
+        <ul class="card-features">
+          <li>Qwen 3.5 — агентный ИИ</li>
+          <li>Мультимодальные модели</li>
+          <li>Open-source с коммерческой лицензией</li>
+          <li>Отличная поддержка китайского языка</li>
+          <li>Самохостинг и Alibaba Cloud API</li>
+        </ul>
+        <div class="card-price">
+          <span class="price-from">от</span>
+          <span class="price-val">Бесплатно (open-source)</span>
+        </div>
+      </div>
+
+      <!-- Hunyuan -->
+      <div class="provider-card">
+        <div class="card-header">
+          <div class="card-logo" style="background:rgba(36,130,255,0.1);">
+            <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><circle cx="14" cy="14" r="8" stroke="#2482FF" stroke-width="1" fill="none"/><path d="M10 11h8M10 14h6M10 17h4" stroke="#2482FF" stroke-width="1.2" stroke-linecap="round"/></svg>
+          </div>
+          <div><h3>Hunyuan (Tencent)</h3><span class="card-region">Китай</span></div>
+        </div>
+        <p class="card-desc">Модель ИИ от Tencent с возможностями обработки естественного языка, генерации 3D-моделей и создания видео. Внедряется во всю экосистему Tencent, включая WeChat (citation:2)(citation:3).</p>
+        <ul class="card-features">
+          <li>Hunyuan — NLP и генерация</li>
+          <li>Генерация 3D-моделей и видео</li>
+          <li>Интеграция с WeChat</li>
+          <li>Yuanbao — ИИ-помощник</li>
+          <li>Платформа агентов для разработчиков</li>
+        </ul>
+        <div class="card-price">
+          <span class="price-from">от</span>
+          <span class="price-val">Доступ через Tencent Cloud API</span>
+        </div>
+      </div>
+
+      <!-- Pangu -->
+      <div class="provider-card">
+        <div class="card-header">
+          <div class="card-logo" style="background:rgba(207,0,15,0.1);">
+            <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><rect x="7" y="6" width="14" height="16" rx="2" stroke="#CF000F" stroke-width="1.2" fill="none"/><path d="M10 10h8M10 14h6M10 18h4" stroke="#CF000F" stroke-width="1" stroke-linecap="round" opacity="0.6"/></svg>
+          </div>
+          <div><h3>Pangu (Huawei)</h3><span class="card-region">Китай</span></div>
+        </div>
+        <p class="card-desc">Семейство ИИ-моделей от Huawei, работающее на чипах Ascend AI. Pangu — ключевой элемент стратегии Huawei по созданию независимой технологической платформы (citation:2).</p>
+        <ul class="card-features">
+          <li>Pangu NLP, CV и научные модели</li>
+          <li>Чипы Ascend AI для инференса</li>
+          <li>Открытый код основных моделей</li>
+          <li>Интеграция с HarmonyOS</li>
+          <li>Промышленные применения ИИ</li>
+        </ul>
+        <div class="card-price">
+          <span class="price-from">от</span>
+          <span class="price-val">Доступ через Huawei Cloud</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="page-divider"></div>
+
+<!-- ===================== PAGE 7: COMPARISON TABLE ===================== -->
+<section class="page" id="page-compare">
+  <div class="container">
+    <div class="section-badge">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><rect x="2" y="2" width="4" height="4" rx="1" stroke="currentColor" stroke-width="1"/><rect x="8" y="2" width="4" height="4" rx="1" stroke="currentColor" stroke-width="1"/><rect x="2" y="8" width="4" height="4" rx="1" stroke="currentColor" stroke-width="1"/><rect x="8" y="8" width="4" height="4" rx="1" stroke="currentColor" stroke-width="1"/></svg>
+      Страница 07 — Сравнение
+    </div>
+    <div class="section-title">Сравнение<br>облачных провайдеров</div>
+    <div class="section-subtitle">Сводная таблица ключевых характеристик серверless-решений и Kubernetes-платформ для быстрого выбора подходящего провайдера.</div>
+
+    <!-- Serverless comparison -->
+    <h3 style="font-family:var(--font-display);font-size:1.4rem;margin-bottom:1.5rem;">Serverless Functions — Сравнение</h3>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Провайдер</th>
+            <th>Макс. время выполнения</th>
+            <th>Макс. RAM</th>
+            <th>Поддержка языков</th>
+            <th>Масштабирование</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="provider-name">AWS Lambda</td>
+            <td class="highlight-cell">15 мин (900 сек)</td>
+            <td>10 ГБ</td>
+            <td>Python, Node.js, Java, Go, C#, Ruby, PHP</td>
+            <td>Автоматическое, до 1000 конк.</td>
+          </tr>
+          <tr>
+            <td class="provider-name">Google Cloud Functions</td>
+            <td class="highlight-cell">9 мин (540 сек)</td>
+            <td>8 ГБ</td>
+            <td>Python, Node.js, Java, Go, C#</td>
+            <td>Автоматическое, до 1000 конк.</td>
+          </tr>
+          <tr>
+            <td class="provider-name">Azure Functions</td>
+            <td class="highlight-cell">10 мин (600 сек)</td>
+            <td>3.5 ГБ</td>
+            <td>Python, Node.js, Java, Go, C#, PowerShell</td>
+            <td>До 200 экз. на функцию</td>
+          </tr>
+          <tr>
+            <td class="provider-name">DigitalOcean Functions</td>
+            <td class="highlight-cell">15 мин</td>
+            <td>1 ГБ</td>
+            <td>Python, Node.js, Go, PHP</td>
+            <td>120 на неймспейс</td>
+          </tr>
+          <tr>
+            <td class="provider-name">VK Cloud Functions</td>
+            <td class="highlight-cell">1 час</td>
+            <td>8 ГБ</td>
+            <td>Python, PHP, Go, Java, C#, Node.js, R, Bash</td>
+            <td>Автоматическое</td>
+          </tr>
+          <tr>
+            <td class="provider-name">Alibaba Function Compute</td>
+            <td class="highlight-cell">10 мин</td>
+            <td>4 ГБ</td>
+            <td>Python, Node.js, Java, Go, PHP, C#</td>
+            <td>Автоматическое</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="font-size:0.82rem;color:var(--text-subtle);margin-bottom:3rem;">Данные основаны на информации из открытых источников (citation:8). Для AWS Lambda и Google Cloud Functions ограничения по умолчанию можно увеличить через поддержку.</p>
+
+    <!-- Kubernetes comparison -->
+    <h3 style="font-family:var(--font-display);font-size:1.4rem;margin-bottom:1.5rem;">Управляемый Kubernetes — Сравнение</h3>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Провайдер</th>
+            <th>Control Plane</th>
+            <th>Лучше всего для</th>
+            <th>Скидки</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="provider-name">Azure AKS</td>
+            <td class="highlight-cell">Бесплатно</td>
+            <td>Множество мелких кластеров</td>
+            <td>Спот-инстансы, Reserved</td>
+          </tr>
+          <tr>
+            <td class="provider-name">DigitalOcean K8s</td>
+            <td class="highlight-cell">Бесплатно</td>
+            <td>Множество мелких кластеров</td>
+            <td>Нет спотовых скидок</td>
+          </tr>
+          <tr>
+            <td class="provider-name">Google GKE</td>
+            <td class="highlight-cell">$0.10/час</td>
+            <td>Крупные кластеры</td>
+            <td>Preemptible, CUD</td>
+          </tr>
+          <tr>
+            <td class="provider-name">AWS EKS</td>
+            <td class="highlight-cell">$0.10/час</td>
+            <td>Средние и крупные кластеры</td>
+            <td>Spot, Reserved</td>
+          </tr>
+          <tr>
+            <td class="provider-name">Yandex MKE</td>
+            <td class="highlight-cell">Бесплатно</td>
+            <td>Российские нагрузки</td>
+            <td>Промо-кредиты</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="font-size:0.82rem;color:var(--text-subtle);margin-bottom:2rem;">Сравнение основано на анализе стоимости Managed Kubernetes (citation:9). Azure и DigitalOcean не взимают плату за control plane, что делает их оптимальным выбором для развёртывания множества небольших кластеров.</p>
+  </div>
+</section>
+
+<div class="page-divider"></div>
+
+<!-- ===================== PAGE 8: PRICING ===================== -->
+<section class="page" id="page-pricing">
+  <div class="container">
+    <div class="section-badge">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><rect x="2" y="2" width="10" height="10" rx="2" stroke="currentColor" stroke-width="1"/><path d="M5 7h4M7 5v4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+      Страница 08 — Тарифы
+    </div>
+    <div class="section-title">Рекомендуемые<br>конфигурации</div>
+    <div class="section-subtitle">Оптимальные связки VPS и ИИ-сервисов для разных сценариев использования. От стартапов до крупных продакшен-нагрузок.</div>
+
+    <div class="pricing-grid">
+      <!-- Starter -->
+      <div class="price-card">
+        <h3>Стартовый</h3>
+        <div class="price-tag">$5<span>/мес</span></div>
+        <p class="price-desc">Идеально для прототипов, pet-проектов и изучения ИИ. Самохостинг open-source моделей с API.</p>
+        <ul>
+          <li>2 vCPU, 4 ГБ RAM</li>
+          <li>NVMe SSD 40 ГБ</li>
+          <li>Llama / Qwen через llama.cpp</li>
+          <li>OpenAI-совместимый API</li>
+          <li>Docker Compose развёртывание</li>
+          <li>DigitalOcean / Hetzner VPS</li>
+        </ul>
+      </div>
+
+      <!-- Professional -->
+      <div class="price-card featured">
+        <h3>Профессиональный</h3>
+        <div class="price-tag">$50<span>/мес</span></div>
+        <p class="price-desc">Для продакшена и коммерческих проектов. GPU-инстансы для инференса, продвинутые ИИ-модели.</p>
+        <ul>
+          <li>8 vCPU, 32 ГБ RAM, GPU</li>
+          <li>NVMe SSD 200 ГБ</li>
+          <li>Managed Kubernetes</li>
+          <li>GPT-4o / Claude API</li>
+          <li>Векторная база данных</li>
+          <li>Мониторинг и алертинг</li>
+          <li>Автоматические бэкапы</li>
+        </ul>
+      </div>
+
+      <!-- Enterprise -->
+      <div class="price-card">
+        <h3>Корпоративный</h3>
+        <div class="price-tag">$500<span>+/мес</span></div>
+        <p class="price-desc">Для крупных нагрузок, обучения моделей и высоконагруженных ИИ-сервисов. Мульти-регион развёртывание.</p>
+        <ul>
+          <li>GPU-кластер (H100/A100)</li>
+          <li>Distributed training</li>
+          <li>Мульти-облако и отказоустойчивость</li>
+          <li>Приватная модель на ваших данных</li>
+          <li>SLA 99.99%</li>
+          <li>Выделенный менеджер</li>
+          <li>Кастомная архитектура</li>
+        </ul>
+      </div>
+    </div>
+
+    <div style="margin-top:3rem;">
+      <h3 style="font-family:var(--font-display);font-size:1.4rem;margin-bottom:1.5rem;">Сравнение цен VPS для n8n и автоматизации</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Провайдер</th>
+              <th>Базовый VPS</th>
+              <th>Рекомендуемый</th>
+              <th>GPU VPS</th>
+              <th>Примечание</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="provider-name">Hetzner</td>
+              <td class="highlight-cell">$3.85/мес</td>
+              <td>$8.50/мес (4vCPU, 8GB)</td>
+              <td>$0.50/час (A100)</td>
+              <td>Лучшее соотношение цена/производительность в ЕС</td>
+            </tr>
+            <tr>
+              <td class="provider-name">DigitalOcean</td>
+              <td class="highlight-cell">$4/мес</td>
+              <td>$24/мес (4vCPU, 8GB)</td>
+              <td>$1.50/час (GPU)</td>
+              <td>Простота, предсказуемость</td>
+            </tr>
+            <tr>
+              <td class="provider-name">Timeweb Cloud</td>
+              <td class="highlight-cell">170 руб/мес</td>
+              <td>800 руб/мес (4vCPU, 8GB)</td>
+              <td>N/A</td>
+              <td>Для российских проектов</td>
+            </tr>
+            <tr>
+              <td class="provider-name">Selectel</td>
+              <td class="highlight-cell">$0.03/час</td>
+              <td>$0.12/час (4vCPU, 8GB)</td>
+              <td>$1.00/час (V100)</td>
+              <td>РФ GPU-серверы</td>
+            </tr>
+            <tr>
+              <td class="provider-name">Yandex Cloud</td>
+              <td class="highlight-cell">$0.05/час</td>
+              <td>$0.20/час (4vCPU, 8GB)</td>
+              <td>$2.00/час (A100)</td>
+              <td>Для интеграции с Yandex-сервисами</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p style="font-size:0.82rem;color:var(--text-subtle);">Для n8n и аналогичных задач автоматизации рекомендуется VPS с 2-4 vCPU, 4-8 ГБ RAM и NVMe SSD (citation:11). Docker/Compose обеспечивает простоту развёртывания и масштабирования.</p>
+    </div>
+  </div>
+</section>
+
+<div class="page-divider"></div>
+
+<!-- ===================== PAGE 9: GUIDE ===================== -->
+<section class="page" id="page-guide">
+  <div class="container">
+    <div class="section-badge">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 3h8v8H3z" stroke="currentColor" stroke-width="1" rx="1"/><path d="M6 3v8M3 6h8" stroke="currentColor" stroke-width="0.7" opacity="0.5"/></svg>
+      Страница 09 — Руководство
+    </div>
+    <div class="section-title">Как выбрать<br>инфраструктуру для ИИ</div>
+    <div class="section-subtitle">Пошаговое руководство по выбору оптимального решения. Учитывайте тип задачи, бюджет, требования к задержке и географическое расположение данных.</div>
+
+    <div class="info-grid">
+      <div class="info-card">
+        <div class="info-icon" style="background:var(--accent-glow);">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="4" stroke="#e8a838" stroke-width="1.5"/><path d="M6 20c0-3 3-6 6-6s6 3 6 6" stroke="#e8a838" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </div>
+        <h3>Для стартапов</h3>
+        <p>Начинайте с минимальных затрат. Используйте open-source модели (Llama, Qwen) на доступных VPS. API крупных провайдеров для прототипирования.</p>
+        <ul>
+          <li>DigitalOcean/Hetzner VPS — от $4/мес</li>
+          <li>OpenAI API для быстрого прототипа</li>
+          <li>Docker Compose вместо Kubernetes</li>
+          <li>SQLite или PostgreSQL вместо кластеров</li>
+        </ul>
+      </div>
+
+      <div class="info-card">
+        <div class="info-icon" style="background:var(--sage-dim);">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><rect x="4" y="4" width="16" height="16" rx="3" stroke="#7a9e7e" stroke-width="1.5"/><path d="M8 10h8M8 14h5" stroke="#7a9e7e" stroke-width="1.3" stroke-linecap="round"/></svg>
+        </div>
+        <h3>Для бизнеса</h3>
+        <p>Нужна надёжность, масштабируемость и поддержка. Выбирайте проверенных провайдеров с SLA и инструментами мониторинга.</p>
+        <ul>
+          <li>Managed Kubernetes (AKS, GKE, EKS)</li>
+          <li>Мульти-регион для отказоустойчивости</li>
+          <li>CI/CD пайплайн через Git</li>
+          <li>GPT-4o / Claude для production</li>
+        </ul>
+      </div>
+
+      <div class="info-card">
+        <div class="info-icon" style="background:var(--copper-dim);">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M4 18V8l8-4 8 4v10l-8 4-8-4z" stroke="#d4785a" stroke-width="1.5" fill="none"/><path d="M4 8l8 4 8-4M12 12v10" stroke="#d4785a" stroke-width="1" opacity="0.6"/></svg>
+        </div>
+        <h3>Для обучения моделей</h3>
+        <p>Обучение LLM требует GPU-кластеров с высокой пропускной способностью сети. Используйте спотовые инстансы для экономии до 70%.</p>
+        <ul>
+          <li>AWS P5 / GCP A3 — NVIDIA H100</li>
+          <li>Spot/Preemptible инстансы</li>
+          <li>Distributed training (DeepSpeed)</li>
+          <li>Weights & Biases для трекинга</li>
+        </ul>
+      </div>
+
+      <div class="info-card">
+        <div class="info-icon" style="background:rgba(232,168,56,0.08);">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="8" stroke="#e8a838" stroke-width="1.5" fill="none"/><path d="M12 8v4l3 3" stroke="#e8a838" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </div>
+        <h3>Для автоматизации</h3>
+        <p>n8n, Zapier-альтернативы и workflow-автоматизация. Нужен стабильный VPS с быстрым хранилищем и поддержкой Docker (citation:11).</p>
+        <ul>
+          <li>2-4 vCPU, 4-8 ГБ RAM</li>
+          <li>NVMe SSD для быстрого I/O</li>
+          <li>SSL через Nginx + Let's Encrypt</li>
+          <li>PostgreSQL для данных</li>
+        </ul>
+      </div>
+
+      <div class="info-card">
+        <div class="info-icon" style="background:rgba(122,158,126,0.1);">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M4 12h4l3-8 4 16 3-8h4" stroke="#7a9e7e" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <h3>Для инференса ИИ</h3>
+        <p>Продакшн-инференс LLM требует оптимизации: квантизация, batching, кеширование. vLLM и TGI — стандарты индустрии.</p>
+        <ul>
+          <li>GPU с 24+ ГБ VRAM (RTX 4090, A100)</li>
+          <li>vLLM / TGI для обслуживания</li>
+          <li>Квантизация GGUF/GPTQ для экономии</li>
+          <li>Автоматическое масштабирование GPU</li>
+        </ul>
+      </div>
+
+      <div class="info-card">
+        <div class="info-icon" style="background:rgba(212,120,90,0.1);">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><rect x="3" y="6" width="18" height="12" rx="2" stroke="#d4785a" stroke-width="1.5"/><path d="M7 10h2M7 14h4M13 10h4M13 14h2" stroke="#d4785a" stroke-width="1" stroke-linecap="round" opacity="0.6"/></svg>
+        </div>
+        <h3>Serverless vs VPS</h3>
+        <p>Serverless подходит для коротких, эпизодических задач. VPS — для долгоживущих процессов. Цены за ресурс на Serverless могут быть в 30 раз выше (citation:8).</p>
+        <ul>
+          <li>Serverless: API, вебхуки, крон-задачи</li>
+          <li>VPS: ML-инференс, базы данных, боты</li>
+          <li>Контейнеры: гибридный подход</li>
+          <li>Прогрев функций: постоянные инстансы дешевле</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="page-divider"></div>
+
+<!-- ===================== PAGE 10: FAQ ===================== -->
+<section class="page" id="page-faq">
+  <div class="container">
+    <div class="section-badge">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="5.5" stroke="currentColor" stroke-width="1"/><text x="7" y="10" font-family="Fira Code" font-size="8" fill="currentColor" text-anchor="middle">?</text></svg>
+      Страница 10 — FAQ
+    </div>
+    <div class="section-title">Часто задаваемые<br>вопросы</div>
+    <div class="section-subtitle">Ответы на наиболее популярные вопросы о выборе облачной инфраструктуры для ИИ-проектов.</div>
+
+    <div style="max-width:820px;">
+      <div class="faq-item">
+        <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">
+          Какой VPS выбрать для самохостинга LLM?
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M9 4v10M4 9h10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </div>
+        <div class="faq-a"><p>Для моделей 7B параметров достаточно GPU с 16+ ГБ VRAM (RTX 4060 Ti 16GB, RTX 4090). Для моделей 13-70B — A100 40/80 ГБ или H100. Рекомендуем начать с Hetzner GPU-сервера или Selectel GPU VPS. Квантизация через GGUF позволяет запускать 7B модели даже на CPU с 16 ГБ RAM.</p></div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">
+          Облачные сервисы подходят для хранения чувствительных данных?
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M9 4v10M4 9h10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </div>
+        <div class="faq-a"><p>Крупные облачные провайдеры применяют продвинутые методы шифрования и регулярно обновляют политику кибербезопасности (citation:10). Однако они не подходят компаниям, которые не могут работать онлайн с общим доступом по соображениям безопасности, например, электростанциям или оборонным предприятиям. Для российских компаний важно учитывать требования 152-ФЗ о локализации персональных данных.</p></div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">
+          В чём разница между Serverless и VPS?
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M9 4v10M4 9h10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </div>
+        <div class="faq-a"><p>Serverless (функции как сервис) оптимален для коротких задач — обработка вебхуков, API, крон-задачи. Вы платите только за время выполнения (citation:10). VPS подходит для долгоживущих процессов: базы данных, ML-инференс, боты. Стоимость Serverless в пересчёте на ресурс может быть в 30 раз выше, чем у VPS, но для эпизодических нагрузок общие затраты могут быть ниже (citation:8).</p></div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">
+          Какой провайдер лучше для российского проекта?
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M9 4v10M4 9h10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </div>
+        <div class="faq-a"><p>Для проектов с требованиями к локализации данных: Yandex Cloud (самый полный набор сервисов), VK Cloud (удобная платформа), Selectel (выделенные серверы и GPU), SberCloud (для корпоративного сегмента). Для стартапов и небольших проектов — Timeweb Cloud с доступными тарифами. Российские решения имеют преимущество в виде оплаты без иностранных карт (citation:8).</p></div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">
+          Можно ли использовать спотовые инстансы для ИИ?
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M9 4v10M4 9h10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </div>
+        <div class="faq-a"><p>Да, спотовые (spot/preemptible) инстансы позволяют снизить расходы более чем на 50% (citation:9). Они подходят для обучения моделей с чекпоинтингом и batch-инференса. Однако они могут быть прерваны провайдером, поэтому не подходят для latency-critical продакшен-сервисов. Используйте их для обучения, а для инференса — on-demand или reserved инстансы.</p></div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">
+          Какие ИИ-модели лучше использовать в 2026 году?
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M9 4v10M4 9h10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </div>
+        <div class="faq-a"><p>Для коммерческих API: GPT-4o (OpenAI), Claude 4 (Anthropic), Gemini 2.5 (Google). Для самохостинга: Llama 4 (Meta), Qwen 3.5 (Alibaba), Mistral Large 2. Для русскоязычных задач: YandexGPT 4, GigaChat Max. Для самохостинга на ограниченных ресурсах: квантизованные модели Llama 3 8B или Qwen 7B. Alibaba в 2026 году активно развивает агентный ИИ на базе Qwen (citation:2).</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== FOOTER ===================== -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="#hero" class="nav-logo" style="font-size:1.4rem;">
+          <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+            <rect x="2" y="8" width="24" height="14" rx="2" stroke="#e8a838" stroke-width="1.5" fill="none"/>
+            <circle cx="6" cy="5" r="2" fill="#e8a838" opacity="0.8"/>
+            <circle cx="14" cy="4" r="1.5" fill="#e8a838"/>
+            <rect x="4" y="11" width="2" height="1.5" rx="0.5" fill="#e8a838" opacity="0.7"/>
+            <rect x="10" y="11" width="2" height="1.5" rx="0.5" fill="#e8a838" opacity="0.7"/>
+            <rect x="16" y="11" width="2" height="1.5" rx="0.5" fill="#e8a838" opacity="0.7"/>
+            <rect x="22" y="11" width="2" height="1.5" rx="0.5" fill="#e8a838" opacity="0.7"/>
+          </svg>
+          AI<span class="logo-accent">-</span>VPS
+        </a>
+        <p>Комплексное руководство по выбору облачной инфраструктуры для ИИ-проектов. Сравнение провайдеров из России, Китая, США и Европы. Актуальные данные на 2026 год.</p>
+      </div>
+      <div>
+        <h4>Облака</h4>
+        <ul>
+          <li><a href="#page-cloud-ru">Российские провайдеры</a></li>
+          <li><a href="#page-cloud-intl">AWS, Azure, GCP</a></li>
+          <li><a href="#page-cloud-cn">Alibaba, Tencent, Huawei</a></li>
+          <li><a href="#page-cloud-intl">DigitalOcean, Hetzner</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>ИИ-платформы</h4>
+        <ul>
+          <li><a href="#page-ai-intl">OpenAI, Anthropic, Google</a></li>
+          <li><a href="#page-ai-intl">Meta Llama, Mistral</a></li>
+          <li><a href="#page-ai-ru">YandexGPT, GigaChat</a></li>
+          <li><a href="#page-ai-ru">Qwen, Hunyuan, Pangu</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Ресурсы</h4>
+        <ul>
+          <li><a href="#page-compare">Сравнение таблицей</a></li>
+          <li><a href="#page-pricing">Тарифы и конфигурации</a></li>
+          <li><a href="#page-guide">Гид по выбору</a></li>
+          <li><a href="#page-faq">FAQ</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>ai-vps.github.io / 2026</span>
+      <span>Данные носят информационный характер. Проверяйте актуальные цены на сайтах провайдеров.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+// Scroll-reveal animation
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.08, rootMargin: '0px 0px -60px 0px' });
+
+document.querySelectorAll('.page').forEach(page => {
+  if (page.id !== 'hero') observer.observe(page);
+});
+
+// Nav scroll effect
+let lastScroll = 0;
+window.addEventListener('scroll', () => {
+  const nav = document.getElementById('mainNav');
+  if (window.scrollY > 100) {
+    nav.classList.add('scrolled');
+  } else {
+    nav.classList.remove('scrolled');
+  }
+  lastScroll = window.scrollY;
+});
+
+// Active nav link highlighting
+const sections = document.querySelectorAll('.page[id]');
+const navLinks = document.querySelectorAll('.nav-links a');
+window.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach(section => {
+    const sectionTop = section.offsetTop - 150;
+    if (window.scrollY >= sectionTop) {
+      current = section.getAttribute('id');
+    }
+  });
+  navLinks.forEach(link => {
+    link.classList.remove('active');
+    if (link.getAttribute('href') === '#' + current) {
+      link.classList.add('active');
+    }
+  });
+});
+
+// Smooth scroll for nav links
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', function (e) {
+    e.preventDefault();
+    const target = document.querySelector(this.getAttribute('href'));
+    if (target) {
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+    document.getElementById('navLinks').classList.remove('open');
+  });
+});
+</script>
+</body>
+</html>
