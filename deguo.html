@@ -1,0 +1,1571 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI-VPS | KI-Infrastruktur & Cloud-Ressourcen Vergleich</title>
+<meta name="description" content="Ihr umfassender Ratgeber fuer Cloud-Services, KI-Plattformen und GPU-Ressourcen weltweit. Vergleichen Sie AWS, Azure, Google Cloud, Alibaba Cloud und mehr.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#050510;--bg-surface:#0a0a1e;--bg-card:#10102a;--bg-card-hover:#181840;
+  --accent:#00c8ff;--accent-2:#ff4d2a;--accent-gold:#ffa800;--accent-green:#00e676;
+  --text:#e0e0f0;--text-muted:#6868a0;--border:#1a1a40;
+  --font-display:'Bebas Neue',sans-serif;--font-body:'Source Serif 4',serif;--font-mono:'DM Mono',monospace;
+  --gradient-accent:linear-gradient(135deg,#00c8ff,#0055ff);
+  --gradient-warm:linear-gradient(135deg,#ff4d2a,#ffa800);
+  --gradient-hero:linear-gradient(180deg,#050510 0%,#0a0a2e 40%,#050510 100%);
+}
+html{scroll-behavior:smooth;font-size:16px}
+body{
+  font-family:var(--font-body);color:var(--text);background:var(--bg);
+  line-height:1.7;overflow-x:hidden;
+}
+body::before{
+  content:'';position:fixed;inset:0;z-index:9999;pointer-events:none;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+  opacity:0.025;
+}
+h1,h2,h3,h4{font-family:var(--font-display);letter-spacing:0.04em;line-height:1.1}
+h1{font-size:clamp(3rem,8vw,7rem)}
+h2{font-size:clamp(2rem,4vw,3.6rem)}
+h3{font-size:clamp(1.4rem,2.5vw,2rem)}
+h4{font-size:clamp(1.1rem,1.8vw,1.4rem)}
+a{color:var(--accent);text-decoration:none;transition:color .2s}
+a:hover{color:var(--accent-gold)}
+.container{max-width:1200px;margin:0 auto;padding:0 2rem}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)}
+
+/* Scroll progress */
+.scroll-progress{position:fixed;top:0;left:0;height:3px;background:var(--gradient-accent);z-index:10000;width:0;transition:width .1s}
+
+/* Navigation */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:9990;
+  background:rgba(5,5,16,.85);backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--border);transition:transform .3s;
+}
+nav.hidden{transform:translateY(-100%)}
+.nav-inner{max-width:1400px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:.6rem 2rem}
+.nav-logo{font-family:var(--font-display);font-size:1.6rem;color:var(--accent);letter-spacing:.08em;display:flex;align-items:center;gap:.5rem}
+.nav-logo svg{width:28px;height:28px}
+.nav-links{display:flex;gap:1.4rem;flex-wrap:wrap;justify-content:center}
+.nav-links a{
+  font-family:var(--font-mono);font-size:.72rem;color:var(--text-muted);
+  letter-spacing:.06em;text-transform:uppercase;padding:.4rem 0;
+  border-bottom:1px solid transparent;transition:all .2s;
+}
+.nav-links a:hover,.nav-links a.active{color:var(--accent);border-bottom-color:var(--accent)}
+.nav-toggle{display:none;background:none;border:none;color:var(--text);cursor:pointer;font-size:1.4rem}
+
+/* Hero */
+#hero{
+  min-height:100vh;display:flex;align-items:center;position:relative;
+  background:var(--gradient-hero);overflow:hidden;
+}
+.hero-bg{position:absolute;inset:0;z-index:0}
+.hero-content{position:relative;z-index:2;padding:8rem 0 4rem}
+.hero-tag{
+  font-family:var(--font-mono);font-size:.8rem;color:var(--accent);
+  letter-spacing:.15em;text-transform:uppercase;margin-bottom:1.5rem;
+  display:flex;align-items:center;gap:.6rem;
+}
+.hero-tag::before{content:'';width:40px;height:1px;background:var(--accent)}
+.hero-title{margin-bottom:1.5rem}
+.hero-title span{
+  display:block;
+  background:var(--gradient-accent);-webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;background-clip:text;
+}
+.hero-subtitle{font-size:1.2rem;color:var(--text-muted);max-width:600px;margin-bottom:2.5rem;font-weight:300}
+.hero-actions{display:flex;gap:1rem;flex-wrap:wrap}
+.btn{
+  display:inline-flex;align-items:center;gap:.5rem;
+  font-family:var(--font-mono);font-size:.82rem;letter-spacing:.06em;
+  padding:.85rem 2rem;border:1px solid var(--border);
+  background:transparent;color:var(--text);cursor:pointer;
+  transition:all .3s;text-transform:uppercase;
+}
+.btn:hover{border-color:var(--accent);color:var(--accent);letter-spacing:.1em}
+.btn-primary{background:var(--gradient-accent);color:#000;border-color:transparent;font-weight:500}
+.btn-primary:hover{opacity:.85;color:#000;letter-spacing:.1em}
+
+/* Stats bar */
+.stats-bar{
+  background:var(--bg-surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border);
+  padding:3rem 0;
+}
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2rem;text-align:center}
+.stat-item .stat-number{
+  font-family:var(--font-display);font-size:clamp(2rem,4vw,3.2rem);
+  background:var(--gradient-accent);-webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;background-clip:text;
+}
+.stat-item .stat-label{font-family:var(--font-mono);font-size:.72rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:.1em;margin-top:.3rem}
+
+/* Section styles */
+.section{padding:7rem 0;position:relative}
+.section-dark{background:var(--bg-surface)}
+.section-header{margin-bottom:4rem}
+.section-number{
+  font-family:var(--font-display);font-size:5rem;color:rgba(0,200,255,.08);
+  line-height:1;margin-bottom:-1.5rem;
+}
+.section-title{margin-bottom:.8rem}
+.section-subtitle{color:var(--text-muted);font-size:1.05rem;max-width:600px;font-weight:300}
+.accent-line{width:60px;height:2px;background:var(--gradient-accent);margin-bottom:1.5rem}
+
+/* Provider cards */
+.provider-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:2rem}
+.provider-card{
+  background:var(--bg-card);border:1px solid var(--border);
+  padding:2.5rem;position:relative;overflow:hidden;
+  transition:all .4s;
+}
+.provider-card:hover{border-color:var(--accent);transform:translateY(-4px);background:var(--bg-card-hover)}
+.provider-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:var(--gradient-accent);opacity:0;transition:opacity .4s;
+}
+.provider-card:hover::before{opacity:1}
+.provider-card-header{display:flex;align-items:flex-start;gap:1.2rem;margin-bottom:1.5rem}
+.provider-icon{
+  width:52px;height:52px;flex-shrink:0;
+  background:rgba(0,200,255,.06);border:1px solid rgba(0,200,255,.15);
+  display:flex;align-items:center;justify-content:center;
+}
+.provider-icon svg{width:28px;height:28px}
+.provider-name{font-family:var(--font-display);font-size:1.5rem;letter-spacing:.05em}
+.provider-market{font-family:var(--font-mono);font-size:.7rem;color:var(--accent);letter-spacing:.08em;text-transform:uppercase}
+.provider-desc{color:var(--text-muted);font-size:.92rem;margin-bottom:1.5rem;font-weight:300}
+.provider-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;padding-top:1.2rem;border-top:1px solid var(--border)}
+.provider-stat{text-align:center}
+.provider-stat .val{font-family:var(--font-display);font-size:1.3rem;color:var(--accent)}
+.provider-stat .lbl{font-family:var(--font-mono);font-size:.6rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:.08em}
+
+/* Featured card */
+.featured-card{
+  background:linear-gradient(135deg,rgba(0,200,255,.06),rgba(0,85,255,.04));
+  border:1px solid rgba(0,200,255,.2);padding:3rem;
+  position:relative;overflow:hidden;
+}
+.featured-card::after{
+  content:'';position:absolute;top:-50%;right:-50%;width:100%;height:100%;
+  background:radial-gradient(circle,rgba(0,200,255,.04),transparent 60%);
+}
+
+/* Comparison table */
+.comparison-wrap{overflow-x:auto;margin-top:3rem;-webkit-overflow-scrolling:touch}
+.comparison-table{
+  width:100%;border-collapse:collapse;font-family:var(--font-mono);font-size:.78rem;
+}
+.comparison-table th{
+  text-align:left;padding:1rem 1.2rem;
+  background:var(--bg-card);color:var(--accent);
+  letter-spacing:.08em;text-transform:uppercase;font-weight:500;
+  border-bottom:2px solid var(--accent);
+  position:sticky;top:0;
+}
+.comparison-table td{
+  padding:.85rem 1.2rem;border-bottom:1px solid var(--border);
+  color:var(--text-muted);vertical-align:top;
+}
+.comparison-table tr:hover td{background:rgba(0,200,255,.02);color:var(--text)}
+.comparison-table .highlight{color:var(--accent);font-weight:500}
+
+/* AI model cards */
+.model-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem}
+.model-card{
+  background:var(--bg-card);border:1px solid var(--border);padding:2rem;
+  transition:all .3s;position:relative;
+}
+.model-card:hover{border-color:var(--accent-gold);transform:translateY(-3px)}
+.model-card .model-name{font-family:var(--font-display);font-size:1.3rem;margin-bottom:.3rem}
+.model-card .model-company{font-family:var(--font-mono);font-size:.68rem;color:var(--accent-gold);letter-spacing:.08em;text-transform:uppercase;margin-bottom:1rem}
+.model-card .model-desc{color:var(--text-muted);font-size:.88rem;font-weight:300;margin-bottom:1.2rem}
+.model-tags{display:flex;flex-wrap:wrap;gap:.4rem}
+.model-tag{
+  font-family:var(--font-mono);font-size:.6rem;
+  padding:.25rem .6rem;border:1px solid var(--border);
+  color:var(--text-muted);letter-spacing:.04em;text-transform:uppercase;
+}
+
+/* GPU cards */
+.gpu-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:2rem}
+.gpu-card{
+  background:var(--bg-card);border:1px solid var(--border);padding:2rem;
+  transition:all .3s;
+}
+.gpu-card:hover{border-color:var(--accent-green)}
+.gpu-card .gpu-name{font-family:var(--font-display);font-size:1.5rem;margin-bottom:.2rem}
+.gpu-card .gpu-vendor{font-family:var(--font-mono);font-size:.68rem;color:var(--accent-green);letter-spacing:.08em;text-transform:uppercase;margin-bottom:1rem}
+.gpu-specs{list-style:none;padding:0}
+.gpu-specs li{
+  display:flex;justify-content:space-between;padding:.5rem 0;
+  border-bottom:1px solid rgba(255,255,255,.04);font-size:.85rem;
+}
+.gpu-specs li span:first-child{color:var(--text-muted)}
+.gpu-specs li span:last-child{color:var(--text);font-family:var(--font-mono);font-size:.82rem}
+
+/* Pricing tier */
+.pricing-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.5rem;margin-top:2rem}
+.pricing-card{
+  background:var(--bg-card);border:1px solid var(--border);padding:2.5rem 2rem;
+  text-align:center;transition:all .3s;position:relative;
+}
+.pricing-card:hover{border-color:var(--accent);transform:translateY(-4px)}
+.pricing-card.popular{border-color:var(--accent);background:linear-gradient(180deg,rgba(0,200,255,.06),var(--bg-card))}
+.pricing-card.popular::before{
+  content:'EMPFOHLEN';position:absolute;top:-1px;left:50%;transform:translateX(-50%);
+  font-family:var(--font-mono);font-size:.6rem;letter-spacing:.12em;
+  background:var(--gradient-accent);color:#000;padding:.3rem 1rem;
+}
+.pricing-tier{font-family:var(--font-display);font-size:1.6rem;margin-bottom:.3rem}
+.pricing-price{font-family:var(--font-mono);font-size:2.2rem;color:var(--accent);margin-bottom:.3rem}
+.pricing-period{font-family:var(--font-mono);font-size:.65rem;color:var(--text-muted);letter-spacing:.08em;text-transform:uppercase;margin-bottom:1.5rem}
+.pricing-features{list-style:none;text-align:left}
+.pricing-features li{
+  padding:.45rem 0;font-size:.85rem;color:var(--text-muted);
+  border-bottom:1px solid rgba(255,255,255,.03);
+  display:flex;align-items:center;gap:.5rem;
+}
+.pricing-features li::before{content:'';width:4px;height:4px;background:var(--accent);flex-shrink:0}
+
+/* Section divider SVG */
+.section-divider{display:block;width:100%;height:80px;position:relative}
+
+/* Info blocks */
+.info-block{
+  background:var(--bg-card);border-left:3px solid var(--accent);
+  padding:2rem 2.5rem;margin:2rem 0;
+}
+.info-block p{color:var(--text-muted);font-size:.95rem;font-weight:300}
+.info-block .info-title{font-family:var(--font-display);font-size:1.2rem;color:var(--accent);margin-bottom:.8rem}
+
+/* Two column layout */
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:start}
+.col-text h3{margin-bottom:1rem}
+.col-text p{color:var(--text-muted);font-size:.95rem;font-weight:300;margin-bottom:1rem}
+.col-text p:last-child{margin-bottom:0}
+
+/* Timeline */
+.timeline{position:relative;padding-left:3rem;margin:2rem 0}
+.timeline::before{content:'';position:absolute;left:0;top:0;bottom:0;width:1px;background:var(--border)}
+.timeline-item{position:relative;margin-bottom:2.5rem}
+.timeline-item::before{
+  content:'';position:absolute;left:-3rem;top:.5rem;
+  width:10px;height:10px;border:2px solid var(--accent);background:var(--bg);border-radius:50%;
+}
+.timeline-item .timeline-date{font-family:var(--font-mono);font-size:.7rem;color:var(--accent);letter-spacing:.1em;text-transform:uppercase;margin-bottom:.3rem}
+.timeline-item h4{margin-bottom:.5rem}
+.timeline-item p{color:var(--text-muted);font-size:.88rem;font-weight:300}
+
+/* Feature grid */
+.feature-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:2rem}
+.feature-item{padding:2rem;border:1px solid var(--border);transition:all .3s}
+.feature-item:hover{border-color:rgba(0,200,255,.3);background:rgba(0,200,255,.02)}
+.feature-item .feature-icon{
+  width:48px;height:48px;margin-bottom:1rem;
+  display:flex;align-items:center;justify-content:center;
+  background:rgba(0,200,255,.06);
+}
+.feature-item .feature-icon svg{width:24px;height:24px}
+.feature-item h4{margin-bottom:.5rem;font-size:1.1rem}
+.feature-item p{color:var(--text-muted);font-size:.85rem;font-weight:300}
+
+/* Region map section */
+.region-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.5rem}
+.region-card{
+  background:var(--bg-card);border:1px solid var(--border);padding:2rem;
+  text-align:center;transition:all .3s;
+}
+.region-card:hover{border-color:var(--accent)}
+.region-card .region-name{font-family:var(--font-display);font-size:1.3rem;margin-bottom:.3rem}
+.region-card .region-share{font-family:var(--font-mono);font-size:1.8rem;color:var(--accent);margin-bottom:.3rem}
+.region-card .region-detail{font-size:.82rem;color:var(--text-muted)}
+
+/* Bar chart SVG */
+.bar-chart-wrap{max-width:600px;margin:2rem 0}
+.bar-row{display:flex;align-items:center;gap:1rem;margin-bottom:1rem}
+.bar-label{font-family:var(--font-mono);font-size:.75rem;color:var(--text-muted);min-width:80px;text-align:right}
+.bar-track{flex:1;height:28px;background:rgba(255,255,255,.03);position:relative;overflow:hidden}
+.bar-fill{height:100%;display:flex;align-items:center;padding-left:.8rem;font-family:var(--font-mono);font-size:.65rem;color:var(--bg);font-weight:500;transition:width 1.5s ease}
+
+/* Contact / newsletter */
+.newsletter-form{display:flex;gap:1rem;margin-top:1.5rem;flex-wrap:wrap}
+.newsletter-form input{
+  flex:1;min-width:240px;padding:.85rem 1.2rem;
+  background:var(--bg-card);border:1px solid var(--border);
+  color:var(--text);font-family:var(--font-mono);font-size:.82rem;
+  outline:none;transition:border-color .2s;
+}
+.newsletter-form input:focus{border-color:var(--accent)}
+.newsletter-form input::placeholder{color:var(--text-muted)}
+
+/* Footer */
+footer{
+  background:var(--bg-surface);border-top:1px solid var(--border);
+  padding:4rem 0 2rem;
+}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:3rem;margin-bottom:3rem}
+.footer-brand p{color:var(--text-muted);font-size:.85rem;margin-top:1rem;font-weight:300}
+.footer-col h4{
+  font-family:var(--font-mono);font-size:.7rem;
+  letter-spacing:.12em;text-transform:uppercase;color:var(--accent);
+  margin-bottom:1rem;
+}
+.footer-col a{display:block;color:var(--text-muted);font-size:.85rem;padding:.3rem 0;transition:color .2s}
+.footer-col a:hover{color:var(--text)}
+.footer-bottom{
+  border-top:1px solid var(--border);padding-top:2rem;
+  display:flex;justify-content:space-between;align-items:center;
+  font-family:var(--font-mono);font-size:.7rem;color:var(--text-muted);
+}
+
+/* Scroll animations */
+.reveal{opacity:0;transform:translateY(30px);transition:opacity .7s ease,transform .7s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+.reveal-left{opacity:0;transform:translateX(-30px);transition:opacity .7s ease,transform .7s ease}
+.reveal-left.visible{opacity:1;transform:translateX(0)}
+.reveal-right{opacity:0;transform:translateX(30px);transition:opacity .7s ease,transform .7s ease}
+.reveal-right.visible{opacity:1;transform:translateX(0)}
+
+/* Responsive */
+@media(max-width:1024px){
+  .two-col{grid-template-columns:1fr}
+  .footer-grid{grid-template-columns:1fr 1fr}
+  .stats-grid{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:768px){
+  .nav-links{display:none;position:absolute;top:100%;left:0;right:0;flex-direction:column;
+    background:rgba(5,5,16,.98);padding:1rem 2rem;border-bottom:1px solid var(--border);
+  }
+  .nav-links.open{display:flex}
+  .nav-toggle{display:block}
+  .provider-grid,.model-grid,.gpu-grid{grid-template-columns:1fr}
+  .footer-grid{grid-template-columns:1fr}
+  .footer-bottom{flex-direction:column;gap:.5rem;text-align:center}
+  .comparison-table{font-size:.68rem}
+  .comparison-table th,.comparison-table td{padding:.6rem .8rem}
+  .hero-content{padding:6rem 0 3rem}
+  section{padding:5rem 0}
+}
+@media(max-width:480px){
+  .stats-grid{grid-template-columns:1fr 1fr;gap:1.5rem}
+  .provider-stats{grid-template-columns:1fr}
+  .nav-inner{padding:.6rem 1rem}
+  .container{padding:0 1rem}
+}
+</style>
+</head>
+<body>
+
+<div class="scroll-progress" id="scrollProgress"></div>
+
+<!-- Navigation -->
+<nav id="mainNav">
+  <div class="nav-inner">
+    <a href="#hero" class="nav-logo">
+      <svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M14 2L24 8v12l-10 6L4 20V8l10-6z" stroke="#00c8ff" stroke-width="1.5" fill="none"/>
+        <circle cx="14" cy="14" r="4" fill="#00c8ff" opacity=".6"/>
+        <path d="M14 2v24M4 8l20 12M24 8L4 20" stroke="#00c8ff" stroke-width=".5" opacity=".3"/>
+      </svg>
+      AI-VPS
+    </a>
+    <button class="nav-toggle" id="navToggle" aria-label="Navigation">&#9776;</button>
+    <div class="nav-links" id="navLinks">
+      <a href="#markt">Markt</a>
+      <a href="#cloud-int">Cloud Global</a>
+      <a href="#cloud-cn">Cloud China</a>
+      <a href="#ki-global">KI Global</a>
+      <a href="#ki-cn">KI China</a>
+      <a href="#gpu">GPU &amp; VPS</a>
+      <a href="#hybrid">Hybrid</a>
+      <a href="#zukunft">Zukunft</a>
+      <a href="#kontakt">Kontakt</a>
+    </div>
+  </div>
+</nav>
+
+<!-- Hero Section -->
+<section id="hero">
+  <div class="hero-bg">
+    <svg width="100%" height="100%" viewBox="0 0 1200 800" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+      <defs>
+        <radialGradient id="glow1" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stop-color="#00c8ff" stop-opacity=".08"/>
+          <stop offset="100%" stop-color="#00c8ff" stop-opacity="0"/>
+        </radialGradient>
+        <radialGradient id="glow2" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stop-color="#ff4d2a" stop-opacity=".05"/>
+          <stop offset="100%" stop-color="#ff4d2a" stop-opacity="0"/>
+        </radialGradient>
+      </defs>
+      <rect width="1200" height="800" fill="#050510"/>
+      <ellipse cx="900" cy="300" rx="400" ry="300" fill="url(#glow1)"/>
+      <ellipse cx="300" cy="600" rx="300" ry="250" fill="url(#glow2)"/>
+      <!-- Grid lines -->
+      <g stroke="#00c8ff" stroke-width=".3" opacity=".08">
+        <line x1="0" y1="200" x2="1200" y2="200"/><line x1="0" y1="400" x2="1200" y2="400"/>
+        <line x1="0" y1="600" x2="1200" y2="600"/>
+        <line x1="200" y1="0" x2="200" y2="800"/><line x1="400" y1="0" x2="400" y2="800"/>
+        <line x1="600" y1="0" x2="600" y2="800"/><line x1="800" y1="0" x2="800" y2="800"/>
+        <line x1="1000" y1="0" x2="1000" y2="800"/>
+      </g>
+      <!-- Nodes and connections -->
+      <g>
+        <circle cx="200" cy="200" r="3" fill="#00c8ff" opacity=".6"/>
+        <circle cx="400" cy="300" r="4" fill="#00c8ff" opacity=".5"/>
+        <circle cx="600" cy="150" r="3" fill="#ffa800" opacity=".5"/>
+        <circle cx="800" cy="350" r="5" fill="#00c8ff" opacity=".7"/>
+        <circle cx="1000" cy="200" r="3" fill="#00c8ff" opacity=".4"/>
+        <circle cx="300" cy="500" r="3" fill="#ff4d2a" opacity=".5"/>
+        <circle cx="500" cy="600" r="4" fill="#00c8ff" opacity=".4"/>
+        <circle cx="700" cy="500" r="3" fill="#ffa800" opacity=".5"/>
+        <circle cx="900" cy="600" r="4" fill="#00c8ff" opacity=".6"/>
+        <circle cx="150" cy="400" r="2" fill="#00c8ff" opacity=".3"/>
+        <circle cx="1050" cy="450" r="3" fill="#00c8ff" opacity=".4"/>
+        <!-- Connections -->
+        <line x1="200" y1="200" x2="400" y2="300" stroke="#00c8ff" stroke-width=".5" opacity=".15"/>
+        <line x1="400" y1="300" x2="600" y2="150" stroke="#00c8ff" stroke-width=".5" opacity=".15"/>
+        <line x1="400" y1="300" x2="800" y2="350" stroke="#00c8ff" stroke-width=".5" opacity=".12"/>
+        <line x1="600" y1="150" x2="800" y2="350" stroke="#ffa800" stroke-width=".4" opacity=".12"/>
+        <line x1="800" y1="350" x2="1000" y2="200" stroke="#00c8ff" stroke-width=".5" opacity=".15"/>
+        <line x1="300" y1="500" x2="500" y2="600" stroke="#ff4d2a" stroke-width=".4" opacity=".12"/>
+        <line x1="500" y1="600" x2="700" y2="500" stroke="#00c8ff" stroke-width=".5" opacity=".12"/>
+        <line x1="700" y1="500" x2="900" y2="600" stroke="#00c8ff" stroke-width=".5" opacity=".12"/>
+        <line x1="200" y1="200" x2="300" y2="500" stroke="#00c8ff" stroke-width=".3" opacity=".1"/>
+        <line x1="800" y1="350" x2="900" y2="600" stroke="#00c8ff" stroke-width=".3" opacity=".1"/>
+        <line x1="1000" y1="200" x2="1050" y2="450" stroke="#00c8ff" stroke-width=".4" opacity=".12"/>
+      </g>
+      <!-- Animated pulse rings -->
+      <circle cx="800" cy="350" r="20" fill="none" stroke="#00c8ff" stroke-width=".5" opacity=".2">
+        <animate attributeName="r" values="20;60;20" dur="4s" repeatCount="indefinite"/>
+        <animate attributeName="opacity" values=".2;0;.2" dur="4s" repeatCount="indefinite"/>
+      </circle>
+      <circle cx="400" cy="300" r="15" fill="none" stroke="#00c8ff" stroke-width=".5" opacity=".15">
+        <animate attributeName="r" values="15;45;15" dur="5s" repeatCount="indefinite"/>
+        <animate attributeName="opacity" values=".15;0;.15" dur="5s" repeatCount="indefinite"/>
+      </circle>
+      <!-- Cloud outline -->
+      <path d="M520 280c-30-45-90-55-130-20s-40 100 10 125h300c40-20 60-80 20-115s-100-35-140 5c10-30-15-50-35-50s-35 20-25 55z"
+            stroke="#00c8ff" stroke-width="1" fill="none" opacity=".12" stroke-dasharray="4 6">
+        <animate attributeName="stroke-dashoffset" values="0;100" dur="20s" repeatCount="indefinite"/>
+      </path>
+    </svg>
+  </div>
+  <div class="container hero-content">
+    <div class="hero-tag">KI-Infrastruktur Ratgeber 2026</div>
+    <h1 class="hero-title">
+      <span>KI-Infrastruktur</span>
+      entdecken
+    </h1>
+    <p class="hero-subtitle">Ihr umfassender Vergleich von Cloud-Services, KI-Plattformen und GPU-Ressourcen fuer Unternehmen und Entwickler weltweit.</p>
+    <div class="hero-actions">
+      <a href="#markt" class="btn btn-primary">Marktuebersicht entdecken</a>
+      <a href="#cloud-int" class="btn">Cloud-Anbieter vergleichen</a>
+    </div>
+  </div>
+</section>
+
+<!-- Stats Bar -->
+<div class="stats-bar">
+  <div class="container">
+    <div class="stats-grid">
+      <div class="stat-item reveal">
+        <div class="stat-number">$129 Mrd.</div>
+        <div class="stat-label">Cloud-Ausgaben Q1 2026</div>
+      </div>
+      <div class="stat-item reveal" style="transition-delay:.1s">
+        <div class="stat-number">+35%</div>
+        <div class="stat-label">Jaehrliches Wachstum</div>
+      </div>
+      <div class="stat-item reveal" style="transition-delay:.2s">
+        <div class="stat-number">68%</div>
+        <div class="stat-label">Marktanteil Top 3</div>
+      </div>
+      <div class="stat-item reveal" style="transition-delay:.3s">
+        <div class="stat-number">19%</div>
+        <div class="stat-label">KI-Anteil am Cloud-Markt</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Section 2: Marktueberblick -->
+<section id="markt" class="section">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-number">01</div>
+      <div class="accent-line"></div>
+      <h2 class="section-title">Marktueberblick 2026</h2>
+      <p class="section-subtitle">Der globale Cloud-Markt erreicht neue Dimensionen. Kuenstliche Intelligenz treibt die Nachfrage nach Rechenressourcen auf beispiellose Hoehen.</p>
+    </div>
+
+    <div class="two-col reveal">
+      <div class="col-text">
+        <h3>Der Cloud-Markt im Ueberflug</h3>
+        <p>Die globalen Ausgaben fuer Cloud-Infrastrukturdienste beliefen sich im ersten Quartal 2026 auf 129 Milliarden US-Dollar, was einem Wachstum von 35 Prozent im Jahresvergleich entspricht (citation:4). Fuer das Gesamtjahr 2026 wird erwartet, dass die Umsaetze erstmals die Marke von 500 Milliarden US-Dollar uebersteigen werden. Das Wachstum beschleunigt sich bereits seit zehn aufeinanderfolgenden Quartalen, angetrieben vor allem durch den KI-Boom und die damit verbundenen Rechenanforderungen (citation:4).</p>
+        <p>Die drei grossen Hyperskaler -- Amazon Web Services (AWS), Microsoft Azure und Google Cloud -- kontrollieren zusammen rund 68 Prozent des globalen Cloud-Infrastrukturmarktes (citation:5). AWS fuehrt mit einem Marktanteil von etwa 30 Prozent, gefolgt von Azure mit 25 Prozent und Google Cloud mit 13 Prozent (citation:5). Kein anderer Anbieter uebersteigt die Vier-Prozent-Marke.</p>
+        <p>Seit der Einfuehrung von ChatGPT Ende 2022 hat sich der Cloud-Markt regelmaessig in einen hoeheren Gang geschaltet. Der KI-bezogene Cloud-Anteil stieg von 8 Prozent im Jahr 2023 auf 19 Prozent im Jahr 2026 (citation:5). Jeder grosse Anbieter positioniert sich neu rund um KI-Infrastruktur, was bedeutet, dass sich Preisgestaltung, Servicetiefe und Wettbewerbsvorteile schneller veraendern als in jeder vorangegangenen Periode.</p>
+      </div>
+      <div class="col-text">
+        <div class="info-block">
+          <div class="info-title">Wesentliche Marktdaten</div>
+          <p>Q1 2026: 129 Mrd. USD Cloud-Infrastrukturausgaben (citation:4)</p>
+          <p>Prognose 2026: &gt;500 Mrd. USD Jahresumsatz (citation:4)</p>
+          <p>Wachstum: 10. Quartal in Folge steigend (citation:4)</p>
+          <p>KI-Anteil: 19% des gesamten Cloud-Aufkommens (citation:5)</p>
+          <p>Hyperskaler-Dreierbund: 68% Marktanteil (citation:5)</p>
+        </div>
+        <h3 style="margin-top:2rem">Regionale Maerkte</h3>
+        <p>Die Vereinigten Staaten bleiben bei weitem der groesste Cloud-Markt, gefolgt von China, das deutlich vor anderen Laendern liegt (citation:2). Japan, das Vereinigte Koenigreich, Deutschland und Indien folgen danach. Zusammen machen die USA, China, die APAC-Region und Europa ueber 90 Prozent des gesamten Weltmarktes aus (citation:2).</p>
+        <p>Bemerkenswert ist die Sonderrolle Chinas: Aufgrund geopolitischer und historischer Faktoren sind westliche Cloud-Anbieter stark eingeschraenkt, auf dem chinesischen Markt zu konkurrieren. Der Markt wird von lokalen Unternehmen dominiert -- Alibaba, Tencent, China Telecom und Huawei fuehren an, die gesamte Top Ten besteht aus chinesischen Firmen (citation:2).</p>
+      </div>
+    </div>
+
+    <div class="reveal" style="margin-top:3rem">
+      <h3 style="margin-bottom:1.5rem">Marktanteile Q1 2026 (Globale Cloud-Infrastruktur)</h3>
+      <div class="bar-chart-wrap">
+        <div class="bar-row">
+          <div class="bar-label">AWS</div>
+          <div class="bar-track"><div class="bar-fill" style="width:0;background:var(--gradient-accent)" data-width="90%">30%</div></div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-label">Azure</div>
+          <div class="bar-track"><div class="bar-fill" style="width:0;background:linear-gradient(90deg,#0055ff,#00aaff)" data-width="75%">25%</div></div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-label">Google Cloud</div>
+          <div class="bar-track"><div class="bar-fill" style="width:0;background:linear-gradient(90deg,#ffa800,#ff6b00)" data-width="39%">13%</div></div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-label">Alibaba</div>
+          <div class="bar-track"><div class="bar-fill" style="width:0;background:linear-gradient(90deg,#ff4d2a,#ff8800)" data-width="12%">4%</div></div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-label">Oracle</div>
+          <div class="bar-track"><div class="bar-fill" style="width:0;background:linear-gradient(90deg,#8a2be2,#4b0082)" data-width="10%">3%</div></div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-label">Sonstige</div>
+          <div class="bar-track"><div class="bar-fill" style="width:0;background:linear-gradient(90deg,#555,#333)" data-width="75%">25%</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Divider -->
+<div class="section-divider">
+  <svg viewBox="0 0 1200 80" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" style="display:block;width:100%;height:80px">
+    <path d="M0 80L48 72C96 64 192 48 288 40C384 32 480 32 576 36C672 40 768 48 864 44C960 40 1056 24 1104 16L1152 8L1200 0V80H0Z" fill="#050510"/>
+    <path d="M0 80L48 72C96 64 192 48 288 40C384 32 480 32 576 36C672 40 768 48 864 44C960 40 1056 24 1104 16L1152 8L1200 0" fill="none" stroke="#00c8ff" stroke-width=".5" opacity=".15"/>
+  </svg>
+</div>
+
+<!-- Section 3: Internationale Cloud-Anbieter -->
+<section id="cloud-int" class="section section-dark">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-number">02</div>
+      <div class="accent-line"></div>
+      <h2 class="section-title">Internationale Cloud-Anbieter</h2>
+      <p class="section-subtitle">Die drei grossen Hyperskaler dominieren den globalen Markt. Jeder verfolgt eine einzigartige Strategie fuer die Zukunft der KI-Infrastruktur.</p>
+    </div>
+
+    <div class="provider-grid">
+      <!-- AWS -->
+      <div class="provider-card reveal">
+        <div class="provider-card-header">
+          <div class="provider-icon">
+            <svg viewBox="0 0 28 28" fill="none"><path d="M14 3l10 5.5v11L14 25 4 19.5v-11L14 3z" stroke="#ff9900" stroke-width="1.2"/><path d="M9 12h10M9 16h8" stroke="#ff9900" stroke-width="1" opacity=".6"/><circle cx="14" cy="14" r="2" fill="#ff9900" opacity=".4"/></svg>
+          </div>
+          <div>
+            <div class="provider-name">Amazon Web Services</div>
+            <div class="provider-market">Marktfuehrer</div>
+          </div>
+        </div>
+        <p class="provider-desc">AWS hielt im Q1 2026 rund 30 Prozent des globalen Cloud-Infrastrukturmarktes und bleibt damit der unangefochtene Marktfuehrer (citation:5). Mit ueber 240 verwalteten Diensten in 33 Regionen und 105 Availability Zones bietet AWS die breiteste Palette an Cloud-Diensten weltweit. Kein anderer Anbieter kommt an die Servicetiefe oder die globale Infrastruktur heran (citation:5).</p>
+        <p class="provider-desc">AWS ist typischerweise 10-20 Prozent teurer als Google Cloud fuer vergleichbare Rechenleistungen, was den reifen Oekosystem, die Support-Infrastruktur und das Partnernetzwerk widerspiegelt (citation:5). Die Reserved Instance- und Savings Plans-Infrastruktur von AWS ist die ausgereifteste der drei Anbieter, mit Rabatten von bis zu 69 Prozent bei dreijaehrigen Reserved Instances (citation:5).</p>
+        <div class="provider-stats">
+          <div class="provider-stat"><div class="val">30%</div><div class="lbl">Marktanteil</div></div>
+          <div class="provider-stat"><div class="val">240+</div><div class="lbl">Dienste</div></div>
+          <div class="provider-stat"><div class="val">33</div><div class="lbl">Regionen</div></div>
+        </div>
+      </div>
+
+      <!-- Azure -->
+      <div class="provider-card reveal" style="transition-delay:.1s">
+        <div class="provider-card-header">
+          <div class="provider-icon">
+            <svg viewBox="0 0 28 28" fill="none"><path d="M6 22l8-18 4 10-6 8H6z" stroke="#00a4ef" stroke-width="1.2"/><path d="M14 4l8 18H10L6 22" stroke="#00a4ef" stroke-width=".6" opacity=".4"/><circle cx="16" cy="10" r="2" fill="#00a4ef" opacity=".3"/></svg>
+          </div>
+          <div>
+            <div class="provider-name">Microsoft Azure</div>
+            <div class="provider-market">Platz 2 -- schnellstes Absatzwachstum</div>
+          </div>
+        </div>
+        <p class="provider-desc">Azure erreichte im Q1 2026 einen Marktanteil von 25 Prozent und verzeichnete das schnellste absolute Umsatzwachstum aller drei grossen Anbieter (citation:5). Die tiefe Integration in die Microsoft-Oekosysteme -- einschliesslich Office 365, Dynamics und dem Power Platform -- macht Azure zur bevorzugten Wahl fuer grosse Unternehmen, die bereits in Microsoft-Technologien investiert haben.</p>
+        <p class="provider-desc">Azure verzeichnete ein Umsatzwachstum von 40 Prozent im Jahresvergleich, angetrieben durch die steigende Nachfrage nach KI-Infrastruktur und die exklusive Partnerschaft mit OpenAI. Die Azure OpenAI Service-Plattform bietet Unternehmen Zugang zu GPT-Modellen in einer verwalteten, compliance-konformen Umgebung. Azure ist in ueber 60 Regionen weltweit verfuegbar.</p>
+        <div class="provider-stats">
+          <div class="provider-stat"><div class="val">25%</div><div class="lbl">Marktanteil</div></div>
+          <div class="provider-stat"><div class="val">+40%</div><div class="lbl">YoY Wachstum</div></div>
+          <div class="provider-stat"><div class="val">60+</div><div class="lbl">Regionen</div></div>
+        </div>
+      </div>
+
+      <!-- Google Cloud -->
+      <div class="provider-card reveal" style="transition-delay:.2s">
+        <div class="provider-card-header">
+          <div class="provider-icon">
+            <svg viewBox="0 0 28 28" fill="none"><path d="M14 4C8.5 4 4 8.5 4 14s4.5 10 10 10 10-4.5 10-10" stroke="#4285f4" stroke-width="1.2"/><path d="M14 4c3 0 5.5 4.5 5.5 10S17 24 14 24" stroke="#34a853" stroke-width="1.2"/><circle cx="22" cy="8" r="2.5" fill="#fbbc04" opacity=".5"/></svg>
+          </div>
+          <div>
+            <div class="provider-name">Google Cloud</div>
+            <div class="provider-market">Platz 3 -- schnellstes prozentuales Wachstum</div>
+          </div>
+        </div>
+        <p class="provider-desc">Google Cloud hielt im Q1 2026 einen Marktanteil von 13 Prozent und verzeichnete mit 63 Prozent das schnellste prozentuale Wachstum aller drei grossen Anbieter (citation:5). Als KI-native Plattform profitiert Google Cloud von seiner fuehrenden Position in der KI-Forschung -- von TensorFlow ueber Vertex AI bis hin zu den Gemini-Modellen.</p>
+        <p class="provider-desc">Googles TPUs (Tensor Processing Units) bieten eine einzigartige Hardware-Infrastruktur, die speziell fuer KI-Workloads optimiert ist. Die BigQuery-Datenplattform und die fuehrende Position in Kubernetes (GKE) machen Google Cloud besonders attraktiv fuer datenintensive und KI-orientierte Anwendungen. Google Cloud investiert massiv in den globalen Ausbau seiner hyperskalen Rechenzentren.</p>
+        <div class="provider-stats">
+          <div class="provider-stat"><div class="val">13%</div><div class="lbl">Marktanteil</div></div>
+          <div class="provider-stat"><div class="val">+63%</div><div class="lbl">YoY Wachstum</div></div>
+          <div class="provider-stat"><div class="val">40+</div><div class="lbl">Regionen</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Other providers -->
+    <h3 class="reveal" style="margin-top:3rem;margin-bottom:1.5rem">Weitere internationale Anbieter</h3>
+    <div class="provider-grid">
+      <div class="provider-card reveal">
+        <div class="provider-card-header">
+          <div class="provider-icon">
+            <svg viewBox="0 0 28 28" fill="none"><rect x="6" y="6" width="16" height="16" rx="2" stroke="#f80000" stroke-width="1.2"/><path d="M10 10h8M10 14h6M10 18h4" stroke="#f80000" stroke-width=".8" opacity=".5"/></svg>
+          </div>
+          <div>
+            <div class="provider-name">Oracle Cloud</div>
+            <div class="provider-market">Enterprise-Datenbankfuehrer</div>
+          </div>
+        </div>
+        <p class="provider-desc">Oracle Cloud Infrastructure (OCI) positioniert sich als kosteneffiziente Alternative fuer rechenintensive Workloads. Mit der fuehrenden Datenbanktechnologie und starken Enterprise-Beziehungen ist OCI besonders bei grossen Unternehmen mit bestehenden Oracle-Umgebungen beliebt. OCI bietet eine einzigartige Architektur mit isolierten Netzwerk- und Rechenbereichen.</p>
+      </div>
+      <div class="provider-card reveal" style="transition-delay:.1s">
+        <div class="provider-card-header">
+          <div class="provider-icon">
+            <svg viewBox="0 0 28 28" fill="none"><circle cx="14" cy="14" r="9" stroke="#00a1e0" stroke-width="1.2"/><path d="M14 8v6l4 4" stroke="#00a1e0" stroke-width="1" opacity=".6"/><circle cx="14" cy="14" r="2" fill="#00a1e0" opacity=".3"/></svg>
+          </div>
+          <div>
+            <div class="provider-name">IBM Cloud</div>
+            <div class="provider-market">Hybrid-Cloud-Experte</div>
+          </div>
+        </div>
+        <p class="provider-desc">IBM Cloud konzentriert sich auf Hybrid-Cloud-Loesungen und KI fuer Unternehmen. Mit der Red Hat-Integration bietet IBM eine fuehrende Open-Source-Hybrid-Cloud-Plattform. IBM Watson und die KI-Dienste richten sich an regulierte Branchen wie Finanzwesen und Gesundheitswesen, bei denen Compliance und Datenschutz im Vordergrund stehen.</p>
+      </div>
+    </div>
+
+    <!-- Comparison Table -->
+    <div class="comparison-wrap reveal" style="margin-top:3rem">
+      <h3 style="margin-bottom:1.5rem">Direkter Vergleich der Top 3</h3>
+      <table class="comparison-table">
+        <thead>
+          <tr>
+            <th>Merkmal</th>
+            <th>AWS</th>
+            <th>Azure</th>
+            <th>Google Cloud</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Marktanteil Q1 2026</td><td class="highlight">30%</td><td>25%</td><td>13%</td></tr>
+          <tr><td>Jaehrliches Wachstum</td><td>19%</td><td class="highlight">40%</td><td class="highlight">63%</td></tr>
+          <tr><td>Regionen</td><td class="highlight">33</td><td class="highlight">60+</td><td>40+</td></tr>
+          <tr><td>Verwaltete Dienste</td><td class="highlight">240+</td><td>200+</td><td>150+</td></tr>
+          <tr><td>KI-Fokus</td><td>SageMaker, Bedrock</td><td>OpenAI, Copilot</td><td>Vertex AI, Gemini</td></tr>
+          <tr><td>Pricing-Ansatz</td><td>Premium (10-20% ueber GCP)</td><td>Mittel</td><td>Kostenguenstig</td></tr>
+          <tr><td>Staerke</td><td>Service-Breite</td><td>Enterprise-Integration</td><td>KI-Nativ, Datenanalyse</td></tr>
+          <tr><td>Max. RI-Rabatt (3 J.)</td><td class="highlight">Bis zu 69%</td><td>Bis zu 60%</td><td>Bis zu 57%</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- Divider -->
+<div class="section-divider">
+  <svg viewBox="0 0 1200 80" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" style="display:block;width:100%;height:80px">
+    <path d="M0 0L48 8C96 16 192 32 288 40C384 48 480 48 576 44C672 40 768 32 864 36C960 40 1056 56 1104 64L1152 72L1200 80V0H0Z" fill="#050510"/>
+    <path d="M0 0L48 8C96 16 192 32 288 40C384 48 480 48 576 44C672 40 768 32 864 36C960 40 1056 56 1104 64L1152 72L1200 80" fill="none" stroke="#ffa800" stroke-width=".5" opacity=".1"/>
+  </svg>
+</div>
+
+<!-- Section 4: Chinesische Cloud-Anbieter -->
+<section id="cloud-cn" class="section">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-number">03</div>
+      <div class="accent-line" style="background:var(--gradient-warm)"></div>
+      <h2 class="section-title">Chinesische Cloud-Anbieter</h2>
+      <p class="section-subtitle">China ist der zweitgroesste Cloud-Markt der Welt und wird ausschliesslich von einheimischen Anbietern dominiert. Der Markt waechst rapide und unterscheidet sich grundlegend vom Rest der Welt.</p>
+    </div>
+
+    <div class="two-col reveal">
+      <div class="col-text">
+        <h3>Ein einzigartiger Markt</h3>
+        <p>Der chinesische Cloud-Markt stellt eine bemerkenswerte Ausnahme in der ansonsten globalen Cloud-Landschaft dar. Waehrend AWS, Microsoft und Google in fast allen Regionen der Welt fuehren, dominieren in China ausnahmslos lokale Unternehmen (citation:1)(citation:2). Die Top Ten der chinesischen Cloud-Anbieter bestehen ausschliesslich aus chinesischen Firmen, angefuehrt von Alibaba Cloud, Tencent Cloud, China Telecom und Huawei Cloud (citation:2).</p>
+        <p>China macht inzwischen etwa ein Drittel des gesamten APAC-Cloud-Marktes aus, und sein Anteil an der regionalen Gesamtsumme steigt von Quartal zu Quartal (citation:1). Westliche Anbieter sind durch geopolitische Faktoren und regulatorische Anforderungen stark eingeschraenkt (citation:2). Trotz des enormen Wachstums liegt der chinesische Cloud-Sektor jedoch hinter dem amerikanischen zurueck: Allein AWS generiert mehr Umsatz als der gesamte chinesische Cloud-Sektor zusammen (citation:3).</p>
+        <p>Ein grundlegender Schwachpunkt des chinesischen Cloud-Sektors sind die niedrigen IT-Ausgaben. Chinesische Unternehmen geben nur etwa 2 Prozent ihres Umsatzes fuer IT aus -- etwa die Haelfte des globalen Durchschnitts (citation:3). Die US-Infrastruktur macht 51 Prozent der weltweiten Rechenzentrenskapazitaet aus, waehrend China bei 16 Prozent liegt (citation:3).</p>
+      </div>
+      <div class="col-text">
+        <div class="info-block" style="border-left-color:var(--accent-2)">
+          <div class="info-title" style="color:var(--accent-2)">Chinas Cloud-Sektor in Zahlen</div>
+          <p>1/3 des APAC-Marktes (citation:1)</p>
+          <p>16% der globalen Rechenzentrums-kapazitaet (citation:3)</p>
+          <p>Top 10: ausschliesslich chinesische Firmen (citation:2)</p>
+          <p>IT-Ausgaben: 2% des Umsatzes vs. 4% global (citation:3)</p>
+          <p>IaaS-ueberwaegend, PaaS-Rueckstand (citation:3)</p>
+        </div>
+        <h3 style="margin-top:2rem">Herausforderungen</h3>
+        <p>Ein wesentlicher Unterschied zwischen den USA und China liegt in der Aufschluesselung nach Diensttypen. Waehrend beide Maerkte den Grossteil ihrer Umsaetze aus IaaS erzielen, hinken chinesische Anbieter bei PaaS-Umsaetzen deutlich hinterher (citation:3). Chinesische Cloud-Anbieter sind ueberproportional auf niedrigmaergige IaaS-Dienste angewiesen, was sie eher zu Rohstoff-Infrastrukturanbietern als zu Ermoechtern produktivitaetssteigernder digitaler Transformation macht.</p>
+        <p>Die Telekommunikationsunternehmen spielen in China eine groessere Rolle als in den USA. Huawei, China Mobile, China Telecom und China Unicom haben massiv in Cloud-Computing investiert und ihre bestehende Netzwerkinfrastruktur genutzt, um in den Sektor zu expandieren (citation:3).</p>
+      </div>
+    </div>
+
+    <div class="provider-grid" style="margin-top:3rem">
+      <div class="provider-card reveal">
+        <div class="provider-card-header">
+          <div class="provider-icon">
+            <svg viewBox="0 0 28 28" fill="none"><path d="M6 18c-2-4 0-10 6-12s12 0 14 6-2 10-8 12-10-2-12-6z" stroke="#ff6a00" stroke-width="1.2" opacity=".8"/><circle cx="14" cy="14" r="3" fill="#ff6a00" opacity=".3"/></svg>
+          </div>
+          <div>
+            <div class="provider-name">Alibaba Cloud</div>
+            <div class="provider-market">Chinas Marktfuehrer</div>
+          </div>
+        </div>
+        <p class="provider-desc">Alibaba Cloud fuehrt den chinesischen Cloud-Markt an und ist gleichzeitig der groesste Cloud-Anbieter in der gesamten APAC-Region (citation:1). Alibaba hat kuerzlich 53 Milliarden US-Dollar in KI- und Cloud-Infrastruktur investiert -- mehr als die gesamten KI- und Cloud-Ausgaben des letzten Jahrzehnts zusammen (citation:3). Dies signalisiert nicht nur Alibabas Vertrauen in KI-getriebenes Wachstum, sondern auch die Erkenntnis, dass Cloud-Computing ein zentraler Pfeiler der digitalen Wirtschaft sein wird.</p>
+        <div class="provider-stats">
+          <div class="provider-stat"><div class="val">#1</div><div class="lbl">China</div></div>
+          <div class="provider-stat"><div class="val">#2</div><div class="lbl">APAC</div></div>
+          <div class="provider-stat"><div class="val">$53B</div><div class="lbl">KI-Investition</div></div>
+        </div>
+      </div>
+
+      <div class="provider-card reveal" style="transition-delay:.1s">
+        <div class="provider-card-header">
+          <div class="provider-icon">
+            <svg viewBox="0 0 28 28" fill="none"><circle cx="14" cy="14" r="8" stroke="#00d4aa" stroke-width="1.2"/><path d="M10 12c0-2 2-4 4-4s4 2 4 4c0 3-4 6-4 6s-4-3-4-6z" fill="#00d4aa" opacity=".3"/></svg>
+          </div>
+          <div>
+            <div class="provider-name">Tencent Cloud</div>
+            <div class="provider-market">Stark in Gaming & Sozial</div>
+          </div>
+        </div>
+        <p class="provider-desc">Tencent Cloud profitiert von der riesigen Nutzerbasis der Tencent-Plattformen, einschliesslich WeChat und den Gaming-Diensten. Mit 1,3 Milliarden WeChat-Nutzern bietet Tencent Cloud eine einzigartige Infrastruktur fuer soziale und Gaming-Anwendungen. Tencent ist einer der Top-5-Cloud-Anbieter in der APAC-Region (citation:1) und investiert stark in KI-Infrastruktur und grosssprachliche Modelle.</p>
+        <div class="provider-stats">
+          <div class="provider-stat"><div class="val">#2</div><div class="lbl">China</div></div>
+          <div class="provider-stat"><div class="val">1.3B</div><div class="lbl">WeChat-Nutzer</div></div>
+          <div class="provider-stat"><div class="val">Top 5</div><div class="lbl">APAC</div></div>
+        </div>
+      </div>
+
+      <div class="provider-card reveal" style="transition-delay:.2s">
+        <div class="provider-card-header">
+          <div class="provider-icon">
+            <svg viewBox="0 0 28 28" fill="none"><path d="M8 20V8l6-4 6 4v12l-6 4-6-4z" stroke="#cf0a2c" stroke-width="1.2"/><path d="M14 4v20M8 8l6 4 6-4M8 20l6-4 6 4" stroke="#cf0a2c" stroke-width=".5" opacity=".4"/></svg>
+          </div>
+          <div>
+            <div class="provider-name">Huawei Cloud</div>
+            <div class="provider-market">Enterprise & Regierung</div>
+          </div>
+        </div>
+        <p class="provider-desc">Huawei Cloud wachst schnell im chinesischen Markt, unterstuetzt durch Huaweis umfangreiche Telekommunikationserfahrung und bestehende Beziehungen zu Regierung und Grosskunden. Huawei hat bei KI-Chips (Ascend-Serie) und Cloud-Plattformen stark investiert und positioniert sich als Alternative zu westlicher Technologie. Die Huawei Cloud fuehrt bei Regierungs- und Enterprise-Projekten in China.</p>
+        <div class="provider-stats">
+          <div class="provider-stat"><div class="val">Top 3</div><div class="lbl">China</div></div>
+          <div class="provider-stat"><div class="val">Ascend</div><div class="lbl">KI-Chips</div></div>
+          <div class="provider-stat"><div class="val">Gov+</div><div class="lbl">Staerke</div></div>
+        </div>
+      </div>
+
+      <div class="provider-card reveal" style="transition-delay:.1s">
+        <div class="provider-card-header">
+          <div class="provider-icon">
+            <svg viewBox="0 0 28 28" fill="none"><rect x="6" y="8" width="16" height="12" rx="2" stroke="#0066cc" stroke-width="1.2"/><path d="M10 12h8M10 16h5" stroke="#0066cc" stroke-width=".8" opacity=".5"/><circle cx="22" cy="10" r="2" fill="#0066cc" opacity=".3"/></svg>
+          </div>
+          <div>
+            <div class="provider-name">China Telecom</div>
+            <div class="provider-market">Telekommunikations-Riese</div>
+          </div>
+        </div>
+        <p class="provider-desc">China Telecom ist einer der fuehrenden Cloud-Anbieter in China und profitiert von seiner umfangreichen Netzwerkinfrastruktur (citation:2). Als staatliches Telekommunikationsunternehmen hat China Telecom besonderen Zugang zu Regierungsprojekten und kritischen Infrastrukturprojekten. Die Cloud-Sparte wachst durch den Ausbau von Rechenzentren und Edge-Computing-Infrastruktur.</p>
+        <div class="provider-stats">
+          <div class="provider-stat"><div class="val">Top 4</div><div class="lbl">China</div></div>
+          <div class="provider-stat"><div class="val">Staat</div><div class="lbl">Eigentuemer</div></div>
+          <div class="provider-stat"><div class="val">Edge</div><div class="lbl">Fokus</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Divider -->
+<div class="section-divider">
+  <svg viewBox="0 0 1200 80" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" style="display:block;width:100%;height:80px">
+    <path d="M0 80L48 72C96 64 192 48 288 40C384 32 480 32 576 36C672 40 768 48 864 44C960 40 1056 24 1104 16L1152 8L1200 0V80H0Z" fill="#0a0a1e"/>
+  </svg>
+</div>
+
+<!-- Section 5: KI-Anbieter Global -->
+<section id="ki-global" class="section section-dark">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-number">04</div>
+      <div class="accent-line"></div>
+      <h2 class="section-title">Globale KI-Anbieter</h2>
+      <p class="section-subtitle">Die fuehrenden KI-Unternehmen praegen die Zukunft der Technologie. Von grosssprachlichen Modellen bis hin zu KI-Agenten -- die Innovation beschleunigt sich exponentiell.</p>
+    </div>
+
+    <div class="two-col reveal">
+      <div class="col-text">
+        <h3>Der KI-Markt 2026</h3>
+        <p>KI-Agenten -- Systeme, die in der Lage sind, autonome mehrstufige Reasoning-, Entscheidungs- und Ausfuehrungsprozesse ueber Workflows hinweg durchzufuehren -- erweitern rasch die Grenzen der Automatisierung. Die Investitionen in den agilen KI-Bereich sind seit 2023 um mehr als 60 Prozent jaehrlich gewachsen, wobei sich das Kapital auf zwei Bereiche konzentriert: Agentic-Plattformen (ueber 55% der Investitionen) und horizontale Anwendungen (etwa 40%) (citation:6).</p>
+        <p>BCGs Analyse zeigt, dass agile KI bis zu 200 Milliarden US-Dollar an neuem Netto-Wert in den naechsten fuenf Jahren fuer Technologiedienstleister schaffen wird (citation:6). Unternehmen wie Verizon berichten von 40 Prozent Produktivitaetssteigerungen nach dem Einsatz von KI-Assistenten, waehrend Nubank Effizienzsteigerungen bis zum Zwoelffachen bei Datenmigrationen durch den Einsatz autonomer KI-Softwareingenieure verzeichnete (citation:6).</p>
+      </div>
+      <div class="col-text">
+        <div class="info-block">
+          <div class="info-title">KI-Investitionstrends</div>
+          <p>60%+ jaehrliches Investitionswachstum seit 2023 (citation:6)</p>
+          <p>55% in Agentic-Enabler-Plattformen (citation:6)</p>
+          <p>40% in horizontale Anwendungen (citation:6)</p>
+          <p>$200 Mrd. potentieller Netto-Wert (citation:6)</p>
+          <p>19% des Cloud-Aufkommens fuer KI (citation:5)</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="model-grid" style="margin-top:3rem">
+      <!-- OpenAI -->
+      <div class="model-card reveal">
+        <div class="model-name">OpenAI</div>
+        <div class="model-company">USA -- Gegr. 2015</div>
+        <p class="model-desc">OpenAI ist das Unternehmen hinter ChatGPT und den GPT-Modellserien. Die enge Partnerschaft mit Microsoft Azure ermöglicht es Unternehmen, OpenAI-Modelle in einer verwalteten, compliance-konformen Umgebung zu nutzen. Die Einfuehrung von ChatGPT Ende 2022 hat den gesamten Cloud-Markt in einen hoeheren Gang versetzt (citation:4).</p>
+        <div class="model-tags">
+          <span class="model-tag">GPT-4o</span>
+          <span class="model-tag">o3</span>
+          <span class="model-tag">DALL-E</span>
+          <span class="model-tag">Codex</span>
+          <span class="model-tag">ChatGPT</span>
+        </div>
+      </div>
+
+      <!-- Anthropic -->
+      <div class="model-card reveal" style="transition-delay:.1s">
+        <div class="model-name">Anthropic</div>
+        <div class="model-company">USA -- Gegr. 2021</div>
+        <p class="model-desc">Anthropic, gegründet von ehemaligen OpenAI-Mitarbeitern, entwickelt die Claude-Modellreihe mit Fokus auf Sicherheit und Vertrauenswuerdigkeit. Die Constitutional-AI-Methode setzt neue Standards fuer sichere KI-Entwicklung. Claude-Modelle sind besonders stark in langen Kontextfenstern, nuancierter Analyse und sicherheitskritischen Anwendungen.</p>
+        <div class="model-tags">
+          <span class="model-tag">Claude 4</span>
+          <span class="model-tag">Claude Sonnet</span>
+          <span class="model-tag">Claude Haiku</span>
+          <span class="model-tag">Constitutional AI</span>
+        </div>
+      </div>
+
+      <!-- Google -->
+      <div class="model-card reveal" style="transition-delay:.2s">
+        <div class="model-name">Google DeepMind</div>
+        <div class="model-company">USA -- Gegr. 2023 (Fusion)</div>
+        <p class="model-desc">Google DeepMind entstand aus der Fusion von Google Brain und DeepMind und entwickelt die Gemini-Modellreihe. Gemini ist nahtlos in die Google Cloud Vertex AI-Plattform integriert und profitiert von Googles TPUs -- dedizierter Hardware fuer KI-Workloads. Googles KI-Modelle sind fuehrend in multimodaler Verarbeitung.</p>
+        <div class="model-tags">
+          <span class="model-tag">Gemini Ultra</span>
+          <span class="model-tag">Gemini Pro</span>
+          <span class="model-tag">TPU v5</span>
+          <span class="model-tag">Vertex AI</span>
+        </div>
+      </div>
+
+      <!-- Meta -->
+      <div class="model-card reveal">
+        <div class="model-name">Meta AI</div>
+        <div class="model-company">USA -- Open Source</div>
+        <p class="model-desc">Meta veroeffentlicht die Llama-Modellreihe als Open Source, was sie zur fuehrenden Plattform fuer Open-Source-KI-Entwicklung macht. Llama-Modelle koennen lokal oder in jeder Cloud-Umgebung betrieben werden, was Unternehmen volle Kontrolle ueber ihre KI-Pipeline gibt. Meta investiert massiv in KI-Rechenzentren.</p>
+        <div class="model-tags">
+          <span class="model-tag">Llama 4</span>
+          <span class="model-tag">Open Source</span>
+          <span class="model-tag">Lokal deploybar</span>
+          <span class="model-tag">Forschung</span>
+        </div>
+      </div>
+
+      <!-- Mistral -->
+      <div class="model-card reveal" style="transition-delay:.1s">
+        <div class="model-name">Mistral AI</div>
+        <div class="model-company">Frankreich -- Gegr. 2023</div>
+        <p class="model-desc">Mistral AI aus Paris ist Europas fuehrender KI-Modellanbieter und steht fuer souveraene KI-Entwicklung ausserhalb der USA und Chinas. Die effizienten, kleineren Modelle sind besonders fuer den europaeischen Markt relevant, wo Datenschutz und Souveraenitaet eine zentrale Rolle spielen. Mistral-Modelle sind in allen grossen Clouds verfuegbar.</p>
+        <div class="model-tags">
+          <span class="model-tag">Mistral Large</span>
+          <span class="model-tag">Mixtral</span>
+          <span class="model-tag">Europa</span>
+          <span class="model-tag">Effizient</span>
+        </div>
+      </div>
+
+      <!-- xAI -->
+      <div class="model-card reveal" style="transition-delay:.2s">
+        <div class="model-name">xAI</div>
+        <div class="model-company">USA -- Gegr. 2023</div>
+        <p class="model-desc">xAI, gegründet von Elon Musk, entwickelt die Grok-Modelle mit Fokus auf Echtzeit-Informationen und maximale Wahrhaftigkeit. Das Unternehmen betreibt eigene massive GPU-Cluster (Colossus) und strebt an, die grundlegende Natur des Universums durch KI zu verstehen. Grok ist in die X-Plattform integriert.</p>
+        <div class="model-tags">
+          <span class="model-tag">Grok-3</span>
+          <span class="model-tag">Colossus</span>
+          <span class="model-tag">Echtzeit</span>
+          <span class="model-tag">X-Integration</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Divider -->
+<div class="section-divider">
+  <svg viewBox="0 0 1200 80" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" style="display:block;width:100%;height:80px">
+    <path d="M0 0L48 8C96 16 192 32 288 40C384 48 480 48 576 44C672 40 768 32 864 36C960 40 1056 56 1104 64L1152 72L1200 80V0H0Z" fill="#050510"/>
+  </svg>
+</div>
+
+<!-- Section 6: Chinesische KI-Anbieter -->
+<section id="ki-cn" class="section">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-number">05</div>
+      <div class="accent-line" style="background:var(--gradient-warm)"></div>
+      <h2 class="section-title">Chinesische KI-Anbieter</h2>
+      <p class="section-subtitle">Chinas KI-Industrie wachst rapide und entwickelt ein eigenes Oekosystem grosssprachlicher Modelle und KI-Anwendungen. Die Modelle erreichen zunehmend internationale Spitzenniveaus.</p>
+    </div>
+
+    <div class="info-block reveal" style="border-left-color:var(--accent-2);margin-bottom:3rem">
+      <div class="info-title" style="color:var(--accent-2)">Chinas KI-Landschaft im Wandel</div>
+      <p>Trotz Exportkontrollen fuer fortschrittliche KI-Chips hat China ein blühendes KI-Modell-Oekosystem entwickelt. Alibaba Cloud investiert 53 Milliarden US-Dollar in KI- und Cloud-Infrastruktur, was die strategische Bedeutung von KI fuer Chinas digitale Wirtschaft unterstreicht (citation:3). Die chinesischen KI-Modelle sind zunehmend konkurrenzfaehig mit westlichen Modellen, insbesondere in der chinesischen Sprache und fuer lokalisierte Anwendungen.</p>
+    </div>
+
+    <div class="model-grid">
+      <!-- Baidu -->
+      <div class="model-card reveal">
+        <div class="model-name">Baidu</div>
+        <div class="model-company">Ernie / Wenxin</div>
+        <p class="model-desc">Baidu ist Chinas fuehrendes KI-Unternehmen und Pionier bei grosssprachlichen Modellen in chinesischer Sprache. Ernie Bot (Wenxin Yiyan) war eines der ersten grossen chinesischen LLMs und ist tief in Baidu-Suche, Cloud und autonomes Fahren integriert. Baidu betreibt umfangreiche KI-Forschung und bietet KI-as-a-Service ueber die Baidu-Cloud-Plattform an.</p>
+        <div class="model-tags">
+          <span class="model-tag">Ernie 4.5</span>
+          <span class="model-tag">Wenxin</span>
+          <span class="model-tag">Apollo</span>
+          <span class="model-tag">Suche</span>
+        </div>
+      </div>
+
+      <!-- DeepSeek -->
+      <div class="model-card reveal" style="transition-delay:.1s">
+        <div class="model-name">DeepSeek</div>
+        <div class="model-company">Gegr. 2023 -- KI-Forschung</div>
+        <p class="model-desc">DeepSeek hat die globale KI-Landschaft mit hocheffizienten Modellen erschuettert, die mit deutlich weniger Rechenleistung westliche Spitzenniveaus erreichen. DeepSeek-V3 und DeepSeek-R1 demonstrieren, dass algorithmische Effizienz den Bedarf an massiver Hardware reduzieren kann. Die Open-Source-Strategie hat die Modelle weltweit verbreitet und die Diskussion ueber KI-Effizienz neu belebt.</p>
+        <div class="model-tags">
+          <span class="model-tag">DeepSeek-V3</span>
+          <span class="model-tag">DeepSeek-R1</span>
+          <span class="model-tag">Open Source</span>
+          <span class="model-tag">Effizient</span>
+        </div>
+      </div>
+
+      <!-- Alibaba -->
+      <div class="model-card reveal" style="transition-delay:.2s">
+        <div class="model-name">Alibaba / Qwen</div>
+        <div class="model-company">Tongyi Qianwen</div>
+        <p class="model-desc">Alibaba entwickelt die Tongyi Qianwen (Qwen) Modellreihe, die sich als eine der fuehrenden KI-Plattformen in China etabliert hat. Qwen-Modelle sind als Open Source verfuegbar und in die Alibaba Cloud integriert. Mit der massiven Investition von 53 Milliarden US-Dollar positioniert sich Alibaba als fuehrender KI-Infrastrukturanbieter in Asien (citation:3).</p>
+        <div class="model-tags">
+          <span class="model-tag">Qwen 2.5</span>
+          <span class="model-tag">Tongyi</span>
+          <span class="model-tag">Open Source</span>
+          <span class="model-tag">Cloud-nativ</span>
+        </div>
+      </div>
+
+      <!-- Tencent -->
+      <div class="model-card reveal">
+        <div class="model-name">Tencent</div>
+        <div class="model-company">Hunyuan</div>
+        <p class="model-desc">Tencent entwickelt die Hunyuan-Grosssprachmodelle und integriert diese tief in seine Oekosysteme -- von WeChat ueber Gaming bis hin zu Unternehmensdiensten. Tencent Cloud bietet KI-as-a-Service fuer Entwickler und Unternehmen an. Die riesige Nutzerbasis von 1,3 Milliarden WeChat-Nutzern bietet ein einzigartiges Daten- und Anwendungsumfeld.</p>
+        <div class="model-tags">
+          <span class="model-tag">Hunyuan</span>
+          <span class="model-tag">WeChat KI</span>
+          <span class="model-tag">Gaming KI</span>
+          <span class="model-tag">Enterprise</span>
+        </div>
+      </div>
+
+      <!-- ByteDance -->
+      <div class="model-card reveal" style="transition-delay:.1s">
+        <div class="model-name">ByteDance</div>
+        <div class="model-company">Doubao / Coze</div>
+        <p class="model-desc">ByteDance, das Unternehmen hinter TikTok und Douyin, hat mit Doubao ein eigenes grosses KI-Modell entwickelt. Die Coze-Plattform ermoeglicht die Erstellung von KI-Bots und -Agenten. ByteDance ist einer der groessten GPU-Kunden weltweit und betreibt massive KI-Trainings-Infrastruktur fuer Empfehlungsalgorithmen und generative KI.</p>
+        <div class="model-tags">
+          <span class="model-tag">Doubao</span>
+          <span class="model-tag">Coze</span>
+          <span class="model-tag">TikTok KI</span>
+          <span class="model-tag">Mass GPU</span>
+        </div>
+      </div>
+
+      <!-- Zhipu -->
+      <div class="model-card reveal" style="transition-delay:.2s">
+        <div class="model-name">Zhipu AI</div>
+        <div class="model-company">ChatGLM</div>
+        <p class="model-desc">Zhipu AI, ein Spin-off der Tsinghua-Universitaet, entwickelt die ChatGLM-Modellreihe und gehoert zu den fuehrenden KI-Startups in China. Die Modelle sind sowohl in chinesischer als auch in englischer Sprache leistungsstark und werden fuer Unternehmensanwendungen, Wissensmanagement und wissenschaftliche Forschung eingesetzt.</p>
+        <div class="model-tags">
+          <span class="model-tag">GLM-4</span>
+          <span class="model-tag">ChatGLM</span>
+          <span class="model-tag">Tsinghua</span>
+          <span class="model-tag">Wissen</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Divider -->
+<div class="section-divider">
+  <svg viewBox="0 0 1200 80" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" style="display:block;width:100%;height:80px">
+    <path d="M0 80L48 72C96 64 192 48 288 40C384 32 480 32 576 36C672 40 768 48 864 44C960 40 1056 24 1104 16L1152 8L1200 0V80H0Z" fill="#0a0a1e"/>
+  </svg>
+</div>
+
+<!-- Section 7: GPU & VPS -->
+<section id="gpu" class="section section-dark">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-number">06</div>
+      <div class="accent-line" style="background:linear-gradient(90deg,#00e676,#00c8ff)"></div>
+      <h2 class="section-title">GPU &amp; VPS-Ressourcen</h2>
+      <p class="section-subtitle">Die Nachfrage nach GPU-Beschleunigern und leistungsstarken VPS-Loesungen wachst exponentiell, angetrieben durch KI-Training und -Inferenz. Wir vergleichen die fuehrenden Anbieter.</p>
+    </div>
+
+    <!-- GPU Cards -->
+    <h3 class="reveal" style="margin-bottom:1.5rem">Fuehrende GPU-Beschleuniger fuer KI</h3>
+    <div class="gpu-grid">
+      <div class="gpu-card reveal">
+        <div class="gpu-name">NVIDIA H100</div>
+        <div class="gpu-vendor">Hopper-Architektur</div>
+        <ul class="gpu-specs">
+          <li><span>Speicher</span><span>80 GB HBM3</span></li>
+          <li><span>Bandbreite</span><span>3.35 TB/s</span></li>
+          <li><span>FP8 Leistung</span><span>3.958 TFLOPS</span></li>
+          <li><span>TDP</span><span>700W</span></li>
+          <li><span>Interconnect</span><span>NVLink 4.0</span></li>
+          <li><span>Preis (Cloud)</span><span>~$2.50-3.50/h</span></li>
+          <li><span>Verfuegbarkeit</span><span>AWS, Azure, GCP</span></li>
+        </ul>
+      </div>
+
+      <div class="gpu-card reveal" style="transition-delay:.1s">
+        <div class="gpu-name">NVIDIA H200</div>
+        <div class="gpu-vendor">Hopper+ -- Erweitert</div>
+        <ul class="gpu-specs">
+          <li><span>Speicher</span><span>141 GB HBM3e</span></li>
+          <li><span>Bandbreite</span><span>4.8 TB/s</span></li>
+          <li><span>FP8 Leistung</span><span>3.958 TFLOPS</span></li>
+          <li><span>TDP</span><span>700W</span></li>
+          <li><span>Interconnect</span><span>NVLink 4.0</span></li>
+          <li><span>Preis (Cloud)</span><span>~$3.50-5.00/h</span></li>
+          <li><span>Verfuegbarkeit</span><span>AWS, Azure, GCP</span></li>
+        </ul>
+      </div>
+
+      <div class="gpu-card reveal" style="transition-delay:.2s">
+        <div class="gpu-name">NVIDIA B200</div>
+        <div class="gpu-vendor">Blackwell-Architektur</div>
+        <ul class="gpu-specs">
+          <li><span>Speicher</span><span>192 GB HBM3e</span></li>
+          <li><span>Bandbreite</span><span>8.0 TB/s</span></li>
+          <li><span>FP8 Leistung</span><span>9.000 TFLOPS</span></li>
+          <li><span>TDP</span><span>1000W</span></li>
+          <li><span>Interconnect</span><span>NVLink 5.0</span></li>
+          <li><span>Preis (Cloud)</span><span>~$5.00-8.00/h</span></li>
+          <li><span>Verfuegbarkeit</span><span>Begrenzt 2026</span></li>
+        </ul>
+      </div>
+
+      <div class="gpu-card reveal">
+        <div class="gpu-name">Google TPU v5e</div>
+        <div class="gpu-vendor">Google -- Custom Silicon</div>
+        <ul class="gpu-specs">
+          <li><span>Speicher</span><span>HBM je Chip</span></li>
+          <li><span>INT8 Leistung</span><span>393 TOPS</span></li>
+          <li><span>Interconnect</span><span>ICI-Netzwerk</span></li>
+          <li><span>Pod-Groesse</span><span>Bis zu 256 Chips</span></li>
+          <li><span>Energieeffizienz</span><span>Sehr hoch</span></li>
+          <li><span>Preis (Cloud)</span><span>~$1.20-2.00/h</span></li>
+          <li><span>Verfuegbarkeit</span><span>Nur Google Cloud</span></li>
+        </ul>
+      </div>
+
+      <div class="gpu-card reveal" style="transition-delay:.1s">
+        <div class="gpu-name">AMD MI300X</div>
+        <div class="gpu-vendor">AMD -- CDNA 3</div>
+        <ul class="gpu-specs">
+          <li><span>Speicher</span><span>192 GB HBM3</span></li>
+          <li><span>Bandbreite</span><span>5.3 TB/s</span></li>
+          <li><span>FP16 Leistung</span><span>1.307 TFLOPS</span></li>
+          <li><span>TDP</span><span>750W</span></li>
+          <li><span>Interconnect</span><span>Infinity Fabric</span></li>
+          <li><span>Preis (Cloud)</span><span>~$2.00-3.00/h</span></li>
+          <li><span>Verfuegbarkeit</span><span>Azure, OCI</span></li>
+        </ul>
+      </div>
+
+      <div class="gpu-card reveal" style="transition-delay:.2s">
+        <div class="gpu-name">Huawei Ascend 910B</div>
+        <div class="gpu-vendor">Huawei -- Da Vinci</div>
+        <ul class="gpu-specs">
+          <li><span>Speicher</span><span>64 GB HBM2e</span></li>
+          <li><span>FP16 Leistung</span><span>320 TFLOPS</span></li>
+          <li><span>TDP</span><span>400W</span></li>
+          <li><span>Interconnect</span><span>HCCS</span></li>
+          <li><span>Zielmarkt</span><span>China</span></li>
+          <li><span>Verfuegbarkeit</span><span>Huawei Cloud</span></li>
+          <li><span>Besonderheit</span><span>NVIDIA-Alternative</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- VPS Comparison -->
+    <h3 class="reveal" style="margin-top:4rem;margin-bottom:1.5rem">Cloud-VPS Vergleich (Basis-Konfiguration)</h3>
+    <div class="comparison-wrap reveal">
+      <table class="comparison-table">
+        <thead>
+          <tr>
+            <th>Anbieter</th>
+            <th>Instanz</th>
+            <th>vCPU</th>
+            <th>RAM</th>
+            <th>Speicher</th>
+            <th>Preis/Monat</th>
+            <th>Besonderheit</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td class="highlight">AWS</td><td>t3.large</td><td>2</td><td>8 GB</td><td>Variable EBS</td><td>~$60</td><td>Burstable, breites Oekosystem</td></tr>
+          <tr><td class="highlight">Azure</td><td>D2s v5</td><td>2</td><td>8 GB</td><td>Temp + Managed</td><td>~$56</td><td>Hybrid-Integration</td></tr>
+          <tr><td class="highlight">Google</td><td>e2-standard-2</td><td>2</td><td>8 GB</td><td>Variable PD</td><td>~$49</td><td>Sustained-Use-Rabatt</td></tr>
+          <tr><td class="highlight">Alibaba</td><td>ecs.g7.large</td><td>2</td><td>8 GB</td><td>Cloud SSD</td><td>~$40</td><td>China-Optimiert</td></tr>
+          <tr><td>Hetzner</td><td>CPX21</td><td>3</td><td>4 GB</td><td>40 GB SSD</td><td>~$10</td><td>Preis-Leistungs-Sieger</td></tr>
+          <tr><td>Contabo</td><td>VPS M</td><td>4</td><td>8 GB</td><td>200 GB SSD</td><td>~$12</td><td>Max. Ressourcen/Preis</td></tr>
+          <tr><td>DigitalOcean</td><td>Basic 8 GB</td><td>4</td><td>8 GB</td><td>160 GB SSD</td><td>~$48</td><td>Entwickler-freundlich</td></tr>
+          <tr><td>Vultr</td><td>High Freq.</td><td>3</td><td>8 GB</td><td>256 GB SSD</td><td>~$48</td><td>Hochfrequenz-CPU</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Pricing tiers -->
+    <h3 class="reveal" style="margin-top:4rem;margin-bottom:1rem">Empfohlene Ausstattungsstufen</h3>
+    <div class="pricing-grid">
+      <div class="pricing-card reveal">
+        <div class="pricing-tier">Einstieg</div>
+        <div class="pricing-price">$5-15</div>
+        <div class="pricing-period">pro Monat</div>
+        <ul class="pricing-features">
+          <li>1-2 vCPU Kerne</li>
+          <li>1-4 GB RAM</li>
+          <li>25-50 GB SSD</li>
+          <li>1-2 TB Traffic</li>
+          <li>Prototyping, Tests</li>
+          <li>Persoenliche Projekte</li>
+        </ul>
+      </div>
+      <div class="pricing-card popular reveal" style="transition-delay:.1s">
+        <div class="pricing-tier">Professional</div>
+        <div class="pricing-price">$40-80</div>
+        <div class="pricing-period">pro Monat</div>
+        <ul class="pricing-features">
+          <li>4-8 vCPU Kerne</li>
+          <li>16-32 GB RAM</li>
+          <li>100-500 GB SSD</li>
+          <li>4-8 TB Traffic</li>
+          <li>Produktions-Workloads</li>
+          <li>KI-Inferenz (kleine Modelle)</li>
+          <li>CI/CD Pipelines</li>
+        </ul>
+      </div>
+      <div class="pricing-card reveal" style="transition-delay:.2s">
+        <div class="pricing-tier">Enterprise</div>
+        <div class="pricing-price">$200+</div>
+        <div class="pricing-period">pro Monat</div>
+        <ul class="pricing-features">
+          <li>16+ vCPU Kerne</li>
+          <li>64+ GB RAM</li>
+          <li>GPU-Beschleunigung</li>
+          <li>Dedicated Resources</li>
+          <li>KI-Training</li>
+          <li>Hochverfuegbarkeit</li>
+          <li>24/7 Premium-Support</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Divider -->
+<div class="section-divider">
+  <svg viewBox="0 0 1200 80" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" style="display:block;width:100%;height:80px">
+    <path d="M0 0L48 8C96 16 192 32 288 40C384 48 480 48 576 44C672 40 768 32 864 36C960 40 1056 56 1104 64L1152 72L1200 80V0H0Z" fill="#050510"/>
+  </svg>
+</div>
+
+<!-- Section 8: Hybrid Cloud -->
+<section id="hybrid" class="section">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-number">07</div>
+      <div class="accent-line"></div>
+      <h2 class="section-title">Hybrid-Cloud-Strategien</h2>
+      <p class="section-subtitle">Hybrid-Cloud-Architekturen verbinden oeffentliche, private und lokale Infrastruktur zu einer flexiblen, sicheren und kosteneffizienten Gesamtloesung.</p>
+    </div>
+
+    <div class="two-col reveal">
+      <div class="col-text">
+        <h3>Was ist Hybrid-Cloud?</h3>
+        <p>Eine Hybrid-Cloud ist eine Kombination aus Public Cloud, Private Cloud und lokaler Infrastruktur. Ideal verbunden bildet eine Hybrid-Cloud diese drei Umgebungen zu einer einzigen, flexiblen Infrastruktur fuer die Ausfuehrung von Anwendungen und Workloads zusammen (citation:10).</p>
+        <p>Urspruenglich wandten sich Organisationen Hybrid-Cloud-Modellen hauptsaechlich zu, um Teile ihrer lokalen Daten in Private-Cloud-Infrastruktur zu migrieren und diese dann mit Public-Cloud-Infrastruktur zu verbinden. Heute hat sich die Hybrid-Cloud-Architektur ueber die physische Konnektivitaet hinaus erweitert und bietet eine flexible, sichere und kosteneffiziente Umgebung, die die Portabilitaet und automatisierte Bereitstellung von Workloads ueber mehrere Umgebungen hinweg unterstuetzt (citation:10).</p>
+        <p>Ein Public Cloud erlaubt es Unternehmen auch, Ressourcen schnell als Reaktion auf ungeplante Traffic-Spitzen zu skalieren, ohne die Private-Cloud-Workloads zu beeinflussen -- ein Merkmal, das als Cloud-Bursting bekannt ist. Streaming-Dienste wie Amazon nutzen Cloud-Bursting, um die Zuschauerzahlen zu unterstuetzen, wenn neue Shows gestartet werden (citation:10).</p>
+      </div>
+      <div class="col-text">
+        <div class="info-block">
+          <div class="info-title">Hybrid-Cloud in Zahlen</div>
+          <p>77% der Unternehmen haben einen Hybrid-Cloud-Ansatz adoptiert (citation:10)</p>
+          <p>Kombination aus Public, Private und On-Premises (citation:10)</p>
+          <p>Einheitliches Management durch "Single Pane of Glass" (citation:10)</p>
+          <p>Cloud-Bursting fuer unvorhergesehene Spitzen (citation:10)</p>
+        </div>
+        <h3 style="margin-top:2rem">Vorteile der Hybrid-Cloud</h3>
+        <p>Eine Hybrid-Cloud-Umgebung ist ideal fuer DevOps- und andere Teams, um Webanwendungen zu entwickeln und zu testen. Dies befreit Organisationen davon, lokale physische Hardware fuer Anwendungstests kaufen und erweitern zu muessen, und bietet eine schnellere Markteinfuehrungszeit. Sobald ein Team eine Anwendung in der Public Cloud entwickelt hat, kann es sie basierend auf Geschaeftsanforderungen oder Sicherheitsfaktoren in eine Private-Cloud-Umgebung verschieben (citation:10).</p>
+      </div>
+    </div>
+
+    <div class="feature-grid reveal" style="margin-top:3rem">
+      <div class="feature-item">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M12 2L2 7v10l10 5 10-5V7L12 2z" stroke="#00c8ff" stroke-width="1.2"/><path d="M12 22V12M2 7l10 5 10-5" stroke="#00c8ff" stroke-width=".8" opacity=".5"/></svg>
+        </div>
+        <h4>Flexibilitaet</h4>
+        <p>Workloads koennen zwischen Public und Private Clouds verschoben werden, basierend auf Kosten, Leistung und Compliance-Anforderungen.</p>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M12 2a10 10 0 100 20 10 10 0 000-20z" stroke="#00c8ff" stroke-width="1.2"/><path d="M12 6v6l4 2" stroke="#00c8ff" stroke-width="1" opacity=".6"/><circle cx="12" cy="12" r="1.5" fill="#00c8ff" opacity=".4"/></svg>
+        </div>
+        <h4>Skalierbarkeit</h4>
+        <p>Elastische Skalierung in die Public Cloud bei Spitzenlasten, ohne dass in teure lokale Hardware investiert werden muss.</p>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24" fill="none"><rect x="3" y="11" width="18" height="11" rx="2" stroke="#00c8ff" stroke-width="1.2"/><path d="M7 11V7a5 5 0 0110 0v4" stroke="#00c8ff" stroke-width="1.2"/><circle cx="12" cy="16" r="1.5" fill="#00c8ff" opacity=".5"/></svg>
+        </div>
+        <h4>Sicherheit &amp; Compliance</h4>
+        <p>Sensible Daten koennen in Private Clouds oder On-Premises gehalten werden, waehrend weniger kritische Workloads in die Public Cloud ausgelagert werden.</p>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83" stroke="#00c8ff" stroke-width="1.2"/></svg>
+        </div>
+        <h4>Kosteneffizienz</h4>
+        <p>Optimierung der Gesamtkosten durch die Ausrichtung jedes Workloads auf die kostenguenstigste Umgebung.</p>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M9 3H5a2 2 0 00-2 2v4m6-6h10a2 2 0 012 2v4M9 3v18m0 0H5a2 2 0 01-2-2v-4m6 6h10a2 2 0 002-2v-4M3 15h18" stroke="#00c8ff" stroke-width="1" opacity=".8"/></svg>
+        </div>
+        <h4>Vermeidung von Vendor Lock-in</h4>
+        <p>Durch die Verteilung auf mehrere Clouds wird die Abhaengigkeit von einem einzelnen Anbieter reduziert und die Verhandlungsposition gestaerkt.</p>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" stroke="#00c8ff" stroke-width="1.2"/></svg>
+        </div>
+        <h4>Agilitaet &amp; Innovation</h4>
+        <p>Schneller Zugang zu den neuesten Cloud-Diensten und KI-Funktionen, waehrend kritische Systeme lokal geschuetzt bleiben.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Divider -->
+<div class="section-divider">
+  <svg viewBox="0 0 1200 80" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" style="display:block;width:100%;height:80px">
+    <path d="M0 80L48 72C96 64 192 48 288 40C384 32 480 32 576 36C672 40 768 48 864 44C960 40 1056 24 1104 16L1152 8L1200 0V80H0Z" fill="#0a0a1e"/>
+  </svg>
+</div>
+
+<!-- Section 9: Zukunft -->
+<section id="zukunft" class="section section-dark">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-number">08</div>
+      <div class="accent-line"></div>
+      <h2 class="section-title">Zukunft der KI-Infrastruktur</h2>
+      <p class="section-subtitle">Die Konvergenz von KI und Cloud-Computing treibt eine beispiellose Transformation voran. Agente KI, souveraene Clouds und neue Hardware-Paradigmen praegen die Zukunft.</p>
+    </div>
+
+    <div class="timeline reveal">
+      <div class="timeline-item">
+        <div class="timeline-date">2023 -- Der Wendepunkt</div>
+        <h4>ChatGPT als Katalysator</h4>
+        <p>Seit der Einfuehrung von ChatGPT Ende 2022 hat sich der Cloud-Markt in einen hoeheren Gang versetzt. Die Nachfrage nach GPU-beschleunigter Infrastruktur explodierte, und alle grossen Cloud-Anbieter begannen, ihre KI-Dienste massiv auszubauen (citation:4). KI-bezogene Ausgaben machten 8 Prozent des gesamten Cloud-Aufkommens aus (citation:5).</p>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-date">2024-2025 -- Beschleunigung</div>
+        <h4>Agente KI und Multi-Cloud</h4>
+        <p>Investitionen in agile KI wuchsen um ueber 60 Prozent jaehrlich. Agente KI-Plattformen und horizontale Anwendungen zogen das meiste Kapital an (citation:6). Unternehmen begannen, Multi-Cloud-Strategien zu verfolgen, um Vendor Lock-in zu vermeiden und die staerksten Dienste jedes Anbieters zu nutzen.</p>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-date">2026 -- Das KI-Zeitalter</div>
+        <h4>$500+ Mrd. Cloud-Markt</h4>
+        <p>Der globale Cloud-Markt uebersteigt 2026 erstmals 500 Milliarden US-Dollar. KI-Ausgaben steigen auf 19 Prozent des Cloud-Aufkommens (citation:5). Das Wachstum beschleunigt sich fuer das zehnte Quartal in Folge, mit der hoechsten Rate seit 2021 (citation:4). Agente KI schaetzt bis zu 200 Milliarden US-Dollar an neuem Wert (citation:6).</p>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-date">2027 und darueber</div>
+        <h4>Souveraene KI-Infrastruktur</h4>
+        <p>Europa und China bauen eigene, souveraene KI-Infrastrukturen auf. Regulatorische Anforderungen wie die EU-KI-Verordnung treiben die Nachfrage nach lokalen Cloud- und KI-Loesungen. Effizientere Modelle wie DeepSeek reduzieren die Hardware-Anforderungen, waehrend die Gesamtnachfrage weiter steigt. Der Wettlauf um KI-Chips und Energieinfrastruktur intensiviert sich.</p>
+      </div>
+    </div>
+
+    <div class="info-block reveal" style="margin-top:3rem">
+      <div class="info-title">Auswirkungen auf Tech-Dienstleister</div>
+      <p>Agente KI stellt sowohl eine tiefgreifende Disruption als auch eine grosse Wachstumschance fuer Technologiedienstleister dar. Waehrend Effizienzgewinne die Nachfrage nach einigen traditionellen Dienstleistungen verringern werden, zeigt BCGs Analyse, dass agente KI letztlich den adressierbaren Gesamtmarkt fuer Technologiedienstleistungen erweitern wird -- mit bis zu 200 Milliarden US-Dollar an neuem Netto-Wert in den naechsten fuenf Jahren (citation:6). Ein Drittel der Unternehmen setzt bereits agile KI-Systeme ein, und zwei Drittel erwarten von Anbietern, dass sie prioritäre Anwendungsfaelle bauen und betreiben (citation:6).</p>
+    </div>
+
+    <h3 class="reveal" style="margin-top:3rem;margin-bottom:1.5rem">Wichtige Zukunfts-Trends</h3>
+    <div class="feature-grid reveal">
+      <div class="feature-item">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="3" stroke="#ffa800" stroke-width="1.2"/><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83" stroke="#ffa800" stroke-width="1"/><circle cx="12" cy="12" r="8" stroke="#ffa800" stroke-width=".5" stroke-dasharray="3 3"/></svg>
+        </div>
+        <h4>Agente KI-Systeme</h4>
+        <p>Autonome KI-Agenten, die in der Lage sind, mehrstufige Prozesse zu planen und auszufuehren, werden die Art und Weise, wie Unternehmen Technologie nutzen, grundlegend veraendern.</p>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24" fill="none"><rect x="2" y="6" width="20" height="12" rx="2" stroke="#ffa800" stroke-width="1.2"/><path d="M6 10h4M6 14h2" stroke="#ffa800" stroke-width=".8" opacity=".5"/><circle cx="18" cy="12" r="2" fill="#ffa800" opacity=".3"/></svg>
+        </div>
+        <h4>KI-optimierte Hardware</h4>
+        <p>GPUs, TPUs und spezialisierte KI-Beschleuniger werden leistungsfaehiger und energieeffizienter. Neue Architekturen wie NVIDIAs Blackwell und Googles TPU v6 treiben die Grenzen des Moeglichen.</p>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-4 0a1 1 0 01-1-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 01-1 1" stroke="#ffa800" stroke-width="1"/></svg>
+        </div>
+        <h4>Souveraene Clouds</h4>
+        <p>Regulatorische Anforderungen und geopolitische Spannungen treiben den Aufbau regionaler, souveraener Cloud-Infrastrukturen in Europa, China und anderen Regionen.</p>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M13 10V3L4 14h7v7l9-11h-7z" stroke="#ffa800" stroke-width="1.2"/></svg>
+        </div>
+        <h4>Energie &amp; Nachhaltigkeit</h4>
+        <p>Der Energiebedarf von KI-Rechenzentren wachst exponentiell. Nachhaltige Rechenzentrumsdesigns, erneuerbare Energiequellen und effizientere Algorithmen werden zu entscheidenden Wettbewerbsfaktoren.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Divider -->
+<div class="section-divider">
+  <svg viewBox="0 0 1200 80" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" style="display:block;width:100%;height:80px">
+    <path d="M0 0L48 8C96 16 192 32 288 40C384 48 480 48 576 44C672 40 768 32 864 36C960 40 1056 56 1104 64L1152 72L1200 80V0H0Z" fill="#050510"/>
+  </svg>
+</div>
+
+<!-- Section 10: Kontakt & Newsletter -->
+<section id="kontakt" class="section">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-number">09</div>
+      <div class="accent-line"></div>
+      <h2 class="section-title">Kontakt &amp; Newsletter</h2>
+      <p class="section-subtitle">Bleiben Sie informiert ueber die neuesten Entwicklungen in KI-Infrastruktur und Cloud-Computing. Abonnieren Sie unseren Newsletter fuer exklusive Analysen und Marktberichte.</p>
+    </div>
+
+    <div class="two-col reveal">
+      <div class="col-text">
+        <h3>Newsletter abonnieren</h3>
+        <p>Erhalten Sie woechentlich die wichtigsten Nachrichten und Analysen zu Cloud-Marktentwicklungen, KI-Infrastruktur-Trends und GPU-Verfuegbarkeit direkt in Ihr Postfach. Unser Newsletter richtet sich an CTOs, DevOps-Ingenieure, KI-Entwickler und IT-Entscheider.</p>
+        <form class="newsletter-form" onsubmit="event.preventDefault();this.querySelector('button').textContent='ABONNIERT';this.querySelector('button').style.background='var(--accent-green)';this.querySelector('input').value=''">
+          <input type="email" placeholder="ihre@email.de" required>
+          <button type="submit" class="btn btn-primary">Abonnieren</button>
+        </form>
+        <p style="margin-top:1rem;font-size:.78rem;color:var(--text-muted)">Kein Spam. Jederzeit abbestellbar. Ihre Daten werden vertraulich behandelt.</p>
+
+        <h3 style="margin-top:3rem">Ueber AI-VPS</h3>
+        <p>AI-VPS ist ein unabhaengiges Informationsportal, das sich auf den Vergleich von Cloud-Services, KI-Plattformen und GPU-Ressourcen spezialisiert hat. Wir bieten detaillierte Analysen, Preisvergleiche und Empfehlungen fuer Unternehmen und Entwickler weltweit.</p>
+        <p>Unsere Daten stammen von fuehrenden Marktforschungsunternehmen wie Synergy Research Group (citation:1)(citation:2)(citation:4) und werden regelmaessig aktualisiert, um die schnelllebige Cloud- und KI-Landschaft abzubilden.</p>
+      </div>
+      <div class="col-text">
+        <h3>Ressourcen &amp; Quellen</h3>
+        <p>Nutzen Sie die folgenden Ressourcen, um fundierte Entscheidungen ueber Ihre KI-Infrastruktur zu treffen:</p>
+        <div class="info-block">
+          <div class="info-title">Empfohlene Quellen</div>
+          <p>-- Synergy Research Group: Vierteljaehrliche Cloud-Marktanalysen und Marktanteilsdaten (citation:8)</p>
+          <p>-- ISG Provider Lens: Umfassende Evaluierungen von Cloud- und KI-Dienstleistern (citation:8)</p>
+          <p>-- BCG Research: Analysen zu agenter KI und den Auswirkungen auf Tech-Dienstleister (citation:6)</p>
+          <p>-- America's AI Action Plan: Strategische KI-Politik und Infrastrukturfoerderung (citation:9)</p>
+        </div>
+
+        <h3 style="margin-top:2rem">Regionale Maerkte im Detail</h3>
+        <div class="region-grid" style="margin-top:1rem">
+          <div class="region-card">
+            <div class="region-name">Nordamerika</div>
+            <div class="region-share">$30.6 Mrd.</div>
+            <div class="region-detail">Groesster regionaler Markt</div>
+          </div>
+          <div class="region-card">
+            <div class="region-name">Europa</div>
+            <div class="region-share">$25.5 Mrd.</div>
+            <div class="region-detail">Stark reguliert, souveraen</div>
+          </div>
+          <div class="region-card">
+            <div class="region-name">Asien-Pazifik</div>
+            <div class="region-share">$12.6 Mrd.</div>
+            <div class="region-detail">Schnellstes Wachstum</div>
+          </div>
+          <div class="region-card">
+            <div class="region-name">China</div>
+            <div class="region-share">16% Global</div>
+            <div class="region-detail">Lokale Anbieter dominieren</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="nav-logo" style="margin-bottom:.5rem">
+          <svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" width="28" height="28">
+            <path d="M14 2L24 8v12l-10 6L4 20V8l10-6z" stroke="#00c8ff" stroke-width="1.5" fill="none"/>
+            <circle cx="14" cy="14" r="4" fill="#00c8ff" opacity=".6"/>
+            <path d="M14 2v24M4 8l20 12M24 8L4 20" stroke="#00c8ff" stroke-width=".5" opacity=".3"/>
+          </svg>
+          AI-VPS
+        </div>
+        <p>Ihr unabhaengiger Ratgeber fuer KI-Infrastruktur, Cloud-Services und GPU-Ressourcen. Datenbasierte Empfehlungen fuer fundierte Technologieentscheidungen.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Cloud-Anbieter</h4>
+        <a href="#cloud-int">AWS</a>
+        <a href="#cloud-int">Microsoft Azure</a>
+        <a href="#cloud-int">Google Cloud</a>
+        <a href="#cloud-cn">Alibaba Cloud</a>
+        <a href="#cloud-cn">Tencent Cloud</a>
+        <a href="#cloud-cn">Huawei Cloud</a>
+      </div>
+      <div class="footer-col">
+        <h4>KI-Plattformen</h4>
+        <a href="#ki-global">OpenAI</a>
+        <a href="#ki-global">Anthropic</a>
+        <a href="#ki-global">Google DeepMind</a>
+        <a href="#ki-cn">DeepSeek</a>
+        <a href="#ki-cn">Baidu</a>
+        <a href="#ki-cn">Alibaba Qwen</a>
+      </div>
+      <div class="footer-col">
+        <h4>Ressourcen</h4>
+        <a href="#markt">Marktueberblick</a>
+        <a href="#gpu">GPU-Vergleich</a>
+        <a href="#hybrid">Hybrid-Cloud</a>
+        <a href="#zukunft">Zukunftstrends</a>
+        <a href="#kontakt">Newsletter</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>2026 AI-VPS. Alle Angaben ohne Gewaehr.</span>
+      <span>ai-vps.github.io</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+// Scroll progress
+window.addEventListener('scroll', () => {
+  const h = document.documentElement;
+  const pct = (h.scrollTop / (h.scrollHeight - h.clientHeight)) * 100;
+  document.getElementById('scrollProgress').style.width = pct + '%';
+});
+
+// Navbar hide/show on scroll
+let lastScroll = 0;
+const nav = document.getElementById('mainNav');
+window.addEventListener('scroll', () => {
+  const st = window.pageYOffset;
+  if (st > lastScroll && st > 100) { nav.classList.add('hidden'); }
+  else { nav.classList.remove('hidden'); }
+  lastScroll = st;
+});
+
+// Mobile nav toggle
+document.getElementById('navToggle').addEventListener('click', () => {
+  document.getElementById('navLinks').classList.toggle('open');
+});
+
+// Close mobile nav on link click
+document.querySelectorAll('.nav-links a').forEach(a => {
+  a.addEventListener('click', () => {
+    document.getElementById('navLinks').classList.remove('open');
+  });
+});
+
+// Active nav link
+const sections = document.querySelectorAll('section[id]');
+const navLinks = document.querySelectorAll('.nav-links a');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      navLinks.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href') === '#' + entry.target.id) {
+          link.classList.add('active');
+        }
+      });
+    }
+  });
+}, { threshold: 0.3 });
+sections.forEach(s => observer.observe(s));
+
+// Reveal on scroll
+const reveals = document.querySelectorAll('.reveal');
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+reveals.forEach(r => revealObserver.observe(r));
+
+// Animate bars
+const bars = document.querySelectorAll('.bar-fill');
+const barObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const w = entry.target.getAttribute('data-width');
+      if (w) entry.target.style.width = w;
+    }
+  });
+}, { threshold: 0.5 });
+bars.forEach(b => barObserver.observe(b));
+</script>
+</body>
+</html>
