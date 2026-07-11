@@ -1,0 +1,1583 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI-VPS — 인프라 선택의 모든 것 | ai-vps.github.io</title>
+<meta name="description" content="2026년 AI 개발을 위한 최적의 클라우드, VPS, GPU 클라우드, AI 서비스를 비교하고 추천합니다.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Noto+Sans+KR:wght@300;400;500;700;900&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+--bg:#0a0c14;--bg-alt:#0f1119;--surface:#13151f;--surface-2:#191c28;--surface-3:#1e2232;
+--border:rgba(100,180,255,.08);--border-h:rgba(0,230,255,.2);
+--accent:#00e6ff;--accent-2:#7b61ff;--accent-3:#ffb800;--accent-glow:rgba(0,230,255,.12);
+--green:#00e676;--red:#ff4d6a;
+--t1:#e8ecf4;--t2:#a0a8b8;--t3:#667088;--t4:#404860;
+--font-display:'Syne',sans-serif;--font-body:'Noto Sans KR','Noto Sans',sans-serif;--font-mono:'DM Mono',monospace;
+--radius:14px;--radius-lg:22px;
+}
+html{scroll-behavior:smooth;scrollbar-width:thin;scrollbar-color:var(--accent) var(--bg)}
+::-webkit-scrollbar{width:6px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:var(--accent);border-radius:3px}
+body{font-family:var(--font-body);background:var(--bg);color:var(--t2);line-height:1.7;font-size:15px;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+
+/* Page Number */
+.pn{
+position:absolute;top:1.5rem;right:2rem;
+font-family:var(--font-mono);font-size:11px;color:var(--t4);
+letter-spacing:.15em;z-index:5;
+}
+.pn::before{content:'';display:block;width:20px;height:1px;background:var(--t4);margin-bottom:6px}
+
+/* Section Base */
+.sec{min-height:100vh;padding:6rem 0 4rem;position:relative;overflow:hidden}
+.sec-alt{background:var(--bg-alt)}
+.sec-alt-2{background:var(--bg)}
+.wrap{max-width:1200px;margin:0 auto;padding:0 2rem}
+.sec-hdr{margin-bottom:3.5rem;max-width:640px}
+.sec-hdr .sub{font-family:var(--font-mono);font-size:12px;color:var(--accent);letter-spacing:.2em;text-transform:uppercase;margin-bottom:.6rem;display:flex;align-items:center;gap:.5rem}
+.sec-hdr .sub::before{content:'';width:18px;height:1px;background:var(--accent)}
+.sec-hdr h2{font-family:var(--font-display);font-size:clamp(2rem,4vw,2.8rem);color:var(--t1);font-weight:800;line-height:1.15;margin-bottom:.8rem}
+.sec-hdr p{font-size:15px;color:var(--t3);line-height:1.7}
+
+/* Grid */
+.grid{display:grid;gap:1.5rem}
+.g2{grid-template-columns:repeat(2,1fr)}
+.g3{grid-template-columns:repeat(3,1fr)}
+.g4{grid-template-columns:repeat(4,1fr)}
+.g5{grid-template-columns:repeat(5,1fr)}
+@media(max-width:1024px){.g3,.g4,.g5{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:640px){.g2,.g3,.g4,.g5{grid-template-columns:1fr}}
+
+/* Card */
+.card{
+background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);
+padding:1.8rem;position:relative;transition:all .35s cubic-bezier(.4,0,.2,1);
+display:flex;flex-direction:column;
+}
+.card:hover{border-color:var(--border-h);transform:translateY(-4px);box-shadow:0 12px 40px rgba(0,230,255,.06);background:var(--surface-2)}
+.card-hd{display:flex;align-items:center;gap:.8rem;margin-bottom:1.2rem}
+.card-hd .ic{
+width:42px;height:42px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;
+background:linear-gradient(135deg,rgba(0,230,255,.12),rgba(123,97,255,.08));border:1px solid rgba(0,230,255,.1);
+}
+.card-hd .ic svg{width:20px;height:20px}
+.card-hd h3{font-family:var(--font-display);font-size:1.15rem;color:var(--t1);font-weight:700}
+.card-hd .tag{margin-left:auto;font-family:var(--font-mono);font-size:10px;padding:3px 8px;border-radius:20px;background:rgba(0,230,255,.08);color:var(--accent);border:1px solid rgba(0,230,255,.15);white-space:nowrap}
+.card p{font-size:13.5px;color:var(--t3);line-height:1.65;flex:1}
+.card .feats{list-style:none;margin-top:1rem;display:flex;flex-direction:column;gap:.35rem}
+.card .feats li{font-size:12.5px;color:var(--t3);padding-left:1rem;position:relative}
+.card .feats li::before{content:'';position:absolute;left:0;top:7px;width:4px;height:4px;border-radius:50%;background:var(--accent);opacity:.5}
+.card-full{grid-column:1/-1}
+
+/* Featured */
+.card-featured{
+background:linear-gradient(135deg,rgba(0,230,255,.04),rgba(123,97,255,.03));
+border-color:rgba(0,230,255,.15);
+}
+.card-featured:hover{border-color:var(--accent);box-shadow:0 16px 60px rgba(0,230,255,.1)}
+
+/* Rec Badge */
+.rec{
+position:absolute;top:1rem;right:1rem;
+font-family:var(--font-mono);font-size:9px;padding:3px 8px;border-radius:20px;
+background:rgba(0,230,255,.12);color:var(--accent);border:1px solid rgba(0,230,255,.2);
+letter-spacing:.08em;
+}
+
+/* Price */
+.price{
+font-family:var(--font-mono);font-size:13px;color:var(--accent-3);
+margin-top:1rem;padding-top:.8rem;border-top:1px solid var(--border);
+}
+.price em{font-style:normal;color:var(--t3);font-size:11px}
+
+/* Table */
+.tbl-wrap{overflow-x:auto;border:1px solid var(--border);border-radius:var(--radius);background:var(--surface)}
+table{width:100%;border-collapse:collapse;font-size:13px}
+thead{background:var(--surface-2)}
+th{font-family:var(--font-display);font-weight:600;color:var(--t1);padding:1rem 1.2rem;text-align:left;font-size:12px;letter-spacing:.03em;border-bottom:1px solid var(--border)}
+td{padding:.85rem 1.2rem;border-bottom:1px solid var(--border);color:var(--t2);vertical-align:middle}
+tr:last-child td{border-bottom:none}
+tbody tr:hover{background:rgba(0,230,255,.02)}
+td .v{color:var(--green);font-weight:500}
+td .ev{color:var(--t3)}
+
+/* Hero */
+.hero{
+min-height:100vh;display:flex;align-items:center;justify-content:center;
+text-align:center;position:relative;
+background:radial-gradient(ellipse 70% 50% at 30% 40%,rgba(0,230,255,.06),transparent 70%),
+radial-gradient(ellipse 60% 40% at 75% 65%,rgba(123,97,255,.05),transparent 70%),
+radial-gradient(ellipse 40% 30% at 50% 90%,rgba(255,184,0,.03),transparent 60%),var(--bg);
+}
+.hero .hv{position:relative;z-index:2}
+.hero h1{
+font-family:var(--font-display);font-size:clamp(2.6rem,5.5vw,4.2rem);color:var(--t1);
+font-weight:800;line-height:1.08;letter-spacing:-.03em;margin-bottom:1.2rem;
+}
+.hero h1 .hl{background:linear-gradient(135deg,var(--accent),var(--accent-2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero .lead{font-size:clamp(.95rem,1.8vw,1.15rem);color:var(--t3);max-width:600px;margin:0 auto 3rem;line-height:1.7}
+
+/* Stats */
+.stats{display:flex;justify-content:center;gap:3rem;flex-wrap:wrap;margin-bottom:3rem}
+.stat{text-align:center}
+.stat .n{font-family:var(--font-display);font-size:clamp(1.8rem,3vw,2.4rem);color:var(--t1);font-weight:800;line-height:1.2}
+.stat .n em{font-style:normal;color:var(--accent)}
+.stat .l{font-size:12px;color:var(--t4);margin-top:.2rem;letter-spacing:.05em}
+
+/* CTA */
+.cta{display:inline-flex;align-items:center;gap:.6rem;padding:.9rem 2.4rem;background:linear-gradient(135deg,var(--accent),#00a8cc);color:var(--bg);font-weight:700;border-radius:50px;font-size:15px;text-decoration:none;transition:all .3s ease;cursor:pointer;border:none;font-family:var(--font-body)}
+.cta:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(0,230,255,.25)}
+.cta svg{width:18px;height:18px}
+
+/* CTA outline */
+.cta-o{display:inline-flex;align-items:center;gap:.5rem;padding:.7rem 1.6rem;background:transparent;color:var(--accent);font-weight:500;border-radius:50px;font-size:13px;text-decoration:none;transition:all .3s ease;cursor:pointer;border:1px solid rgba(0,230,255,.25);font-family:var(--font-body)}
+.cta-o:hover{background:rgba(0,230,255,.08);border-color:var(--accent)}
+
+/* Floats */
+.floats{position:absolute;inset:0;pointer-events:none;overflow:hidden;z-index:1}
+.fl{
+position:absolute;border-radius:50%;opacity:.3;
+animation:fl 20s ease-in-out infinite alternate;
+}
+.fl-1{width:500px;height:500px;background:radial-gradient(circle,rgba(0,230,255,.08),transparent 70%);top:-10%;left:-10%;animation-duration:25s}
+.fl-2{width:400px;height:400px;background:radial-gradient(circle,rgba(123,97,255,.06),transparent 70%);bottom:0;right:-5%;animation-duration:30s;animation-delay:5s}
+.fl-3{width:300px;height:300px;background:radial-gradient(circle,rgba(255,184,0,.05),transparent 70%);top:30%;right:10%;animation-duration:22s;animation-delay:10s}
+@keyframes fl{
+0%{transform:translate(0,0) scale(1)}
+33%{transform:translate(30px,-20px) scale(1.05)}
+66%{transform:translate(-20px,15px) scale(.97)}
+100%{transform:translate(10px,-10px) scale(1.02)}
+}
+
+/* Floating Icons */
+.f-icons{position:absolute;inset:0;pointer-events:none;z-index:1;overflow:hidden}
+.f-icon{
+position:absolute;opacity:.06;
+animation:fi-drift 18s ease-in-out infinite alternate;
+}
+.f-icon svg{width:40px;height:40px;fill:none;stroke:var(--accent);stroke-width:1.2}
+.f-icon:nth-child(2){animation-duration:22s;animation-delay:3s}
+.f-icon:nth-child(3){animation-duration:25s;animation-delay:7s}
+.f-icon:nth-child(4){animation-duration:20s;animation-delay:11s}
+.f-icon:nth-child(5){animation-duration:28s;animation-delay:2s}
+.f-icon:nth-child(6){animation-duration:23s;animation-delay:5s}
+@keyframes fi-drift{
+0%{transform:translate(0,0) rotate(0deg)}
+25%{transform:translate(15px,-25px) rotate(3deg)}
+50%{transform:translate(-10px,20px) rotate(-2deg)}
+75%{transform:translate(20px,10px) rotate(4deg)}
+100%{transform:translate(-5px,-15px) rotate(-1deg)}
+}
+
+/* Reveal */
+.rev{opacity:0;transform:translateY(28px);transition:opacity .7s cubic-bezier(.4,0,.2,1),transform .7s cubic-bezier(.4,0,.2,1)}
+.rev.vis{opacity:1;transform:translateY(0)}
+.rev .card:nth-child(2){transition-delay:.07s}
+.rev .card:nth-child(3){transition-delay:.14s}
+.rev .card:nth-child(4){transition-delay:.21s}
+.rev .card:nth-child(5){transition-delay:.28s}
+.rev .card:nth-child(6){transition-delay:.35s}
+
+/* Progress */
+.progress{position:fixed;top:0;left:0;height:2px;background:linear-gradient(90deg,var(--accent),var(--accent-2));z-index:1001;width:0%;transition:width .1s linear}
+
+/* Nav */
+.nav{
+position:fixed;top:0;left:0;right:0;z-index:1000;
+background:rgba(10,12,20,.88);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+border-bottom:1px solid var(--border);
+padding:0 2rem;transition:all .35s ease;
+}
+.nav.scrolled{background:rgba(10,12,20,.95);box-shadow:0 4px 20px rgba(0,0,0,.3)}
+.nav-i{max-width:1200px;margin:0 auto;display:flex;align-items:center;height:60px;justify-content:space-between}
+.logo{font-family:var(--font-display);font-size:1.15rem;color:var(--t1);font-weight:800;text-decoration:none;letter-spacing:-.02em}
+.logo em{font-style:normal;color:var(--accent)}
+.nav-m{display:flex;gap:.2rem}
+.nav-m a{
+padding:.4rem .75rem;font-size:12px;color:var(--t3);text-decoration:none;
+border-radius:8px;transition:all .25s ease;font-weight:400;white-space:nowrap;
+}
+.nav-m a:hover{color:var(--t1);background:rgba(255,255,255,.04)}
+.nav-m a.act{color:var(--accent);background:rgba(0,230,255,.08)}
+@media(max-width:900px){.nav-m{display:none}}
+
+/* Bottom Nav */
+.bnav{
+position:fixed;bottom:1.5rem;left:50%;transform:translateX(-50%);z-index:1000;
+display:flex;align-items:center;gap:.4rem;
+background:rgba(10,12,20,.92);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+padding:.45rem .7rem;border-radius:50px;border:1px solid var(--border);
+box-shadow:0 8px 30px rgba(0,0,0,.3);
+}
+.bnav a{
+width:32px;height:32px;display:flex;align-items:center;justify-content:center;
+border-radius:50%;font-family:var(--font-mono);font-size:10px;color:var(--t4);
+text-decoration:none;transition:all .25s ease;
+}
+.bnav a:hover{color:var(--t1);background:rgba(255,255,255,.06)}
+.bnav a.act{color:var(--bg);background:var(--accent);font-weight:500}
+
+/* Section CTA */
+.scta{
+margin-top:3rem;padding:2.5rem;border-radius:var(--radius-lg);
+background:linear-gradient(135deg,rgba(0,230,255,.04),rgba(123,97,255,.03));
+border:1px solid var(--border);text-align:center;
+}
+.scta h3{font-family:var(--font-display);font-size:1.4rem;color:var(--t1);font-weight:700;margin-bottom:.5rem}
+.scta p{color:var(--t3);font-size:14px;margin-bottom:1.5rem}
+
+/* Feature List */
+.flist{list-style:none;display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:.6rem;margin-top:1.2rem}
+.flist li{font-size:13px;color:var(--t3);padding:.5rem .8rem;background:var(--surface);border-radius:8px;border:1px solid var(--border);display:flex;align-items:center;gap:.5rem}
+.flist li .dot{width:5px;height:5px;border-radius:50%;background:var(--accent);flex-shrink:0;opacity:.6}
+
+/* Info Block */
+.info{
+margin-top:2rem;padding:1.8rem;border-radius:var(--radius);
+background:rgba(0,230,255,.03);border:1px solid rgba(0,230,255,.08);
+}
+.info h4{font-family:var(--font-display);font-size:1.1rem;color:var(--t1);font-weight:700;margin-bottom:.6rem}
+.info p{font-size:13.5px;color:var(--t3);line-height:1.7}
+
+/* Footer */
+.ft{
+padding:4rem 0 2rem;border-top:1px solid var(--border);background:var(--bg);
+}
+.ft-i{max-width:1200px;margin:0 auto;padding:0 2rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1.5rem}
+.ft-brand{font-family:var(--font-display);font-size:1.1rem;color:var(--t1);font-weight:800}
+.ft-brand em{font-style:normal;color:var(--accent)}
+.ft-links{display:flex;gap:1.5rem;flex-wrap:wrap}
+.ft-links a{font-size:13px;color:var(--t3);text-decoration:none;transition:color .2s}
+.ft-links a:hover{color:var(--accent)}
+.ft-copy{font-size:11px;color:var(--t4);margin-top:2rem;text-align:center}
+
+/* Misc */
+.mt-2{margin-top:2rem}
+.mt-3{margin-top:3rem}
+.mt-4{margin-top:4rem}
+.mb-1{margin-bottom:1rem}
+.text-center{text-align:center}
+.gap-sm{gap:1rem}
+</style>
+</head>
+<body>
+
+<!-- Progress Bar -->
+<div class="progress" id="progress"></div>
+
+<!-- Navigation -->
+<nav class="nav" id="nav">
+  <div class="nav-i">
+    <a href="#hero" class="logo">AI-VPS<em>.github.io</em></a>
+    <div class="nav-m">
+      <a href="#s1" class="act">글로벌 클라우드</a>
+      <a href="#s2">국내 클라우드</a>
+      <a href="#s3">뉴 클라우드</a>
+      <a href="#s4">GPU 클라우드</a>
+      <a href="#s5">AI 서비스</a>
+      <a href="#s6">AI-VPS</a>
+      <a href="#s7">가격 비교</a>
+      <a href="#s8">배포 가이드</a>
+      <a href="#s9">활용 사례</a>
+      <a href="#s10">FAQ</a>
+    </div>
+  </div>
+</nav>
+
+<!-- Bottom Page Nav -->
+<div class="bnav" id="bnav">
+  <a href="#hero" class="act">1</a>
+  <a href="#s1">2</a>
+  <a href="#s2">3</a>
+  <a href="#s3">4</a>
+  <a href="#s4">5</a>
+  <a href="#s5">6</a>
+  <a href="#s6">7</a>
+  <a href="#s7">8</a>
+  <a href="#s8">9</a>
+  <a href="#s9">10</a>
+</div>
+
+<!-- ===================== HERO ===================== -->
+<section class="sec hero" id="hero">
+  <div class="pn">01 / 10</div>
+  <div class="floats">
+    <div class="fl fl-1"></div>
+    <div class="fl fl-2"></div>
+    <div class="fl fl-3"></div>
+  </div>
+  <div class="f-icons">
+    <div class="f-icon" style="top:12%;left:8%">
+      <svg viewBox="0 0 24 24"><path d="M6.5 19a4.5 4.5 0 0 1-.42-8.98A7 7 0 1 1 18.5 19H6.5z" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </div>
+    <div class="f-icon" style="top:20%;right:12%">
+      <svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M9 9h6M9 12h6M9 15h4" stroke-linecap="round"/></svg>
+    </div>
+    <div class="f-icon" style="bottom:25%;left:15%">
+      <svg viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="2" stroke-linecap="round" stroke-linejoin="round"/><line x1="12" y1="18" x2="12.01" y2="18" stroke-linecap="round"/></svg>
+    </div>
+    <div class="f-icon" style="top:60%;right:8%">
+      <svg viewBox="0 0 24 24"><rect x="2" y="6" width="20" height="12" rx="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M6 12h.01M10 12h.01M14 12h.01" stroke-linecap="round"/></svg>
+    </div>
+    <div class="f-icon" style="top:40%;left:5%">
+      <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </div>
+    <div class="f-icon" style="bottom:15%;right:20%">
+      <svg viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </div>
+  </div>
+  <div class="hv">
+    <p style="font-family:var(--font-mono);font-size:12px;color:var(--accent);letter-spacing:.25em;margin-bottom:1.5rem;">AI INFRASTRUCTURE GUIDE 2026</p>
+    <h1>AI 인프라의<br><span class="hl">모든 것을 한 곳에서</span></h1>
+    <p class="lead">클라우드 플랫폼, GPU 리소스, AI 서비스, VPS 호스팅까지. 2026년 AI 개발에 필요한 최적의 인프라를 비교하고 선택하세요. 국내외 주요 공급업체 50개 이상을 심층 분석합니다.</p>
+    <div class="stats">
+      <div class="stat"><div class="n">50<em>+</em></div><div class="l">클라우드 공급업체</div></div>
+      <div class="stat"><div class="n">30<em>+</em></div><div class="l">AI 서비스 플랫폼</div></div>
+      <div class="stat"><div class="n">100<em>%</em></div><div class="l">무료 비교 가이드</div></div>
+    </div>
+    <a href="#s1" class="cta">비교 시작하기
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17l9.2-9.2M17 17V8H8"/></svg>
+    </a>
+  </div>
+</section>
+
+<!-- ===================== SEC 1: 글로벌 클라우드 ===================== -->
+<section class="sec sec-alt" id="s1">
+  <div class="pn">02 / 10</div>
+  <div class="f-icons">
+    <div class="f-icon" style="top:8%;right:6%"><svg viewBox="0 0 24 24"><path d="M6.5 19a4.5 4.5 0 0 1-.42-8.98A7 7 0 1 1 18.5 19H6.5z" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    <div class="f-icon" style="bottom:10%;left:4%"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+  </div>
+  <div class="wrap">
+    <div class="sec-hdr rev">
+      <div class="sub">PAGE 02 — GLOBAL CLOUD</div>
+      <h2>글로벌 하이퍼스케일러 및<br>대형 클라우드 플랫폼</h2>
+      <p>전 세계적으로 가장 널리 사용되는 클라우드 인프라 플랫폼입니다. 엔터프라이즈급 SLA, 글로벌 리전, 포괄적인 AI/ML 서비스를 제공합니다. 대규모 워크로드와 프로덕션 환경에 적합합니다.</p>
+    </div>
+
+    <div class="grid g3 rev">
+      <!-- AWS -->
+      <div class="card card-featured">
+        <span class="rec">RECOMMENDED</span>
+        <div class="card-hd">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.6"><path d="M6.5 19a4.5 4.5 0 0 1-.42-8.98A7 7 0 1 1 18.5 19H6.5z"/><path d="M12 2v10M8 6l4-4 4 4"/></svg></div>
+          <h3>Amazon Web Services</h3>
+          <span class="tag">글로벌 1위</span>
+        </div>
+        <p>가장 광범위한 서비스 포트폴리오를 보유한 세계 최대 클라우드 플랫폼입니다. EC2 GPU 인스턴스(P4d, P5), SageMaker, Bedrock 등 AI/ML 전용 서비스가 강력합니다.</p>
+        <ul class="feats">
+          <li>30개 이상의 글로벌 리전 운영</li>
+          <li>P5 인스턴스: H100 8-GPU, NVLink</li>
+          <li>SageMaker Studio 원스톱 ML 플랫폼</li>
+          <li>Bedrock: 서버리스 Foundation Model API</li>
+          <li>Trainium / Inferentia 자체 AI 칩</li>
+        </ul>
+        <div class="price">H100 8-GPU: ~$6.88/hr/GPU <em>(8-GPU 인스턴스 환산)</em></div>
+      </div>
+
+      <!-- GCP -->
+      <div class="card card-featured">
+        <span class="rec">RECOMMENDED</span>
+        <div class="card-hd">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="var(--accent-2)" stroke-width="1.6"><circle cx="12" cy="12" r="3"/><circle cx="12" cy="4" r="2"/><circle cx="18" cy="16" r="2"/><circle cx="6" cy="16" r="2"/><path d="M14.5 5.5L17 14M9.5 5.5L7 14M18 18H6"/></svg></div>
+          <h3>Google Cloud Platform</h3>
+          <span class="tag">AI 특화</span>
+        </div>
+        <p>TensorFlow와 Vertex AI의 본거지. TPU v5p, A3 Mega(H100), 독자적 Gemini API까지 AI 개발에 최적화된 인프라를 제공합니다.</p>
+        <ul class="feats">
+          <li>Vertex AI: 통합 ML 플랫폼</li>
+          <li>TPU v5p: 맞춤형 AI 가속기</li>
+          <li>A3 Mega 인스턴스: H100 GPU</li>
+          <li>Gemini API 네이티브 통합</li>
+          <li>Colab Enterprise 제공</li>
+        </ul>
+        <div class="price">H100: ~$3.00~$11.06/hr <em>(리전·유형별 상이)</em></div>
+      </div>
+
+      <!-- Azure -->
+      <div class="card">
+        <div class="card-hd">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.6"><path d="M5 17L12 3l7 14H5z"/><path d="M12 3v14M5 17h14"/></svg></div>
+          <h3>Microsoft Azure</h3>
+          <span class="tag">엔터프라이즈</span>
+        </div>
+        <p>Microsoft 생태계와의 깊은 통합. Azure OpenAI Service로 GPT-4o, DALL-E 등을 엔터프라이즈급 SLA로 이용할 수 있습니다. ND H100 v5 시리즈를 제공합니다.</p>
+        <ul class="feats">
+          <li>Azure OpenAI Service 독점 제공</li>
+          <li>ND H100 v5: H100 8-GPU 인스턴스</li>
+          <li>Azure Machine Learning Studio</li>
+          <li>M365, Teams 등과 네이티브 연동</li>
+          <li>SOC 2, ISO 27001 등 인증 완비</li>
+        </ul>
+        <div class="price">H100: ~$6.98~$12.29/hr</div>
+      </div>
+
+      <!-- Oracle -->
+      <div class="card">
+        <div class="card-hd">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="var(--accent-3)" stroke-width="1.6"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14c0 1.66 4.03 3 9 3s9-1.34 9-3V5"/><path d="M3 12c0 1.66 4.03 3 9 3s9-1.34 9-3"/></svg></div>
+          <h3>Oracle Cloud</h3>
+          <span class="tag">무료 티어</span>
+        </div>
+        <p>Always Free 티어로 ARM 인스턴스(Ampere A1)를 영구 무료로 제공합니다. NVIDIA A100 GPU를 합리적인 가격에 제공하며, 오라클 데이터베이스와의 연동이 뛰어납니다.</p>
+        <ul class="feats">
+          <li>Always Free: ARM 4C/24GB 무료</li>
+          <li>A100 80GB 온디맨드 제공</li>
+          <li>OCI Data Science 플랫폼</li>
+          <li>로우 레이턴시 DB 연동</li>
+          <li>AI 서비스: LLM, Vision, Speech</li>
+        </ul>
+        <div class="price">A100: ~$3.05/hr <em>(Always Free 티어 포함)</em></div>
+      </div>
+
+      <!-- IBM -->
+      <div class="card">
+        <div class="card-hd">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="var(--accent-2)" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M7 8h10M7 12h10M7 16h6"/></svg></div>
+          <h3>IBM Cloud</h3>
+          <span class="tag">엔터프라이즈</span>
+        </div>
+        <p>하이브리드 클라우드 전략의 선두. watsonx 플랫폼으로 기업용 AI 파인튜닝 및 배포를 지원합니다. Red Hat OpenShift 통합이 돋보입니다.</p>
+        <ul class="feats">
+          <li>watsonx.ai: 기업용 AI 플랫폼</li>
+          <li>Red Hat OpenShift 통합</li>
+          <li>NVIDIA A100/H100 GPU 제공</li>
+          <li>하이브리드 멀티클라우드 지원</li>
+          <li>금융·의료 특화 컴플라이언스</li>
+        </ul>
+        <div class="price">가격: 영업 문의 <em>(엔터프라이즈 견적)</em></div>
+      </div>
+
+      <!-- Alibaba -->
+      <div class="card">
+        <div class="card-hd">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M8 12c0-2.2 1.8-4 4-4s4 1.8 4 4-1.8 4-4 4"/><circle cx="12" cy="12" r="1"/></svg></div>
+          <h3>Alibaba Cloud</h3>
+          <span class="tag">아시아 1위</span>
+        </div>
+        <p>아시아태평양 시장 1위 클라우드. 중국 및 동남아 비즈니스에 필수적이며, PAI(Platform for AI)와 ModelScope 오픈소스 모델 허브를 제공합니다.</p>
+        <ul class="feats">
+          <li>PAI: 통합 AI 개발 플랫폼</li>
+          <li>ModelScope 오픈소스 모델 허브</li>
+          <li>중국 본토 8개 리전 운영</li>
+          <li>한국, 일본, 싱가포르 등 아시아 리전</li>
+          <li>ECS GPU 인스턴스 (A100, V100)</li>
+        </ul>
+        <div class="price">A100 80GB: ~¥36/hr <em>(약 $5/hr, 아시아 리전)</em></div>
+      </div>
+    </div>
+
+    <div class="info rev">
+      <h4>하이퍼스케일러 선택 기준</h4>
+      <p>하이퍼스케일러는 대규모 워크로드, 엔터프라이즈 SLA, 글로벌 배포가 필요할 때 최적입니다. 다만 GPU 가격이 네오클라우드 대비 60~150% 높을 수 있으며, VPC 설정, IAM 구성, 할당량 승인 등 사전 작업이 필요합니다. 소규모 프로젝트나 스타트업이라면 아래 뉴 클라우드나 GPU 클라우드 섹션을 먼저 확인하세요. (citation:5)</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== SEC 2: 국내 클라우드 ===================== -->
+<section class="sec sec-alt-2" id="s2">
+  <div class="pn">03 / 10</div>
+  <div class="f-icons">
+    <div class="f-icon" style="top:15%;left:5%"><svg viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="2" stroke-linecap="round" stroke-linejoin="round"/><line x1="12" y1="18" x2="12.01" y2="18" stroke-linecap="round"/></svg></div>
+    <div class="f-icon" style="bottom:12%;right:6%"><svg viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+  </div>
+  <div class="wrap">
+    <div class="sec-hdr rev">
+      <div class="sub">PAGE 03 — KOREAN CLOUD</div>
+      <h2>국내 클라우드 플랫폼</h2>
+      <p>한국에 데이터센터를 운영하며 한국어 지원, 원화 결제, 세금계산서 발행, 데이터 주권을 보장하는 국내 클라우드 공급업체입니다. 의료, 금융, 공공 분야나 규정 준수가 중요한 조직에 특히 적합합니다. (citation:5)</p>
+    </div>
+
+    <div class="grid g3 rev">
+      <!-- NCP -->
+      <div class="card card-featured">
+        <span class="rec">국내 1위</span>
+        <div class="card-hd">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="1.6"><path d="M6.5 19a4.5 4.5 0 0 1-.42-8.98A7 7 0 1 1 18.5 19H6.5z"/><path d="M10 14l2-2 2 2M12 12v4"/></svg></div>
+          <h3>NHN Cloud (NCP)</h3>
+          <span class="tag">종합 플랫폼</span>
+        </div>
+        <p>국내 최대 규모의 종합 클라우드 플랫폼. 게임, 커머스, 미디어 분야에서 강력한 인프라를 보유하고 있으며 GPU 서버와 AI 서비스를 제공합니다.</p>
+        <ul class="feats">
+          <li>GPU 서버: NVIDIA A100, V100 제공</li>
+          <li>NHN Cloud AI 서비스 (OCR, NLP 등)</li>
+          <li>한국어 기술 지원 및 한국 리전</li>
+          <li>원화 결제, 세금계산서 발행</li>
+          <li>게임, 커머스 특화 솔루션</li>
+        </ul>
+        <div class="price">A100: 영업 문의 <em>(커스텀 견적)</em></div>
+      </div>
+
+      <!-- KT Cloud -->
+      <div class="card">
+        <div class="card-hd">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.6"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M6 12h.01M10 12h.01M14 12h.01"/></svg></div>
+          <h3>KT Cloud</h3>
+          <span class="tag">통신사 클라우드</span>
+        </div>
+        <p>KT 그룹의 클라우드 플랫폼. 국내 통신 인프라와 결합된 저지연 서비스를 제공하며, GPU 서버와 AI 개발 환경을 갖추고 있습니다.</p>
+        <ul class="feats">
+          <li>GPU Cloud: A100, V100 인스턴스</li>
+          <li>AI 개발 플랫폼 (AIaaS)</li>
+          <li>국내 전용 회선 저지연 연결</li>
+          <li>금융 보안 인증 완비</li>
+          <li>하이브리드 클라우드 지원</li>
+        </ul>
+        <div class="price">GPU 서버: 영업 문의</div>
+      </div>
+
+      <!-- Samsung SDS -->
+      <div class="card">
+        <div class="card-hd">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="var(--accent-3)" stroke-width="1.6"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg></div>
+          <h3>Samsung SDS Cloud</h3>
+          <span class="tag">엔터프라이즈</span>
+        </div>
+        <p>삼성 그룹의 IT 서비스 자회사가 제공하는 엔터프라이즈 클라우드. 제조, 반도체, 금융 분야의 대기업 고객을 위한 맞춤형 인프라를 제공합니다.</p>
+        <ul class="feats">
+          <li>엔터프라이즈 전용 GPU 클러스터</li>
+          <li>Brightics AI: 삼성 AI 플랫폼</li>
+          <li>글로벌 멀티리전 배포</li>
+          <li>제조/반도체 특화 솔루션</li>
+          <li>24시간 한국어 전담 지원</li>
+        </ul>
+        <div class="price">가격: 엔터프라이즈 견적</div>
+      </div>
+
+      <!-- Naver Cloud -->
+      <div class="card">
+        <div class="card-hd">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="1.6"><path d="M6 4v16M18 4v16M6 12l6-8 6 8M6 12l6 8 6-8"/></svg></div>
+          <h3>Naver Cloud Platform</h3>
+          <span class="tag">AI 특화</span>
+        </div>
+        <p>네이버의 AI 기술(Clva, HyperCLOVA X)을 기반으로 한 클라우드. 한국어 AI에 특화된 서비스를 제공하며, CLOVA Studio로 LLM API를 이용할 수 있습니다.</p>
+        <ul class="feats">
+          <li>CLOVA Studio: HyperCLOVA X API</li>
+          <li>AI CLOVA: OCR, NLP, 음성 인식</li>
+          <li>GPU 서버: NVIDIA A100 제공</li>
+          <li>한국어 특화 AI 모델</li>
+          <li>네이버 서비스와의 연동</li>
+        </ul>
+        <div class="price">CLOVA Studio: 토큰 과금 <em>(플랜별 상이)</em></div>
+      </div>
+
+      <!-- LG CNS -->
+      <div class="card">
+        <div class="card-hd">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="var(--accent-2)" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M9 12h6M12 9v6"/></svg></div>
+          <h3>LG CNS</h3>
+          <span class="tag">DX 특화</span>
+        </div>
+        <p>LG 그룹의 디지털 전환(DX) 전문 기업. 대규모 AI 학습 인프라와 데이터 분석 플랫폼을 제공하며, 제조 AI 분야에서 강점을 보입니다.</p>
+        <ul class="feats">
+          <li>AI팩토리: 제조 특화 AI 솔루션</li>
+          <li>대규모 GPU 클러스터 운영</li>
+          <li>데이터 분석 플랫폼</li>
+          <li>AWS, Azure 파트너십</li>
+          <li>멀티클라우드 관리 서비스</li>
+        </ul>
+        <div class="price">가격: 엔터프라이즈 견적</div>
+      </div>
+
+      <!-- 가비아 -->
+      <div class="card">
+        <div class="card-hd">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.6"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg></div>
+          <h3>가비아 클라우드</h3>
+          <span class="tag">중소기업</span>
+        </div>
+        <p>중소기업 및 스타트업에 적합한 국내 클라우드. 합리적인 가격과 한국어 지원을 제공하며, 웹 호스팅부터 GPU 서버까지 다양한 상품을 운영합니다.</p>
+        <ul class="feats">
+          <li>GPU 서버 대여 서비스</li>
+          <li>Managed Kubernetes</li>
+          <li>한국 IDC 기반 저지연</li>
+          <li>중소기업 특화 요금제</li>
+          <li>SSL, 백업 등 기본 서비스 포함</li>
+        </ul>
+        <div class="price">VPS: 월 ~30,000원~ <em>(기본 플랜)</em></div>
+      </div>
+    </div>
+
+    <div class="info rev">
+      <h4>국내 클라우드가 필요한 경우</h4>
+      <p>데이터 주권, 한국어 지원, 원화 결제, 세금계산서 발행이 중요한 국내 기업이나 대학·연구기관이라면 국내 GPU 클라우드를 먼저 살펴보세요. 의료·금융·공공 분야는 해외 데이터 반출이 어려울 수 있어 국내 리전이 필수적입니다. 가격은 해외 네오클라우드보다 다소 높을 수 있으나, 기술 지원과 규정 준수 측면에서 장점이 있습니다. (citation:5)</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== SEC 3: 뉴 클라우드 ===================== -->
+<section class="sec sec-alt" id="s3">
+  <div class="pn">04 / 10</div>
+  <div class="f-icons">
+    <div class="f-icon" style="top:10%;right:8%"><svg viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    <div class="f-icon" style="bottom:8%;left:6%"><svg viewBox="0 0 24 24"><path d="M6.5 19a4.5 4.5 0 0 1-.42-8.98A7 7 0 1 1 18.5 19H6.5z" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+  </div>
+  <div class="wrap">
+    <div class="sec-hdr rev">
+      <div class="sub">PAGE 04 — NEO CLOUD</div>
+      <h2>뉴 클라우드: 합리적인 가격의<br>차세대 인프라</h2>
+      <p>하이퍼스케일러 대비 60~80% 저렴한 가격으로 같은 GPU를 제공하는 네오클라우드 플랫폼입니다. 빠른 셋업, 투명한 가격, 개발자 친화적 인터페이스가 강점입니다. 스타트업, 연구자, 소규모 팀에 특히 적합합니다. (citation:5)</p>
+    </div>
+
+    <div class="grid g3 rev">
+      <!-- Hetzner -->
+      <div class="card card-featured">
+        <span class="rec">BEST VALUE</span>
+        <div class="card-hd">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="1.6"><rect x="2" y="2" width="20" height="20" rx="3"/><path d="M7 8h10M7 12h10M7 16h6"/></svg></div>
+          <h3>Hetzner Cloud</h3>
+          <span class="tag">가성비 최강</span>
+        </div>
+        <p>독일 기반의 가성비 최강 클라우드. 유럽과 미국 리전에서 업계 최저 수준의 가격으로 고성능 서버를 제공합니다. 개발자 커뮤니티에서 극찬받는 플랫폼입니다.</p>
+        <ul class="feats">
+          <li>CCX23: AMD EPYC 4vCPU/16GB, 7.49유로/월</li>
+          <li>GPU 서버: RTX 4090 대여 가능</li>
+          <li>5분 내 서버 배포</li>
+          <li>유럽, 미국 리전</li>
+          <li>사설 네트워크, 로드 밸런서 포함</li>
+        </ul>
+        <div class="price">4vCPU/16GB: EUR 7.49/월 <em>(약 11,000원)</em></div>
+      </div>
+
+      <!-- DigitalOcean -->
+      <div class="card">
+        <div class="card-hd">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.6"><circle cx="12" cy="12" r="3"/><path d="M12 2a10 10 0 0 1 0 20"/><path d="M2 12h3M19 12h3"/></svg></div>
+          <h3>DigitalOcean</h3>
+          <span class="tag">개발자 친화</span>
+        </div>
+        <p>개발자 중심의 클라우드 플랫폼. 깔끔한 UI, 풍부한 튜토리얼, 합리적인 가격으로 유명합니다. Droplets(가상머신), App Platform, Managed Kubernetes를 제공합니다.</p>
+        <ul class="feats">
+          <li>Droplets: $4/월부터 시작</li>
+          <li>App Platform: 서버리스 배포</li>
+          <li>Managed Kubernetes</li>
+          <li>15개 글로벌 데이터센터</li>
+          <li>풍부한 개발자 문서</li>
+        </ul>
+        <div class="price">기본 Droplet: $4/월 <em>(1vCPU/512MB)</em></div>
+      </div>
+
+      <!-- Vultr -->
+      <div class="card">
+        <div class="card-hd">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="var(--accent-2)" stroke-width="1.6"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div>
+          <h3>Vultr</h3>
+          <span class="tag">글로벌 리전</span>
+        </div>
+        <p>32개 이상의 글로벌 데이터센터를 운영하는 클라우드 플랫폼. GPU(Cloud GPU) 서비스로 NVIDIA A100, H100을 제공하며, 엣지 배포에 강합니다.</p>
+        <ul class="feats">
+          <li>32개 글로벌 데이터센터</li>
+          <li>Cloud GPU: A100, H100, A40</li>
+          <li>Bare Metal 서버 옵션</li>
+          <li>최저 $2.50/월 인스턴스</li>
+          <li>원클릭 앱 배포</li>
+        </ul>
+        <div class="price">A100 80GB: ~$2.23/hr <em>(Cloud GPU)</em></div>
+      </div>
+
+      <!-- Linode (Akamai) -->
+      <div class="card">
+        <div class="card-hd">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="var(--accent-3)" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M12 3v18M3 12h18"/><path d="M5.6 5.6l12.8 12.8M18.4 5.6L5.6 18.4"/></svg></div>
+          <h3>Linode (Akamai)</h3>
+          <span class="tag">안정성</span>
+        </div>
+        <p>Akamai에 인수된 후 엣지 인프라와 통합된 클라우드 플랫폼. 간단한 가격 구조와 안정적인 성능으로 소규모 워크로드에 적합합니다.</p>
+        <ul class="feats">
+          <li>Shared CPU: $5/월부터</li>
+          <li>GPU: NVIDIA RTX 6000 제공</li>
+          <li>Akamai 엣지 네트워크 통합</li>
+          <li>Managed Kubernetes</li>
+          <li>11개 글로벌 데이터센터</li>
+        </ul>
+        <div class="price">기본 Shared: $5/월 <em>(1vCPU/1GB)</em></div>
+      </div>
+
+      <!-- Scaleway -->
+      <div class="card">
+        <div class="card-hd">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.6"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg></div>
+          <h3>Scaleway</h3>
+          <span class="tag">유럽 리전</span>
+        </div>
+        <p>프랑스 기반의 유럽 클라우드. GDPR 준수에 유리하며, 저렴한 GPU 인스턴스와 ARM 서버를 제공합니다. 유럽 시장 진출 시 유용합니다.</p>
+        <ul class="feats">
+          <li>GPU: H100, L40S, A100 제공</li>
+          <li>ARM64 Instances ( Ampere )</li>
+          <li>유럽 데이터 주권 보장</li>
+          <li>서버리스 컨테이너</li>
+          <li>Object Storage 무료 티어</li>
+        </ul>
+        <div class="price">H100: ~EUR 2.60/hr <em>(약 3,700원)</em></div>
+      </div>
+
+      <!-- Cloudflare -->
+      <div class="card">
+        <div class="card-hd">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="var(--accent-3)" stroke-width="1.6"><path d="M6.5 19a4.5 4.5 0 0 1-.42-8.98A7 7 0 1 1 18.5 19H6.5z"/><path d="M8 14l2-2 2 2M12 12v4"/></svg></div>
+          <h3>Cloudflare Workers</h3>
+          <span class="tag">엣지 컴퓨팅</span>
+        </div>
+        <p>전 세계 300개 이상 엣지 노드에서 실행되는 서버리스 플랫폼. Workers AI로 엣지에서 AI 추론을 수행하며, 초저지연 서비스 구현에 최적입니다.</p>
+        <ul class="feats">
+          <li>Workers AI: 엣지 AI 추론</li>
+          <li>300+ 글로벌 엣지 노드</li>
+          <li>R2: S3 호환 무료 스토리지</li>
+          <li>D1: 엣지 SQLite 데이터베이스</li>
+          <li>무료 티어 상당히 넉넉</li>
+        </ul>
+        <div class="price">Workers: 무료 티어 <em>(100K 요청/일)</em></div>
+      </div>
+    </div>
+
+    <div class="scta rev">
+      <h3>하이퍼스케일러 vs 뉴 클라우드</h3>
+      <p>네오클라우드는 하이퍼스케일러 대비 같은 GPU를 60~80% 저렴하게 쓸 수 있어요. 다만 SLA, 멀티리전, 보안 인증 등 엔터프라이즈 기능에서 차이가 있으니 용도에 맞게 선택하세요. (citation:5)</p>
+      <a href="#s7" class="cta-o" style="margin-top:1rem">가격 비교표 보기</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== SEC 4: GPU 클라우드 ===================== -->
+<section class="sec sec-alt-2" id="s4">
+  <div class="pn">05 / 10</div>
+  <div class="f-icons">
+    <div class="f-icon" style="top:8%;left:4%"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M9 9h6M9 12h6M9 15h4" stroke-linecap="round"/></svg></div>
+    <div class="f-icon" style="bottom:10%;right:5%"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+  </div>
+  <div class="wrap">
+    <div class="sec-hdr rev">
+      <div class="sub">PAGE 05 — GPU CLOUD</div>
+      <h2>GPU 클라우드: AI 학습 및<br>추론 전용 인프라</h2>
+      <p>NVIDIA A100, H100, B200 같은 고성능 GPU를 온디맨드로 제공하는 클라우드 서비스입니다. AI 모델 학습, 파인튜닝, 추론에 필요한 GPU를 직접 구매하지 않고 시간 단위로 빌려 쓸 수 있습니다. (citation:5)</p>
+    </div>
+
+    <div class="grid g3 rev">
+      <!-- VESSL Cloud -->
+      <div class="card card-featured">
+        <span class="rec">국내 추천</span>
+        <div class="card-hd">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="1.6"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div>
+          <h3>VESSL Cloud</h3>
+          <span class="tag">한국 네오클라우드</span>
+        </div>
+        <p>한국 기반의 GPU 네오클라우드. A100부터 GB200까지 폭넓은 GPU 라인업을 제공하며, 한국어 지원, 원화 결제, SOC 2 Type II 인증을 갖추고 있습니다. (citation:5)</p>
+        <ul class="feats">
+          <li>H100 80GB: $2.39/hr (약 3,400원)</li>
+          <li>A100 80GB: $1.55/hr (약 2,200원)</li>
+          <li>B200, B300, GB200 클러스터 (상담)</li>
+          <li>셀프서비스, 분 단위 과금</li>
+          <li>한국어 기술 지원, SOC 2 인증</li>
+        </ul>
+        <div class="price">H100: $2.39/hr | A100: $1.55/hr</div>
+      </div>
+
+      <!-- RunPod -->
+      <div class="card card-featured">
+        <span class="rec">해외 추천</span>
+        <div class="card-hd">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.6"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M6 12h.01M10 12h.01M14 12h.01"/></svg></div>
+          <h3>RunPod</h3>
+          <span class="tag">해외 인기</span>
+        </div>
+        <p>합리적인 가격과 빠른 시작으로 해외에서 인기 있는 GPU 클라우드. Secure Cloud와 Community Cloud를 제공하며, 서버리스 추론 엔드포인트도 지원합니다.</p>
+        <ul class="feats">
+          <li>H100 SXM: $2.69/hr (약 3,800원)</li>
+          <li>A100 SXM: $1.79/hr (약 2,500원)</li>
+          <li>Secure Cloud / Community Cloud</li>
+          <li>서버리스 추론 엔드포인트</li>
+          <li>초 단위 과금</li>
+        </ul>
+        <div class="price">H100: $2.69/hr | A100: $1.79/hr</div>
+      </div>
+
+      <!-- Lambda Labs -->
+      <div class="card">
+        <div class="card-hd">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="var(--accent-2)" stroke-width="1.6"><path d="M7 4v16l4-4 4 4V4M7 4h10"/></svg></div>
+          <h3>Lambda Labs</h3>
+          <span class="tag">AI 연구 특화</span>
+        </div>
+        <p>AI 연구자와 엔지니어를 위해 설계된 GPU 클라우드. 안정적인 GPU 재고와 Lambda Stack(ML 프레임워크 원클릭 설치)을 제공합니다.</p>
+        <ul class="feats">
+          <li>H100 8-GPU: $3.99/hr</li>
+          <li>H100 1-GPU: $4.29/hr</li>
+          <li>Lambda Stack: 원클릭 ML 환경</li>
+          <li>JupyterHub 내장</li>
+          <li>안정적인 GPU 재고</li>
+        </ul>
+        <div class="price">H100 8-GPU: $3.99/hr <em>per GPU</em></div>
+      </div>
+
+      <!-- Vast.ai -->
+      <div class="card">
+        <div class="card-hd">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="var(--accent-3)" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg></div>
+          <h3>Vast.ai</h3>
+          <span class="tag">최저가</span>
+        </div>
+        <p>GPU 마켓플레이스 모델로, 개인 호스트의 유휴 GPU를 대여합니다. 가장 저렴한 가격으로 GPU를 사용할 수 있지만 SLA가 보장되지 않습니다.</p>
+        <ul class="feats">
+          <li>H100: ~$1.65/hr부터</li>
+          <li>마켓플레이스 모델 (개인 호스트)</li>
+          <li>초 단위 과금</li>
+          <li>다양한 GPU 옵션</li>
+          <li>SLA 없음 (리스크 있음)</li>
+        </ul>
+        <div class="price">H100: ~$1.65/hr~ <em>(최저가, 변동)</em></div>
+      </div>
+
+      <!-- Jarvis Labs -->
+      <div class="card">
+        <div class="card-hd">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M8 12h8M12 8v8"/></svg></div>
+          <h3>Jarvis Labs</h3>
+          <span class="tag">가성비</span>
+        </div>
+        <p>ML 엔지니어를 위한 GPU 클라우드. A100을 합리적인 가격에 제공하며, 분 단위 과금으로 짧은 실험에도 비용 효율적입니다.</p>
+        <ul class="feats">
+          <li>A100 80GB: $1.49/hr (약 2,100원)</li>
+          <li>분 단위 과금</li>
+          <li>PyTorch, TensorFlow 사전 설치</li>
+          <li>JupyterLab 기본 제공</li>
+          <li>SSH 접근 지원</li>
+        </ul>
+        <div class="price">A100 80GB: $1.49/hr</div>
+      </div>
+
+      <!-- CoreWeave -->
+      <div class="card">
+        <div class="card-hd">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="var(--accent-2)" stroke-width="1.6"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg></div>
+          <h3>CoreWeave</h3>
+          <span class="tag">대규모 학습</span>
+        </div>
+        <p>대규모 AI 학습에 특화된 GPU 클라우드. NVIDIA와의 긴밀한 파트너십으로 최신 GPU를 빠르게 제공하며, InfiniBand 인터커넥트를 지원합니다.</p>
+        <ul class="feats">
+          <li>H100, B200, GB200 클러스터</li>
+          <li>InfiniBand 고속 인터커넥트</li>
+          <li>Kubernetes 네이티브</li>
+          <li>대규모 멀티노드 학습</li>
+          <li>NVIDIA 파트너</li>
+        </ul>
+        <div class="price">가격: 영업 문의 <em>(대규모 견적)</em></div>
+      </div>
+    </div>
+
+    <div class="info rev">
+      <h4>GPU 클라우드 선택 팁</h4>
+      <p>GPU 클라우드를 고를 때는 시간당 가격뿐 아니라 숨은 비용(데이터 전송, 스토리지), GPU 가용성(재고), 셋업 속도, 팀 협업 기능, 기술 지원을 함께 비교하세요. 네오클라우드는 가입 후 3~10분 안에 GPU에 접속할 수 있지만, 하이퍼스케일러는 VPC 설정, IAM 구성, 할당량 승인 등으로 며칠이 걸릴 수 있습니다. (citation:5)</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== SEC 5: AI 서비스 ===================== -->
+<section class="sec sec-alt" id="s5">
+  <div class="pn">06 / 10</div>
+  <div class="f-icons">
+    <div class="f-icon" style="top:12%;right:6%"><svg viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18" stroke-linecap="round"/></svg></div>
+    <div class="f-icon" style="bottom:8%;left:5%"><svg viewBox="0 0 24 24"><path d="M6.5 19a4.5 4.5 0 0 1-.42-8.98A7 7 0 1 1 18.5 19H6.5z" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+  </div>
+  <div class="wrap">
+    <div class="sec-hdr rev">
+      <div class="sub">PAGE 06 — AI SERVICES</div>
+      <h2>AI 서비스 플랫폼:<br>API로 바로 쓰는 인텔리전스</h2>
+      <p>직접 모델을 학습하지 않아도 최신 AI를 활용할 수 있는 API 기반 플랫폼입니다. LLM(대규모 언어 모델), 이미지 생성, 음성 처리 등 다양한 AI 기능을 API 한 줄로 호출할 수 있습니다.</p>
+    </div>
+
+    <!-- International AI -->
+    <h3 style="font-family:var(--font-display);color:var(--t1);font-weight:700;font-size:1.2rem;margin-bottom:1.5rem;">글로벌 AI 서비스</h3>
+    <div class="grid g3 rev">
+      <!-- OpenAI -->
+      <div class="card card-featured">
+        <span class="rec">시장 리더</span>
+        <div class="card-hd">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg></div>
+          <h3>OpenAI</h3>
+          <span class="tag">GPT-4o</span>
+        </div>
+        <p>ChatGPT의 개발사. GPT-4o, GPT-4.5, o3, DALL-E 3, Sora 등 최첨단 모델을 API로 제공합니다. 업계 최대의 생태계와 개발자 도구를 보유하고 있습니다.</p>
+        <ul class="feats">
+          <li>GPT-4o: 멀티모달 (텍스트/이미지/음성)</li>
+          <li>o3: 고급 추론 모델</li>
+          <li>DALL-E 3: 이미지 생성</li>
+          <li>Sora: 비디오 생성</li>
+          <li>Assistants API, Function Calling</li>
+        </ul>
+        <div class="price">GPT-4o: $2.50/1M input <em>tokens</em></div>
+      </div>
+
+      <!-- Anthropic -->
+      <div class="card card-featured">
+        <span class="rec">안전 특화</span>
+        <div class="card-hd">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="var(--accent-2)" stroke-width="1.6"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5"/></svg></div>
+          <h3>Anthropic (Claude)</h3>
+          <span class="tag">Claude 4</span>
+        </div>
+        <p>AI 안전성 연구에 집중하는 기업. Claude 4 Opus, Sonnet, Haiku 모델을 제공하며, 200K 토큰의 초장대 컨텍스트 윈도우가 강점입니다. Claude Code로 코딩 자동화도 지원합니다.</p>
+        <ul class="feats">
+          <li>Claude 4 Opus: 최고 성능 추론</li>
+          <li>Claude 4 Sonnet: 가성비 최강</li>
+          <li>200K 토큰 컨텍스트 윈도우</li>
+          <li>Claude Code: 코딩 에이전트</li>
+          <li>Computer Use: 화면 제어 에이전트</li>
+        </ul>
+        <div class="price">Claude 4 Sonnet: $3/1M input <em>tokens</em></div>
+      </div>
+
+      <!-- Google AI -->
+      <div class="card">
+        <div class="card-hd">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="var(--accent-3)" stroke-width="1.6"><circle cx="12" cy="12" r="3"/><circle cx="12" cy="4" r="2"/><circle cx="18" cy="16" r="2"/><circle cx="6" cy="16" r="2"/></svg></div>
+          <h3>Google AI (Gemini)</h3>
+          <span class="tag">Gemini 2.5</span>
+        </div>
+        <p>Gemini 2.5 Pro, Flash 등 최신 모델을 API로 제공합니다. 100만 토큰의 초대형 컨텍스트, 멀티모달 이해 능력, Google 검색 통합이 돋보입니다.</p>
+        <ul class="feats">
+          <li>Gemini 2.5 Pro: 1M 토큰 컨텍스트</li>
+          <li>Gemini Flash: 초고속 추론</li>
+          <li>Google Search Grounding</li>
+          <li>Imagen 3: 이미지 생성</li>
+          <li>Vertex AI 통합 배포</li>
+        </ul>
+        <div class="price">Gemini 2.5 Flash: 무료 티어 <em>있음</em></div>
+      </div>
+
+      <!-- xAI -->
+      <div class="card">
+        <div class="card-hd">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.6"><path d="M4 4l7 8-7 8M20 4l-7 8 7 8"/></svg></div>
+          <h3>xAI (Grok)</h3>
+          <span class="tag">Grok 3</span>
+        </div>
+        <p>Elon Musk의 AI 회사. Grok 3 모델은 X(트위터) 실시간 데이터에 접근할 수 있어 최신 이슈에 강하며, DeepSearch 기능이 돋보입니다.</p>
+        <ul class="feats">
+          <li>Grok 3: 최신 실시간 지식</li>
+          <li>DeepSearch: 심층 웹 검색</li>
+          <li>X 플랫폼 실시간 데이터</li>
+          <li>멀티모달 (이미지 이해)</li>
+          <li>API 및 X Premium+ 연동</li>
+        </ul>
+        <div class="price">Grok 3 API: 토큰 과금 <em>(공식 가격 확인)</em></div>
+      </div>
+
+      <!-- Meta AI -->
+      <div class="card">
+        <div class="card-hd">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="var(--accent-2)" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M8 12a4 4 0 0 1 8 0"/><path d="M12 8v8"/></svg></div>
+          <h3>Meta AI (Llama)</h3>
+          <span class="tag">오픈소스</span>
+        </div>
+        <p>Llama 4 시리즈를 오픈소스로 공개한 Meta. Maverick, Scout 등 다양한 크기의 모델을 제공하며, 자체 서버에서 자유롭게 호스팅할 수 있습니다.</p>
+        <ul class="feats">
+          <li>Llama 4 Maverick: 400B MoE</li>
+          <li>Llama 4 Scout: 109B, 10M 컨텍스트</li>
+          <li>완전 오픈소스 (자유 배포)</li>
+          <li>자체 GPU 서버에서 실행 가능</li>
+          <li>Hugging Face 생태계 호환</li>
+        </ul>
+        <div class="price">오픈소스: 무료 <em>(자체 호스팅)</em></div>
+      </div>
+
+      <!-- Mistral -->
+      <div class="card">
+        <div class="card-hd">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="var(--accent-3)" stroke-width="1.6"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div>
+          <h3>Mistral AI</h3>
+          <span class="tag">유럽 AI</span>
+        </div>
+        <p>프랑스 기반의 AI 기업. Mistral Large, Medium, Small 등 다양한 크기의 모델을 제공하며, 유럽 GDPR 준수에 유리합니다. Codestral로 코드 생성에도 강합니다.</p>
+        <ul class="feats">
+          <li>Mistral Large: 최고 성능</li>
+          <li>Codestral: 코드 특화 모델</li>
+          <li>Pixtral: 비전 멀티모달</li>
+          <li>유럽 GDPR 준수</li>
+          <li>오픈소스 + 상용 API 혼합</li>
+        </ul>
+        <div class="price">Mistral Large: EUR 2/1M input <em>tokens</em></div>
+      </div>
+    </div>
+
+    <!-- Korean AI -->
+    <h3 style="font-family:var(--font-display);color:var(--t1);font-weight:700;font-size:1.2rem;margin:3rem 0 1.5rem;">국내 AI 서비스</h3>
+    <div class="grid g3 rev">
+      <!-- Naver CLOVA -->
+      <div class="card">
+        <div class="card-hd">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="1.6"><path d="M6 4v16M18 4v16M6 12l6-8 6 8M6 12l6 8 6-8"/></svg></div>
+          <h3>Naver CLOVA Studio</h3>
+          <span class="tag">한국어 특화</span>
+        </div>
+        <p>네이버의 HyperCLOVA X 기반 AI API. 한국어 성능이 뛰어나며, CLOVA Studio로 프롬프트 엔지니어링과 파인튜닝을 쉽게 할 수 있습니다.</p>
+        <ul class="feats">
+          <li>HyperCLOVA X: 한국어 특화 LLM</li>
+          <li>CLOVA Studio: 프롬프트 IDE</li>
+          <li>CLOVA OCR, 음성 인식</li>
+          <li>한국어 파인튜닝 지원</li>
+          <li>네이버 서비스 연동</li>
+        </ul>
+        <div class="price">CLOVA Studio: 토큰 과금 <em>(플랜별 상이)</em></div>
+      </div>
+
+      <!-- Kakao -->
+      <div class="card">
+        <div class="card-hd">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="var(--accent-3)" stroke-width="1.6"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
+          <h3>Kakao (Kanana)</h3>
+          <span class="tag">한국어 LLM</span>
+        </div>
+        <p>카카오의 AI 모델 Kanana를 중심으로 한 서비스. 한국어 자연어 처리에 강하며, 카카오톡 연동 AI 서비스를 제공합니다.</p>
+        <ul class="feats">
+          <li>Kanana: 한국어 특화 LLM</li>
+          <li>카카오 i 연동 AI 서비스</li>
+          <li>한국어 대화 최적화</li>
+          <li>멀티모달 연구 진행 중</li>
+          <li>API 서비스 확대 예정</li>
+        </ul>
+        <div class="price">가격: 서비스 확대 중</div>
+      </div>
+
+      <!-- Upstage -->
+      <div class="card">
+        <div class="card-hd">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.6"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div>
+          <h3>Upstage</h3>
+          <span class="tag">Solar 모델</span>
+        </div>
+        <p>한국 AI 스타트업. Solar 모델 시리즈로 글로벌 LLM 벤치마크에서 상위권을 기록했으며, Document AI 분야에서도 강점을 보입니다.</p>
+        <ul class="feats">
+          <li>Solar Pro: 한국어 강화 LLM</li>
+          <li>Document AI: 문서 분석 특화</li>
+          <li>글로벌 벤치마크 상위권</li>
+          <li>파인튜닝 API 제공</li>
+          <li>Hugging Face 공개 모델</li>
+        </ul>
+        <div class="price">Solar API: 토큰 과금</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== SEC 6: AI-VPS ===================== -->
+<section class="sec sec-alt-2" id="s6">
+  <div class="pn">07 / 10</div>
+  <div class="f-icons">
+    <div class="f-icon" style="top:10%;left:6%"><svg viewBox="0 0 24 24"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M6 12h.01M10 12h.01M14 12h.01" stroke-linecap="round"/></svg></div>
+    <div class="f-icon" style="bottom:12%;right:4%"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg></div>
+  </div>
+  <div class="wrap">
+    <div class="sec-hdr rev">
+      <div class="sub">PAGE 07 — AI-VPS HOSTING</div>
+      <h2>AI 에이전트 호스팅을 위한<br>VPS 및 SaaS 플랫폼</h2>
+      <p>OpenClaw, Claude Code 등 AI 에이전트를 안정적으로 실행하기 위한 호스팅 환경입니다. 로컬 배포는 물론, 원격 서버와 SaaS 플랫폼까지 다양한 옵션을 비교합니다. (citation:3)(citation:10)</p>
+    </div>
+
+    <div class="grid g3 rev">
+      <!-- Kimi Claw -->
+      <div class="card card-featured">
+        <span class="rec">SaaS 추천</span>
+        <div class="card-hd">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.6"><path d="M6.5 19a4.5 4.5 0 0 1-.42-8.98A7 7 0 1 1 18.5 19H6.5z"/><path d="M10 14l2-2 2 2M12 12v4"/></svg></div>
+          <h3>Kimi Claw</h3>
+          <span class="tag">완전 관리형</span>
+        </div>
+        <p>OpenClaw를 위한 완전 관리형 클라우드 환경. 인프라 설정 없이 원클릭으로 AI 에이전트를 배포할 수 있습니다. 영구 메모리, 40GB 스토리지, 5,000개 이상의 ClawHub 스킬을 제공합니다. (citation:3)(citation:10)</p>
+        <ul class="feats">
+          <li>원클릭 클라우드 배포 (설정 불필요)</li>
+          <li>영구 메모리 및 개성 커스터마이징</li>
+          <li>40GB 클라우드 스토리지</li>
+          <li>5,000+ ClawHub 스킬 생태계</li>
+          <li>예약 작업 자동화</li>
+          <li>24시간 클라우드 가동 시간</li>
+        </ul>
+        <div class="price">가격: 플랜별 상이 <em>(무료 체험 가능)</em></div>
+      </div>
+
+      <!-- Hetzner VPS -->
+      <div class="card">
+        <div class="card-hd">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="1.6"><rect x="2" y="2" width="20" height="20" rx="3"/><path d="M7 8h10M7 12h10M7 16h6"/></svg></div>
+          <h3>Hetzner VPS</h3>
+          <span class="tag">가성비 VPS</span>
+        </div>
+        <p>OpenClaw 셀프 호스팅에 추천되는 가성비 VPS. 유럽과 미국 리전에서 최저 수준의 가격으로 고성능 서버를 제공합니다. (citation:4)</p>
+        <ul class="feats">
+          <li>4vCPU/16GB: EUR 7.49/월</li>
+          <li>OpenClaw 설치 가이드 제공</li>
+          <li>사설 네트워크, 방화벽</li>
+          <li>5분 내 서버 배포</li>
+          <li>유럽, 미국 리전</li>
+        </ul>
+        <div class="price">4vCPU/16GB: EUR 7.49/월 <em>(약 11,000원)</em></div>
+      </div>
+
+      <!-- Hostinger VPS -->
+      <div class="card">
+        <div class="card-hd">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="var(--accent-2)" stroke-width="1.6"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M6 12h.01M10 12h.01M14 12h.01"/></svg></div>
+          <h3>Hostinger VPS</h3>
+          <span class="tag">초보자 친화</span>
+        </div>
+        <p>예산 친화적인 VPS 제공업체. 합리적인 가격에 전용 리소스와 사용하기 쉬운 제어판을 제공합니다. OpenClaw 수동 설치에 적합합니다. (citation:3)</p>
+        <ul class="feats">
+          <li>전용 CPU, RAM, 저장 공간</li>
+          <li>합리적인 가격 플랜</li>
+          <li>전체 root 접근 권한</li>
+          <li>간편한 제어판 관리</li>
+          <li>한국어 지원</li>
+        </ul>
+        <div class="price">VPS: 월 ~6,000원~ <em>(KVM 1 플랜)</em></div>
+      </div>
+
+      <!-- Oracle Cloud Free -->
+      <div class="card">
+        <div class="card-hd">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="var(--accent-3)" stroke-width="1.6"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14c0 1.66 4.03 3 9 3s9-1.34 9-3V5"/><path d="M3 12c0 1.66 4.03 3 9 3s9-1.34 9-3"/></svg></div>
+          <h3>Oracle Cloud Free</h3>
+          <span class="tag">무료 옵션</span>
+        </div>
+        <p>Always Free 티어로 ARM 인스턴스(Ampere A1, 4코어/24GB)를 영구 무료로 제공합니다. OpenClaw 테스트나 소규모 배포에 최적입니다. (citation:4)</p>
+        <ul class="feats">
+          <li>Always Free: ARM 4C/24GB 영구 무료</li>
+          <li>Ampere A1 인스턴스</li>
+          <li>무료 데이터 전송 10TB/월</li>
+          <li>OpenClaw 설치 가능</li>
+          <li>글로벌 리전 선택 가능</li>
+        </ul>
+        <div class="price">ARM 4C/24GB: 무료 <em>(Always Free)</em></div>
+      </div>
+
+      <!-- Kamatera -->
+      <div class="card">
+        <div class="card-hd">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.6"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg></div>
+          <h3>Kamatera</h3>
+          <span class="tag">엔터프라이즈</span>
+        </div>
+        <p>엔터프라이즈급 가상 서버를 제공하는 클라우드 인프라. CPU, RAM, 저장 공간을 즉시 확장할 수 있어 대규모 AI 에이전트 운영에 적합합니다. (citation:3)</p>
+        <ul class="feats">
+          <li>CPU/RAM/저장 공간 즉시 확장</li>
+          <li>엔터프라이즈급 안정성</li>
+          <li>글로벌 18개 데이터센터</li>
+          <li>수동 서버 구성</li>
+          <li>24/7 기술 지원</li>
+        </ul>
+        <div class="price">1vCPU/1GB: $4/월~ <em>(시작 가격)</em></div>
+      </div>
+
+      <!-- Railway -->
+      <div class="card">
+        <div class="card-hd">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="var(--accent-2)" stroke-width="1.6"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div>
+          <h3>Railway</h3>
+          <span class="tag">PaaS</span>
+        </div>
+        <p>Git 저장소를 연결하면 자동으로 배포되는 PaaS 플랫폼. DevOps 없이도 빠르게 AI 에이전트를 배포할 수 있습니다. (citation:3)</p>
+        <ul class="feats">
+          <li>Git 저장소 자동 배포</li>
+          <li>워크로드 자동 확장</li>
+          <li>안정적인 클라우드 기반</li>
+          <li>환경 변수, 볼륨 관리</li>
+          <li> Hobby 플랜 무료</li>
+        </ul>
+        <div class="price">Hobby: 무료 <em>(제한적 리소스)</em></div>
+      </div>
+    </div>
+
+    <div class="info rev">
+      <h4>SaaS vs 셀프 호스팅 비교</h4>
+      <p>OpenClaw SaaS 플랫폼(예: Kimi Claw)은 배포·인프라·유지 관리를 자동으로 처리하므로 AI 에이전트 워크플로 구축에만 집중할 수 있습니다. 반면 셀프 호스팅(예: Hetzner VPS)은 완전한 제어권을 제공하지만, 수동 설치·환경 설정·종속성 관리·정기 업데이트가 필요합니다. 기술 지식과 시간이 있다면 셀프 호스팅이, 빠른 시작과 편의성을 원한다면 SaaS가 적합합니다. (citation:10)</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== SEC 7: 가격 비교 ===================== -->
+<section class="sec sec-alt" id="s7">
+  <div class="pn">08 / 10</div>
+  <div class="wrap">
+    <div class="sec-hdr rev">
+      <div class="sub">PAGE 08 — PRICING</div>
+      <h2>GPU 및 VPS 가격 비교표</h2>
+      <p>2026년 4월 기준, 각 서비스 공식 사이트에서 확인한 온디맨드(정가) 요금입니다. 실제 결제 금액은 인스턴스 유형, 리전, 할인 플랜에 따라 달라질 수 있습니다. (citation:5)</p>
+    </div>
+
+    <!-- H100 Table -->
+    <h3 style="font-family:var(--font-display);color:var(--t1);font-weight:700;font-size:1.15rem;margin-bottom:1.2rem;">H100 80GB 가격 비교</h3>
+    <div class="tbl-wrap rev" style="margin-bottom:3rem">
+      <table>
+        <thead>
+          <tr><th>서비스</th><th>유형</th><th>H100 온디맨드 (GPU당)</th><th>최소 과금 단위</th><th>비고</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>VESSL Cloud</strong></td><td><span class="v">국내 네오클라우드</span></td><td><strong>$2.39/hr</strong> (약 3,400원)</td><td>분</td><td>셀프서비스, 즉시 할당</td></tr>
+          <tr><td><strong>RunPod</strong></td><td>해외 네오클라우드</td><td><strong>$2.69/hr</strong> (약 3,800원)</td><td>초</td><td>Secure Cloud SXM 기준</td></tr>
+          <tr><td><strong>Lambda Labs</strong></td><td>해외 네오클라우드</td><td><strong>$3.99~$4.29/hr</strong></td><td>초</td><td>8-GPU $3.99, 1-GPU $4.29</td></tr>
+          <tr><td><strong>Vast.ai</strong></td><td>마켓플레이스</td><td><strong>$1.65~/hr</strong> (약 2,300원~)</td><td>초</td><td>개인 호스트, SLA 없음</td></tr>
+          <tr><td><strong>AWS (P5)</strong></td><td><span class="ev">하이퍼스케일러</span></td><td><strong>~$6.88/hr</strong></td><td>초</td><td>8-GPU 인스턴스 환산</td></tr>
+          <tr><td><strong>GCP (A3 Mega)</strong></td><td><span class="ev">하이퍼스케일러</span></td><td><strong>~$3.00~$11.06/hr</strong></td><td>초</td><td>리전별 큰 편차</td></tr>
+          <tr><td><strong>Azure (ND H100 v5)</strong></td><td><span class="ev">하이퍼스케일러</span></td><td><strong>~$6.98~$12.29/hr</strong></td><td>초</td><td>단일~8-GPU 환산</td></tr>
+          <tr><td><strong>Scaleway</strong></td><td>유럽 네오클라우드</td><td><strong>~EUR 2.60/hr</strong> (약 3,700원)</td><td>시간</td><td>유럽 리전</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- A100 Table -->
+    <h3 style="font-family:var(--font-display);color:var(--t1);font-weight:700;font-size:1.15rem;margin-bottom:1.2rem;">A100 80GB 가격 비교</h3>
+    <div class="tbl-wrap rev" style="margin-bottom:3rem">
+      <table>
+        <thead>
+          <tr><th>서비스</th><th>A100 온디맨드 (GPU당)</th><th>비고</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>VESSL Cloud</strong></td><td><strong>$1.55/hr</strong> (약 2,200원)</td><td><span class="v">셀프서비스</span></td></tr>
+          <tr><td><strong>RunPod</strong></td><td><strong>$1.79/hr</strong> (약 2,500원)</td><td>SXM 기준</td></tr>
+          <tr><td><strong>Jarvis Labs</strong></td><td><strong>$1.49/hr</strong> (약 2,100원)</td><td><span class="v">분 단위 과금</span></td></tr>
+          <tr><td><strong>AWS (P4d)</strong></td><td><strong>~$4.10/hr</strong> (약 5,700원)</td><td>8-GPU 인스턴스 환산</td></tr>
+          <tr><td><strong>GCP (A2 Ultra)</strong></td><td><strong>~$3.67/hr</strong> (약 5,100원)</td><td>1-GPU 직접 사용 가능</td></tr>
+          <tr><td><strong>Vultr</strong></td><td><strong>~$2.23/hr</strong> (약 3,100원)</td><td>Cloud GPU</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- VPS Table -->
+    <h3 style="font-family:var(--font-display);color:var(--t1);font-weight:700;font-size:1.15rem;margin-bottom:1.2rem;">VPS 기본 가격 비교 (AI 에이전트 호스팅)</h3>
+    <div class="tbl-wrap rev">
+      <table>
+        <thead>
+          <tr><th>서비스</th><th>사양</th><th>월 요금</th><th>적합한 용도</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>Oracle Cloud Free</strong></td><td>ARM 4C/24GB</td><td><span class="v">무료</span></td><td>테스트, 소규모 에이전트</td></tr>
+          <tr><td><strong>Hetzner</strong></td><td>4vCPU/16GB</td><td>EUR 7.49 (약 11,000원)</td><td><span class="v">OpenClaw 셀프 호스팅 추천</span></td></tr>
+          <tr><td><strong>DigitalOcean</strong></td><td>1vCPU/512MB</td><td>$4 (약 5,600원)</td><td>소규모 웹 앱</td></tr>
+          <tr><td><strong>Vultr</strong></td><td>1vCPU/1GB</td><td>$2.50 (약 3,500원)</td><td>가벼운 워크로드</td></tr>
+          <tr><td><strong>Hostinger</strong></td><td>1vCPU/4GB</td><td>~6,000원</td><td>초보자 친화적</td></tr>
+          <tr><td><strong>Railway</strong></td><td>변동</td><td>무료 (Hobby)</td><td>빠른 배포, PaaS</td></tr>
+          <tr><td><strong>Kimi Claw</strong></td><td>클라우드 관리형</td><td>플랜별 상이</td><td><span class="v">AI 에이전트 SaaS 추천</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== SEC 8: 배포 가이드 ===================== -->
+<section class="sec sec-alt-2" id="s8">
+  <div class="pn">09 / 10</div>
+  <div class="f-icons">
+    <div class="f-icon" style="top:8%;right:4%"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M9 9h6M9 12h6M9 15h4" stroke-linecap="round"/></svg></div>
+    <div class="f-icon" style="bottom:10%;left:6%"><svg viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+  </div>
+  <div class="wrap">
+    <div class="sec-hdr rev">
+      <div class="sub">PAGE 09 — DEPLOYMENT GUIDE</div>
+      <h2>AI 인프라 배포 가이드</h2>
+      <p>초보자도 따라할 수 있는 단계별 배포 가이드입니다. VPS 선택부터 AI 에이전트 실행까지, 핵심 단계를 안내합니다.</p>
+    </div>
+
+    <!-- Step 1 -->
+    <div class="card card-full rev" style="margin-bottom:1.5rem">
+      <div class="card-hd">
+        <div class="ic" style="background:rgba(0,230,118,.1);border-color:rgba(0,230,118,.2)"><svg viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="1.6"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
+        <h3>1단계: 용도에 맞는 인프라 선택</h3>
+        <span class="tag">가장 중요</span>
+      </div>
+      <p>프로젝트의 규모와 목적에 따라 적합한 인프라를 먼저 선택하세요. 잘못된 선택은 비용과 시간을 낭비할 수 있습니다.</p>
+      <ul class="flist">
+        <li><span class="dot"></span>AI 모델 학습/파인튜닝: GPU 클라우드 (VESSL, RunPod, Lambda)</li>
+        <li><span class="dot"></span>LLM API 활용: AI 서비스 (OpenAI, Anthropic, Google AI)</li>
+        <li><span class="dot"></span>AI 에이전트 호스팅: VPS (Hetzner, Oracle Free) 또는 SaaS (Kimi Claw)</li>
+        <li><span class="dot"></span>프로덕션 서비스: 하이퍼스케일러 (AWS, GCP, Azure)</li>
+        <li><span class="dot"></span>예산 제한: Oracle Cloud Free, Vultr, Railway</li>
+        <li><span class="dot"></span>국내 규정 준수: 국내 클라우드 (NCP, KT Cloud, Naver Cloud)</li>
+      </ul>
+    </div>
+
+    <!-- Step 2 -->
+    <div class="card card-full rev" style="margin-bottom:1.5rem">
+      <div class="card-hd">
+        <div class="ic" style="background:rgba(0,230,255,.1);border-color:rgba(0,230,255,.2)"><svg viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.6"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div>
+        <h3>2단계: 서버 생성 및 접속</h3>
+        <span class="tag">5~10분</span>
+      </div>
+      <p>선택한 플랫폼에서 서버를 생성하고 SSH로 접속합니다. 대부분의 네오클라우드는 가입 후 5~10분 안에 서버를 사용할 수 있습니다. (citation:5)</p>
+      <ul class="flist">
+        <li><span class="dot"></span>OS 선택: Ubuntu 22.04 LTS 권장</li>
+        <li><span class="dot"></span>사양 확인: 최소 2vCPU/4GB RAM (OpenClaw 기준)</li>
+        <li><span class="dot"></span>SSH 키 등록 및 방화벽 설정</li>
+        <li><span class="dot"></span>한국 리전 또는 가까운 리전 선택 (지연 시간 최소화)</li>
+        <li><span class="dot"></span>정기 백업 설정 권장</li>
+      </ul>
+    </div>
+
+    <!-- Step 3 -->
+    <div class="card card-full rev" style="margin-bottom:1.5rem">
+      <div class="card-hd">
+        <div class="ic" style="background:rgba(123,97,255,.1);border-color:rgba(123,97,255,.2)"><svg viewBox="0 0 24 24" fill="none" stroke="var(--accent-2)" stroke-width="1.6"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></div>
+        <h3>3단계: 시스템 업데이트 및 AI 프레임워크 설치</h3>
+        <span class="tag">10~20분</span>
+      </div>
+      <p>서버 접속 후 시스템을 업데이트하고 필요한 AI 프레임워크를 설치합니다. (citation:4)</p>
+      <ul class="flist">
+        <li><span class="dot"></span>시스템 업데이트: apt update && apt upgrade -y</li>
+        <li><span class="dot"></span>Docker 설치: curl -fsSL https://get.docker.com | sh</li>
+        <li><span class="dot"></span>OpenClaw 설치: 공식 설치 스크립트 실행</li>
+        <li><span class="dot"></span>API 키 설정: OpenAI, Anthropic 등 발급 및 연동</li>
+        <li><span class="dot"></span>환경 검증: 온보딩 마법사 실행 및 테스트</li>
+      </ul>
+    </div>
+
+    <!-- Step 4 -->
+    <div class="card card-full rev">
+      <div class="card-hd">
+        <div class="ic" style="background:rgba(255,184,0,.1);border-color:rgba(255,184,0,.2)"><svg viewBox="0 0 24 24" fill="none" stroke="var(--accent-3)" stroke-width="1.6"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+        <h3>4단계: 모니터링 및 유지 관리</h3>
+        <span class="tag">지속적</span>
+      </div>
+      <p>배포 후에는 정기적인 모니터링과 업데이트가 필요합니다. (citation:3)</p>
+      <ul class="flist">
+        <li><span class="dot"></span>서버 모니터링: CPU, 메모리, 디스크 사용량 확인</li>
+        <li><span class="dot"></span>정기 업데이트: OS 및 AI 프레임워크 보안 패치</li>
+        <li><span class="dot"></span>로그 관리: 에러 로그 정기 확인</li>
+        <li><span class="dot"></span>비용 관리: 사용량 대비 요금 최적화</li>
+        <li><span class="dot"></span>스케일링: 필요시 서버 사양 업그레이드</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== SEC 9: 활용 사례 ===================== -->
+<section class="sec sec-alt" id="s9">
+  <div class="pn">10 / 10</div>
+  <div class="f-icons">
+    <div class="f-icon" style="top:12%;left:5%"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    <div class="f-icon" style="bottom:8%;right:6%"><svg viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18" stroke-linecap="round"/></svg></div>
+  </div>
+  <div class="wrap">
+    <div class="sec-hdr rev">
+      <div class="sub">PAGE 10 — USE CASES & FAQ</div>
+      <h2>활용 사례와 자주 묻는 질문</h2>
+      <p>AI 인프라를 실제로 어떻게 활용하는지, 그리고 가장 많이 묻는 질문에 대한 답변을 정리했습니다.</p>
+    </div>
+
+    <!-- Use Cases -->
+    <div class="grid g2 rev" style="margin-bottom:3rem">
+      <div class="card">
+        <div class="card-hd">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.6"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg></div>
+          <h3>LLM API로 AI 앱 빌딩</h3>
+        </div>
+        <p>OpenAI GPT-4o, Anthropic Claude 4, Google Gemini API를 활용하여 챗봇, 문서 요약, 코드 생성 등 다양한 AI 애플리케이션을 빌드합니다. API 키만 있으면 바로 시작할 수 있습니다.</p>
+        <ul class="feats">
+          <li>추천 인프라: AI 서비스 API + VPS (백엔드)</li>
+          <li>예산: API 토큰 과금 + VPS 월 ~1만원</li>
+          <li>난이도: 초급</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <div class="card-hd">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="var(--accent-2)" stroke-width="1.6"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M9 9h6M9 12h6M9 15h4"/></svg></div>
+          <h3>자체 AI 모델 학습</h3>
+        </div>
+        <p>자체 데이터로 AI 모델을 파인튜닝하거나 처음부터 학습합니다. H100, A100 GPU 클러스터가 필요하며, 대규모 학습에는 멀티노드 인프라가 필수입니다.</p>
+        <ul class="feats">
+          <li>추천 인프라: GPU 클라우드 (VESSL, RunPod, CoreWeave)</li>
+          <li>예산: $2~7/hr/GPU (학습 시간에 따라)</li>
+          <li>난이도: 중~상급</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <div class="card-hd">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="1.6"><path d="M6.5 19a4.5 4.5 0 0 1-.42-8.98A7 7 0 1 1 18.5 19H6.5z"/><path d="M10 14l2-2 2 2M12 12v4"/></svg></div>
+          <h3>AI 에이전트 자동화</h3>
+        </div>
+        <p>OpenClaw, Claude Code 등 AI 에이전트를 활용하여 자동화 워크플로를 구축합니다. 이메일 분석, 리서치, 코드 리뷰, 보고서 작성 등을 자동화할 수 있습니다. (citation:3)</p>
+        <ul class="feats">
+          <li>추천 인프라: SaaS (Kimi Claw) 또는 VPS 셀프 호스팅</li>
+          <li>예산: 무료~월 수만원</li>
+          <li>난이도: 초~중급</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <div class="card-hd">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="var(--accent-3)" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg></div>
+          <h3>AI 보안 테스팅</h3>
+        </div>
+        <p>AI 기반 보안 펜테스팅 도구를 활용하여 인프라의 취약점을 검증합니다. 자율 노출 검증, 에이전트 공격 워크플로, CI/CD 통합 테스트 등 다양한 카테고리가 있습니다. (citation:2)</p>
+        <ul class="feats">
+          <li>추천 도구: Horizon3.ai, Penligent, XBOW</li>
+          <li>예산: 도구별 상이 (무료~엔터프라이즈)</li>
+          <li>난이도: 중급</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- FAQ -->
+    <h3 style="font-family:var(--font-display);color:var(--t1);font-weight:700;font-size:1.3rem;margin-bottom:1.5rem;">자주 묻는 질문 (FAQ)</h3>
+    <div class="grid g2 rev">
+      <div class="card">
+        <div class="card-hd">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.6"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+          <h3>AI 개발에 최소 얼마가 필요한가요?</h3>
+        </div>
+        <p>무료로 시작할 수 있습니다. Oracle Cloud Always Free로 ARM 서버를 무료로 쓸 수 있고, OpenAI와 Google AI는 무료 티어를 제공합니다. 월 5만원 이하로도 충분히 AI 에이전트를 운영할 수 있습니다. (citation:4)</p>
+      </div>
+
+      <div class="card">
+        <div class="card-hd">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="var(--accent-2)" stroke-width="1.6"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+          <h3>GPU 클라우드와 VPS의 차이는?</h3>
+        </div>
+        <p>GPU 클라우드는 AI 모델 학습·추론에 특화된 고성능 GPU(A100, H100)를 제공합니다. VPS는 범용 서버로, AI 에이전트 호스팅, 웹 앱, API 서버 등에 사용됩니다. GPU가 필요 없는 AI API 활용에는 VPS로 충분합니다. (citation:5)</p>
+      </div>
+
+      <div class="card">
+        <div class="card-hd">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="1.6"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+          <h3>국내 클라우드가 해외보다 비싼가요?</h3>
+        </div>
+        <p>GPU 가격 기준으로는 해외 네오클라우드(VESSL Cloud 포함)가 하이퍼스케일러 대비 60~80% 저렴합니다. 국내 클라우드는 가격이 다소 높을 수 있으나, 한국어 기술 지원, 원화 결제, 데이터 주권 측면에서 장점이 있습니다. (citation:5)</p>
+      </div>
+
+      <div class="card">
+        <div class="card-hd">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="var(--accent-3)" stroke-width="1.6"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+          <h3>AI 에이전트 호스팅은 어떻게 하나요?</h3>
+        </div>
+        <p>두 가지 방법이 있습니다. 1) SaaS 플랫폼(Kimi Claw): 원클릭 배포, 설정 불필요. 2) 셀프 호스팅(VPS): Hetzner나 Oracle Cloud에서 서버를 만들고 OpenClaw를 직접 설치합니다. 초보자는 SaaS를, 제어권이 필요하면 셀프 호스팅을 추천합니다. (citation:3)(citation:10)</p>
+      </div>
+
+      <div class="card">
+        <div class="card-hd">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.6"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+          <h3>OpenClaw를 구동하려면 RAM이 얼마나 필요한가요?</h3>
+        </div>
+        <p>최소 4GB RAM을 권장합니다. 2vCPU/4GB RAM이면 기본적인 AI 에이전트 워크플로를 실행할 수 있으며, 복잡한 멀티 에이전트 작업에는 8GB 이상을 추천합니다. (citation:4)</p>
+      </div>
+
+      <div class="card">
+        <div class="card-hd">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="var(--accent-2)" stroke-width="1.6"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+          <h3>하이브리드 전략이란 무엇인가요?</h3>
+        </div>
+        <p>기존 클라우드(AWS/GCP)에서 데이터 파이프라인을 운영하면서, GPU 학습 작업만 네오클라우드(VESSL, RunPod)로 분리하는 전략입니다. 비용 효율성과 유연성을 동시에 확보할 수 있습니다. (citation:5)</p>
+      </div>
+    </div>
+
+    <!-- Final CTA -->
+    <div class="scta rev">
+      <h3>지금 최적의 AI 인프라를 찾아보세요</h3>
+      <p>50개 이상의 클라우드, GPU, AI 서비스를 비교하고, 프로젝트에 꼭 맞는 인프라를 선택하세요. 이 가이드는 무료로 제공됩니다.</p>
+      <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;margin-top:1.5rem">
+        <a href="#s1" class="cta">글로벌 클라우드 비교</a>
+        <a href="#s4" class="cta-o">GPU 클라우드 비교</a>
+        <a href="#s5" class="cta-o">AI 서비스 비교</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="ft">
+  <div class="ft-i">
+    <div class="ft-brand">AI-VPS<em>.github.io</em></div>
+    <div class="ft-links">
+      <a href="#s1">글로벌 클라우드</a>
+      <a href="#s2">국내 클라우드</a>
+      <a href="#s3">뉴 클라우드</a>
+      <a href="#s4">GPU 클라우드</a>
+      <a href="#s5">AI 서비스</a>
+      <a href="#s6">AI-VPS</a>
+      <a href="#s7">가격 비교</a>
+      <a href="#s8">배포 가이드</a>
+      <a href="#s9">FAQ</a>
+    </div>
+    <div class="ft-copy">2026 AI-VPS.github.io. 이 사이트는 AI 인프라 비교 가이드를 제공하는 비영리 프로젝트입니다. 모든 가격 정보는 2026년 4월 기준이며, 각 서비스 공식 사이트에서 최신 정보를 확인하세요.</div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  const secs=document.querySelectorAll('.sec');
+  const navAs=document.querySelectorAll('.nav-m a');
+  const bnavAs=document.querySelectorAll('.bnav a');
+  const revs=document.querySelectorAll('.rev');
+  const progress=document.getElementById('progress');
+  const nav=document.getElementById('nav');
+
+  // Scroll Progress
+  function updProgress(){
+    const h=document.documentElement.scrollHeight-window.innerHeight;
+    const p=h>0?(window.scrollY/h)*100:0;
+    progress.style.width=p+'%';
+  }
+
+  // Nav scrolled
+  function updNav(){
+    nav.classList.toggle('scrolled',window.scrollY>50);
+  }
+
+  // Active Section
+  function updActive(){
+    let idx=0;
+    secs.forEach(function(s,i){
+      const r=s.getBoundingClientRect();
+      if(r.top<window.innerHeight*0.4)idx=i;
+    });
+    navAs.forEach(function(a){a.classList.remove('act')});
+    bnavAs.forEach(function(a){a.classList.remove('act')});
+    if(navAs[idx])navAs[idx].classList.add('act');
+    if(bnavAs[idx])bnavAs[idx].classList.add('act');
+  }
+
+  // Reveal
+  function chkReveal(){
+    revs.forEach(function(el){
+      const r=el.getBoundingClientRect();
+      if(r.top<window.innerHeight*0.88){
+        el.classList.add('vis');
+      }
+    });
+  }
+
+  let ticking=false;
+  function onScroll(){
+    if(!ticking){
+      requestAnimationFrame(function(){
+        updProgress();
+        updNav();
+        updActive();
+        chkReveal();
+        ticking=false;
+      });
+      ticking=true;
+    }
+  }
+
+  window.addEventListener('scroll',onScroll,{passive:true});
+  onScroll();
+
+  // Smooth scroll for anchor links
+  document.querySelectorAll('a[href^="#"]').forEach(function(a){
+    a.addEventListener('click',function(e){
+      e.preventDefault();
+      const t=document.querySelector(this.getAttribute('href'));
+      if(t){
+        t.scrollIntoView({behavior:'smooth',block:'start'});
+      }
+    });
+  });
+})();
+</script>
+</body>
+</html>
