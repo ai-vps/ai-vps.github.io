@@ -1,0 +1,1122 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI-VPS | Recursos de Inteligencia Artificial y Computación en la Nube</title>
+<meta name="description" content="Plataforma líder de recomendación de proveedores de IA y recursos VPS para América Latina y el mundo.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg-deep:#07080c;--bg-main:#0c0e14;--bg-surface:#141722;--bg-card:#1a1e2e;--bg-card-hover:#222740;
+  --accent:#00d4aa;--accent-dim:rgba(0,212,170,.12);--accent2:#6366f1;--accent2-dim:rgba(99,102,241,.12);
+  --warm:#f59e0b;--warm-dim:rgba(245,158,11,.1);--danger:#ef4444;
+  --text:#eee9e3;--text2:#b0aaa0;--text3:#6b7280;--border:rgba(255,255,255,.06);--border2:rgba(255,255,255,.1);
+  --font-display:'Syne',sans-serif;--font-body:'Source Serif 4',serif;--font-mono:'DM Mono',monospace;
+  --radius:12px;--radius-lg:20px;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;scrollbar-width:thin;scrollbar-color:var(--accent) var(--bg-deep)}
+body{font-family:var(--font-body);background:var(--bg-deep);color:var(--text);line-height:1.7;overflow-x:hidden}
+::selection{background:var(--accent);color:var(--bg-deep)}
+::-webkit-scrollbar{width:6px}::-webkit-scrollbar-track{background:var(--bg-deep)}::-webkit-scrollbar-thumb{background:var(--accent);border-radius:3px}
+a{color:var(--accent);text-decoration:none;transition:color .3s}a:hover{color:#33eac0}
+img,svg{display:block;max-width:100%}
+
+/* NAV */
+.nav{position:fixed;top:0;left:0;right:0;z-index:1000;backdrop-filter:blur(20px);background:rgba(7,8,12,.85);border-bottom:1px solid var(--border);transition:transform .4s ease}
+.nav-inner{max-width:1400px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:0 2rem;height:64px}
+.nav-logo{font-family:var(--font-display);font-weight:800;font-size:1.3rem;color:var(--text);display:flex;align-items:center;gap:.6rem;letter-spacing:-.02em}
+.nav-logo .dot{width:8px;height:8px;border-radius:50%;background:var(--accent);animation:pulse 2s infinite}
+.nav-links{display:flex;gap:.2rem;list-style:none}
+.nav-links a{font-family:var(--font-mono);font-size:.72rem;text-transform:uppercase;letter-spacing:.08em;color:var(--text3);padding:.5rem .8rem;border-radius:6px;transition:all .3s}
+.nav-links a:hover,.nav-links a.active{color:var(--accent);background:var(--accent-dim)}
+.nav-cta{font-family:var(--font-mono);font-size:.72rem;text-transform:uppercase;letter-spacing:.08em;background:var(--accent);color:var(--bg-deep);padding:.55rem 1.2rem;border-radius:6px;font-weight:500;transition:all .3s}
+.nav-cta:hover{background:#33eac0;color:var(--bg-deep);transform:translateY(-1px)}
+.nav-toggle{display:none;flex-direction:column;gap:4px;cursor:pointer;padding:8px}
+.nav-toggle span{width:22px;height:2px;background:var(--text);transition:all .3s;border-radius:1px}
+
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+
+/* HERO */
+.hero{min-height:100vh;display:flex;align-items:center;position:relative;overflow:hidden;padding-top:64px}
+.hero-bg{position:absolute;inset:0;z-index:0}
+.hero-content{position:relative;z-index:2;max-width:1400px;margin:0 auto;padding:4rem 2rem;display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center}
+.hero-tag{font-family:var(--font-mono);font-size:.7rem;text-transform:uppercase;letter-spacing:.15em;color:var(--accent);background:var(--accent-dim);padding:.4rem 1rem;border-radius:100px;display:inline-block;margin-bottom:1.5rem;border:1px solid rgba(0,212,170,.2)}
+.hero h1{font-family:var(--font-display);font-size:clamp(2.8rem,6vw,5rem);font-weight:800;line-height:1.05;letter-spacing:-.03em;margin-bottom:1.5rem}
+.hero h1 .accent{color:var(--accent)}
+.hero p{font-size:1.15rem;color:var(--text2);max-width:520px;margin-bottom:2.5rem}
+.hero-btns{display:flex;gap:1rem;flex-wrap:wrap}
+.btn{font-family:var(--font-mono);font-size:.75rem;text-transform:uppercase;letter-spacing:.1em;padding:.85rem 2rem;border-radius:8px;border:none;cursor:pointer;transition:all .3s;font-weight:500}
+.btn-primary{background:var(--accent);color:var(--bg-deep)}.btn-primary:hover{background:#33eac0;transform:translateY(-2px);box-shadow:0 8px 30px rgba(0,212,170,.25)}
+.btn-outline{background:transparent;color:var(--text);border:1px solid var(--border2)}.btn-outline:hover{border-color:var(--accent);color:var(--accent)}
+.hero-visual{display:flex;justify-content:center;align-items:center}
+.hero-stats{display:flex;gap:3rem;margin-top:3rem;padding-top:2rem;border-top:1px solid var(--border)}
+.hero-stat .num{font-family:var(--font-display);font-size:2rem;font-weight:700;color:var(--accent)}
+.hero-stat .label{font-family:var(--font-mono);font-size:.65rem;text-transform:uppercase;letter-spacing:.1em;color:var(--text3);margin-top:.2rem}
+
+/* SECTIONS */
+.section{padding:8rem 2rem;position:relative}
+.section-inner{max-width:1400px;margin:0 auto}
+.section-header{margin-bottom:4rem;max-width:700px}
+.section-num{font-family:var(--font-mono);font-size:.7rem;text-transform:uppercase;letter-spacing:.2em;color:var(--accent);margin-bottom:.8rem;display:block}
+.section-title{font-family:var(--font-display);font-size:clamp(2rem,4vw,3.2rem);font-weight:800;line-height:1.1;letter-spacing:-.02em;margin-bottom:1rem}
+.section-desc{font-size:1.05rem;color:var(--text2);line-height:1.8}
+.divider{width:60px;height:3px;background:var(--accent);border-radius:2px;margin:1.5rem 0}
+
+/* WHY SECTION */
+.why-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem;margin-top:3rem}
+.why-card{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-lg);padding:2.5rem 2rem;transition:all .4s;position:relative;overflow:hidden}
+.why-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--accent);transform:scaleX(0);transition:transform .4s;transform-origin:left}
+.why-card:hover{border-color:var(--border2);transform:translateY(-4px);background:var(--bg-card-hover)}
+.why-card:hover::before{transform:scaleX(1)}
+.why-icon{width:48px;height:48px;margin-bottom:1.2rem}
+.why-card h3{font-family:var(--font-display);font-size:1.15rem;font-weight:700;margin-bottom:.6rem}
+.why-card p{font-size:.92rem;color:var(--text2);line-height:1.7}
+
+/* CLOUD CARDS */
+.cloud-grid{display:grid;gap:2rem;margin-top:2rem}
+.cloud-card{display:grid;grid-template-columns:auto 1fr;gap:2rem;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-lg);padding:2.5rem;transition:all .4s;align-items:start}
+.cloud-card:hover{border-color:var(--border2);transform:translateY(-2px)}
+.cloud-logo{width:80px;height:80px;flex-shrink:0}
+.cloud-info h3{font-family:var(--font-display);font-size:1.4rem;font-weight:700;margin-bottom:.4rem}
+.cloud-info .cloud-sub{font-family:var(--font-mono);font-size:.7rem;text-transform:uppercase;letter-spacing:.1em;color:var(--text3);margin-bottom:1rem}
+.cloud-info p{color:var(--text2);font-size:.95rem;margin-bottom:1.2rem;line-height:1.7}
+.cloud-tags{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:1.2rem}
+.cloud-tag{font-family:var(--font-mono);font-size:.65rem;padding:.3rem .7rem;border-radius:100px;background:var(--accent-dim);color:var(--accent);border:1px solid rgba(0,212,170,.15)}
+.cloud-features{display:grid;grid-template-columns:1fr 1fr;gap:.6rem}
+.cloud-feature{display:flex;align-items:flex-start;gap:.5rem;font-size:.85rem;color:var(--text2)}
+.cloud-feature svg{flex-shrink:0;margin-top:3px}
+
+/* AI PROVIDERS */
+.ai-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:1.5rem;margin-top:2rem}
+.ai-card{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-lg);padding:2rem;transition:all .4s;position:relative;overflow:hidden}
+.ai-card:hover{border-color:var(--border2);transform:translateY(-3px)}
+.ai-card-header{display:flex;align-items:center;gap:1rem;margin-bottom:1.2rem}
+.ai-card-logo{width:48px;height:48px;border-radius:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.ai-card h3{font-family:var(--font-display);font-size:1.15rem;font-weight:700}
+.ai-card .ai-sub{font-family:var(--font-mono);font-size:.65rem;color:var(--text3);text-transform:uppercase;letter-spacing:.08em}
+.ai-card p{color:var(--text2);font-size:.9rem;line-height:1.7;margin-bottom:1.2rem}
+.ai-models{display:flex;flex-wrap:wrap;gap:.35rem}
+.ai-model{font-family:var(--font-mono);font-size:.6rem;padding:.25rem .6rem;border-radius:4px;background:var(--accent2-dim);color:var(--accent2);border:1px solid rgba(99,102,241,.15)}
+
+/* COMPARISON TABLE */
+.table-wrap{overflow-x:auto;margin-top:2rem;border-radius:var(--radius-lg);border:1px solid var(--border)}
+table{width:100%;border-collapse:collapse;font-size:.85rem}
+thead{background:var(--bg-surface)}
+th{font-family:var(--font-display);font-weight:600;padding:1rem 1.2rem;text-align:left;font-size:.8rem;text-transform:uppercase;letter-spacing:.05em;color:var(--text3);border-bottom:1px solid var(--border)}
+td{padding:1rem 1.2rem;border-bottom:1px solid var(--border);color:var(--text2);vertical-align:top}
+tr:hover td{background:rgba(0,212,170,.03)}
+.badge{font-family:var(--font-mono);font-size:.6rem;padding:.2rem .5rem;border-radius:4px;text-transform:uppercase;letter-spacing:.05em}
+.badge-green{background:var(--accent-dim);color:var(--accent)}
+.badge-blue{background:var(--accent2-dim);color:var(--accent2)}
+.badge-warm{background:var(--warm-dim);color:var(--warm)}
+
+/* GPU SECTION */
+.gpu-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.5rem;margin-top:2rem}
+.gpu-card{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-lg);padding:2rem;transition:all .4s;position:relative}
+.gpu-card.featured{border-color:var(--accent);background:linear-gradient(135deg,var(--bg-card),rgba(0,212,170,.05))}
+.gpu-card.featured::after{content:'RECOMENDADO';position:absolute;top:1rem;right:1rem;font-family:var(--font-mono);font-size:.55rem;letter-spacing:.1em;background:var(--accent);color:var(--bg-deep);padding:.3rem .7rem;border-radius:4px}
+.gpu-card h3{font-family:var(--font-display);font-size:1.2rem;font-weight:700;margin-bottom:.3rem}
+.gpu-card .gpu-sub{font-family:var(--font-mono);font-size:.65rem;color:var(--accent);margin-bottom:1rem}
+.gpu-specs{list-style:none;margin-bottom:1.2rem}
+.gpu-specs li{padding:.4rem 0;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;font-size:.85rem;color:var(--text2)}
+.gpu-specs li span{font-family:var(--font-mono);color:var(--text)}
+.gpu-price{font-family:var(--font-display);font-size:2rem;font-weight:700;color:var(--accent)}
+.gpu-price small{font-size:.7rem;font-weight:400;color:var(--text3);font-family:var(--font-mono)}
+
+/* ARCHITECTURE */
+.arch-diagram{background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:3rem;margin-top:2rem;display:flex;justify-content:center}
+.steps-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.5rem;margin-top:2rem}
+.step-card{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-lg);padding:2rem;text-align:center;transition:all .4s}
+.step-card:hover{transform:translateY(-3px);border-color:var(--border2)}
+.step-num{font-family:var(--font-display);font-size:2.5rem;font-weight:800;color:var(--accent);opacity:.3;margin-bottom:.5rem}
+.step-card h4{font-family:var(--font-display);font-size:1rem;font-weight:700;margin-bottom:.6rem}
+.step-card p{font-size:.85rem;color:var(--text2);line-height:1.7}
+
+/* GUIDES */
+.guides-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.5rem;margin-top:2rem}
+.guide-card{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;transition:all .4s}
+.guide-card:hover{transform:translateY(-3px);border-color:var(--border2)}
+.guide-visual{height:160px;display:flex;align-items:center;justify-content:center}
+.guide-body{padding:1.5rem}
+.guide-body h3{font-family:var(--font-display);font-size:1.1rem;font-weight:700;margin-bottom:.5rem}
+.guide-body p{font-size:.88rem;color:var(--text2);line-height:1.7}
+.guide-meta{display:flex;align-items:center;gap:1rem;margin-top:1rem;font-family:var(--font-mono);font-size:.65rem;color:var(--text3)}
+
+/* CONTACT */
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem;margin-top:2rem}
+.contact-form{display:flex;flex-direction:column;gap:1rem}
+.form-group{display:flex;flex-direction:column;gap:.4rem}
+.form-group label{font-family:var(--font-mono);font-size:.7rem;text-transform:uppercase;letter-spacing:.1em;color:var(--text3)}
+.form-group input,.form-group textarea,.form-group select{background:var(--bg-surface);border:1px solid var(--border);border-radius:8px;padding:.85rem 1rem;color:var(--text);font-family:var(--font-body);font-size:.9rem;transition:all .3s;outline:none}
+.form-group input:focus,.form-group textarea:focus,.form-group select:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-dim)}
+.form-group textarea{resize:vertical;min-height:120px}
+.form-group select option{background:var(--bg-surface)}
+
+/* FOOTER */
+.footer{border-top:1px solid var(--border);padding:4rem 2rem 2rem;margin-top:4rem}
+.footer-inner{max-width:1400px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:3rem}
+.footer-brand p{color:var(--text3);font-size:.88rem;margin-top:1rem;max-width:320px;line-height:1.7}
+.footer h4{font-family:var(--font-display);font-size:.9rem;font-weight:700;margin-bottom:1rem;color:var(--text)}
+.footer-links{list-style:none;display:flex;flex-direction:column;gap:.5rem}
+.footer-links a{color:var(--text3);font-size:.85rem;transition:color .3s}.footer-links a:hover{color:var(--accent)}
+.footer-bottom{max-width:1400px;margin:2rem auto 0;padding-top:2rem;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;font-family:var(--font-mono);font-size:.7rem;color:var(--text3)}
+
+/* ANIMATIONS */
+.reveal{opacity:0;transform:translateY(30px);transition:opacity .8s ease,transform .8s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+.reveal-delay-1{transition-delay:.1s}.reveal-delay-2{transition-delay:.2s}.reveal-delay-3{transition-delay:.3s}.reveal-delay-4{transition-delay:.4s}.reveal-delay-5{transition-delay:.5s}
+
+/* NOISE */
+body::after{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");pointer-events:none;z-index:9999;opacity:.4}
+
+/* RESPONSIVE */
+@media(max-width:1024px){
+  .hero-content{grid-template-columns:1fr;text-align:center}
+  .hero p{margin-left:auto;margin-right:auto}
+  .hero-btns{justify-content:center}
+  .hero-stats{justify-content:center}
+  .hero-visual{display:none}
+  .cloud-card{grid-template-columns:1fr}
+  .contact-grid{grid-template-columns:1fr}
+  .footer-inner{grid-template-columns:1fr 1fr}
+  .nav-links{display:none}
+  .nav-toggle{display:flex}
+  .nav.open .nav-links{display:flex;flex-direction:column;position:absolute;top:64px;left:0;right:0;background:rgba(7,8,12,.95);backdrop-filter:blur(20px);padding:1rem 2rem;border-bottom:1px solid var(--border)}
+}
+@media(max-width:600px){
+  .section{padding:5rem 1.2rem}
+  .why-grid,.ai-grid,.gpu-grid,.guides-grid,.steps-grid{grid-template-columns:1fr}
+  .cloud-features{grid-template-columns:1fr}
+  .footer-inner{grid-template-columns:1fr}
+  .hero-stats{flex-direction:column;gap:1.5rem;align-items:center}
+}
+
+/* SECTION ALTERNATING BG */
+.section-alt{background:var(--bg-main)}
+.section-dark{background:var(--bg-deep)}
+
+/* STATS BAR */
+.stats-bar{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);margin:4rem 0;border-radius:var(--radius-lg);overflow:hidden}
+.stat-item{background:var(--bg-card);padding:2rem;text-align:center}
+.stat-item .num{font-family:var(--font-display);font-size:2.2rem;font-weight:800;color:var(--accent)}
+.stat-item .label{font-family:var(--font-mono);font-size:.65rem;text-transform:uppercase;letter-spacing:.1em;color:var(--text3);margin-top:.3rem}
+
+/* TAB SYSTEM */
+.tabs{display:flex;gap:.3rem;margin-bottom:2rem;border-bottom:1px solid var(--border);padding-bottom:0;overflow-x:auto}
+.tab{font-family:var(--font-mono);font-size:.72rem;text-transform:uppercase;letter-spacing:.08em;padding:.8rem 1.2rem;cursor:pointer;color:var(--text3);border-bottom:2px solid transparent;transition:all .3s;white-space:nowrap;background:none;border-top:none;border-left:none;border-right:none}
+.tab:hover{color:var(--text)}
+.tab.active{color:var(--accent);border-bottom-color:var(--accent)}
+.tab-content{display:none}.tab-content.active{display:block}
+
+/* TOOLTIP */
+.star{color:var(--warm)}
+</style>
+</head>
+<body>
+
+<!-- NAVIGATION -->
+<nav class="nav" id="nav">
+<div class="nav-inner">
+  <a href="#hero" class="nav-logo">
+    <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><rect x="2" y="2" width="24" height="24" rx="6" stroke="var(--accent)" stroke-width="2"/><circle cx="9" cy="11" r="2" fill="var(--accent)"/><circle cx="19" cy="11" r="2" fill="var(--accent2)"/><path d="M7 18 Q14 24 21 18" stroke="var(--accent)" stroke-width="1.5" fill="none"/><circle cx="14" cy="8" r="1" fill="var(--warm)" opacity=".6"/></svg>
+    AI-VPS
+  </a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#inicio">Inicio</a></li>
+    <li><a href="#por-que">Por Que</a></li>
+    <li><a href="#nube-intl">Nube Intl</a></li>
+    <li><a href="#nube-cn">Nube CN</a></li>
+    <li><a href="#ia-intl">IA Intl</a></li>
+    <li><a href="#ia-cn">IA CN</a></li>
+    <li><a href="#gpu">GPU VPS</a></li>
+    <li><a href="#comparativa">Comparativa</a></li>
+    <li><a href="#guia">Guia</a></li>
+    <li><a href="#contacto">Contacto</a></li>
+  </ul>
+  <a href="#contacto" class="nav-cta">Contactar</a>
+  <div class="nav-toggle" id="navToggle" onclick="document.getElementById('nav').classList.toggle('open')">
+    <span></span><span></span><span></span>
+  </div>
+</div>
+</nav>
+
+<!-- ======================== SECTION 1: HERO ======================== -->
+<section class="hero" id="inicio">
+<div class="hero-bg">
+  <svg width="100%" height="100%" viewBox="0 0 1440 900" fill="none" preserveAspectRatio="xMidYMid slice">
+    <defs>
+      <radialGradient id="g1" cx="30%" cy="40%" r="50%"><stop offset="0%" stop-color="rgba(0,212,170,.12)"/><stop offset="100%" stop-color="transparent"/></radialGradient>
+      <radialGradient id="g2" cx="70%" cy="60%" r="40%"><stop offset="0%" stop-color="rgba(99,102,241,.08)"/><stop offset="100%" stop-color="transparent"/></radialGradient>
+      <radialGradient id="g3" cx="80%" cy="20%" r="30%"><stop offset="0%" stop-color="rgba(245,158,11,.06)"/><stop offset="100%" stop-color="transparent"/></radialGradient>
+    </defs>
+    <rect width="1440" height="900" fill="var(--bg-deep)"/>
+    <rect width="1440" height="900" fill="url(#g1)"/>
+    <rect width="1440" height="900" fill="url(#g2)"/>
+    <rect width="1440" height="900" fill="url(#g3)"/>
+    <!-- Grid lines -->
+    <g stroke="rgba(255,255,255,.03)" stroke-width="1"><line x1="0" y1="0" x2="0" y2="900"/><line x1="200" y1="0" x2="200" y2="900"/><line x1="400" y1="0" x2="400" y2="900"/><line x1="600" y1="0" x2="600" y2="900"/><line x1="800" y1="0" x2="800" y2="900"/><line x1="1000" y1="0" x2="1000" y2="900"/><line x1="1200" y1="0" x2="1200" y2="900"/><line x1="1440" y1="0" x2="1440" y2="900"/><line x1="0" y1="0" x2="1440" y2="0"/><line x1="0" y1="200" x2="1440" y2="200"/><line x1="0" y1="400" x2="1440" y2="400"/><line x1="0" y1="600" x2="1440" y2="600"/><line x1="0" y1="900" x2="1440" y2="900"/></g>
+    <!-- Animated nodes -->
+    <g class="hero-nodes">
+      <circle cx="200" cy="300" r="3" fill="var(--accent)" opacity=".6"><animate attributeName="cy" values="300;280;300" dur="4s" repeatCount="indefinite"/></circle>
+      <circle cx="400" cy="500" r="2" fill="var(--accent2)" opacity=".5"><animate attributeName="cy" values="500;520;500" dur="5s" repeatCount="indefinite"/></circle>
+      <circle cx="700" cy="200" r="4" fill="var(--accent)" opacity=".4"><animate attributeName="cx" values="700;720;700" dur="6s" repeatCount="indefinite"/></circle>
+      <circle cx="1000" cy="400" r="3" fill="var(--warm)" opacity=".5"><animate attributeName="cy" values="400;380;400" dur="3.5s" repeatCount="indefinite"/></circle>
+      <circle cx="1200" cy="250" r="2" fill="var(--accent)" opacity=".6"><animate attributeName="cx" values="1200;1180;1200" dur="4.5s" repeatCount="indefinite"/></circle>
+      <circle cx="300" cy="700" r="3" fill="var(--accent2)" opacity=".4"><animate attributeName="cy" values="700;680;700" dur="5.5s" repeatCount="indefinite"/></circle>
+      <circle cx="900" cy="600" r="2" fill="var(--warm)" opacity=".3"><animate attributeName="cx" values="900;920;900" dur="7s" repeatCount="indefinite"/></circle>
+    </g>
+    <!-- Connection lines -->
+    <g stroke="var(--accent)" stroke-width=".5" opacity=".15">
+      <line x1="200" y1="300" x2="400" y2="500"><animate attributeName="opacity" values=".15;.05;.15" dur="4s" repeatCount="indefinite"/></line>
+      <line x1="400" y1="500" x2="700" y2="200"><animate attributeName="opacity" values=".1;.03;.1" dur="5s" repeatCount="indefinite"/></line>
+      <line x1="700" y1="200" x2="1000" y2="400"><animate attributeName="opacity" values=".15;.05;.15" dur="3.5s" repeatCount="indefinite"/></line>
+      <line x1="1000" y1="400" x2="1200" y2="250"/><line x1="300" y1="700" x2="700" y2="200"/><line x1="900" y1="600" x2="1200" y2="250"/>
+    </g>
+  </svg>
+</div>
+<div class="hero-content">
+  <div>
+    <span class="hero-tag">Plataforma de Recursos IA y Nube</span>
+    <h1>Inteligencia Artificial<br>y Poder <span class="accent">Cloud</span><br>sin Limites</h1>
+    <p>Descubre, compara y elige los mejores proveedores de servicios de inteligencia artificial y recursos VPS del mundo. Desde AWS hasta Huawei Cloud, desde OpenAI hasta DeepSeek.</p>
+    <div class="hero-btns">
+      <button class="btn btn-primary" onclick="document.getElementById('nube-intl').scrollIntoView({behavior:'smooth'})">Explorar Proveedores</button>
+      <button class="btn btn-outline" onclick="document.getElementById('comparativa').scrollIntoView({behavior:'smooth'})">Ver Comparativa</button>
+    </div>
+    <div class="hero-stats">
+      <div class="hero-stat"><div class="num">20+</div><div class="label">Proveedores Analizados</div></div>
+      <div class="hero-stat"><div class="num">50+</div><div class="label">Modelos de IA</div></div>
+      <div class="hero-stat"><div class="num">15+</div><div class="label">Regiones Globales</div></div>
+    </div>
+  </div>
+  <div class="hero-visual">
+    <svg width="480" height="480" viewBox="0 0 480 480" fill="none">
+      <!-- Central brain/chip -->
+      <defs>
+        <linearGradient id="chipGrad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="var(--accent)" stop-opacity=".2"/><stop offset="100%" stop-color="var(--accent2)" stop-opacity=".1"/></linearGradient>
+        <filter id="glow"><feGaussianBlur stdDeviation="8" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+      </defs>
+      <!-- Outer ring -->
+      <circle cx="240" cy="240" r="200" stroke="var(--accent)" stroke-width=".5" opacity=".2"><animateTransform attributeName="transform" type="rotate" from="0 240 240" to="360 240 240" dur="60s" repeatCount="indefinite"/></circle>
+      <circle cx="240" cy="240" r="170" stroke="var(--accent2)" stroke-width=".5" opacity=".15" stroke-dasharray="8 12"><animateTransform attributeName="transform" type="rotate" from="360 240 240" to="0 240 240" dur="45s" repeatCount="indefinite"/></circle>
+      <circle cx="240" cy="240" r="140" stroke="var(--warm)" stroke-width=".5" opacity=".1" stroke-dasharray="4 16"><animateTransform attributeName="transform" type="rotate" from="0 240 240" to="360 240 240" dur="30s" repeatCount="indefinite"/></circle>
+      <!-- Central hexagon -->
+      <polygon points="240,160 300,195 300,265 240,300 180,265 180,195" fill="url(#chipGrad)" stroke="var(--accent)" stroke-width="1.5" filter="url(#glow)"/>
+      <!-- Inner circuit lines -->
+      <path d="M240 180 L240 200 M240 260 L240 280 M210 195 L200 185 M270 195 L280 185 M210 265 L200 275 M270 265 L280 275" stroke="var(--accent)" stroke-width="1" opacity=".6"/>
+      <circle cx="240" cy="230" r="15" fill="none" stroke="var(--accent)" stroke-width="1" opacity=".5"/>
+      <circle cx="240" cy="230" r="6" fill="var(--accent)" opacity=".8"/>
+      <!-- Orbital nodes -->
+      <g><circle cx="240" cy="40" r="8" fill="var(--accent-dim)" stroke="var(--accent)" stroke-width="1"><animate attributeName="r" values="8;10;8" dur="3s" repeatCount="indefinite"/></circle><animateTransform attributeName="transform" type="rotate" from="0 240 240" to="360 240 240" dur="20s" repeatCount="indefinite"/></g>
+      <g><circle cx="240" cy="70" r="6" fill="var(--accent2-dim)" stroke="var(--accent2)" stroke-width="1"><animate attributeName="r" values="6;8;6" dur="4s" repeatCount="indefinite"/></circle><animateTransform attributeName="transform" type="rotate" from="120 240 240" to="480 240 240" dur="25s" repeatCount="indefinite"/></g>
+      <g><circle cx="240" cy="100" r="5" fill="var(--warm-dim)" stroke="var(--warm)" stroke-width="1"><animate attributeName="r" values="5;7;5" dur="3.5s" repeatCount="indefinite"/></circle><animateTransform attributeName="transform" type="rotate" from="240 240 240" to="600 240 240" dur="22s" repeatCount="indefinite"/></g>
+      <!-- Data flow lines -->
+      <g stroke="var(--accent)" stroke-width=".7" opacity=".3">
+        <line x1="240" y1="60" x2="240" y2="160"><animate attributeName="opacity" values=".3;.1;.3" dur="2s" repeatCount="indefinite"/></line>
+        <line x1="380" y1="170" x2="300" y2="195"><animate attributeName="opacity" values=".3;.1;.3" dur="2.5s" repeatCount="indefinite"/></line>
+        <line x1="380" y1="310" x2="300" y2="265"><animate attributeName="opacity" values=".3;.1;.3" dur="3s" repeatCount="indefinite"/></line>
+        <line x1="240" y1="420" x2="240" y2="300"><animate attributeName="opacity" values=".3;.1;.3" dur="2.8s" repeatCount="indefinite"/></line>
+        <line x1="100" y1="310" x2="180" y2="265"><animate attributeName="opacity" values=".3;.1;.3" dur="3.2s" repeatCount="indefinite"/></line>
+        <line x1="100" y1="170" x2="180" y2="195"><animate attributeName="opacity" values=".3;.1;.3" dur="2.3s" repeatCount="indefinite"/></line>
+      </g>
+      <!-- Labels -->
+      <text x="240" y="28" text-anchor="middle" fill="var(--accent)" font-family="var(--font-mono)" font-size="9" letter-spacing=".1em" opacity=".7">CLOUD</text>
+      <text x="410" y="168" text-anchor="start" fill="var(--accent2)" font-family="var(--font-mono)" font-size="9" letter-spacing=".1em" opacity=".7">IA</text>
+      <text x="410" y="315" text-anchor="start" fill="var(--warm)" font-family="var(--font-mono)" font-size="9" letter-spacing=".1em" opacity=".7">VPS</text>
+      <text x="240" y="445" text-anchor="middle" fill="var(--accent)" font-family="var(--font-mono)" font-size="9" letter-spacing=".1em" opacity=".7">DATOS</text>
+      <text x="70" y="315" text-anchor="end" fill="var(--accent2)" font-family="var(--font-mono)" font-size="9" letter-spacing=".1em" opacity=".7">GPU</text>
+      <text x="70" y="168" text-anchor="end" fill="var(--warm)" font-family="var(--font-mono)" font-size="9" letter-spacing=".1em" opacity=".7">API</text>
+    </svg>
+  </div>
+</div>
+</section>
+
+<!-- ======================== SECTION 2: POR QUE ======================== -->
+<section class="section section-alt" id="por-que">
+<div class="section-inner">
+  <div class="section-header reveal">
+    <span class="section-num">01 / Plataforma</span>
+    <h2 class="section-title">Por que elegir AI-VPS como tu guia tecnologica</h2>
+    <div class="divider"></div>
+    <p class="section-desc">En un mercado saturado de proveedores de nube e inteligencia artificial, tomar la decision correcta puede ser abrumador. AI-VPS simplifica este proceso ofreciendo comparativas objetivas, analisis detallados y recomendaciones personalizadas para empresas de todos los tamanos. (citation:9)(citation:10)</p>
+  </div>
+  <div class="stats-bar reveal">
+    <div class="stat-item"><div class="num">99.9%</div><div class="label">Disponibilidad Media</div></div>
+    <div class="stat-item"><div class="num">$0.008</div><div class="label">Costo min/GPU hora</div></div>
+    <div class="stat-item"><div class="num">200+</div><div class="label">Servicios Cloud</div></div>
+    <div class="stat-item"><div class="num">5ms</div><div class="label">Latencia Promedio</div></div>
+  </div>
+  <div class="why-grid">
+    <div class="why-card reveal">
+      <svg class="why-icon" viewBox="0 0 48 48" fill="none"><rect x="4" y="8" width="40" height="32" rx="4" stroke="var(--accent)" stroke-width="2"/><path d="M4 16h40" stroke="var(--accent)" stroke-width="1.5"/><circle cx="10" cy="12" r="1.5" fill="var(--danger)"/><circle cx="16" cy="12" r="1.5" fill="var(--warm)"/><circle cx="22" cy="12" r="1.5" fill="var(--accent)"/><path d="M12 24h24M12 30h16" stroke="var(--text3)" stroke-width="1.5" stroke-linecap="round"/></svg>
+      <h3>Comparativas Objetivas</h3>
+      <p>Analizamos cada proveedor con criterios uniformes: rendimiento, precio, disponibilidad, soporte tecnico y ecosistema de servicios. Sin sesgos, sin patrocinios ocultos.</p>
+    </div>
+    <div class="why-card reveal reveal-delay-1">
+      <svg class="why-icon" viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="18" stroke="var(--accent)" stroke-width="2"/><path d="M24 14v10l7 7" stroke="var(--accent)" stroke-width="2" stroke-linecap="round"/><circle cx="24" cy="24" r="3" fill="var(--accent)" opacity=".3"/></svg>
+      <h3>Actualizacion Continua</h3>
+      <p>El mercado de IA y cloud evoluciona cada semana. Nuestro equipo mantiene la informacion al dia con los ultimos lanzamientos, precios y funcionalidades de cada proveedor.</p>
+    </div>
+    <div class="why-card reveal reveal-delay-2">
+      <svg class="why-icon" viewBox="0 0 48 48" fill="none"><path d="M8 36L16 20L24 28L32 12L40 24" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="16" cy="20" r="2.5" fill="var(--accent)"/><circle cx="24" cy="28" r="2.5" fill="var(--accent)"/><circle cx="32" cy="12" r="2.5" fill="var(--accent)"/><circle cx="40" cy="24" r="2.5" fill="var(--accent)"/></svg>
+      <h3>Enfoque en Latinoamerica</h3>
+      <p>Consideramos la latencia, disponibilidad de regiones y soporte en espanol para mercados de America Latina, donde la transformacion digital es una prioridad creciente. (citation:1)(citation:2)</p>
+    </div>
+    <div class="why-card reveal reveal-delay-3">
+      <svg class="why-icon" viewBox="0 0 48 48" fill="none"><path d="M14 34V22l10-10 10 10v12" stroke="var(--accent)" stroke-width="2" stroke-linejoin="round"/><rect x="20" y="28" width="8" height="6" stroke="var(--accent)" stroke-width="1.5"/><path d="M6 34h36" stroke="var(--accent)" stroke-width="2"/><path d="M24 12l-14 10" stroke="var(--accent)" stroke-width="1.5" opacity=".5"/></svg>
+      <h3>Arquitecturas Integradas</h3>
+      <p>No solo comparamos servicios aislados. Te mostramos como combinar proveedores de nube con plataformas de IA para crear soluciones completas y escalables para tu negocio.</p>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ======================== SECTION 3: NUBE INTERNACIONAL ======================== -->
+<section class="section section-dark" id="nube-intl">
+<div class="section-inner">
+  <div class="section-header reveal">
+    <span class="section-num">02 / Nube Internacional</span>
+    <h2 class="section-title">Proveedores de Nube Publica Global</h2>
+    <div class="divider"></div>
+    <p class="section-desc">Los tres gigantes del cloud computing mundial ofrecen infraestructura robusta con cobertura global. AWS lidera en madurez, Azure destaca en integracion empresarial y Google Cloud innova en analitica e inteligencia artificial. (citation:10)(citation:11)</p>
+  </div>
+  <div class="cloud-grid">
+    <!-- AWS -->
+    <div class="cloud-card reveal">
+      <svg class="cloud-logo" viewBox="0 0 80 80" fill="none"><rect width="80" height="80" rx="16" fill="rgba(255,153,0,.1)"/><path d="M20 42c4-2 10-6 16-6s10 4 16 6c3 1.5 6 1 8-1" stroke="#FF9900" stroke-width="2.5" stroke-linecap="round"/><path d="M18 36c5 3 12 5 18 5s14-3 18-6" stroke="#FF9900" stroke-width="1.5" stroke-linecap="round" opacity=".5"/><path d="M30 26l4-6 4 6M42 28l3-5 3 5" stroke="#FF9900" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" opacity=".6"/><text x="40" y="58" text-anchor="middle" fill="#FF9900" font-family="var(--font-mono)" font-size="8" font-weight="500" letter-spacing=".15em">AWS</text></svg>
+      <div class="cloud-info">
+        <h3>Amazon Web Services</h3>
+        <p class="cloud-sub">El pionero del cloud computing con mas de 200 servicios</p>
+        <p>AWS es la plataforma de nube mas madura y con mayor participacion en el mercado global. Ofrece una amplia gama de servicios y herramientas de migracion, almacenamiento, analisis de datos y machine learning. Su documentacion es clara y detallada, y cuenta con una gran red de centros de datos en todo el mundo. (citation:10)(citation:11)</p>
+        <div class="cloud-tags">
+          <span class="cloud-tag">76+ Zonas</span>
+          <span class="cloud-tag">200+ Servicios</span>
+          <span class="cloud-tag">EC2</span>
+          <span class="cloud-tag">S3</span>
+          <span class="cloud-tag">Lambda</span>
+          <span class="cloud-tag">SageMaker</span>
+        </div>
+        <div class="cloud-features">
+          <div class="cloud-feature"><svg width="14" height="14" viewBox="0 0 14 14"><path d="M3 7l3 3 5-6" stroke="var(--accent)" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg>Flexibilidad total en SO y lenguajes</div>
+          <div class="cloud-feature"><svg width="14" height="14" viewBox="0 0 14 14"><path d="M3 7l3 3 5-6" stroke="var(--accent)" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg>Modelo de pago por uso sin compromisos</div>
+          <div class="cloud-feature"><svg width="14" height="14" viewBox="0 0 14 14"><path d="M3 7l3 3 5-6" stroke="var(--accent)" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg>Auto Scaling y Elastic Load Balancing</div>
+          <div class="cloud-feature"><svg width="14" height="14" viewBox="0 0 14 14"><path d="M3 7l3 3 5-6" stroke="var(--accent)" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg>Certificaciones de seguridad avanzadas</div>
+          <div class="cloud-feature"><svg width="14" height="14" viewBox="0 0 14 14"><path d="M3 7l3 3 5-6" stroke="var(--accent)" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg>GPU: P4, P5, G5 para workloads IA</div>
+          <div class="cloud-feature"><svg width="14" height="14" viewBox="0 0 14 14"><path d="M3 7l3 3 5-6" stroke="var(--accent)" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg>Ideal para startups y grandes empresas</div>
+        </div>
+      </div>
+    </div>
+    <!-- Azure -->
+    <div class="cloud-card reveal reveal-delay-1">
+      <svg class="cloud-logo" viewBox="0 0 80 80" fill="none"><rect width="80" height="80" rx="16" fill="rgba(0,120,212,.1)"/><path d="M24 52L36 18l16 22-20 2" stroke="#0078D4" stroke-width="2" stroke-linejoin="round"/><path d="M36 18l12 12-12 2z" fill="#0078D4" opacity=".3"/><path d="M36 42l16-2-8 14z" fill="#50e6ff" opacity=".2"/><path d="M24 52l12-10 16 2" stroke="#50e6ff" stroke-width="1" opacity=".5"/><text x="40" y="66" text-anchor="middle" fill="#0078D4" font-family="var(--font-mono)" font-size="7" font-weight="500" letter-spacing=".1em">AZURE</text></svg>
+      <div class="cloud-info">
+        <h3>Microsoft Azure</h3>
+        <p class="cloud-sub">Integracion perfecta con el ecosistema Microsoft</p>
+        <p>Azure es conocido por su integracion fluida con productos Microsoft como Office 365, Dynamics 365 y Windows Server. Ofrece soluciones hibridas robustas que combinan nube y servidores locales, con una de las redes globales mas grandes del mundo y un fuerte enfoque en el sector empresarial. (citation:9)(citation:10)</p>
+        <div class="cloud-tags">
+          <span class="cloud-tag">60+ Regiones</span>
+          <span class="cloud-tag">200+ Servicios</span>
+          <span class="cloud-tag">Virtual Machines</span>
+          <span class="cloud-tag">Azure AI</span>
+          <span class="cloud-tag">DevOps</span>
+        </div>
+        <div class="cloud-features">
+          <div class="cloud-feature"><svg width="14" height="14" viewBox="0 0 14 14"><path d="M3 7l3 3 5-6" stroke="var(--accent)" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg>Integracion nativa con Office 365 y Teams</div>
+          <div class="cloud-feature"><svg width="14" height="14" viewBox="0 0 14 14"><path d="M3 7l3 3 5-6" stroke="var(--accent)" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg>Soluciones hibridas Azure Arc</div>
+          <div class="cloud-feature"><svg width="14" height="14" viewBox="0 0 14 14"><path d="M3 7l3 3 5-6" stroke="var(--accent)" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg>SLA del 99.9% de disponibilidad</div>
+          <div class="cloud-feature"><svg width="14" height="14" viewBox="0 0 14 14"><path d="M3 7l3 3 5-6" stroke="var(--accent)" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg>Azure OpenAI Service (GPT-4)</div>
+          <div class="cloud-feature"><svg width="14" height="14" viewBox="0 0 14 14"><path d="M3 7l3 3 5-6" stroke="var(--accent)" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg>GPU: NC, ND series con NVIDIA</div>
+          <div class="cloud-feature"><svg width="14" height="14" viewBox="0 0 14 14"><path d="M3 7l3 3 5-6" stroke="var(--accent)" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg>Ideal para empresas con stack Microsoft</div>
+        </div>
+      </div>
+    </div>
+    <!-- Google Cloud -->
+    <div class="cloud-card reveal reveal-delay-2">
+      <svg class="cloud-logo" viewBox="0 0 80 80" fill="none"><rect width="80" height="80" rx="16" fill="rgba(66,133,244,.08)"/><path d="M28 44c0-8 6-14 14-14" stroke="#4285F4" stroke-width="2.5" stroke-linecap="round"/><path d="M42 30c4 2 6 6 6 10" stroke="#34A853" stroke-width="2.5" stroke-linecap="round"/><path d="M48 40c0 6-4 10-10 12" stroke="#FBBC05" stroke-width="2" stroke-linecap="round"/><path d="M38 52c-4-1-8-4-8-8" stroke="#EA4335" stroke-width="2" stroke-linecap="round"/><circle cx="32" cy="36" r="3" fill="#4285F4" opacity=".4"/><circle cx="42" cy="38" r="2" fill="#34A853" opacity=".4"/><text x="40" y="66" text-anchor="middle" fill="#4285F4" font-family="var(--font-mono)" font-size="7" font-weight="500" letter-spacing=".1em">GOOGLE</text></svg>
+      <div class="cloud-info">
+        <h3>Google Cloud Platform</h3>
+        <p class="cloud-sub">Innovacion en IA, datos y analitica avanzada</p>
+        <p>GCP aprovecha la infraestructura que impulsa YouTube, Search y Gmail. Destaca por sus capacidades avanzadas de inteligencia artificial y machine learning, con herramientas como TensorFlow, AutoML y BigQuery. Ofrece precios competitivos con descuentos por uso sostenido. (citation:10)(citation:11)</p>
+        <div class="cloud-tags">
+          <span class="cloud-tag">40+ Regiones</span>
+          <span class="cloud-tag">BigQuery</span>
+          <span class="cloud-tag">Vertex AI</span>
+          <span class="cloud-tag">GKE</span>
+          <span class="cloud-tag">TPU v5</span>
+        </div>
+        <div class="cloud-features">
+          <div class="cloud-feature"><svg width="14" height="14" viewBox="0 0 14 14"><path d="M3 7l3 3 5-6" stroke="var(--accent)" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg>BigQuery: analitica de datos ultrarrapida</div>
+          <div class="cloud-feature"><svg width="14" height="14" viewBox="0 0 14 14"><path d="M3 7l3 3 5-6" stroke="var(--accent)" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg>TPU custom para entrenamiento IA</div>
+          <div class="cloud-feature"><svg width="14" height="14" viewBox="0 0 14 14"><path d="M3 7l3 3 5-6" stroke="var(--accent)" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg>Red de fibra global privada</div>
+          <div class="cloud-feature"><svg width="14" height="14" viewBox="0 0 14 14"><path d="M3 7l3 3 5-6" stroke="var(--accent)" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg>Sustained Use Discounts automaticos</div>
+          <div class="cloud-feature"><svg width="14" height="14" viewBox="0 0 14 14"><path d="M3 7l3 3 5-6" stroke="var(--accent)" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg>Gemini integrado en la plataforma</div>
+          <div class="cloud-feature"><svg width="14" height="14" viewBox="0 0 14 14"><path d="M3 7l3 3 5-6" stroke="var(--accent)" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg>Ideal para empresas data-driven</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ======================== SECTION 4: NUBE CHINA ======================== -->
+<section class="section section-alt" id="nube-cn">
+<div class="section-inner">
+  <div class="section-header reveal">
+    <span class="section-num">03 / Nube China</span>
+    <h2 class="section-title">Proveedores de Nube Publica de China</h2>
+    <div class="divider"></div>
+    <p class="section-desc">Los proveedores chinos de nube han experimentado un crecimiento extraordinario, expandiendo su presencia a nivel global con tecnologia de vanguardia y precios competitivos. Huawei Cloud, por ejemplo, se ha posicionado como el proveedor preferido para soluciones hibridas y multinube en America Latina. (citation:1)</p>
+  </div>
+  <div class="cloud-grid">
+    <!-- Alibaba Cloud -->
+    <div class="cloud-card reveal">
+      <svg class="cloud-logo" viewBox="0 0 80 80" fill="none"><rect width="80" height="80" rx="16" fill="rgba(255,106,0,.08)"/><ellipse cx="40" cy="36" rx="18" ry="12" stroke="#FF6A00" stroke-width="2" fill="none"/><path d="M22 36c0 8 8 16 18 16s18-8 18-16" stroke="#FF6A00" stroke-width="1.5" stroke-dasharray="4 3" fill="none"/><circle cx="40" cy="30" r="4" fill="#FF6A00" opacity=".3"/><path d="M32 44h16" stroke="#FF6A00" stroke-width="1.5" stroke-linecap="round"/><text x="40" y="64" text-anchor="middle" fill="#FF6A00" font-family="var(--font-mono)" font-size="7" font-weight="500" letter-spacing=".08em">ALIBABA</text></svg>
+      <div class="cloud-info">
+        <h3>Alibaba Cloud</h3>
+        <p class="cloud-sub">El mayor proveedor de nube de Asia con alcance global</p>
+        <p>Conocida como Aliyun, Alibaba Cloud es el lider indiscutible del mercado cloud en China y el tercer proveedor a nivel mundial. Ofrece servicios completos que incluyen computacion, almacenamiento, bases de datos, IA, big data y seguridad, con 89 zonas de disponibilidad en 30 regiones a nivel global.</p>
+        <div class="cloud-tags">
+          <span class="cloud-tag">30+ Regiones</span>
+          <span class="cloud-tag">ECS</span>
+          <span class="cloud-tag">OSS</span>
+          <span class="cloud-tag">PAI</span>
+          <span class="cloud-tag">MaxCompute</span>
+        </div>
+        <div class="cloud-features">
+          <div class="cloud-feature"><svg width="14" height="14" viewBox="0 0 14 14"><path d="M3 7l3 3 5-6" stroke="var(--accent)" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg>Lider en comercio electronico cloud</div>
+          <div class="cloud-feature"><svg width="14" height="14" viewBox="0 0 14 14"><path d="M3 7l3 3 5-6" stroke="var(--accent)" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg>Plataforma PAI para machine learning</div>
+          <div class="cloud-feature"><svg width="14" height="14" viewBox="0 0 14 14"><path d="M3 7l3 3 5-6" stroke="var(--accent)" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg>Precios muy competitivos globalmente</div>
+          <div class="cloud-feature"><svg width="14" height="14" viewBox="0 0 14 14"><path d="M3 7l3 3 5-6" stroke="var(--accent)" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg>Presencia fuerte en Sudeste Asiatico</div>
+        </div>
+      </div>
+    </div>
+    <!-- Huawei Cloud -->
+    <div class="cloud-card reveal reveal-delay-1">
+      <svg class="cloud-logo" viewBox="0 0 80 80" fill="none"><rect width="80" height="80" rx="16" fill="rgba(207,10,44,.08)"/><path d="M24 40c0-10 7-18 16-18s16 8 16 18" stroke="#CF0A2C" stroke-width="2" fill="none"/><path d="M28 40h24" stroke="#CF0A2C" stroke-width="1.5"/><path d="M32 46c0-3 3-6 8-6s8 3 8 6" stroke="#CF0A2C" stroke-width="1.5" fill="none"/><circle cx="36" cy="34" r="2" fill="#CF0A2C" opacity=".4"/><circle cx="44" cy="34" r="2" fill="#CF0A2C" opacity=".4"/><circle cx="40" cy="28" r="2" fill="#CF0A2C" opacity=".3"/><text x="40" y="62" text-anchor="middle" fill="#CF0A2C" font-family="var(--font-mono)" font-size="7" font-weight="500" letter-spacing=".08em">HUAWEI</text></svg>
+      <div class="cloud-info">
+        <h3>Huawei Cloud</h3>
+        <p class="cloud-sub">Infraestructura de vanguardia con enfoque en IA y nube hibrida</p>
+        <p>Huawei Cloud se ha convertido en el proveedor preferido para empresas que adoptan soluciones hibridas y multinube en America Latina. Con 955 dias de operacion segura e ininterrumpida, ofrece la nube hibrida mas avanzada, respaldando el despliegue completo de IA desde infraestructura hasta servicios de modelos en centros de datos locales. (citation:1)</p>
+        <div class="cloud-tags">
+          <span class="cloud-tag">Nube Hibrida</span>
+          <span class="cloud-tag">ModelArts</span>
+          <span class="cloud-tag">KooVerse</span>
+          <span class="cloud-tag">EI Health</span>
+          <span class="cloud-tag">LATAM</span>
+        </div>
+        <div class="cloud-features">
+          <div class="cloud-feature"><svg width="14" height="14" viewBox="0 0 14 14"><path d="M3 7l3 3 5-6" stroke="var(--accent)" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg>955 dias de operacion segura continua</div>
+          <div class="cloud-feature"><svg width="14" height="14" viewBox="0 0 14 14"><path d="M3 7l3 3 5-6" stroke="var(--accent)" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg>Computacion IA expandiendose en Brasil y Mexico</div>
+          <div class="cloud-feature"><svg width="14" height="14" viewBox="0 0 14 14"><path d="M3 7l3 3 5-6" stroke="var(--accent)" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg>4,400+ empleados en America Latina</div>
+          <div class="cloud-feature"><svg width="14" height="14" viewBox="0 0 14 14"><path d="M3 7l3 3 5-6" stroke="var(--accent)" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg>Soluciones full-stack de IA</div>
+        </div>
+      </div>
+    </div>
+    <!-- Tencent Cloud -->
+    <div class="cloud-card reveal reveal-delay-2">
+      <svg class="cloud-logo" viewBox="0 0 80 80" fill="none"><rect width="80" height="80" rx="16" fill="rgba(0,82,217,.08)"/><circle cx="32" cy="32" r="10" stroke="#0052D9" stroke-width="2" fill="none"/><circle cx="48" cy="32" r="10" stroke="#0052D9" stroke-width="2" fill="none"/><circle cx="40" cy="44" r="10" stroke="#0052D9" stroke-width="2" fill="none"/><circle cx="40" cy="36" r="3" fill="#0052D9" opacity=".3"/><text x="40" y="66" text-anchor="middle" fill="#0052D9" font-family="var(--font-mono)" font-size="7" font-weight="500" letter-spacing=".08em">TENCENT</text></svg>
+      <div class="cloud-info">
+        <h3>Tencent Cloud</h3>
+        <p class="cloud-sub">Potenciada por el ecosistema social y de gaming mas grande de China</p>
+        <p>Tencent Cloud aprovecha la infraestructura que soporta WeChat, QQ y los juegos mas populares de Asia. Ofrece servicios de nube empresarial con especial fortaleza en video, streaming, redes sociales y gaming. Su plataforma de IA Hunyuan proporciona modelos de lenguaje avanzados para aplicaciones empresariales.</p>
+        <div class="cloud-tags">
+          <span class="cloud-tag">26+ Regiones</span>
+          <span class="cloud-tag">CVM</span>
+          <span class="cloud-tag">COS</span>
+          <span class="cloud-tag">Hunyuan</span>
+          <span class="cloud-tag">Gaming</span>
+        </div>
+        <div class="cloud-features">
+          <div class="cloud-feature"><svg width="14" height="14" viewBox="0 0 14 14"><path d="M3 7l3 3 5-6" stroke="var(--accent)" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg>Lider en soluciones de video y streaming</div>
+          <div class="cloud-feature"><svg width="14" height="14" viewBox="0 0 14 14"><path d="M3 7l3 3 5-6" stroke="var(--accent)" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg>Integracion con WeChat ecosystem</div>
+          <div class="cloud-feature"><svg width="14" height="14" viewBox="0 0 14 14"><path d="M3 7l3 3 5-6" stroke="var(--accent)" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg>GPU aceleradores para gaming y metaverso</div>
+          <div class="cloud-feature"><svg width="14" height="14" viewBox="0 0 14 14"><path d="M3 7l3 3 5-6" stroke="var(--accent)" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg>Modelos Hunyuan para empresas</div>
+        </div>
+      </div>
+    </div>
+    <!-- Baidu AI Cloud -->
+    <div class="cloud-card reveal reveal-delay-3">
+      <svg class="cloud-logo" viewBox="0 0 80 80" fill="none"><rect width="80" height="80" rx="16" fill="rgba(35,25,220,.08)"/><circle cx="30" cy="32" r="8" stroke="#2319DC" stroke-width="2" fill="none"/><circle cx="50" cy="32" r="8" stroke="#2319DC" stroke-width="2" fill="none"/><path d="M30 40c0 6 4 12 10 12s10-6 10-12" stroke="#2319DC" stroke-width="1.5" fill="none"/><circle cx="30" cy="30" r="2.5" fill="#2319DC" opacity=".4"/><circle cx="50" cy="30" r="2.5" fill="#2319DC" opacity=".4"/><text x="40" y="64" text-anchor="middle" fill="#2319DC" font-family="var(--font-mono)" font-size="7" font-weight="500" letter-spacing=".08em">BAIDU</text></svg>
+      <div class="cloud-info">
+        <h3>Baidu AI Cloud</h3>
+        <p class="cloud-sub">La nube con el ADN mas fuerte en inteligencia artificial de China</p>
+        <p>Baidu AI Cloud combina la experiencia de busqueda mas grande de China con capacidades avanzadas de IA. Su plataforma ERNIE (Wenxin) es uno de los modelos de lenguaje mas potentes del pais. Ofrece servicios completos de nube con un enfoque especial en conduccion autonoma, IA conversacional y procesamiento de lenguaje natural.</p>
+        <div class="cloud-tags">
+          <span class="cloud-tag">ERNIE Bot</span>
+          <span class="cloud-tag">PaddlePaddle</span>
+          <span class="cloud-tag">Apollo</span>
+          <span class="cloud-tag">Smart Cloud</span>
+        </div>
+        <div class="cloud-features">
+          <div class="cloud-feature"><svg width="14" height="14" viewBox="0 0 14 14"><path d="M3 7l3 3 5-6" stroke="var(--accent)" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg>ERNIE: modelo LLM mas popular de China</div>
+          <div class="cloud-feature"><svg width="14" height="14" viewBox="0 0 14 14"><path d="M3 7l3 3 5-6" stroke="var(--accent)" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg>PaddlePaddle: framework de deep learning</div>
+          <div class="cloud-feature"><svg width="14" height="14" viewBox="0 0 14 14"><path d="M3 7l3 3 5-6" stroke="var(--accent)" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg>Lider en conduccion autonoma (Apollo)</div>
+          <div class="cloud-feature"><svg width="14" height="14" viewBox="0 0 14 14"><path d="M3 7l3 3 5-6" stroke="var(--accent)" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg>IA generativa integrada en la nube</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ======================== SECTION 5: IA INTERNACIONAL ======================== -->
+<section class="section section-dark" id="ia-intl">
+<div class="section-inner">
+  <div class="section-header reveal">
+    <span class="section-num">04 / IA Internacional</span>
+    <h2 class="section-title">Plataformas de Inteligencia Artificial Globales</h2>
+    <div class="divider"></div>
+    <p class="section-desc">Las principales plataformas de IA del mundo ofrecen modelos de lenguaje, vision por computadora, generacion de contenido y automatizacion inteligente. Cada una tiene fortalezas unicas que se adaptan a diferentes casos de uso empresariales y de desarrollo.</p>
+  </div>
+  <div class="ai-grid">
+    <!-- OpenAI -->
+    <div class="ai-card reveal">
+      <div class="ai-card-header">
+        <svg class="ai-card-logo" viewBox="0 0 48 48" style="background:rgba(16,163,127,.12)"><path d="M24 10c-7 0-12 5-12 11 0 4 2 7 6 9l-1 6 7-3c2 0 4 0 6-1 5-3 8-7 8-12 0-6-5-10-14-10z" stroke="#10A37F" stroke-width="2" fill="none"/><circle cx="20" cy="21" r="2" fill="#10A37F"/><circle cx="28" cy="21" r="2" fill="#10A37F"/><circle cx="24" cy="27" r="2" fill="#10A37F" opacity=".5"/></svg>
+        <div><h3>OpenAI</h3><span class="ai-sub">Estados Unidos</span></div>
+      </div>
+      <p>El creador de ChatGPT y GPT-4, el modelo de lenguaje mas avanzado del mundo. OpenAI ofrece APIs para texto, imagen (DALL-E), audio (Whisper) y video (Sora). Su ecosistema de plugins y GPTs personalizados permite a empresas crear soluciones de IA a medida.</p>
+      <div class="ai-models">
+        <span class="ai-model">GPT-4o</span><span class="ai-model">GPT-4 Turbo</span><span class="ai-model">DALL-E 3</span><span class="ai-model">Whisper</span><span class="ai-model">Sora</span><span class="ai-model">GPTs</span>
+      </div>
+    </div>
+    <!-- Anthropic -->
+    <div class="ai-card reveal reveal-delay-1">
+      <div class="ai-card-header">
+        <svg class="ai-card-logo" viewBox="0 0 48 48" style="background:rgba(212,165,116,.12)"><path d="M16 34L24 12l8 22" stroke="#D4A574" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M19 28h10" stroke="#D4A574" stroke-width="1.5" stroke-linecap="round"/><circle cx="24" cy="12" r="2" fill="#D4A574" opacity=".5"/></svg>
+        <div><h3>Anthropic</h3><span class="ai-sub">Estados Unidos</span></div>
+      </div>
+      <p>Creadores de Claude, el asistente de IA mas capaz y seguro del mercado. Anthropic se enfoca en la seguridad e interpretabilidad de la IA, con modelos que destacan en razonamiento complejo, analisis de documentos largos y generacion de codigo de alta calidad.</p>
+      <div class="ai-models">
+        <span class="ai-model">Claude 3.5 Sonnet</span><span class="ai-model">Claude 3 Opus</span><span class="ai-model">Claude 3 Haiku</span><span class="ai-model">200K Context</span>
+      </div>
+    </div>
+    <!-- Google AI -->
+    <div class="ai-card reveal reveal-delay-2">
+      <div class="ai-card-header">
+        <svg class="ai-card-logo" viewBox="0 0 48 48" style="background:rgba(66,133,244,.12)"><path d="M14 24c0-6 4-10 10-10" stroke="#4285F4" stroke-width="2" stroke-linecap="round"/><path d="M24 14c4 2 6 6 6 10" stroke="#34A853" stroke-width="2" stroke-linecap="round"/><path d="M30 24c0 4-3 8-6 8" stroke="#FBBC05" stroke-width="2" stroke-linecap="round"/><path d="M24 32c-4-1-6-4-6-8" stroke="#EA4335" stroke-width="2" stroke-linecap="round"/></svg>
+        <div><h3>Google AI</h3><span class="ai-sub">Estados Unidos</span></div>
+      </div>
+      <p>Google AI impulsa la familia Gemini, los modelos multimodales mas avanzados del mundo, capaces de procesar texto, imagen, audio, video y codigo de forma nativa. Integrados directamente en Google Cloud Vertex AI, ofrecen la infraestructura TPU mas potente para entrenamiento e inferencia.</p>
+      <div class="ai-models">
+        <span class="ai-model">Gemini Ultra</span><span class="ai-model">Gemini Pro</span><span class="ai-model">Gemini Flash</span><span class="ai-model">Imagen 3</span><span class="ai-model">Veo</span>
+      </div>
+    </div>
+    <!-- Meta AI -->
+    <div class="ai-card reveal reveal-delay-3">
+      <div class="ai-card-header">
+        <svg class="ai-card-logo" viewBox="0 0 48 48" style="background:rgba(6,104,225,.12)"><path d="M14 30c0-8 4-14 10-14s10 6 10 14" stroke="#0668E1" stroke-width="2" fill="none"/><circle cx="18" cy="26" r="4" stroke="#0668E1" stroke-width="1.5" fill="none"/><circle cx="30" cy="26" r="4" stroke="#0668E1" stroke-width="1.5" fill="none"/></svg>
+        <div><h3>Meta AI</h3><span class="ai-sub">Estados Unidos</span></div>
+      </div>
+      <p>Meta democratiza la IA con Llama, su familia de modelos de codigo abierto que han revolucionado la industria. Llama 3 ofrece rendimiento comparable a modelos propietarios, permitiendo a empresas y desarrolladores ejecutar IA de vanguardia en sus propias infraestructuras sin depender de APIs externas.</p>
+      <div class="ai-models">
+        <span class="ai-model">Llama 3.1 405B</span><span class="ai-model">Llama 3.1 70B</span><span class="ai-model">Code Llama</span><span class="ai-model">Open Source</span>
+      </div>
+    </div>
+    <!-- Mistral -->
+    <div class="ai-card reveal reveal-delay-4">
+      <div class="ai-card-header">
+        <svg class="ai-card-logo" viewBox="0 0 48 48" style="background:rgba(255,120,50,.12)"><path d="M14 32l10-16 10 16" stroke="#FF7832" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M20 26l4-6 4 6" stroke="#FF7832" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <div><h3>Mistral AI</h3><span class="ai-sub">Francia</span></div>
+      </div>
+      <p>El fenomeno europeo de la IA. Mistral AI combina modelos abiertos y comerciales con un rendimiento excepcional en eficiencia. Sus modelos Mixtral ofrecen calidad de vanguardia con costos significativamente menores, siendo la opcion preferida para empresas europeas que buscan soberania digital y cumplimiento del RGPD.</p>
+      <div class="ai-models">
+        <span class="ai-model">Mistral Large</span><span class="ai-model">Mixtral 8x22B</span><span class="ai-model">Codestral</span><span class="ai-model">Pixtral</span>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ======================== SECTION 6: IA CHINA ======================== -->
+<section class="section section-alt" id="ia-cn">
+<div class="section-inner">
+  <div class="section-header reveal">
+    <span class="section-num">05 / IA China</span>
+    <h2 class="section-title">Plataformas de IA de China</h2>
+    <div class="divider"></div>
+    <p class="section-desc">China se ha consolidado como la segunda potencia mundial en inteligencia artificial, con modelos de lenguaje que compiten directamente con los lideres globales. Estas plataformas ofrecen capacidades avanzadas con un enfoque particular en el mercado asiatico y cada vez mas presencia internacional.</p>
+  </div>
+  <div class="ai-grid">
+    <!-- Baidu ERNIE -->
+    <div class="ai-card reveal">
+      <div class="ai-card-header">
+        <svg class="ai-card-logo" viewBox="0 0 48 48" style="background:rgba(35,25,220,.12)"><circle cx="19" cy="22" r="6" stroke="#2319DC" stroke-width="1.5" fill="none"/><circle cx="33" cy="22" r="6" stroke="#2319DC" stroke-width="1.5" fill="none"/><circle cx="19" cy="20" r="2" fill="#2319DC" opacity=".4"/><circle cx="33" cy="20" r="2" fill="#2319DC" opacity=".4"/></svg>
+        <div><h3>Baidu ERNIE (Wenxin)</h3><span class="ai-sub">China</span></div>
+      </div>
+      <p>ERNIE Bot (Wenxin Yiyan) es el modelo de lenguaje mas popular de China, con cientos de millones de usuarios. Entrenado con la mayor base de datos de conocimiento en chino, ofrece capacidades avanzadas de comprension, generacion y razonamiento. Su ecosistema incluye generacion de imagenes, codigo y asistentes especializados.</p>
+      <div class="ai-models">
+        <span class="ai-model">ERNIE 4.0</span><span class="ai-model">ERNIE 3.5</span><span class="ai-model">ERNIE Speed</span><span class="ai-model">Wenxin Yige</span>
+      </div>
+    </div>
+    <!-- Alibaba Tongyi -->
+    <div class="ai-card reveal reveal-delay-1">
+      <div class="ai-card-header">
+        <svg class="ai-card-logo" viewBox="0 0 48 48" style="background:rgba(255,106,0,.12)"><ellipse cx="24" cy="22" rx="12" ry="8" stroke="#FF6A00" stroke-width="1.5" fill="none"/><circle cx="20" cy="20" r="2" fill="#FF6A00" opacity=".4"/><circle cx="28" cy="20" r="2" fill="#FF6A00" opacity=".4"/><path d="M16 30h16" stroke="#FF6A00" stroke-width="1" stroke-linecap="round"/></svg>
+        <div><h3>Alibaba Tongyi Qianwen</h3><span class="ai-sub">China</span></div>
+      </div>
+      <p>Tongyi Qianwen (Qwen) es la familia de modelos de Alibaba, disponible tanto en la nube como en codigo abierto. Los modelos Qwen2 han demostrado rendimiento competitivo a nivel mundial, con soporte multilingue excepcional y capacidades multimodales que incluyen procesamiento de texto, imagen, audio y video.</p>
+      <div class="ai-models">
+        <span class="ai-model">Qwen2.5 72B</span><span class="ai-model">Qwen-VL</span><span class="ai-model">Qwen-Audio</span><span class="ai-model">CodeQwen</span>
+      </div>
+    </div>
+    <!-- DeepSeek -->
+    <div class="ai-card reveal reveal-delay-2">
+      <div class="ai-card-header">
+        <svg class="ai-card-logo" viewBox="0 0 48 48" style="background:rgba(59,130,246,.12)"><circle cx="24" cy="24" r="10" stroke="#3B82F6" stroke-width="1.5" fill="none"/><circle cx="24" cy="24" r="5" stroke="#3B82F6" stroke-width="1" fill="none" opacity=".5"/><circle cx="24" cy="24" r="2" fill="#3B82F6" opacity=".6"/><line x1="24" y1="14" x2="24" y2="10" stroke="#3B82F6" stroke-width="1"/><line x1="24" y1="34" x2="24" y2="38" stroke="#3B82F6" stroke-width="1"/><line x1="14" y1="24" x2="10" y2="24" stroke="#3B82F6" stroke-width="1"/><line x1="34" y1="24" x2="38" y2="24" stroke="#3B82F6" stroke-width="1"/></svg>
+        <div><h3>DeepSeek</h3><span class="ai-sub">China</span></div>
+      </div>
+      <p>DeepSeek ha irrumpido en la escena global con modelos que igualan o superan a GPT-4 en multiples benchmarks, con una fraccion del costo de entrenamiento. DeepSeek-V2 y DeepSeek-Coder son especialmente reconocidos por su eficiencia y capacidad de razonamiento, siendo adoptados rapidamente por la comunidad de desarrolladores global.</p>
+      <div class="ai-models">
+        <span class="ai-model">DeepSeek-V3</span><span class="ai-model">DeepSeek-R1</span><span class="ai-model">DeepSeek-Coder</span><span class="ai-model">MoE Architecture</span>
+      </div>
+    </div>
+    <!-- Zhipu AI -->
+    <div class="ai-card reveal reveal-delay-3">
+      <div class="ai-card-header">
+        <svg class="ai-card-logo" viewBox="0 0 48 48" style="background:rgba(139,92,246,.12)"><rect x="16" y="16" width="16" height="16" rx="3" stroke="#8B5CF6" stroke-width="1.5" fill="none"/><path d="M20 20h8v8h-8z" stroke="#8B5CF6" stroke-width="1" fill="none" opacity=".5"/><circle cx="24" cy="24" r="2" fill="#8B5CF6" opacity=".6"/></svg>
+        <div><h3>Zhipu AI (GLM)</h3><span class="ai-sub">China</span></div>
+      </div>
+      <p>Zhipu AI, respaldada por la Universidad de Tsinghua, desarrolla la familia de modelos GLM (General Language Model). ChatGLM es ampliamente utilizado en ambitos academicos y empresariales en China. Su enfoque en la investigacion fundamenta modelos que destacan en razonamiento logico y procesamiento de conocimiento.</p>
+      <div class="ai-models">
+        <span class="ai-model">GLM-4</span><span class="ai-model">ChatGLM</span><span class="ai-model">CogView</span><span class="ai-model">CogVideo</span>
+      </div>
+    </div>
+    <!-- Tencent Hunyuan -->
+    <div class="ai-card reveal reveal-delay-4">
+      <div class="ai-card-header">
+        <svg class="ai-card-logo" viewBox="0 0 48 48" style="background:rgba(0,82,217,.12)"><path d="M18 18c0-3 3-6 6-6s6 3 6 6-3 6-6 6-6-3-6-6" stroke="#0052D9" stroke-width="1.5" fill="none"/><path d="M18 30c0-3 3-6 6-6s6 3 6 6" stroke="#0052D9" stroke-width="1.5" fill="none"/><line x1="24" y1="24" x2="24" y2="26" stroke="#0052D9" stroke-width="1.5"/></svg>
+        <div><h3>Tencent Hunyuan</h3><span class="ai-sub">China</span></div>
+      </div>
+      <p>Hunyuan es el modelo de IA fundamental de Tencent, con fortalezas especificas en generacion de contenido para redes sociales, videojuegos y comercio electronico. Integrado profundamente en el ecosistema WeChat, ofrece capacidades de IA conversacional que conectan con mas de mil millones de usuarios.</p>
+      <div class="ai-models">
+        <span class="ai-model">Hunyuan-Large</span><span class="ai-model">Hunyuan-DiT</span><span class="ai-model">Hunyuan-Video</span><span class="ai-model">WeChat AI</span>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ======================== SECTION 7: GPU VPS ======================== -->
+<section class="section section-dark" id="gpu">
+<div class="section-inner">
+  <div class="section-header reveal">
+    <span class="section-num">06 / GPU VPS</span>
+    <h2 class="section-title">VPS con GPU para Inteligencia Artificial</h2>
+    <div class="divider"></div>
+    <p class="section-desc">La computacion con GPU es esencial para entrenar modelos de IA, ejecutar inferencia a gran escala y procesar datos masivos. Estos son los mejores VPS con GPU disponibles en el mercado, organizados por nivel de rendimiento y presupuesto.</p>
+  </div>
+  <div class="gpu-grid">
+    <div class="gpu-card reveal">
+      <h3>Starter GPU</h3>
+      <p class="gpu-sub">Ideal para experimentacion y aprendizaje</p>
+      <ul class="gpu-specs">
+        <li><span>GPU</span> NVIDIA T4 16GB</li>
+        <li><span>vCPU</span> 4 nucleos</li>
+        <li><span>RAM</span> 16 GB</li>
+        <li><span>Almacenamiento</span> 200 GB SSD NVMe</li>
+        <li><span>Ancho de banda</span> 1 Gbps</li>
+        <li><span>Inferencia</span> ResNet-50: 250 img/s</li>
+      </ul>
+      <div class="gpu-price">$0.50<small>/hora</small></div>
+      <button class="btn btn-outline" style="width:100%;margin-top:1rem">Ver Proveedores</button>
+    </div>
+    <div class="gpu-card featured reveal reveal-delay-1">
+      <h3>Professional GPU</h3>
+      <p class="gpu-sub">Para entrenamiento de modelos medianos</p>
+      <ul class="gpu-specs">
+        <li><span>GPU</span> NVIDIA A100 40GB</li>
+        <li><span>vCPU</span> 12 nucleos</li>
+        <li><span>RAM</span> 80 GB</li>
+        <li><span>Almacenamiento</span> 500 GB SSD NVMe</li>
+        <li><span>Ancho de banda</span> 10 Gbps</li>
+        <li><span>Entrenamiento</span> BERT: ~3 horas</li>
+      </ul>
+      <div class="gpu-price">$3.50<small>/hora</small></div>
+      <button class="btn btn-primary" style="width:100%;margin-top:1rem">Ver Proveedores</button>
+    </div>
+    <div class="gpu-card reveal reveal-delay-2">
+      <h3>Enterprise GPU</h3>
+      <p class="gpu-sub">Para entrenamiento a escala industrial</p>
+      <ul class="gpu-specs">
+        <li><span>GPU</span> 8x NVIDIA H100 80GB</li>
+        <li><span>vCPU</span> 96 nucleos</li>
+        <li><span>RAM</span> 1.5 TB</li>
+        <li><span>Almacenamiento</span> 4 TB SSD NVMe</li>
+        <li><span>Interconect</span> NVLink + InfiniBand</li>
+        <li><span>Entrenamiento</span> LLM 70B: ~2 semanas</li>
+      </ul>
+      <div class="gpu-price">$28.00<small>/hora</small></div>
+      <button class="btn btn-outline" style="width:100%;margin-top:1rem">Ver Proveedores</button>
+    </div>
+  </div>
+  <div class="table-wrap reveal" style="margin-top:3rem">
+    <table>
+      <thead>
+        <tr><th>GPU</th><th>VRAM</th><th>FP16 TFLOPS</th><th>Caso de Uso</th><th>Disponibilidad</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>NVIDIA T4</strong></td><td>16 GB</td><td>65</td><td>Inferencia, ML clasico</td><td><span class="badge badge-green">Amplia</span></td></tr>
+        <tr><td><strong>NVIDIA A10G</strong></td><td>24 GB</td><td>125</td><td>Inferencia LLM, fine-tuning</td><td><span class="badge badge-green">Amplia</span></td></tr>
+        <tr><td><strong>NVIDIA A100</strong></td><td>40/80 GB</td><td>312</td><td>Entrenamiento, HPC</td><td><span class="badge badge-blue">Moderada</span></td></tr>
+        <tr><td><strong>NVIDIA L40S</strong></td><td>48 GB</td><td>362</td><td>IA generativa, render</td><td><span class="badge badge-blue">Moderada</span></td></tr>
+        <tr><td><strong>NVIDIA H100</strong></td><td>80 GB</td><td>990</td><td>Entrenamiento LLM a escala</td><td><span class="badge badge-warm">Limitada</span></td></tr>
+        <tr><td><strong>NVIDIA H200</strong></td><td>141 GB</td><td>990</td><td>LLM masivos, inferencia</td><td><span class="badge badge-warm">Limitada</span></td></tr>
+        <tr><td><strong>Google TPU v5e</strong></td><td>HBM dedicado</td><td>Custom</td><td>Entrenamiento Google-native</td><td><span class="badge badge-blue">GCP only</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+</section>
+
+<!-- ======================== SECTION 8: COMPARATIVA ======================== -->
+<section class="section section-alt" id="comparativa">
+<div class="section-inner">
+  <div class="section-header reveal">
+    <span class="section-num">07 / Comparativa</span>
+    <h2 class="section-title">Comparativa Integrada de Proveedores</h2>
+    <div class="divider"></div>
+    <p class="section-desc">Analisis comparativo integral de los principales proveedores de nube e IA, considerando factores criticos como precio, rendimiento, disponibilidad regional y ecosistema de servicios para ayudarte a tomar la mejor decision. (citation:9)(citation:10)(citation:11)</p>
+  </div>
+  <div class="tabs reveal" id="compTabs">
+    <button class="tab active" onclick="switchTab('tab-cloud')">Nube Publica</button>
+    <button class="tab" onclick="switchTab('tab-ai')">Plataformas IA</button>
+    <button class="tab" onclick="switchTab('tab-gpu')">GPU / VPS</button>
+  </div>
+  <div class="tab-content active" id="tab-cloud">
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Proveedor</th><th>Regiones LATAM</th><th>Servicios IA</th><th>Hibrido</th><th>Nivel</th><th>Ideal Para</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>AWS</strong></td><td>Sao Paulo, Chile</td><td>SageMaker, Bedrock</td><td>Outposts</td><td><span class="badge badge-green">Premium</span></td><td>Empresas que buscan flexibilidad y madurez</td></tr>
+          <tr><td><strong>Azure</strong></td><td>Sao Paulo, Queretaro</td><td>Azure AI, OpenAI</td><td>Azure Arc</td><td><span class="badge badge-green">Premium</span></td><td>Organizaciones con ecosistema Microsoft</td></tr>
+          <tr><td><strong>Google Cloud</strong></td><td>Sao Paulo, Santiago</td><td>Vertex AI, Gemini</td><td>GKE Anthos</td><td><span class="badge badge-green">Premium</span></td><td>Empresas enfocadas en datos e IA</td></tr>
+          <tr><td><strong>Huawei Cloud</strong></td><td>Santiago, Mexico, Lima</td><td>ModelArts, EI</td><td>Full-stack</td><td><span class="badge badge-blue">Avanzado</span></td><td>Soluciones hibridas y multinube (citation:1)</td></tr>
+          <tr><td><strong>Alibaba Cloud</strong></td><td>Sao Paulo</td><td>PAI, MaxCompute</td><td>Hybrid Cloud</td><td><span class="badge badge-blue">Avanzado</span></td><td>Comercio electronico y big data</td></tr>
+          <tr><td><strong>Tencent Cloud</strong></td><td>Sao Paulo</td><td>Hunyuan, TI Matrix</td><td>TCE</td><td><span class="badge badge-warm">En crecimiento</span></td><td>Gaming, video, redes sociales</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="tab-content" id="tab-ai">
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Plataforma</th><th>Modelo Top</th><th>Contexto Max</th><th>API</th><th>Codigo Abierto</th><th>Costo (por 1M tokens)</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>OpenAI</strong></td><td>GPT-4o</td><td>128K</td><td>REST</td><td>No</td><td>$2.50 - $10.00</td></tr>
+          <tr><td><strong>Anthropic</strong></td><td>Claude 3.5 Sonnet</td><td>200K</td><td>REST</td><td>No</td><td>$3.00 - $15.00</td></tr>
+          <tr><td><strong>Google AI</strong></td><td>Gemini Pro</td><td>1M+</td><td>REST/SDK</td><td>No</td><td>$1.25 - $5.00</td></tr>
+          <tr><td><strong>Meta AI</strong></td><td>Llama 3.1 405B</td><td>128K</td><td>Varios</td><td>Si</td><td>Segun proveedor</td></tr>
+          <tr><td><strong>DeepSeek</strong></td><td>DeepSeek-V3</td><td>128K</td><td>REST</td><td>Parcial</td><td>$0.14 - $0.28</td></tr>
+          <tr><td><strong>Baidu ERNIE</strong></td><td>ERNIE 4.0</td><td>128K</td><td>REST</td><td>No</td><td>Variable</td></tr>
+          <tr><td><strong>Alibaba Qwen</strong></td><td>Qwen2.5 72B</td><td>128K</td><td>REST</td><td>Si</td><td>$0.40 - $1.20</td></tr>
+          <tr><td><strong>Zhipu AI</strong></td><td>GLM-4</td><td>128K</td><td>REST</td><td>Parcial</td><td>Variable</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="tab-content" id="tab-gpu">
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Proveedor</th><th>GPU T4</th><th>GPU A100</th><th>GPU H100</th><th>Spot/Preemptible</th><th>Region LATAM</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>AWS</strong></td><td>$0.53/h</td><td>$3.67/h</td><td>$8.10/h</td><td>Si (hasta 70% dto.)</td><td>Si</td></tr>
+          <tr><td><strong>Azure</strong></td><td>$0.53/h</td><td>$3.40/h</td><td>$7.90/h</td><td>Si (hasta 80% dto.)</td><td>Si</td></tr>
+          <tr><td><strong>Google Cloud</strong></td><td>$0.35/h</td><td>$2.95/h</td><td>TPU v5e</td><td>Si (hasta 70% dto.)</td><td>Si</td></tr>
+          <tr><td><strong>Huawei Cloud</strong></td><td>Variable</td><td>Variable</td><td>Variable</td><td>Si</td><td>Si</td></tr>
+          <tr><td><strong>Lambda Labs</strong></td><td>--</td><td>$1.10/h</td><td>$1.99/h</td><td>No</td><td>No</td></tr>
+          <tr><td><strong>Vast.ai</strong></td><td>$0.20/h</td><td>$0.85/h</td><td>$1.60/h</td><td>Siempre spot</td><td>No</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ======================== SECTION 9: GUIA ======================== -->
+<section class="section section-dark" id="guia">
+<div class="section-inner">
+  <div class="section-header reveal">
+    <span class="section-num">08 / Guia</span>
+    <h2 class="section-title">Guia de Implementacion</h2>
+    <div class="divider"></div>
+    <p class="section-desc">Sigue estos pasos para construir tu infraestructura de IA escalable combinando los mejores recursos de nube y VPS. La migracion de datos y servicios a la nube es un proceso que requiere planificacion cuidadosa. (citation:11)</p>
+  </div>
+  <div class="arch-diagram reveal">
+    <svg width="800" height="200" viewBox="0 0 800 200" fill="none">
+      <!-- Architecture flow diagram -->
+      <rect x="10" y="60" width="120" height="80" rx="12" stroke="var(--accent)" stroke-width="1.5" fill="var(--accent-dim)"/>
+      <text x="70" y="95" text-anchor="middle" fill="var(--accent)" font-family="var(--font-mono)" font-size="9" font-weight="500">DATOS</text>
+      <text x="70" y="115" text-anchor="middle" fill="var(--text3)" font-family="var(--font-mono)" font-size="7">ETL Pipeline</text>
+      <path d="M130 100h50" stroke="var(--accent)" stroke-width="1" stroke-dasharray="4 3"/>
+      <polygon points="175,95 185,100 175,105" fill="var(--accent)" opacity=".5"/>
+      <rect x="185" y="60" width="120" height="80" rx="12" stroke="var(--accent2)" stroke-width="1.5" fill="var(--accent2-dim)"/>
+      <text x="245" y="95" text-anchor="middle" fill="var(--accent2)" font-family="var(--font-mono)" font-size="9" font-weight="500">MODELO IA</text>
+      <text x="245" y="115" text-anchor="middle" fill="var(--text3)" font-family="var(--font-mono)" font-size="7">Fine-tuning</text>
+      <path d="M305 100h50" stroke="var(--accent2)" stroke-width="1" stroke-dasharray="4 3"/>
+      <polygon points="350,95 360,100 350,105" fill="var(--accent2)" opacity=".5"/>
+      <rect x="360" y="60" width="120" height="80" rx="12" stroke="var(--warm)" stroke-width="1.5" fill="var(--warm-dim)"/>
+      <text x="420" y="95" text-anchor="middle" fill="var(--warm)" font-family="var(--font-mono)" font-size="9" font-weight="500">VPS / GPU</text>
+      <text x="420" y="115" text-anchor="middle" fill="var(--text3)" font-family="var(--font-mono)" font-size="7">Inferencia</text>
+      <path d="M480 100h50" stroke="var(--warm)" stroke-width="1" stroke-dasharray="4 3"/>
+      <polygon points="525,95 535,100 525,105" fill="var(--warm)" opacity=".5"/>
+      <rect x="535" y="60" width="120" height="80" rx="12" stroke="var(--accent)" stroke-width="1.5" fill="var(--accent-dim)"/>
+      <text x="595" y="95" text-anchor="middle" fill="var(--accent)" font-family="var(--font-mono)" font-size="9" font-weight="500">API</text>
+      <text x="595" y="115" text-anchor="middle" fill="var(--text3)" font-family="var(--font-mono)" font-size="7">REST / GraphQL</text>
+      <path d="M655 100h50" stroke="var(--accent)" stroke-width="1" stroke-dasharray="4 3"/>
+      <polygon points="700,95 710,100 700,105" fill="var(--accent)" opacity=".5"/>
+      <rect x="710" y="60" width="80" height="80" rx="12" stroke="var(--accent2)" stroke-width="1.5" fill="var(--accent2-dim)"/>
+      <text x="750" y="95" text-anchor="middle" fill="var(--accent2)" font-family="var(--font-mono)" font-size="9" font-weight="500">APP</text>
+      <text x="750" y="115" text-anchor="middle" fill="var(--text3)" font-family="var(--font-mono)" font-size="7">Usuarios</text>
+    </svg>
+  </div>
+  <div class="steps-grid">
+    <div class="step-card reveal">
+      <div class="step-num">01</div>
+      <h4>Evaluar Necesidades</h4>
+      <p>Define tus requisitos: tipo de modelo IA, volumen de datos, latencia requerida, presupuesto y region geografica. Considera si necesitas una solucion hibrida o multinube. (citation:11)</p>
+    </div>
+    <div class="step-card reveal reveal-delay-1">
+      <div class="step-num">02</div>
+      <h4>Seleccionar Proveedor Cloud</h4>
+      <p>Elige la plataforma cloud que mejor se alinee con tu stack tecnologico existente. Si usas Microsoft, considera Azure; si buscas IA avanzada, Google Cloud; si necesitas flexibilidad, AWS. (citation:10)</p>
+    </div>
+    <div class="step-card reveal reveal-delay-2">
+      <div class="step-num">03</div>
+      <h4>Configurar GPU VPS</h4>
+      <p>Provisiona instancias GPU para entrenamiento e inferencia. Comienza con T4 para experimentacion y escala a A100/H100 para produccion. Considera instancias spot para ahorrar costos.</p>
+    </div>
+    <div class="step-card reveal reveal-delay-3">
+      <div class="step-num">04</div>
+      <h4>Integrar APIs de IA</h4>
+      <p>Conecta las APIs de los modelos de IA (OpenAI, Anthropic, DeepSeek, etc.) con tu infraestructura. Implementa balanceadores de carga y fallbacks entre proveedores para maxima disponibilidad.</p>
+    </div>
+    <div class="step-card reveal reveal-delay-4">
+      <div class="step-num">05</div>
+      <h4>Seguridad y Cumplimiento</h4>
+      <p>Implementa encriptacion de datos en reposo y transito, gestion de identidades (IAM), y asegura el cumplimiento normativo (RGPD, leyes locales). Los proveedores como Huawei Cloud ofrecen soluciones de seguridad end-to-end. (citation:1)</p>
+    </div>
+    <div class="step-card reveal reveal-delay-5">
+      <div class="step-num">06</div>
+      <h4>Monitorear y Optimizar</h4>
+      <p>Establece metricas de rendimiento, costos y latencia. Usa herramientas de observabilidad para identificar cuellos de botella y optimizar el uso de recursos continuamente.</p>
+    </div>
+  </div>
+  <div class="guides-grid" style="margin-top:4rem">
+    <div class="guide-card reveal">
+      <div class="guide-visual" style="background:linear-gradient(135deg,rgba(0,212,170,.1),rgba(99,102,241,.1))">
+        <svg width="120" height="80" viewBox="0 0 120 80" fill="none"><rect x="10" y="20" width="40" height="50" rx="6" stroke="var(--accent)" stroke-width="1.5"/><rect x="60" y="10" width="50" height="60" rx="6" stroke="var(--accent2)" stroke-width="1.5"/><path d="M50 45h10" stroke="var(--text3)" stroke-width="1" stroke-dasharray="3 2"/><text x="30" y="50" text-anchor="middle" fill="var(--accent)" font-size="7" font-family="var(--font-mono)">ON-PREM</text><text x="85" y="45" text-anchor="middle" fill="var(--accent2)" font-size="7" font-family="var(--font-mono)">CLOUD</text></svg>
+      </div>
+      <div class="guide-body">
+        <h3>Migracion Hibrida a la Nube</h3>
+        <p>Aprende a migrar tus cargas de trabajo de forma gradual, manteniendo servicios criticos on-premise mientras aprovechas la escalabilidad del cloud para IA y analitica. (citation:11)</p>
+        <div class="guide-meta"><span>15 min lectura</span><span>Nivel: Intermedio</span></div>
+      </div>
+    </div>
+    <div class="guide-card reveal reveal-delay-1">
+      <div class="guide-visual" style="background:linear-gradient(135deg,rgba(245,158,11,.1),rgba(0,212,170,.1))">
+        <svg width="120" height="80" viewBox="0 0 120 80" fill="none"><circle cx="35" cy="40" r="20" stroke="var(--warm)" stroke-width="1.5"/><circle cx="75" cy="30" r="15" stroke="var(--accent)" stroke-width="1.5"/><circle cx="85" cy="55" r="12" stroke="var(--accent2)" stroke-width="1.5"/><path d="M52 35h15M67 35l12-2M67 43l12 8" stroke="var(--text3)" stroke-width="1" stroke-dasharray="2 2"/></svg>
+      </div>
+      <div class="guide-body">
+        <h3>Estrategia Multinube para IA</h3>
+        <p>Distribuye tus workloads de IA entre multiples proveedores para evitar dependencia, optimizar costos y garantizar la continuidad del negocio ante fallos de un solo proveedor.</p>
+        <div class="guide-meta"><span>20 min lectura</span><span>Nivel: Avanzado</span></div>
+      </div>
+    </div>
+    <div class="guide-card reveal reveal-delay-2">
+      <div class="guide-visual" style="background:linear-gradient(135deg,rgba(99,102,241,.1),rgba(239,68,68,.08))">
+        <svg width="120" height="80" viewBox="0 0 120 80" fill="none"><rect x="15" y="15" width="90" height="50" rx="8" stroke="var(--accent2)" stroke-width="1.5"/><path d="M30 40h15M55 40h15M80 40h15" stroke="var(--text3)" stroke-width="1.5" stroke-linecap="round"/><circle cx="37" cy="55" r="4" fill="var(--accent)" opacity=".3"/><circle cx="62" cy="55" r="4" fill="var(--accent2)" opacity=".3"/><circle cx="87" cy="55" r="4" fill="var(--warm)" opacity=".3"/></svg>
+      </div>
+      <div class="guide-body">
+        <h3>Optimizacion de Costos en GPU</h3>
+        <p>Tecnicas avanzadas para reducir hasta un 70% el costo de computacion GPU: instancias spot, reserved instances, distillation de modelos y cuantizacion eficiente.</p>
+        <div class="guide-meta"><span>12 min lectura</span><span>Nivel: Intermedio</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ======================== SECTION 10: CONTACTO ======================== -->
+<section class="section section-alt" id="contacto">
+<div class="section-inner">
+  <div class="section-header reveal">
+    <span class="section-num">09 / Contacto</span>
+    <h2 class="section-title">Conecta con Nosotros</h2>
+    <div class="divider"></div>
+    <p class="section-desc">La transformacion digital del sector publico y privado requiere colaboracion internacional. Estamos aqui para ayudarte a navegar el ecosistema de IA y cloud computing. (citation:2)(citation:3)</p>
+  </div>
+  <div class="contact-grid">
+    <form class="contact-form reveal" onsubmit="event.preventDefault();alert('Gracias por tu mensaje. Te contactaremos pronto.')">
+      <div class="form-group">
+        <label>Nombre Completo</label>
+        <input type="text" placeholder="Tu nombre" required>
+      </div>
+      <div class="form-group">
+        <label>Correo Electronico</label>
+        <input type="email" placeholder="tu@empresa.com" required>
+      </div>
+      <div class="form-group">
+        <label>Tipo de Organizacion</label>
+        <select required>
+          <option value="">Selecciona una opcion</option>
+          <option>Startup</option>
+          <option>PYMES</option>
+          <option>Empresa Grande</option>
+          <option>Organizacion Publica</option>
+          <option>Institucion Academica</option>
+          <option>Desarrollador Independiente</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Interes Principal</label>
+        <select>
+          <option value="">Selecciona una opcion</option>
+          <option>Proveedores de Nube</option>
+          <option>Plataformas de IA</option>
+          <option>VPS con GPU</option>
+          <option>Migracion a la Nube</option>
+          <option>Arquitectura Multinube</option>
+          <option>Capacitacion en IA</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Mensaje</label>
+        <textarea placeholder="Cuentanos sobre tu proyecto o necesidad..."></textarea>
+      </div>
+      <button class="btn btn-primary" style="width:100%">Enviar Mensaje</button>
+    </form>
+    <div class="reveal reveal-delay-1">
+      <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-lg);padding:2rem;margin-bottom:1.5rem">
+        <h3 style="font-family:var(--font-display);font-size:1.2rem;font-weight:700;margin-bottom:1rem">Recursos Adicionales</h3>
+        <ul style="list-style:none;display:flex;flex-direction:column;gap:.8rem">
+          <li><a href="#" style="color:var(--text2);display:flex;align-items:center;gap:.6rem"><svg width="16" height="16" viewBox="0 0 16 16"><path d="M4 8h8M8 4l4 4-4 4" stroke="var(--accent)" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg>Documentacion Tecnica Completa</a></li>
+          <li><a href="#" style="color:var(--text2);display:flex;align-items:center;gap:.6rem"><svg width="16" height="16" viewBox="0 0 16 16"><path d="M4 8h8M8 4l4 4-4 4" stroke="var(--accent)" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg>Calculadora de Costos Interactiva</a></li>
+          <li><a href="#" style="color:var(--text2);display:flex;align-items:center;gap:.6rem"><svg width="16" height="16" viewBox="0 0 16 16"><path d="M4 8h8M8 4l4 4-4 4" stroke="var(--accent)" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg>Blog: Novedades en IA y Cloud</a></li>
+          <li><a href="#" style="color:var(--text2);display:flex;align-items:center;gap:.6rem"><svg width="16" height="16" viewBox="0 0 16 16"><path d="M4 8h8M8 4l4 4-4 4" stroke="var(--accent)" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg>Webinars y Eventos en Vivo</a></li>
+          <li><a href="#" style="color:var(--text2);display:flex;align-items:center;gap:.6rem"><svg width="16" height="16" viewBox="0 0 16 16"><path d="M4 8h8M8 4l4 4-4 4" stroke="var(--accent)" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg>Academia: Cursos de IA y Cloud</a></li>
+          <li><a href="#" style="color:var(--text2);display:flex;align-items:center;gap:.6rem"><svg width="16" height="16" viewBox="0 0 16 16"><path d="M4 8h8M8 4l4 4-4 4" stroke="var(--accent)" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg>Comunidad de Desarrolladores</a></li>
+        </ul>
+      </div>
+      <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-lg);padding:2rem">
+        <h3 style="font-family:var(--font-display);font-size:1.2rem;font-weight:700;margin-bottom:1rem">Sobre AI-VPS</h3>
+        <p style="color:var(--text2);font-size:.9rem;line-height:1.8">AI-VPS es una plataforma independiente dedicada a ayudar a empresas y desarrolladores a encontrar los mejores recursos de inteligencia artificial y computacion en la nube. Nuestra mision es simplificar la toma de decisiones tecnologicas con informacion objetiva, actualizada y accesible para el mercado hispanohablante.</p>
+        <p style="color:var(--text3);font-family:var(--font-mono);font-size:.7rem;margin-top:1rem">ai-vps.github.io</p>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+<div class="footer-inner">
+  <div class="footer-brand">
+    <div class="nav-logo" style="font-size:1.5rem">
+      <svg width="32" height="32" viewBox="0 0 28 28" fill="none"><rect x="2" y="2" width="24" height="24" rx="6" stroke="var(--accent)" stroke-width="2"/><circle cx="9" cy="11" r="2" fill="var(--accent)"/><circle cx="19" cy="11" r="2" fill="var(--accent2)"/><path d="M7 18 Q14 24 21 18" stroke="var(--accent)" stroke-width="1.5" fill="none"/></svg>
+      AI-VPS
+    </div>
+    <p>Tu guia definitiva para proveedores de inteligencia artificial y recursos VPS. Informacion objetiva, comparativas detalladas y recomendaciones para el mercado global hispanohablante.</p>
+  </div>
+  <div>
+    <h4>Nube</h4>
+    <ul class="footer-links">
+      <li><a href="#nube-intl">AWS</a></li>
+      <li><a href="#nube-intl">Microsoft Azure</a></li>
+      <li><a href="#nube-intl">Google Cloud</a></li>
+      <li><a href="#nube-cn">Huawei Cloud</a></li>
+      <li><a href="#nube-cn">Alibaba Cloud</a></li>
+      <li><a href="#nube-cn">Tencent Cloud</a></li>
+    </ul>
+  </div>
+  <div>
+    <h4>Inteligencia Artificial</h4>
+    <ul class="footer-links">
+      <li><a href="#ia-intl">OpenAI</a></li>
+      <li><a href="#ia-intl">Anthropic</a></li>
+      <li><a href="#ia-intl">Google AI</a></li>
+      <li><a href="#ia-cn">DeepSeek</a></li>
+      <li><a href="#ia-cn">Baidu ERNIE</a></li>
+      <li><a href="#ia-cn">Alibaba Qwen</a></li>
+    </ul>
+  </div>
+  <div>
+    <h4>Recursos</h4>
+    <ul class="footer-links">
+      <li><a href="#comparativa">Comparativas</a></li>
+      <li><a href="#gpu">GPU VPS</a></li>
+      <li><a href="#guia">Guias</a></li>
+      <li><a href="#contacto">Contacto</a></li>
+    </ul>
+  </div>
+</div>
+<div class="footer-bottom">
+  <span>2026 AI-VPS. Todos los derechos reservados.</span>
+  <span>ai-vps.github.io</span>
+</div>
+</footer>
+
+<script>
+// Tab switching
+function switchTab(id) {
+  document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(el => el.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  event.target.classList.add('active');
+}
+
+// Scroll reveal
+const revealElements = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+revealElements.forEach(el => observer.observe(el));
+
+// Active nav link
+const sections = document.querySelectorAll('section[id]');
+const navLinks = document.querySelectorAll('.nav-links a');
+window.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach(section => {
+    const sectionTop = section.offsetTop - 100;
+    if (pageYOffset >= sectionTop) {
+      current = section.getAttribute('id');
+    }
+  });
+  navLinks.forEach(link => {
+    link.classList.remove('active');
+    if (link.getAttribute('href') === '#' + current) {
+      link.classList.add('active');
+    }
+  });
+});
+
+// Nav hide on scroll
+let lastScroll = 0;
+window.addEventListener('scroll', () => {
+  const nav = document.getElementById('nav');
+  const currentScroll = window.pageYOffset;
+  if (currentScroll > lastScroll && currentScroll > 200) {
+    nav.style.transform = 'translateY(-100%)';
+  } else {
+    nav.style.transform = 'translateY(0)';
+  }
+  lastScroll = currentScroll;
+});
+</script>
+</body>
+</html>
