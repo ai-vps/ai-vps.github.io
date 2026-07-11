@@ -1,0 +1,1261 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI-VPS | KI-Infrastruktur & Cloud-Ressourcen Empfehlungen</title>
+<meta name="description" content="Ihre definitive Quelle für KI-Infrastruktur, Cloud-Ressourcen und VPS-Empfehlungen. Vergleich internationaler und chinesischer Anbieter.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Crimson+Pro:ital,wght@0,300;0,400;0,500;0,600;1,400&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg-primary:#06090f;--bg-secondary:#0b1018;--bg-surface:#111827;--bg-card:#161f30;
+  --bg-card-hover:#1c2840;--accent:#00d4ff;--accent-dim:rgba(0,212,255,.12);
+  --accent-warm:#ff6b35;--accent-warm-dim:rgba(255,107,53,.12);
+  --accent-green:#34d399;--accent-purple:#a78bfa;
+  --text-primary:#e2e8f0;--text-secondary:#94a3b8;--text-muted:#475569;
+  --border:#1e293b;--border-light:#2d3a4f;
+  --radius:12px;--radius-lg:20px;
+  --font-display:'Syne',sans-serif;--font-body:'Crimson Pro',Georgia,serif;
+  --font-mono:'DM Mono',monospace;
+  --max-w:1280px;--section-py:clamp(4rem,8vw,7rem);
+}
+html{scroll-behavior:smooth;scroll-padding-top:72px}
+body{
+  font-family:var(--font-body);font-size:18px;line-height:1.7;
+  color:var(--text-primary);background:var(--bg-primary);
+  -webkit-font-smoothing:antialiased;overflow-x:hidden;
+}
+body::before{
+  content:'';position:fixed;inset:0;z-index:9999;pointer-events:none;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+  opacity:.5;
+}
+h1,h2,h3,h4,h5,h6{font-family:var(--font-display);font-weight:700;line-height:1.2;color:var(--text-primary)}
+h1{font-size:clamp(2.4rem,5vw,4.2rem);font-weight:800}
+h2{font-size:clamp(1.8rem,3.5vw,2.8rem)}
+h3{font-size:clamp(1.2rem,2vw,1.6rem)}
+p{color:var(--text-secondary);max-width:68ch}
+a{color:var(--accent);text-decoration:none;transition:color .2s}
+a:hover{color:#fff}
+ul{list-style:none}
+.container{max-width:var(--max-w);margin:0 auto;padding:0 clamp(1rem,4vw,2.5rem)}
+img,svg{display:block;max-width:100%}
+
+/* Progress bar */
+.progress-bar{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,var(--accent),var(--accent-purple));z-index:10001;width:0;transition:width .1s}
+
+/* Navigation */
+.nav{
+  position:fixed;top:0;left:0;right:0;z-index:10000;
+  background:rgba(6,9,15,.85);backdrop-filter:blur(20px) saturate(1.5);
+  border-bottom:1px solid var(--border);height:64px;
+  display:flex;align-items:center;
+}
+.nav .container{display:flex;align-items:center;justify-content:space-between;width:100%}
+.nav-logo{font-family:var(--font-display);font-weight:800;font-size:1.3rem;color:var(--text-primary);display:flex;align-items:center;gap:.5rem}
+.nav-logo .logo-dot{width:8px;height:8px;background:var(--accent);border-radius:50%;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(0,212,255,.4)}50%{opacity:.8;box-shadow:0 0 0 8px rgba(0,212,255,0)}}
+.nav-links{display:flex;gap:0;align-items:center;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.nav-links::-webkit-scrollbar{display:none}
+.nav-links a{
+  font-family:var(--font-mono);font-size:.72rem;letter-spacing:.04em;
+  padding:.5rem .85rem;color:var(--text-muted);white-space:nowrap;
+  border-radius:6px;transition:all .25s;text-transform:uppercase;
+}
+.nav-links a:hover,.nav-links a.active{color:var(--accent);background:var(--accent-dim)}
+.nav-toggle{display:none;background:none;border:none;color:var(--text-primary);cursor:pointer}
+
+/* Sections */
+.page-section{
+  position:relative;padding:var(--section-py) 0;
+  border-bottom:1px solid var(--border);
+}
+.page-section:nth-child(even){background:var(--bg-secondary)}
+
+.section-header{margin-bottom:clamp(2.5rem,5vw,4rem)}
+.section-badge{
+  display:inline-flex;align-items:center;gap:.6rem;
+  font-family:var(--font-mono);font-size:.75rem;letter-spacing:.08em;
+  text-transform:uppercase;color:var(--accent);margin-bottom:1rem;
+}
+.section-badge .badge-line{width:32px;height:1px;background:var(--accent)}
+.section-header h2{margin-bottom:.75rem}
+.section-header p{font-size:1.1rem}
+
+/* Hero */
+.hero{
+  min-height:100vh;display:flex;align-items:center;justify-content:center;
+  position:relative;overflow:hidden;padding-top:64px;
+  background:radial-gradient(ellipse at 25% 40%,rgba(0,212,255,.08) 0%,transparent 55%),
+             radial-gradient(ellipse at 75% 25%,rgba(167,139,250,.06) 0%,transparent 45%),
+             radial-gradient(ellipse at 50% 85%,rgba(255,107,53,.04) 0%,transparent 50%),
+             var(--bg-primary);
+}
+.hero-grid{
+  position:absolute;inset:0;
+  background-image:linear-gradient(rgba(0,212,255,.025) 1px,transparent 1px),
+                   linear-gradient(90deg,rgba(0,212,255,.025) 1px,transparent 1px);
+  background-size:80px 80px;mask-image:radial-gradient(ellipse at center,black 30%,transparent 75%);
+}
+.hero .container{position:relative;z-index:2;text-align:center;max-width:900px}
+.hero-label{
+  font-family:var(--font-mono);font-size:.8rem;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--accent);margin-bottom:1.5rem;
+  display:flex;align-items:center;justify-content:center;gap:.75rem;
+}
+.hero-label .hl-line{width:40px;height:1px;background:var(--accent)}
+.hero h1{margin-bottom:1.5rem}
+.hero h1 .gradient-text{background:linear-gradient(135deg,var(--accent),var(--accent-purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-desc{font-size:1.25rem;color:var(--text-secondary);max-width:60ch;margin:0 auto 2.5rem}
+.hero-actions{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
+.btn{
+  font-family:var(--font-display);font-weight:600;font-size:.95rem;
+  padding:.85rem 2rem;border-radius:8px;border:none;cursor:pointer;
+  transition:all .3s ease;display:inline-flex;align-items:center;gap:.5rem;
+}
+.btn-primary{background:var(--accent);color:var(--bg-primary)}
+.btn-primary:hover{background:#33ddff;transform:translateY(-2px);box-shadow:0 8px 30px rgba(0,212,255,.25)}
+.btn-outline{background:transparent;color:var(--text-primary);border:1px solid var(--border-light)}
+.btn-outline:hover{border-color:var(--accent);color:var(--accent)}
+
+/* Floating geo shapes */
+.geo-float{position:absolute;border:1px solid rgba(0,212,255,.08);pointer-events:none}
+.geo-float.sq{width:80px;height:80px;transform:rotate(45deg);animation:geoDrift 25s ease-in-out infinite}
+.geo-float.cr{width:60px;height:60px;border-radius:50%;animation:geoDrift 30s ease-in-out infinite reverse}
+.geo-float.tri{
+  width:0;height:0;border:none;
+  border-left:35px solid transparent;border-right:35px solid transparent;
+  border-bottom:60px solid rgba(0,212,255,.04);animation:geoDrift 22s ease-in-out infinite;
+}
+@keyframes geoDrift{0%,100%{transform:translateY(0) rotate(45deg)}50%{transform:translateY(-30px) rotate(45deg)}}
+
+/* Stats row */
+.stats-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1.5rem;margin:3rem 0}
+.stat-card{
+  background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius);
+  padding:1.8rem;text-align:center;transition:all .3s;
+}
+.stat-card:hover{border-color:var(--accent);transform:translateY(-3px)}
+.stat-num{font-family:var(--font-display);font-size:2.6rem;font-weight:800;color:var(--accent);margin-bottom:.3rem}
+.stat-label{font-family:var(--font-mono);font-size:.72rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:.06em}
+
+/* Provider cards */
+.providers-grid{display:grid;gap:1.5rem;margin-top:2rem}
+.providers-grid.cols-3{grid-template-columns:repeat(auto-fill,minmax(340px,1fr))}
+.providers-grid.cols-2{grid-template-columns:repeat(auto-fill,minmax(420px,1fr))}
+.provider-card{
+  background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-lg);
+  padding:2rem;transition:all .35s;position:relative;overflow:hidden;
+}
+.provider-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:3px;
+  background:linear-gradient(90deg,var(--accent),var(--accent-purple));
+  opacity:0;transition:opacity .35s;
+}
+.provider-card:hover{border-color:var(--border-light);transform:translateY(-4px);box-shadow:0 20px 60px rgba(0,0,0,.3)}
+.provider-card:hover::before{opacity:1}
+.pc-head{display:flex;align-items:center;gap:1rem;margin-bottom:1.2rem}
+.pc-icon{
+  width:48px;height:48px;border-radius:12px;display:flex;align-items:center;justify-content:center;
+  background:var(--accent-dim);flex-shrink:0;
+}
+.pc-icon svg{width:24px;height:24px}
+.pc-icon.warm{background:var(--accent-warm-dim)}
+.pc-icon.purple{background:rgba(167,139,250,.12)}
+.pc-icon.green{background:rgba(52,211,153,.12)}
+.pc-head h3{margin:0}
+.pc-tagline{font-size:.9rem;color:var(--text-muted);margin-bottom:1rem;font-family:var(--font-mono);font-size:.78rem}
+.pc-features{margin-bottom:1.2rem}
+.pc-features li{
+  padding:.35rem 0;padding-left:1.4rem;position:relative;
+  font-size:.95rem;color:var(--text-secondary);
+}
+.pc-features li::before{
+  content:'';position:absolute;left:0;top:.7rem;
+  width:6px;height:6px;border-radius:50%;background:var(--accent);
+}
+.pc-meta{
+  display:flex;justify-content:space-between;align-items:center;
+  padding-top:1rem;border-top:1px solid var(--border);
+  font-family:var(--font-mono);font-size:.72rem;color:var(--text-muted);
+}
+.pc-price{color:var(--accent-warm);letter-spacing:.05em}
+.pc-badge{
+  display:inline-block;padding:.2rem .6rem;border-radius:4px;
+  background:var(--accent-dim);color:var(--accent);font-size:.68rem;
+  text-transform:uppercase;letter-spacing:.04em;
+}
+
+/* Comparison table */
+.table-wrap{
+  overflow-x:auto;border:1px solid var(--border);border-radius:var(--radius-lg);
+  margin:2rem 0;background:var(--bg-surface);
+}
+.comp-table{width:100%;border-collapse:collapse;font-size:.9rem}
+.comp-table thead{background:var(--bg-card)}
+.comp-table th{
+  font-family:var(--font-display);font-weight:600;font-size:.82rem;
+  text-transform:uppercase;letter-spacing:.04em;color:var(--text-muted);
+  padding:1rem 1.2rem;text-align:left;border-bottom:1px solid var(--border);
+  white-space:nowrap;
+}
+.comp-table td{
+  padding:.85rem 1.2rem;border-bottom:1px solid var(--border);
+  color:var(--text-secondary);vertical-align:top;
+}
+.comp-table tbody tr{transition:background .2s}
+.comp-table tbody tr:hover{background:var(--bg-card)}
+.comp-table tbody tr:last-child td{border-bottom:none}
+.comp-table .highlight{color:var(--accent);font-weight:500}
+
+/* Feature list / info cards */
+.info-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1.5rem;margin:2rem 0}
+.info-card{
+  background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);
+  padding:1.8rem;transition:border-color .3s;
+}
+.info-card:hover{border-color:var(--accent)}
+.info-card .ic-icon{
+  width:44px;height:44px;border-radius:10px;
+  background:var(--accent-dim);display:flex;align-items:center;justify-content:center;
+  margin-bottom:1rem;
+}
+.info-card .ic-icon svg{width:22px;height:22px;stroke:var(--accent);fill:none;stroke-width:1.5}
+.info-card h4{margin-bottom:.5rem;font-size:1.05rem}
+.info-card p{font-size:.9rem;color:var(--text-secondary)}
+
+/* Two column layout */
+.split{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center}
+.split.reverse{direction:rtl}
+.split.reverse>*{direction:ltr}
+.split-visual{position:relative}
+
+/* Tags */
+.tags{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1rem}
+.tag{
+  font-family:var(--font-mono);font-size:.68rem;
+  padding:.3rem .7rem;border-radius:4px;
+  background:var(--bg-surface);border:1px solid var(--border);
+  color:var(--text-muted);text-transform:uppercase;letter-spacing:.03em;
+}
+.tag.accent{background:var(--accent-dim);border-color:rgba(0,212,255,.2);color:var(--accent)}
+
+/* Tier cards */
+.tier-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1.5rem;margin:2rem 0}
+.tier-card{
+  background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-lg);
+  padding:2rem;position:relative;transition:all .35s;
+}
+.tier-card.featured{border-color:var(--accent);box-shadow:0 0 40px rgba(0,212,255,.08)}
+.tier-card.featured::before{
+  content:'Empfehlung';position:absolute;top:-1px;right:2rem;
+  font-family:var(--font-mono);font-size:.65rem;letter-spacing:.06em;
+  text-transform:uppercase;padding:.3rem .8rem;border-radius:0 0 6px 6px;
+  background:var(--accent);color:var(--bg-primary);
+}
+.tier-card h3{margin-bottom:.3rem}
+.tier-card .tier-sub{font-family:var(--font-mono);font-size:.75rem;color:var(--text-muted);margin-bottom:1.2rem}
+.tier-card .tier-price{
+  font-family:var(--font-display);font-size:2rem;font-weight:800;color:var(--text-primary);
+  margin-bottom:.3rem;
+}
+.tier-card .tier-price span{font-size:.9rem;font-weight:400;color:var(--text-muted)}
+.tier-card .tier-desc{font-size:.92rem;color:var(--text-secondary);margin-bottom:1.2rem}
+.tier-list{margin-bottom:1.5rem}
+.tier-list li{
+  padding:.3rem 0;padding-left:1.4rem;position:relative;
+  font-size:.88rem;color:var(--text-secondary);
+}
+.tier-list li::before{
+  content:'';position:absolute;left:0;top:.65rem;
+  width:6px;height:6px;border-radius:50%;background:var(--accent-green);
+}
+
+/* Contact */
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem}
+.contact-form{display:flex;flex-direction:column;gap:1rem}
+.form-field label{
+  display:block;font-family:var(--font-mono);font-size:.72rem;
+  text-transform:uppercase;letter-spacing:.06em;color:var(--text-muted);
+  margin-bottom:.4rem;
+}
+.form-field input,.form-field textarea{
+  width:100%;background:var(--bg-surface);border:1px solid var(--border);
+  border-radius:8px;padding:.8rem 1rem;color:var(--text-primary);
+  font-family:var(--font-body);font-size:1rem;transition:border-color .2s;
+}
+.form-field input:focus,.form-field textarea:focus{outline:none;border-color:var(--accent)}
+.form-field textarea{resize:vertical;min-height:120px}
+
+/* Footer */
+.site-footer{
+  padding:3rem 0 2rem;border-top:1px solid var(--border);
+  background:var(--bg-secondary);
+}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:2rem;margin-bottom:2rem}
+.footer-brand p{font-size:.9rem;color:var(--text-muted);margin-top:.5rem;max-width:32ch}
+.footer-col h4{
+  font-family:var(--font-mono);font-size:.7rem;text-transform:uppercase;
+  letter-spacing:.08em;color:var(--text-muted);margin-bottom:.8rem;
+}
+.footer-col a{display:block;font-size:.9rem;color:var(--text-secondary);padding:.2rem 0}
+.footer-col a:hover{color:var(--accent)}
+.footer-bottom{
+  display:flex;justify-content:space-between;align-items:center;
+  padding-top:1.5rem;border-top:1px solid var(--border);
+  font-family:var(--font-mono);font-size:.7rem;color:var(--text-muted);
+}
+
+/* Section divider SVG */
+.section-wave{display:block;width:100%;height:80px}
+
+/* Reveal animations */
+.reveal{opacity:0;transform:translateY(30px);transition:opacity .7s ease,transform .7s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+.reveal-delay-1{transition-delay:.1s}
+.reveal-delay-2{transition-delay:.2s}
+.reveal-delay-3{transition-delay:.3s}
+.reveal-delay-4{transition-delay:.4s}
+
+/* Scroll top button */
+.scroll-top{
+  position:fixed;bottom:2rem;right:2rem;width:44px;height:44px;
+  border-radius:10px;background:var(--bg-card);border:1px solid var(--border);
+  color:var(--text-muted);cursor:pointer;display:flex;align-items:center;
+  justify-content:center;opacity:0;transform:translateY(10px);
+  transition:all .3s;z-index:9998;
+}
+.scroll-top.show{opacity:1;transform:translateY(0)}
+.scroll-top:hover{border-color:var(--accent);color:var(--accent)}
+
+/* Responsive */
+@media(max-width:900px){
+  .nav-links{display:none}
+  .nav-toggle{display:block}
+  .nav-links.open{
+    display:flex;flex-direction:column;position:absolute;
+    top:64px;left:0;right:0;background:rgba(6,9,15,.97);
+    padding:1rem;border-bottom:1px solid var(--border);
+  }
+  .split,.contact-grid{grid-template-columns:1fr}
+  .footer-grid{grid-template-columns:1fr 1fr}
+  .providers-grid.cols-3,.providers-grid.cols-2{grid-template-columns:1fr}
+  .stats-row{grid-template-columns:1fr 1fr}
+}
+@media(max-width:600px){
+  .footer-grid{grid-template-columns:1fr}
+  .stats-row{grid-template-columns:1fr}
+  .hero-actions{flex-direction:column;align-items:center}
+}
+</style>
+</head>
+<body>
+
+<!-- Progress Bar -->
+<div class="progress-bar" id="progressBar"></div>
+
+<!-- Hidden SVG Definitions -->
+<svg xmlns="http://www.w3.org/2000/svg" style="position:absolute;width:0;height:0">
+  <defs>
+    <symbol id="ico-cloud" viewBox="0 0 24 24"><path fill="currentColor" d="M19.35 10.04A7.49 7.49 0 0 0 12 4C9.11 4 6.6 5.64 5.35 8.04A5.994 5.994 0 0 0 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96z"/></symbol>
+    <symbol id="ico-server" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M5 6h14M5 18h14M3 6h.01M3 12h.01M3 18h.01M21 6h.01M21 12h.01M21 18h.01"/><circle cx="8" cy="6" r="1.5" fill="currentColor"/><circle cx="8" cy="12" r="1.5" fill="currentColor"/><circle cx="8" cy="18" r="1.5" fill="currentColor"/></symbol>
+    <symbol id="ico-brain" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.5" d="M12 2a7 7 0 0 0-7 7c0 2.38 1.19 4.47 3 5.74V17a2 2 0 0 0 2 2h4a2 2 0 0 0 2-2v-2.26c1.81-1.27 3-3.36 3-5.74a7 7 0 0 0-7-7z"/><path fill="none" stroke="currentColor" stroke-width="1.5" d="M9 21h6M10 17v4M14 17v4"/></symbol>
+    <symbol id="ico-gpu" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2" fill="none" stroke="currentColor" stroke-width="1.5"/><rect x="8" y="8" width="8" height="8" rx="1" fill="currentColor" opacity=".3"/><path fill="none" stroke="currentColor" stroke-width="1.5" d="M9 1v3M15 1v3M9 20v3M15 20v3M1 9h3M1 15h3M20 9h3M20 15h3"/></symbol>
+    <symbol id="ico-shield" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path fill="none" stroke="currentColor" stroke-width="1.5" d="M9 12l2 2 4-4"/></symbol>
+    <symbol id="ico-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="1.5"/><path fill="none" stroke="currentColor" stroke-width="1.5" d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10A15.3 15.3 0 0 1 12 2z"/></symbol>
+    <symbol id="ico-zap" viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></symbol>
+    <symbol id="ico-database" viewBox="0 0 24 24"><ellipse cx="12" cy="5" rx="9" ry="3" fill="none" stroke="currentColor" stroke-width="1.5"/><path fill="none" stroke="currentColor" stroke-width="1.5" d="M21 12c0 1.66-4.03 3-9 3s-9-1.34-9-3"/><path fill="none" stroke="currentColor" stroke-width="1.5" d="M3 5v14c0 1.66 4.03 3 9 3s9-1.34 9-3V5"/></symbol>
+    <symbol id="ico-network" viewBox="0 0 24 24"><circle cx="12" cy="5" r="2.5" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="4" cy="19" r="2.5" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="20" cy="19" r="2.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path fill="none" stroke="currentColor" stroke-width="1.5" d="M12 7.5v4M8.5 15.5L10.5 12M15.5 15.5L13.5 12"/></symbol>
+    <symbol id="ico-cpu" viewBox="0 0 24 24"><rect x="5" y="5" width="14" height="14" rx="2" fill="none" stroke="currentColor" stroke-width="1.5"/><rect x="9" y="9" width="6" height="6" rx="1" fill="currentColor" opacity=".3"/><path fill="none" stroke="currentColor" stroke-width="1.5" d="M9 1v4M15 1v4M9 19v4M15 19v4M1 9h4M1 15h4M19 9h4M19 15h4"/></symbol>
+    <symbol id="ico-chart" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" d="M3 20h18M5 20V10M10 20V4M15 20v-8M20 20V8"/></symbol>
+    <symbol id="ico-users" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.5" d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4" fill="none" stroke="currentColor" stroke-width="1.5"/><path fill="none" stroke="currentColor" stroke-width="1.5" d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></symbol>
+    <symbol id="ico-key" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.5" d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.78 7.78 5.5 5.5 0 0 1 7.78-7.78zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4"/></symbol>
+    <symbol id="ico-send" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></symbol>
+    <symbol id="ico-arrow-up" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M12 19V5M5 12l7-7 7 7"/></symbol>
+    <symbol id="ico-layers" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></symbol>
+  </defs>
+</svg>
+
+<!-- Navigation -->
+<nav class="nav">
+  <div class="container">
+    <a href="#hero" class="nav-logo">
+      <svg width="8" height="8"><circle cx="4" cy="4" r="4" fill="#00d4ff"/></svg>
+      AI-VPS
+    </a>
+    <div class="nav-links" id="navLinks">
+      <a href="#warum">Warum</a>
+      <a href="#landschaft">Landschaft</a>
+      <a href="#cloud-intl">Cloud Intl.</a>
+      <a href="#cloud-cn">Cloud CN</a>
+      <a href="#ki-ueberblick">KI-Ueberblick</a>
+      <a href="#ki-intl">KI Intl.</a>
+      <a href="#ki-cn">KI CN</a>
+      <a href="#vps">VPS</a>
+      <a href="#kontakt">Kontakt</a>
+    </div>
+    <button class="nav-toggle" id="navToggle" aria-label="Navigation">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+    </button>
+  </div>
+</nav>
+
+<!-- ===== PAGE 1: HERO ===== -->
+<section class="hero" id="hero">
+  <div class="hero-grid"></div>
+  <div class="geo-float sq" style="top:15%;left:8%"></div>
+  <div class="geo-float cr" style="top:60%;left:5%"></div>
+  <div class="geo-float sq" style="top:20%;right:10%;width:50px;height:50px"></div>
+  <div class="geo-float cr" style="top:70%;right:8%;width:40px;height:40px"></div>
+  <div class="geo-float tri" style="top:40%;right:15%"></div>
+  <div class="container">
+    <div class="hero-label"><span class="hl-line"></span> Plattform fuer KI-Infrastruktur <span class="hl-line"></span></div>
+    <h1>Finden Sie die perfekte<br><span class="gradient-text">KI-Infrastruktur</span></h1>
+    <p class="hero-desc">Ihre definitive Quelle fuer Cloud-Anbieter, VPS-Empfehlungen und KI-Ressourcen. Vergleichen Sie internationale und chinesische Plattformen – fundiert, neutral und aktuell.</p>
+    <div class="hero-actions">
+      <a href="#cloud-intl" class="btn btn-primary">Cloud-Anbieter entdecken</a>
+      <a href="#ki-ueberblick" class="btn btn-outline">KI-Modelle vergleichen</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PAGE 2: WARUM AI-VPS ===== -->
+<section class="page-section" id="warum">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-badge"><span class="badge-line"></span> 01 – Einfuehrung</div>
+      <h2>Warum AI-VPS?</h2>
+      <p>Die Wahl der richtigen Infrastruktur ist entscheidend fuer den Erfolg Ihrer KI-Projekte. Wir helfen Ihnen, den Ueberblick zu behalten.</p>
+    </div>
+    <div class="stats-row reveal reveal-delay-1">
+      <div class="stat-card">
+        <div class="stat-num">680 Mrd.</div>
+        <div class="stat-label">USD Cloud-Markt 2026</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">89%</div>
+        <div class="stat-label">Organisationen mit KI-Pilotprojekten</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">340+</div>
+        <div class="stat-label">Cloud-Anbieter weltweit</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">70%</div>
+        <div class="stat-label">EU-Marktanteil US-Hyperscaler</div>
+      </div>
+    </div>
+    <div class="split reveal reveal-delay-2">
+      <div>
+        <h3 style="margin-bottom:1rem">Die Infrastruktur-Herausforderung</h3>
+        <p style="margin-bottom:1rem">Die Auswahl des richtigen Cloud- oder VPS-Anbieters ist eine der wichtigsten Entscheidungen fuer jedes KI-Projekt. Faktoren wie Datenresidenz, Rechenleistung, GPU-Verfuegbarkeit und Kostenstruktur variieren erheblich zwischen den Anbietern.</p>
+        <p style="margin-bottom:1rem">Fuer Unternehmen in Europa spielt zudem die digitale Souveraenitaet eine zunehmend wichtige Rolle. Die Frage, wo Daten gespeichert werden, welche Rechtsrahmen gelten und wer Zugriff hat, ist nicht mehr nur eine technische – sondern eine strategische Entscheidung (citation:2).</p>
+        <p>Chinesische KI-Anbieter wie DeepSeek und Alibaba Cloud haben zudem neue Massstaeb fuer Kosten-Effizienz gesetzt, waehrend europaeische Anbieter wie Hetzner und Exoscale mit Transparenz und GDPR-Konformitaet punkten (citation:1)(citation:2).</p>
+      </div>
+      <div class="split-visual">
+        <svg viewBox="0 0 400 300" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:100%">
+          <rect x="20" y="40" width="160" height="100" rx="12" stroke="#00d4ff" stroke-width="1.5" opacity=".3"/>
+          <rect x="220" y="40" width="160" height="100" rx="12" stroke="#a78bfa" stroke-width="1.5" opacity=".3"/>
+          <rect x="120" y="160" width="160" height="100" rx="12" stroke="#ff6b35" stroke-width="1.5" opacity=".3"/>
+          <circle cx="100" cy="90" r="20" fill="#00d4ff" opacity=".15" stroke="#00d4ff" stroke-width="1"/>
+          <text x="100" y="95" text-anchor="middle" fill="#00d4ff" font-size="11" font-family="DM Mono,monospace">Cloud</text>
+          <circle cx="300" cy="90" r="20" fill="#a78bfa" opacity=".15" stroke="#a78bfa" stroke-width="1"/>
+          <text x="300" y="95" text-anchor="middle" fill="#a78bfa" font-size="11" font-family="DM Mono,monospace">KI</text>
+          <circle cx="200" cy="210" r="20" fill="#ff6b35" opacity=".15" stroke="#ff6b35" stroke-width="1"/>
+          <text x="200" y="215" text-anchor="middle" fill="#ff6b35" font-size="11" font-family="DM Mono,monospace">VPS</text>
+          <line x1="120" y1="100" x2="170" y2="180" stroke="#00d4ff" stroke-width="1" opacity=".4" stroke-dasharray="4"/>
+          <line x1="280" y1="100" x2="230" y2="180" stroke="#a78bfa" stroke-width="1" opacity=".4" stroke-dasharray="4"/>
+          <line x1="160" y1="90" x2="240" y2="90" stroke="#fff" stroke-width="1" opacity=".2" stroke-dasharray="4"/>
+        </svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PAGE 3: CLOUD-LANDSCHAFT ===== -->
+<section class="page-section" id="landschaft">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-badge"><span class="badge-line"></span> 02 – Marktueberblick</div>
+      <h2>Die globale Cloud-Landschaft</h2>
+      <p>Cloud-Computing wird in drei Hauptmodelle unterteilt: IaaS, PaaS und SaaS. Die Auswahl des Modells hängt von Ihren spezifischen Anforderungen ab (citation:4)(citation:5).</p>
+    </div>
+    <div class="info-grid reveal reveal-delay-1">
+      <div class="info-card">
+        <div class="ic-icon"><svg><use href="#ico-cloud"/></svg></div>
+        <h4>Public Cloud</h4>
+        <p>Infrastrukturen, die nicht dem Endbenutzer gehoeren und ueber das Internet bereitgestellt werden. Grosse Anbieter wie AWS, Azure und Google Cloud teilen Ressourcen zwischen Mandanten auf. Skalierbar, kosteneffizient und sofort verfuegbar (citation:4).</p>
+      </div>
+      <div class="info-card">
+        <div class="ic-icon"><svg><use href="#ico-shield"/></svg></div>
+        <h4>Private Cloud</h4>
+        <p>Exklusive Cloud-Umgebung fuer einzelne Organisationen. Bietet volle Kontrolle ueber Daten und Sicherheit. Kann On-Premise oder in gemieteten Rechenzentren betrieben werden. Ideal fuer regulierte Branchen (citation:4).</p>
+      </div>
+      <div class="info-card">
+        <div class="ic-icon"><svg><use href="#ico-network"/></svg></div>
+        <h4>Hybrid Cloud</h4>
+        <p>Kombination aus Private und Public Cloud, verbunden ueber Netzwerke und APIs. Ermöglicht灵活e Workload-Verteilung. Unternehmen behalten sensible Daten vor Ort und nutzen die Skalierung der Public Cloud fuer Spitzenlasten (citation:4).</p>
+      </div>
+      <div class="info-card">
+        <div class="ic-icon"><svg><use href="#ico-layers"/></svg></div>
+        <h4>Multi-Cloud</h4>
+        <p>Nutzung mehrerer Cloud-Anbieter gleichzeitig. Reduziert Abhaengigkeiten und optimiert Kosten durch gezielte Auswahl der besten Services jedes Anbieters. Besonders relevant fuer globale Unternehmen mit unterschiedlichen Workload-Anforderungen (citation:3).</p>
+      </div>
+    </div>
+    <div class="table-wrap reveal reveal-delay-2">
+      <table class="comp-table">
+        <thead>
+          <tr><th>Modell</th><th>Dienst</th><th>Beispiel</th><th>Kontrolle</th><th>Kosten</th></tr>
+        </thead>
+        <tbody>
+          <tr><td class="highlight">IaaS</td><td>Infrastruktur as a Service</td><td>EC2, Azure VMs, Compute Engine</td><td>Hoch – OS, Middleware, Apps</td><td>Pay-per-use</td></tr>
+          <tr><td class="highlight">PaaS</td><td>Platform as a Service</td><td>Elastic Beanstalk, App Engine</td><td>Mittel – Apps und Daten</td><td>Abgestuft</td></tr>
+          <tr><td class="highlight">SaaS</td><td>Software as a Service</td><td>Gmail, Salesforce, Office 365</td><td>Gering – nur Konfiguration</td><td>Abonnement</td></tr>
+          <tr><td class="highlight">FaaS</td><td>Functions as a Service</td><td>Lambda, Cloud Functions</td><td>Minimal – nur Code</td><td>Pro Ausfuehrung</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PAGE 4: INTERNATIONALE CLOUD-ANBIETER ===== -->
+<section class="page-section" id="cloud-intl">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-badge"><span class="badge-line"></span> 03 – Internationale Cloud-Anbieter</div>
+      <h2>Globale Cloud-Provider im Vergleich</h2>
+      <p>Die drei grossen Hyperscaler AWS, Azure und Google Cloud halten zusammen rund 65% des Weltmarkts. Doch europaeische und spezialisierte Anbieter gewinnen an Bedeutung (citation:3)(citation:5).</p>
+    </div>
+    <div class="providers-grid cols-3">
+      <div class="provider-card reveal">
+        <div class="pc-head"><div class="pc-icon"><svg viewBox="0 0 24 24" width="24" height="24"><polygon points="12,2 22,19 2,19" fill="none" stroke="#ff9900" stroke-width="1.5"/><text x="12" y="16" text-anchor="middle" fill="#ff9900" font-size="7" font-weight="bold">aws</text></svg></div><div><h3>Amazon Web Services</h3></div></div>
+        <div class="pc-tagline">Marktfuehrer mit 200+ Services</div>
+        <ul class="pc-features">
+          <li>Umfangreichstes Service-Portfolio der Branche</li>
+          <li>Globales Rechenzentrum-Netzwerk mit 30+ Regionen</li>
+          <li>EC2-Instanzen fuer jeden Workload-Typ</li>
+          <li>Starke KI/ML-Services (SageMaker, Bedrock)</li>
+          <li>Dedizierte Verbindungen bis 10 Gbps (citation:3)</li>
+        </ul>
+        <div class="pc-meta"><span class="pc-price">ab 3.50/mo (t4g.nano)</span><span class="pc-badge">Marktfuehrer</span></div>
+      </div>
+      <div class="provider-card reveal reveal-delay-1">
+        <div class="pc-head"><div class="pc-icon"><svg viewBox="0 0 24 24" width="24" height="24"><rect x="4" y="4" width="16" height="16" rx="3" fill="none" stroke="#0078d4" stroke-width="1.5"/><path d="M8 8h8v8H8z" fill="#0078d4" opacity=".3"/></svg></div><div><h3>Microsoft Azure</h3></div></div>
+        <div class="pc-tagline">Enterprise-Starke mit Hybrid-Cloud</div>
+        <ul class="pc-features">
+          <li>Nahtlose Integration mit Microsoft-Produkten</li>
+          <li>95% der Fortune-500-Unternehmen nutzen Azure (citation:3)</li>
+          <li>ExpressRoute bis 100 Gbps fuer dedizierte Verbindungen</li>
+          <li>Umfangreiche Hybrid-Cloud-Optionen (Azure Arc)</li>
+          <li>OpenAI-Partnerschaft fuer KI-Services</li>
+        </ul>
+        <div class="pc-meta"><span class="pc-price">ab $3.50/mo (B1s)</span><span class="pc-badge">Enterprise</span></div>
+      </div>
+      <div class="provider-card reveal reveal-delay-2">
+        <div class="pc-head"><div class="pc-icon"><svg viewBox="0 0 24 24" width="24" height="24"><circle cx="8" cy="12" r="4" fill="none" stroke="#4285f4" stroke-width="1.5"/><circle cx="16" cy="8" r="3" fill="none" stroke="#ea4335" stroke-width="1.5"/><circle cx="16" cy="16" r="3" fill="none" stroke="#34a853" stroke-width="1.5"/></svg></div><div><h3>Google Cloud Platform</h3></div></div>
+        <div class="pc-tagline">Datenanalyse und KI-First</div>
+        <ul class="pc-features">
+          <li>Fuehrend in Datenanalyse und maschinellem Lernen</li>
+          <li>Cloud Interconnect bis 100 Gbps (citation:3)</li>
+          <li>Starke Kubernetes- und Container-Services</li>
+          <li>TPU-Zugang fuer KI-Training</li>
+          <li>Competitive Pricing mit Sustained Use Discounts</li>
+        </ul>
+        <div class="pc-meta"><span class="pc-price">ab $4.12/mo (e2-micro)</span><span class="pc-badge">KI-Fokus</span></div>
+      </div>
+      <div class="provider-card reveal">
+        <div class="pc-head"><div class="pc-icon warm"><svg viewBox="0 0 24 24" width="24" height="24"><rect x="3" y="6" width="18" height="12" rx="2" fill="none" stroke="#d32f2f" stroke-width="1.5"/><text x="12" y="15" text-anchor="middle" fill="#d32f2f" font-size="6" font-weight="bold">H</text></svg></div><div><h3>Hetzner Cloud</h3></div></div>
+        <div class="pc-tagline">Europaeische Preis-Leistungs-Sieger</div>
+        <ul class="pc-features">
+          <li>Bestes Preis-Leistungs-Verhaeltnis in Europa (citation:1)</li>
+          <li>Shared und Dedicated Server-Optionen</li>
+          <li>Standorte in DE, FI, SG und USA (citation:1)</li>
+          <li>Freundliches REST-API und CLI-Tool</li>
+          <li>One-Click-Apps: Docker, WordPress, GitLab (citation:1)</li>
+        </ul>
+        <div class="pc-meta"><span class="pc-price">ab €3.29/mo (CX11)</span><span class="pc-badge">Europa</span></div>
+      </div>
+      <div class="provider-card reveal reveal-delay-1">
+        <div class="pc-head"><div class="pc-icon purple"><svg viewBox="0 0 24 24" width="24" height="24"><circle cx="12" cy="12" r="9" fill="none" stroke="#0080ff" stroke-width="1.5"/><text x="12" y="15" text-anchor="middle" fill="#0080ff" font-size="7" font-weight="bold">DO</text></svg></div><div><h3>DigitalOcean</h3></div></div>
+        <div class="pc-tagline">Entwicklerfreundliche Simplicität</div>
+        <ul class="pc-features">
+          <li>Intuitive Benutzeroberflaeche</li>
+          <li>Droplets mit transparenter Preisgestaltung</li>
+          <li>App Platform fuer PaaS-Workloads</li>
+          <li>Umfangreiche Tutorials und Dokumentation</li>
+          <li>Managed Kubernetes und Datenbanken</li>
+        </ul>
+        <div class="pc-meta"><span class="pc-price">ab $4/mo (Basic)</span><span class="pc-badge">Developer</span></div>
+      </div>
+      <div class="provider-card reveal reveal-delay-2">
+        <div class="pc-head"><div class="pc-icon green"><svg viewBox="0 0 24 24" width="24" height="24"><rect x="4" y="4" width="16" height="16" rx="2" fill="none" stroke="#34d399" stroke-width="1.5"/><text x="12" y="15" text-anchor="middle" fill="#34d399" font-size="7" font-weight="bold">Ex</text></svg></div><div><h3>Exoscale</h3></div></div>
+        <div class="pc-tagline">Europaeische Souveränitäts-Cloud</div>
+        <ul class="pc-features">
+          <li>100% europaeische Eigentuemerstruktur (citation:2)</li>
+          <li>Datenresidenz in EU ohne Ausnahmen</li>
+          <li>Vollstaendige GDPR-Konformitaet</li>
+          <li>IaaS und PaaS mit transparenter Kontrolle</li>
+          <li>Starke Praesenz in DACH-Region</li>
+        </ul>
+        <div class="pc-meta"><span class="pc-price">ab €4.80/mo</span><span class="pc-badge">Souverän</span></div>
+      </div>
+      <div class="provider-card reveal">
+        <div class="pc-head"><div class="pc-icon"><svg viewBox="0 0 24 24" width="24" height="24"><path d="M12 2L4 7v10l8 5 8-5V7l-8-5z" fill="none" stroke="#f80000" stroke-width="1.5"/><text x="12" y="15" text-anchor="middle" fill="#f80000" font-size="6" font-weight="bold">O</text></svg></div><div><h3>Oracle Cloud</h3></div></div>
+        <div class="pc-tagline">Datenbank-optimierte Infrastruktur</div>
+        <ul class="pc-features">
+          <li>Autonomous Database – selbstverwaltend</li>
+          <li>Always Free Tier mit 2 VMs</li>
+          <li>Exadata fuer extreme Datenbank-Performance</li>
+          <li>OCI-Infrastruktur mit hoher Sicherheit</li>
+          <li>Strong fuer Oracle-Workloads und Enterprise</li>
+        </ul>
+        <div class="pc-meta"><span class="pc-price">Kostenlose Tier verfuegbar</span><span class="pc-badge">Datenbank</span></div>
+      </div>
+      <div class="provider-card reveal reveal-delay-1">
+        <div class="pc-head"><div class="pc-icon"><svg viewBox="0 0 24 24" width="24" height="24"><rect x="5" y="3" width="14" height="18" rx="2" fill="none" stroke="#1f70c1" stroke-width="1.5"/><text x="12" y="15" text-anchor="middle" fill="#1f70c1" font-size="6" font-weight="bold">IBM</text></svg></div><div><h3>IBM Cloud</h3></div></div>
+        <div class="pc-tagline">Enterprise-KI und Bare-Metal</div>
+        <ul class="pc-features">
+          <li>Watson AI-Services fuer Unternehmen</li>
+          <li>Bare-Metal-Server fuer maximale Kontrolle</li>
+          <li>Red Hat OpenShift Integration</li>
+          <li>Starke Praesenz in regulierten Branchen</li>
+          <li>Hybride Multi-Cloud-Strategien</li>
+        </ul>
+        <div class="pc-meta"><span class="pc-price">ab $5/mo (Virtual)</span><span class="pc-badge">Enterprise</span></div>
+      </div>
+    </div>
+    <!-- Comparison Table -->
+    <h3 style="margin:3rem 0 1rem" class="reveal">Direktvergleich: Internationale Anbieter</h3>
+    <div class="table-wrap reveal reveal-delay-1">
+      <table class="comp-table">
+        <thead>
+          <tr><th>Anbieter</th><th>Compute</th><th>Speicher</th><th>Dedicated Link</th><th>KI/ML</th><th>Preisniveau</th></tr>
+        </thead>
+        <tbody>
+          <tr><td class="highlight">AWS</td><td>EC2, Lambda</td><td>S3, EBS, EFS</td><td>Direct Connect 10 Gbps</td><td>SageMaker, Bedrock</td><td>$$$$$</td></tr>
+          <tr><td class="highlight">Azure</td><td>VMs, Functions</td><td>Blob, Disk, Files</td><td>ExpressRoute 100 Gbps</td><td>Azure AI, OpenAI</td><td>$$</td></tr>
+          <tr><td class="highlight">GCP</td><td>Compute Engine</td><td>Cloud Storage</td><td>Interconnect 100 Gbps</td><td>Vertex AI, TPU</td><td>$$$$</td></tr>
+          <tr><td>Hetzner</td><td>Cloud Servers</td><td>Volumes</td><td>Nicht angeboten</td><td>Nicht angeboten</td><td class="highlight">$</td></tr>
+          <tr><td>DigitalOcean</td><td>Droplets</td><td>Spaces</td><td>Nicht angeboten</td><td>Begrenzt</td><td class="highlight">$</td></tr>
+          <tr><td>Exoscale</td><td>Compute</td><td>SOS (S3-kompatibel)</td><td>Nicht angeboten</td><td>Begrenzt</td><td>$$</td></tr>
+          <tr><td>Oracle</td><td>VMs, Bare Metal</td><td>Object Storage</td><td>FastConnect</td><td>OCI Data Science</td><td>$$</td></tr>
+          <tr><td>IBM</td><td>VMs, Bare Metal</td><td>Object Storage</td><td>Direct Link</td><td>Watson AI</td><td>$$$</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PAGE 5: CHINESISCHE CLOUD-ANBIETER ===== -->
+<section class="page-section" id="cloud-cn">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-badge"><span class="badge-line"></span> 04 – Chinesische Cloud-Anbieter</div>
+      <h2>Chinas Cloud-Oekosystem</h2>
+      <p>China verfuegt ueber ein schnell wachsendes Cloud-Oekosystem mit eigenen Hyperscalern. Diese Anbieter dominieren den heimischen Markt und expandieren zunehmend international.</p>
+    </div>
+    <div class="providers-grid cols-3">
+      <div class="provider-card reveal">
+        <div class="pc-head"><div class="pc-icon warm"><svg viewBox="0 0 24 24" width="24" height="24"><circle cx="12" cy="12" r="9" fill="none" stroke="#ff6a00" stroke-width="1.5"/><text x="12" y="15" text-anchor="middle" fill="#ff6a00" font-size="7" font-weight="bold">Ali</text></svg></div><div><h3>Alibaba Cloud (Aliyun)</h3></div></div>
+        <div class="pc-tagline">Groesster Cloud-Anbieter in Asien</div>
+        <ul class="pc-features">
+          <li>Marktfuehrer in China mit ueber 30% Marktanteil</li>
+          <li>Umfangreicher KI-Service: PAI, Model Studio</li>
+          <li>Globale Praesenz mit 30+ Availability Zones</li>
+          <li>Qwen-Modelle direkt integriert</li>
+          <li>Starke E-Commerce-Integration (Taobao, Tmall)</li>
+        </ul>
+        <div class="pc-meta"><span class="pc-price">ab ¥48/mo (ecs.t6)</span><span class="pc-badge">Marktfuehrer CN</span></div>
+      </div>
+      <div class="provider-card reveal reveal-delay-1">
+        <div class="pc-head"><div class="pc-icon"><svg viewBox="0 0 24 24" width="24" height="24"><rect x="4" y="4" width="16" height="16" rx="3" fill="none" stroke="#006eff" stroke-width="1.5"/><text x="12" y="15" text-anchor="middle" fill="#006eff" font-size="7" font-weight="bold">TX</text></svg></div><div><h3>Tencent Cloud</h3></div></div>
+        <div class="pc-tagline">Gaming, soziale Medien und WeChat</div>
+        <ul class="pc-features">
+          <li>Tiefe Integration mit WeChat-Oekosystem</li>
+          <li>Fuehrend in Gaming-Cloud-Services</li>
+          <li>Leistungsfähige CDN-Infrastruktur</li>
+          <li>Hunyuan KI-Modell fuer Unternehmen</li>
+          <li>Starke Position in Suedostasien</li>
+        </ul>
+        <div class="pc-meta"><span class="pc-price">ab ¥52/mo</span><span class="pc-badge">Gaming</span></div>
+      </div>
+      <div class="provider-card reveal reveal-delay-2">
+        <div class="pc-head"><div class="pc-icon warm"><svg viewBox="0 0 24 24" width="24" height="24"><circle cx="12" cy="12" r="9" fill="none" stroke="#cf0a2c" stroke-width="1.5"/><text x="12" y="15" text-anchor="middle" fill="#cf0a2c" font-size="7" font-weight="bold">HW</text></svg></div><div><h3>Huawei Cloud</h3></div></div>
+        <div class="pc-tagline">Enterprise und Regierungssektor</div>
+        <ul class="pc-features">
+          <li>Starke Praesenz in Regierungsprojekten</li>
+          <li>Eigene Ascend AI-Chips (NPU)</li>
+          <li>Full-Stack KI-Loesungen (MindSpore)</li>
+          <li>5G-Integration und Edge Computing</li>
+          <li>Schnelle Expansion in Afrika und Nahost</li>
+        </ul>
+        <div class="pc-meta"><span class="pc-price">ab ¥55/mo</span><span class="pc-badge">Enterprise</span></div>
+      </div>
+      <div class="provider-card reveal">
+        <div class="pc-head"><div class="pc-icon"><svg viewBox="0 0 24 24" width="24" height="24"><circle cx="12" cy="12" r="9" fill="none" stroke="#2932e1" stroke-width="1.5"/><text x="12" y="15" text-anchor="middle" fill="#2932e1" font-size="7" font-weight="bold">BD</text></svg></div><div><h3>Baidu AI Cloud</h3></div></div>
+        <div class="pc-tagline">KI-first Cloud-Plattform</div>
+        <ul class="pc-features">
+          <li>Tiefste KI-Integration aller chinesischen Clouds</li>
+          <li>ERNIE-Modelle nativ verfuegbar</li>
+          <li>Intelligente Fahrzeug- und Autonomes-Fahren-Services</li>
+          <li>AI-Entwicklungsplattform mit Low-Code</li>
+          <li>Kunlun AI-Chips fuer Training und Inferenz</li>
+        </ul>
+        <div class="pc-meta"><span class="pc-price">ab ¥50/mo</span><span class="pc-badge">KI-First</span></div>
+      </div>
+      <div class="provider-card reveal reveal-delay-1">
+        <div class="pc-head"><div class="pc-icon purple"><svg viewBox="0 0 24 24" width="24" height="24"><circle cx="12" cy="12" r="9" fill="none" stroke="#fe2c55" stroke-width="1.5"/><text x="12" y="15" text-anchor="middle" fill="#fe2c55" font-size="7" font-weight="bold">VC</text></svg></div><div><h3>Volcengine (ByteDance)</h3></div></div>
+        <div class="pc-tagline">Content-Delivery und KI-Infrastruktur</div>
+        <ul class="pc-features">
+          <li>Technologie hinter TikTok/Douyin</li>
+          <li>Fuehrend in Echtzeit-Video-Verarbeitung</li>
+          <li>ML-Platform fuer Empfehlungssysteme</li>
+          <li>Globaler CDN mit niedriger Latenz</li>
+          <li>Doubao KI-Modell integriert</li>
+        </ul>
+        <div class="pc-meta"><span class="pc-price">ab ¥45/mo</span><span class="pc-badge">Content</span></div>
+      </div>
+      <div class="provider-card reveal reveal-delay-2">
+        <div class="pc-head"><div class="pc-icon green"><svg viewBox="0 0 24 24" width="24" height="24"><circle cx="12" cy="12" r="9" fill="none" stroke="#00b4d8" stroke-width="1.5"/><text x="12" y="15" text-anchor="middle" fill="#00b4d8" font-size="7" font-weight="bold">KS</text></svg></div><div><h3>Kingsoft Cloud</h3></div></div>
+        <div class="pc-tagline">Enterprise-Cloud und Gaming</div>
+        <ul class="pc-features">
+          <li>Enge Integration mit WPS Office Oekosystem</li>
+          <li>Starke Position in Gaming-Infrastruktur</li>
+          <li>Enterprise-Video- und Streaming-Dienste</li>
+          <li>AI-Plattform fuer Bildverarbeitung</li>
+          <li>Wachsendes internationales Angebot</li>
+        </ul>
+        <div class="pc-meta"><span class="pc-price">ab ¥50/mo</span><span class="pc-badge">Enterprise</span></div>
+      </div>
+    </div>
+    <h3 style="margin:3rem 0 1rem" class="reveal">Chinesische Cloud-Anbieter im Vergleich</h3>
+    <div class="table-wrap reveal reveal-delay-1">
+      <table class="comp-table">
+        <thead>
+          <tr><th>Anbieter</th><th>Staerke</th><th>KI-Modelle</th><th>Internationale DC</th><th>Besonderheit</th></tr>
+        </thead>
+        <tbody>
+          <tr><td class="highlight">Alibaba Cloud</td><td>Broadest Portfolio</td><td>Qwen-Serie</td><td>Singapur, Frankfurt, US</td><td>E-Commerce-Integration</td></tr>
+          <tr><td class="highlight">Tencent Cloud</td><td>Gaming, Soziale Medien</td><td>Hunyuan</td><td>Singapur, US, DE</td><td>WeChat-Oekosystem</td></tr>
+          <tr><td class="highlight">Huawei Cloud</td><td>Enterprise, Regierung</td><td>Pangu</td><td>Singapur, Thailand, SA</td><td>Eigene Ascend-NPU</td></tr>
+          <tr><td>Baidu AI Cloud</td><td>KI-Integration</td><td>ERNIE</td><td>Singapur</td><td>Autonomes Fahren</td></tr>
+          <tr><td>Volcengine</td><td>Content, CDN</td><td>Doubao</td><td>Singapur</td><td>TikTok-Infrastruktur</td></tr>
+          <tr><td>Kingsoft Cloud</td><td>Enterprise, Gaming</td><td>Begrenzt</td><td>Begrenzt</td><td>WPS-Integration</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PAGE 6: KI-UEBERBLICK ===== -->
+<section class="page-section" id="ki-ueberblick">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-badge"><span class="badge-line"></span> 05 – KI-Landschaft</div>
+      <h2>Die KI-Modell-Landschaft 2026</h2>
+      <p>Die KI-Branche entwickelt sich rasant. Von grossen Sprachmodellen bis hin zu multimodalen Systemen – die Auswahl des richtigen Anbieters ist entscheidend fuer den Projekterfolg.</p>
+    </div>
+    <div class="split reveal">
+      <div>
+        <h3 style="margin-bottom:1rem">Inferenz vs. Training</h3>
+        <p style="margin-bottom:1rem">Die Wahl der Hardware haengt grundlegend davon ab, ob Sie ein Modell trainieren oder ausfuehren moechten. Inferenz ist speicher-bandbreitengebunden – die Hardware, die Modellgewichte am schnellsten aus dem Speicher liest, erzeugt Tokens am schnellsten (citation:8).</p>
+        <p style="margin-bottom:1.5rem">Fuer die meisten Praktiker bedeutet dies: Ein RTX 5090 mit 32 GB GDDR7 bei 1.792 GB/s eignet sich hervorragend fuer Inferenz bis 30B Parameter. Fuer groessere Modelle wie 70B bieten Apple Silicon Systeme mit 128 GB unified Memory ein starkes Preis-Leistungs-Verhaeltnis (citation:8).</p>
+        <div class="tags">
+          <span class="tag accent">LLM</span>
+          <span class="tag accent">Multimodal</span>
+          <span class="tag">Inferenz</span>
+          <span class="tag">Training</span>
+          <span class="tag">Fine-Tuning</span>
+          <span class="tag">RAG</span>
+          <span class="tag">Agents</span>
+          <span class="tag">Embeddings</span>
+        </div>
+      </div>
+      <div class="split-visual">
+        <svg viewBox="0 0 400 320" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:100%">
+          <!-- Neural network visualization -->
+          <circle cx="80" cy="80" r="8" fill="#00d4ff" opacity=".6"/>
+          <circle cx="80" cy="160" r="8" fill="#00d4ff" opacity=".6"/>
+          <circle cx="80" cy="240" r="8" fill="#00d4ff" opacity=".6"/>
+          <circle cx="200" cy="60" r="8" fill="#a78bfa" opacity=".6"/>
+          <circle cx="200" cy="130" r="8" fill="#a78bfa" opacity=".6"/>
+          <circle cx="200" cy="200" r="8" fill="#a78bfa" opacity=".6"/>
+          <circle cx="200" cy="270" r="8" fill="#a78bfa" opacity=".6"/>
+          <circle cx="320" cy="120" r="10" fill="#ff6b35" opacity=".6"/>
+          <circle cx="320" cy="210" r="10" fill="#ff6b35" opacity=".6"/>
+          <!-- Connections -->
+          <line x1="88" y1="80" x2="192" y2="60" stroke="#00d4ff" stroke-width=".5" opacity=".3"/>
+          <line x1="88" y1="80" x2="192" y2="130" stroke="#00d4ff" stroke-width=".5" opacity=".3"/>
+          <line x1="88" y1="80" x2="192" y2="200" stroke="#00d4ff" stroke-width=".5" opacity=".3"/>
+          <line x1="88" y1="160" x2="192" y2="60" stroke="#00d4ff" stroke-width=".5" opacity=".3"/>
+          <line x1="88" y1="160" x2="192" y2="130" stroke="#00d4ff" stroke-width=".5" opacity=".3"/>
+          <line x1="88" y1="160" x2="192" y2="200" stroke="#00d4ff" stroke-width=".5" opacity=".3"/>
+          <line x1="88" y1="160" x2="192" y2="270" stroke="#00d4ff" stroke-width=".5" opacity=".3"/>
+          <line x1="88" y1="240" x2="192" y2="130" stroke="#00d4ff" stroke-width=".5" opacity=".3"/>
+          <line x1="88" y1="240" x2="192" y2="200" stroke="#00d4ff" stroke-width=".5" opacity=".3"/>
+          <line x1="88" y1="240" x2="192" y2="270" stroke="#00d4ff" stroke-width=".5" opacity=".3"/>
+          <line x1="208" y1="60" x2="310" y2="120" stroke="#a78bfa" stroke-width=".5" opacity=".3"/>
+          <line x1="208" y1="130" x2="310" y2="120" stroke="#a78bfa" stroke-width=".5" opacity=".3"/>
+          <line x1="208" y1="130" x2="310" y2="210" stroke="#a78bfa" stroke-width=".5" opacity=".3"/>
+          <line x1="208" y1="200" x2="310" y2="120" stroke="#a78bfa" stroke-width=".5" opacity=".3"/>
+          <line x1="208" y1="200" x2="310" y2="210" stroke="#a78bfa" stroke-width=".5" opacity=".3"/>
+          <line x1="208" y1="270" x2="310" y2="210" stroke="#a78bfa" stroke-width=".5" opacity=".3"/>
+          <!-- Labels -->
+          <text x="80" y="310" text-anchor="middle" fill="#00d4ff" font-size="10" font-family="DM Mono,monospace" opacity=".7">Eingabe</text>
+          <text x="200" y="310" text-anchor="middle" fill="#a78bfa" font-size="10" font-family="DM Mono,monospace" opacity=".7">Verarbeitung</text>
+          <text x="320" y="310" text-anchor="middle" fill="#ff6b35" font-size="10" font-family="DM Mono,monospace" opacity=".7">Ausgabe</text>
+        </svg>
+      </div>
+    </div>
+    <h3 style="margin:3rem 0 1rem" class="reveal">Hardware-Empfehlungen fuer lokale KI (citation:8)</h3>
+    <div class="table-wrap reveal reveal-delay-1">
+      <table class="comp-table">
+        <thead>
+          <tr><th>Modellgroesse</th><th>Empfohlene Hardware</th><th>Speicher</th><th>Bandbreite</th><th>Performance</th><th>Systempreis</th></tr>
+        </thead>
+        <tbody>
+          <tr><td class="highlight">Bis 30B</td><td>RTX 5090</td><td>32 GB GDDR7</td><td>1.792 GB/s</td><td>60-90 tok/s</td><td>$5.000-8.000</td></tr>
+          <tr><td class="highlight">Bis 30B</td><td>RTX 4090 (gebraucht)</td><td>24 GB GDDR6X</td><td>1.008 GB/s</td><td>40-60 tok/s</td><td>unter $4.000</td></tr>
+          <tr><td class="highlight">70B</td><td>Mac Studio M4 Max</td><td>128 GB unified</td><td>546 GB/s</td><td>8-15 tok/s</td><td>$3.499-3.699</td></tr>
+          <tr><td class="highlight">70B Budget</td><td>4x Mac Mini M4 Pro Cluster</td><td>192 GB pooled</td><td>variabel</td><td>4-8 tok/s</td><td>$6.400-7.200</td></tr>
+          <tr><td class="highlight">70B+CUDA</td><td>RTX PRO 6000</td><td>96 GB GDDR7</td><td>1.800 GB/s</td><td>60-90 tok/s</td><td>ab $15.000</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PAGE 7: INTERNATIONALE KI-ANBIETER ===== -->
+<section class="page-section" id="ki-intl">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-badge"><span class="badge-line"></span> 06 – Internationale KI-Anbieter</div>
+      <h2>Globale KI-Plattformen</h2>
+      <p>Die fuehrenden KI-Anbieter aus den USA und Europa bieten eine breite Palette an Modellen und Services – von proprietären APIs bis hin zu Open-Source-Modellen.</p>
+    </div>
+    <div class="providers-grid cols-2">
+      <div class="provider-card reveal">
+        <div class="pc-head"><div class="pc-icon green"><svg viewBox="0 0 24 24" width="24" height="24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z" fill="#10a37f"/></svg></div><div><h3>OpenAI</h3></div></div>
+        <div class="pc-tagline">Pionier der modernen KI-Revolution</div>
+        <ul class="pc-features">
+          <li>GPT-4o, GPT-4 Turbo, o1, o3 – fuehrende Sprachmodelle</li>
+          <li>DALL-E 3 fuer Bildgenerierung</li>
+          <li>Whisper fuer Spracherkennung</li>
+          <li>Assistants API mit Function Calling</li>
+          <li>Starke Developer-Dokumentation und SDKs</li>
+          <li>ChatGPT als Consumer-Produkt mit Plus/Team/Enterprise-Tiers</li>
+        </ul>
+        <div class="pc-meta"><span class="pc-price">$2-30 / 1M Tokens</span><span class="pc-badge">Fuehrend</span></div>
+      </div>
+      <div class="provider-card reveal reveal-delay-1">
+        <div class="pc-head"><div class="pc-icon"><svg viewBox="0 0 24 24" width="24" height="24"><circle cx="12" cy="12" r="9" fill="none" stroke="#d4a574" stroke-width="1.5"/><path d="M12 7v5l3 3" stroke="#d4a574" stroke-width="1.5" stroke-linecap="round"/></svg></div><div><h3>Anthropic (Claude)</h3></div></div>
+        <div class="pc-tagline">Sicherheitsfokussierte KI-Forschung</div>
+        <ul class="pc-features">
+          <li>Claude 3.5 Sonnet, Opus, Haiku – verschiedene Leistungsstufen</li>
+          <li>200K Token Kontextfenster</li>
+          <li>Fokus auf Harmlosigkeit und Zuverlaessigkeit</li>
+          <li>Constitutional AI als Sicherheitsrahmen</li>
+          <li>Starke Code- und Analysefaehigkeiten</li>
+          <li>API und claude.ai als Plattform</li>
+        </ul>
+        <div class="pc-meta"><span class="pc-price">$0.25-75 / 1M Tokens</span><span class="pc-badge">Sicherheit</span></div>
+      </div>
+      <div class="provider-card reveal">
+        <div class="pc-head"><div class="pc-icon"><svg viewBox="0 0 24 24" width="24" height="24"><circle cx="8" cy="12" r="4" fill="none" stroke="#4285f4" stroke-width="1.5"/><circle cx="16" cy="8" r="3" fill="none" stroke="#ea4335" stroke-width="1.5"/><circle cx="16" cy="16" r="3" fill="none" stroke="#34a853" stroke-width="1.5"/></svg></div><div><h3>Google (Gemini)</h3></div></div>
+        <div class="pc-tagline">Multimodale KI von Google DeepMind</div>
+        <ul class="pc-features">
+          <li>Gemini Ultra, Pro, Flash – breite Modellauswahl</li>
+          <li>Native Multimodalitaet (Text, Bild, Audio, Video)</li>
+          <li>1M+ Token Kontextfenster</li>
+          <li>Integration in Google Workspace und Cloud</li>
+          <li>Vertex AI fuer Enterprise-Deployment</li>
+          <li>Gemma als Open-Source-Modell</li>
+        </ul>
+        <div class="pc-meta"><span class="pc-price">$0.075-10 / 1M Tokens</span><span class="pc-badge">Multimodal</span></div>
+      </div>
+      <div class="provider-card reveal reveal-delay-1">
+        <div class="pc-head"><div class="pc-icon purple"><svg viewBox="0 0 24 24" width="24" height="24"><path d="M12 2L2 7l10 5 10-5L12 2z" fill="none" stroke="#1877f2" stroke-width="1.5"/><path d="M2 17l10 5 10-5" fill="none" stroke="#1877f2" stroke-width="1.5"/><path d="M2 12l10 5 10-5" fill="none" stroke="#1877f2" stroke-width="1.5"/></svg></div><div><h3>Meta (Llama)</h3></div></div>
+        <div class="pc-tagline">Fuehrendes Open-Source-KI-Oekosystem</div>
+        <ul class="pc-features">
+          <li>Llama 3.1 405B – groesstes freies Modell</li>
+          <li>Kommerzielle Nutzung erlaubt</li>
+          <li>8B, 70B, 405B Varianten</li>
+          <li>Grosse Community und Fine-Tuning-Oekosystem</li>
+          <li>Lokale Ausfuehrung moeglich</li>
+          <li>Ollama, vLLM, llama.cpp kompatibel (citation:8)</li>
+        </ul>
+        <div class="pc-meta"><span class="pc-price">Open Source</span><span class="pc-badge">Open Source</span></div>
+      </div>
+      <div class="provider-card reveal">
+        <div class="pc-head"><div class="pc-icon warm"><svg viewBox="0 0 24 24" width="24" height="24"><polygon points="12,2 22,8.5 22,15.5 12,22 2,15.5 2,8.5" fill="none" stroke="#ff7000" stroke-width="1.5"/><text x="12" y="15" text-anchor="middle" fill="#ff7000" font-size="6" font-weight="bold">M</text></svg></div><div><h3>Mistral AI</h3></div></div>
+        <div class="pc-tagline">Europaeische KI-Exzellenz aus Paris</div>
+        <ul class="pc-features">
+          <li>Mistral Large, Medium, Small – optimierte Modelle</li>
+          <li>Starke Code-Generierung</li>
+          <li>Open-Source-Modelle (7B, 8x7B MoE)</li>
+          <li>La Plateforme fuer API-Zugang</li>
+          <li>GDPR-konform, europaeisch gehostet</li>
+          <li>Le Chat als Consumer-Interface</li>
+        </ul>
+        <div class="pc-meta"><span class="pc-price">$0.2-8 / 1M Tokens</span><span class="pc-badge">Europa</span></div>
+      </div>
+      <div class="provider-card reveal reveal-delay-1">
+        <div class="pc-head"><div class="pc-icon green"><svg viewBox="0 0 24 24" width="24" height="24"><rect x="4" y="4" width="16" height="16" rx="3" fill="none" stroke="#39d353" stroke-width="1.5"/><text x="12" y="15" text-anchor="middle" fill="#39d353" font-size="6" font-weight="bold">Co</text></svg></div><div><h3>Cohere</h3></div></div>
+        <div class="pc-tagline">Enterprise-KI fuer Unternehmen</div>
+        <ul class="pc-features">
+          <li>Command R+ fuer Enterprise-Anwendungen</li>
+          <li>Exzellente RAG- und Retrieval-Faehigkeiten</li>
+          <li>Embed-Modelle fuer Vektorsuche</li>
+          <li>On-Premise Deployment-Optionen</li>
+          <li>Fokus auf Unternehmensanwendungen</li>
+          <li>Mehrsprachige Unterstuetzung</li>
+        </ul>
+        <div class="pc-meta"><span class="pc-price">$0.5-15 / 1M Tokens</span><span class="pc-badge">Enterprise</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PAGE 8: CHINESISCHE KI-ANBIETER ===== -->
+<section class="page-section" id="ki-cn">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-badge"><span class="badge-line"></span> 07 – Chinesische KI-Anbieter</div>
+      <h2>Chinas KI-Innovatoren</h2>
+      <p>Chinesische KI-Unternehmen haben 2024-2026 mit kosteneffizienten Modellen und Open-Source-Strategien die globale KI-Landschaft grundlegend veraendert. DeepSeek und Qwen zaehlen zu den meistgenutzten Modellen weltweit.</p>
+    </div>
+    <div class="providers-grid cols-2">
+      <div class="provider-card reveal">
+        <div class="pc-head"><div class="pc-icon"><svg viewBox="0 0 24 24" width="24" height="24"><circle cx="12" cy="12" r="9" fill="none" stroke="#4d6bfe" stroke-width="1.5"/><text x="12" y="15" text-anchor="middle" fill="#4d6bfe" font-size="6" font-weight="bold">DS</text></svg></div><div><h3>DeepSeek</h3></div></div>
+        <div class="pc-tagline">Kosteneffiziente KI-Modelle mit Open-Source-Ansatz</div>
+        <ul class="pc-features">
+          <li>DeepSeek-V3 und R1 – staerkste offene Reasoning-Modelle</li>
+          <li>Bruchteil der Kosten vergleichbarer westlicher Modelle</li>
+          <li>MoE-Architektur fuer effiziente Inferenz</li>
+          <li>671B Parameter, 37B aktiv pro Token</li>
+          <li>Komplett Open Source (MIT-Lizenz)</li>
+          <li>Kodex, Mathematik und Reasoning hervorragend</li>
+        </ul>
+        <div class="pc-meta"><span class="pc-price">$0.14-2 / 1M Tokens</span><span class="pc-badge">Open Source</span></div>
+      </div>
+      <div class="provider-card reveal reveal-delay-1">
+        <div class="pc-head"><div class="pc-icon warm"><svg viewBox="0 0 24 24" width="24" height="24"><circle cx="12" cy="12" r="9" fill="none" stroke="#ff6a00" stroke-width="1.5"/><text x="12" y="15" text-anchor="middle" fill="#ff6a00" font-size="6" font-weight="bold">QW</text></svg></div><div><h3>Alibaba (Qwen)</h3></div></div>
+        <div class="pc-tagline">Tongyi Qianwen – vielseitiges Sprachmodell</div>
+        <ul class="pc-features">
+          <li>Qwen2.5-Serie: 0.5B bis 72B Parameter</li>
+          <li>Exzellente mehrsprachige Faehigkeiten</li>
+          <li>Qwen-VL fuer multimodale Aufgaben</li>
+          <li>Qwen-Audio fuer Sprachverarbeitung</li>
+          <li>QwQ als Reasoning-Modell</li>
+          <li>Open Source mit Apache 2.0 Lizenz</li>
+        </ul>
+        <div class="pc-meta"><span class="pc-price">$0.3-4 / 1M Tokens</span><span class="pc-badge">Vielseitig</span></div>
+      </div>
+      <div class="provider-card reveal">
+        <div class="pc-head"><div class="pc-icon"><svg viewBox="0 0 24 24" width="24" height="24"><circle cx="12" cy="12" r="9" fill="none" stroke="#2932e1" stroke-width="1.5"/><text x="12" y="15" text-anchor="middle" fill="#2932e1" font-size="6" font-weight="bold">ER</text></svg></div><div><h3>Baidu (ERNIE)</h3></div></div>
+        <div class="pc-tagline">Wenxin – Suchintegrierte KI</div>
+        <ul class="pc-features">
+          <li>ERNIE 4.5 – fuehrendes chinesisches Sprachmodell</li>
+          <li>Tiefe Integration mit Baidu-Suche</li>
+          <li>Wenxin Yiyan als Chatbot-Plattform</li>
+          <li>Starke Faehigkeiten in chinesischer Sprache</li>
+          <li>API-Verfuegbarkeit fuer Entwickler</li>
+          <li>Plugin- und Agent-Oekosystem</li>
+        </ul>
+        <div class="pc-meta"><span class="pc-price">$0.5-8 / 1M Tokens</span><span class="pc-badge">Suche+KI</span></div>
+      </div>
+      <div class="provider-card reveal reveal-delay-1">
+        <div class="pc-head"><div class="pc-icon purple"><svg viewBox="0 0 24 24" width="24" height="24"><circle cx="12" cy="12" r="9" fill="none" stroke="#7c3aed" stroke-width="1.5"/><text x="12" y="15" text-anchor="middle" fill="#7c3aed" font-size="6" font-weight="bold">Ki</text></svg></div><div><h3>Moonshot AI (Kimi)</h3></div></div>
+        <div class="pc-tagline">Langes Kontextfenster und Dokumentenanalyse</div>
+        <ul class="pc-features">
+          <li>Kimi mit bis zu 200K Token Kontext</li>
+          <li>Exzellent fuer lange Dokumente und Buecher</li>
+          <li>Moonshot-v1 Modellserie</li>
+          <li>Starke Web-Suche-Integration</li>
+          <li>Fuer den chinesischen Markt optimiert</li>
+          <li>Wachsendes API-Angebot</li>
+        </ul>
+        <div class="pc-meta"><span class="pc-price">$0.4-6 / 1M Tokens</span><span class="pc-badge">Lang-Kontext</span></div>
+      </div>
+      <div class="provider-card reveal">
+        <div class="pc-head"><div class="pc-icon green"><svg viewBox="0 0 24 24" width="24" height="24"><circle cx="12" cy="12" r="9" fill="none" stroke="#059669" stroke-width="1.5"/><text x="12" y="15" text-anchor="middle" fill="#059669" font-size="6" font-weight="bold">GLM</text></svg></div><div><h3>Zhipu AI (ChatGLM)</h3></div></div>
+        <div class="pc-tagline">Akademische KI-Exzellenz aus Tsinghua</div>
+        <ul class="pc-features">
+          <li>GLM-4-Serie mit starken Reasoning-Faehigkeiten</li>
+          <li>ChatGLM als Open-Source-Chatbot</li>
+          <li>GLM-130B als grosses Open-Source-Modell</li>
+          <li>Starke akademische Grundlagenforschung</li>
+          <li>CodeGeeX fuer Code-Generierung</li>
+          <li>CogView fuer Bildgenerierung</li>
+        </ul>
+        <div class="pc-meta"><span class="pc-price">$0.3-5 / 1M Tokens</span><span class="pc-badge">Forschung</span></div>
+      </div>
+      <div class="provider-card reveal reveal-delay-1">
+        <div class="pc-head"><div class="pc-icon warm"><svg viewBox="0 0 24 24" width="24" height="24"><circle cx="12" cy="12" r="9" fill="none" stroke="#fe2c55" stroke-width="1.5"/><text x="12" y="15" text-anchor="middle" fill="#fe2c55" font-size="6" font-weight="bold">DB</text></svg></div><div><h3>ByteDance (Doubao)</h3></div></div>
+        <div class="pc-tagline">Consumer-KI mit Milliarden Nutzern</div>
+        <ul class="pc-features">
+          <li>Doubao als fuehrender KI-Chatbot in China</li>
+          <li>Skalierung durch TikTok/Douyin Oekosystem</li>
+          <li>Volcengine API fuer Entwickler</li>
+          <li>Multimodale Faehigkeiten (Text, Bild, Video)</li>
+          <li>Starker Fokus auf Unterhaltung und Kreativitaet</li>
+          <li>Guenstige API-Preise durch eigene Infrastruktur</li>
+        </ul>
+        <div class="pc-meta"><span class="pc-price">$0.2-3 / 1M Tokens</span><span class="pc-badge">Consumer</span></div>
+      </div>
+    </div>
+    <h3 style="margin:3rem 0 1rem" class="reveal">KI-Anbieter Preisvergleich</h3>
+    <div class="table-wrap reveal reveal-delay-1">
+      <table class="comp-table">
+        <thead>
+          <tr><th>Anbieter</th><th>Flaggschiff-Modell</th><th>Input ($/1M)</th><th>Output ($/1M)</th><th>Kontext</th><th>Open Source</th></tr>
+        </thead>
+        <tbody>
+          <tr><td class="highlight">OpenAI</td><td>GPT-4o</td><td>$2.50</td><td>$10.00</td><td>128K</td><td>Nein</td></tr>
+          <tr><td class="highlight">Anthropic</td><td>Claude 3.5 Sonnet</td><td>$3.00</td><td>$15.00</td><td>200K</td><td>Nein</td></tr>
+          <tr><td class="highlight">Google</td><td>Gemini 1.5 Pro</td><td>$1.25</td><td>$5.00</td><td>1M+</td><td>Teilweise</td></tr>
+          <tr><td class="highlight">Meta</td><td>Llama 3.1 405B</td><td colspan="2" style="text-align:center">Selbst gehostet / API-Anbieter</td><td>128K</td><td>Ja</td></tr>
+          <tr><td>Mistral</td><td>Mistral Large</td><td>$2.00</td><td>$6.00</td><td>128K</td><td>Teilweise</td></tr>
+          <tr><td>DeepSeek</td><td>DeepSeek-V3</td><td>$0.27</td><td>$1.10</td><td>128K</td><td>Ja</td></tr>
+          <tr><td>Alibaba</td><td>Qwen2.5-72B</td><td>$0.50</td><td>$2.00</td><td>128K</td><td>Ja</td></tr>
+          <tr><td>Baidu</td><td>ERNIE 4.5</td><td>$1.20</td><td>$4.00</td><td>128K</td><td>Nein</td></tr>
+          <tr><td>Moonshot</td><td>Kimi</td><td>$0.60</td><td>$2.40</td><td>200K</td><td>Nein</td></tr>
+          <tr><td>Zhipu AI</td><td>GLM-4</td><td>$0.70</td><td>$2.80</td><td>128K</td><td>Teilweise</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PAGE 9: VPS-EMPFEHLUNGEN ===== -->
+<section class="page-section" id="vps">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-badge"><span class="badge-line"></span> 08 – VPS-Empfehlungen</div>
+      <h2>VPS-Empfehlungen fuer KI-Workloads</h2>
+      <p>Die richtige VPS-Auswahl haengt von Ihrem spezifischen Anwendungsfall ab. Hier finden Sie unsere Empfehlungen fuer verschiedene Szenarien – von Entwicklung bis Produktion.</p>
+    </div>
+    <div class="tier-grid">
+      <div class="tier-card reveal">
+        <h3>Entwicklung & Test</h3>
+        <div class="tier-sub">Shared Resources – Ideal zum Experimentieren</div>
+        <div class="tier-price">$5-15 <span>/Monat</span></div>
+        <div class="tier-desc">Perfekt fuer Prototyping, kleine KI-Experimente und die Entwicklung von Anwendungen, die KI-APIs nutzen.</div>
+        <ul class="tier-list">
+          <li>2-4 vCPU (Shared)</li>
+          <li>4-8 GB RAM</li>
+          <li>50-80 GB SSD</li>
+          <li>API-basierte KI-Nutzung</li>
+        </ul>
+        <div class="tags">
+          <span class="tag">Hetzner CX21</span>
+          <span class="tag">DO Basic Droplet</span>
+          <span class="tag">Vultr Cloud Compute</span>
+        </div>
+      </div>
+      <div class="tier-card featured reveal reveal-delay-1">
+        <h3>KI-Inferenz (klein)</h3>
+        <div class="tier-sub">Dedicated Resources – Lokale kleine Modelle</div>
+        <div class="tier-price">$30-80 <span>/Monat</span></div>
+        <div class="tier-desc">Fuer das Ausfuehren kleinerer KI-Modelle (7B-13B) oder als GPU-Instanz fuer gelegentliche Inferenz-Aufgaben.</div>
+        <ul class="tier-list">
+          <li>4-8 vCPU (Dedicated)</li>
+          <li>16-32 GB RAM</li>
+          <li>GPU: NVIDIA T4 oder A10</li>
+          <li>100-200 GB NVMe SSD</li>
+          <li>Ollama oder vLLM empfohlen</li>
+        </ul>
+        <div class="tags">
+          <span class="tag accent">Hetzner GPU AX102</span>
+          <span class="tag accent">Lambda Cloud</span>
+          <span class="tag accent">RunPod</span>
+        </div>
+      </div>
+      <div class="tier-card reveal reveal-delay-2">
+        <h3>Produktion & Enterprise</h3>
+        <div class="tier-sub">High-Performance – Skalierbare KI-Pipelines</div>
+        <div class="tier-price">$200-2000+ <span>/Monat</span></div>
+        <div class="tier-desc">Fuer Produktionsworkloads mit hohem Traffic, grosse Modelle oder Multi-GPU-Setups fuer Training und Fine-Tuning.</div>
+        <ul class="tier-list">
+          <li>16-96 vCPU (Dedicated)</li>
+          <li>64-512 GB RAM</li>
+          <li>Multi-GPU (A100, H100)</li>
+          <li>1+ TB NVMe SSD</li>
+          <li>Load Balancer, Auto-Scaling</li>
+        </ul>
+        <div class="tags">
+          <span class="tag">AWS p4d</span>
+          <span class="tag">Azure ND</span>
+          <span class="tag">GCP a3</span>
+          <span class="tag">CoreWeave</span>
+        </div>
+      </div>
+    </div>
+    <h3 style="margin:3rem 0 1rem" class="reveal">Entscheidungsmatrix</h3>
+    <div class="table-wrap reveal reveal-delay-1">
+      <table class="comp-table">
+        <thead>
+          <tr><th>Anwendungsfall</th><th>Empfohlener Typ</th><th>Min. RAM</th><th>GPU</th><th>Budget/Mo.</th><th>Empfehlung</th></tr>
+        </thead>
+        <tbody>
+          <tr><td class="highlight">KI-APIs nutzen</td><td>Shared VPS</td><td>2 GB</td><td>Nicht noetig</td><td>$5-15</td><td>Hetzner, DigitalOcean</td></tr>
+          <tr><td class="highlight">Lokale LLMs (7B)</td><td>Dedicated VPS</td><td>16 GB</td><td>T4 (16GB)</td><td>$30-60</td><td>RunPod, Lambda</td></tr>
+          <tr><td class="highlight">Lokale LLMs (30B)</td><td>GPU Server</td><td>32 GB</td><td>RTX 4090</td><td>$80-200</td><td>Hetzner GPU, Vast.ai</td></tr>
+          <tr><td class="highlight">Lokale LLMs (70B)</td><td>High-Memory GPU</td><td>64+ GB</td><td>A100 80GB</td><td>$400-1500</td><td>CoreWeave, AWS</td></tr>
+          <tr><td class="highlight">KI-Training</td><td>Multi-GPU Cluster</td><td>256+ GB</td><td>Multi H100</td><td>$2000+</td><td>AWS, Azure, GCP</td></tr>
+          <tr><td class="highlight">RAG-Anwendung</td><td>Dedicated VPS</td><td>8-16 GB</td><td>Optional</td><td>$20-60</td><td>Hetzner, Exoscale</td></tr>
+          <tr><td class="highlight">AI-Agent-Hosting</td><td>Dedicated VPS</td><td>4-8 GB</td><td>Nicht noetig</td><td>$15-40</td><td>DigitalOcean, Hetzner</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PAGE 10: KONTAKT ===== -->
+<section class="page-section" id="kontakt">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-badge"><span class="badge-line"></span> 09 – Kontakt & Community</div>
+      <h2>Kontaktieren Sie uns</h2>
+      <p>Haben Sie Fragen zu einem bestimmten Anbieter oder brauchen Sie eine individuelle Empfehlung? Wir helfen Ihnen gerne weiter.</p>
+    </div>
+    <div class="contact-grid reveal">
+      <div>
+        <h3 style="margin-bottom:1.5rem">Unsere Mission</h3>
+        <p style="margin-bottom:1rem">AI-VPS ist eine unabhngige Informationsplattform, die Unternehmen und Entwicklern bei der Auswahl der richtigen KI-Infrastruktur unterstuetzt. Wir vergleichen Anbieter objektiv anhand von Leistung, Preis, Sicherheit und Eignung fuer verschiedene Anfaelle.</p>
+        <p style="margin-bottom:1.5rem">Unser Team verfolgt taeglich die neuesten Entwicklungen im Bereich Cloud-Computing und KI, um Ihnen aktuelle und fundierte Empfehlungen geben zu koennen.</p>
+        <div class="info-grid" style="grid-template-columns:1fr 1fr">
+          <div class="info-card">
+            <div class="ic-icon"><svg><use href="#ico-globe"/></svg></div>
+            <h4>GitHub</h4>
+            <p style="font-size:.85rem">ai-vps.github.io</p>
+          </div>
+          <div class="info-card">
+            <div class="ic-icon"><svg><use href="#ico-send"/></svg></div>
+            <h4>E-Mail</h4>
+            <p style="font-size:.85rem">kontakt@ai-vps.dev</p>
+          </div>
+        </div>
+      </div>
+      <div>
+        <form class="contact-form" onsubmit="return false">
+          <div class="form-field">
+            <label for="name">Name</label>
+            <input type="text" id="name" placeholder="Ihr Name">
+          </div>
+          <div class="form-field">
+            <label for="email">E-Mail</label>
+            <input type="email" id="email" placeholder="ihre@email.de">
+          </div>
+          <div class="form-field">
+            <label for="subject">Betreff</label>
+            <input type="text" id="subject" placeholder="Anfrage zu...">
+          </div>
+          <div class="form-field">
+            <label for="message">Nachricht</label>
+            <textarea id="message" placeholder="Ihre Nachricht..."></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary" style="align-self:flex-start">
+            <svg width="18" height="18"><use href="#ico-send"/></svg>
+            Nachricht senden
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="nav-logo" style="margin-bottom:.5rem"><svg width="8" height="8"><circle cx="4" cy="4" r="4" fill="#00d4ff"/></svg> AI-VPS</div>
+        <p>Ihre definitive Quelle fuer KI-Infrastruktur und Cloud-Ressourcen. Unabhaengig. Aktuell. Fundiert.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Cloud-Anbieter</h4>
+        <a href="#cloud-intl">AWS</a>
+        <a href="#cloud-intl">Microsoft Azure</a>
+        <a href="#cloud-intl">Google Cloud</a>
+        <a href="#cloud-intl">Hetzner</a>
+        <a href="#cloud-cn">Alibaba Cloud</a>
+        <a href="#cloud-cn">Huawei Cloud</a>
+      </div>
+      <div class="footer-col">
+        <h4>KI-Anbieter</h4>
+        <a href="#ki-intl">OpenAI</a>
+        <a href="#ki-intl">Anthropic</a>
+        <a href="#ki-cn">DeepSeek</a>
+        <a href="#ki-cn">Qwen</a>
+        <a href="#ki-intl">Mistral AI</a>
+        <a href="#ki-intl">Meta Llama</a>
+      </div>
+      <div class="footer-col">
+        <h4>Ressourcen</h4>
+        <a href="#vps">VPS-Empfehlungen</a>
+        <a href="#landschaft">Cloud-Modelle</a>
+        <a href="#ki-ueberblick">Hardware-Guide</a>
+        <a href="#kontakt">Kontakt</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>2026 AI-VPS. Alle Rechte vorbehalten.</span>
+      <span>ai-vps.github.io</span>
+    </div>
+  </div>
+</footer>
+
+<!-- Scroll to top -->
+<button class="scroll-top" id="scrollTop" aria-label="Nach oben">
+  <svg width="20" height="20"><use href="#ico-arrow-up"/></svg>
+</button>
+
+<script>
+// Navigation toggle
+const navToggle = document.getElementById('navToggle');
+const navLinks = document.getElementById('navLinks');
+navToggle.addEventListener('click', () => navLinks.classList.toggle('open'));
+navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('open')));
+
+// Progress bar
+const progressBar = document.getElementById('progressBar');
+window.addEventListener('scroll', () => {
+  const h = document.documentElement;
+  const pct = (h.scrollTop / (h.scrollHeight - h.clientHeight)) * 100;
+  progressBar.style.width = pct + '%';
+});
+
+// Active nav link
+const sections = document.querySelectorAll('.page-section, .hero');
+const navItems = document.querySelectorAll('.nav-links a');
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      const id = e.target.id;
+      navItems.forEach(a => {
+        a.classList.toggle('active', a.getAttribute('href') === '#' + id);
+      });
+    }
+  });
+}, { rootMargin: '-30% 0px -60% 0px' });
+sections.forEach(s => observer.observe(s));
+
+// Reveal on scroll
+const reveals = document.querySelectorAll('.reveal');
+const revealObs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); revealObs.unobserve(e.target); } });
+}, { threshold: 0.1 });
+reveals.forEach(r => revealObs.observe(r));
+
+// Scroll to top button
+const scrollTopBtn = document.getElementById('scrollTop');
+window.addEventListener('scroll', () => {
+  scrollTopBtn.classList.toggle('show', window.scrollY > 600);
+});
+scrollTopBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+</script>
+</body>
+</html>
