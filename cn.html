@@ -1,0 +1,1319 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>AI-VPS | 全球AI服务与VPS计算资源精选指南</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@300;400;500&family=Noto+Serif+SC:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#08080e;--surface:#0e0e18;--surface-2:#141424;--surface-3:#1c1c30;
+  --accent:#00d4aa;--accent-dim:#00d4aa22;--accent-2:#ff6b35;--accent-2-dim:#ff6b3522;
+  --text:#e4e4f0;--text-muted:#6a6a84;--text-dim:#3a3a54;
+  --border:#1e1e36;--glow:0 0 40px #00d4aa33;
+  --font-display:'Syne',sans-serif;--font-body:'DM Mono','Noto Serif SC',monospace;
+  --font-serif:'Noto Serif SC',serif;
+}
+html{scroll-behavior:smooth;background:var(--bg);color:var(--text);font-size:16px;scrollbar-width:thin;scrollbar-color:var(--accent) var(--surface)}
+body{font-family:var(--font-body);line-height:1.7;overflow-x:hidden;background:var(--bg)}
+::-webkit-scrollbar{width:6px}
+::-webkit-scrollbar-track{background:var(--surface)}
+::-webkit-scrollbar-thumb{background:var(--accent);border-radius:3px}
+h1,h2,h3,h4,h5{font-family:var(--font-display);font-weight:700;line-height:1.2}
+a{color:var(--accent);text-decoration:none;transition:color .3s}
+a:hover{color:#fff}
+
+/* NAV */
+.nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(8,8,14,.92);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);padding:0 2rem;height:56px;display:flex;align-items:center;justify-content:space-between}
+.nav-brand{font-family:var(--font-display);font-weight:800;font-size:1.1rem;letter-spacing:.05em;color:var(--accent)}
+.nav-brand span{color:var(--text-muted);font-weight:400;font-size:.75rem;margin-left:.5rem}
+.nav-links{display:flex;gap:0;list-style:none}
+.nav-links a{display:block;padding:0 .7rem;font-size:.65rem;color:var(--text-muted);letter-spacing:.08em;text-transform:uppercase;transition:color .3s;white-space:nowrap}
+.nav-links a:hover,.nav-links a.active{color:var(--accent)}
+
+/* PAGE INDICATOR */
+.page-indicator{position:fixed;right:1.5rem;top:50%;transform:translateY(-50%);z-index:900;display:flex;flex-direction:column;gap:12px}
+.page-dot{width:10px;height:10px;border-radius:50%;border:1.5px solid var(--text-dim);background:transparent;cursor:pointer;transition:all .3s;position:relative}
+.page-dot.active{border-color:var(--accent);background:var(--accent);box-shadow:0 0 12px var(--accent)}
+.page-dot::after{content:attr(data-label);position:absolute;right:20px;top:50%;transform:translateY(-50%);font-size:.55rem;color:var(--text-muted);white-space:nowrap;opacity:0;transition:opacity .3s;pointer-events:none}
+.page-dot:hover::after{opacity:1}
+
+/* SECTIONS */
+.page-section{min-height:100vh;padding:8rem 2rem 4rem;position:relative;overflow:hidden}
+.page-section:nth-child(even){background:var(--surface)}
+.container{max-width:1280px;margin:0 auto}
+.section-header{margin-bottom:3rem;position:relative}
+.section-num{font-family:var(--font-display);font-size:.65rem;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);margin-bottom:.5rem;display:block}
+.section-title{font-size:clamp(2rem,4vw,3.2rem);margin-bottom:1rem;background:linear-gradient(135deg,var(--text),var(--accent));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.section-subtitle{color:var(--text-muted);font-size:.85rem;max-width:600px}
+
+/* HERO */
+.hero{display:flex;align-items:center;justify-content:center;text-align:center;position:relative}
+.hero-bg{position:absolute;inset:0;z-index:0}
+.hero-content{position:relative;z-index:10;max-width:900px}
+.hero-title{font-size:clamp(2.8rem,7vw,5.5rem);font-weight:800;letter-spacing:-.03em;line-height:1;margin-bottom:1.5rem}
+.hero-title .accent{color:var(--accent)}
+.hero-title .accent-2{color:var(--accent-2)}
+.hero-desc{font-size:1rem;color:var(--text-muted);max-width:600px;margin:0 auto 2.5rem}
+.hero-stats{display:flex;gap:3rem;justify-content:center;flex-wrap:wrap}
+.hero-stat{text-align:center}
+.hero-stat-num{font-family:var(--font-display);font-size:2.4rem;font-weight:800;color:var(--accent)}
+.hero-stat-label{font-size:.65rem;color:var(--text-muted);letter-spacing:.1em;text-transform:uppercase}
+.hero-cta{display:flex;gap:1rem;justify-content:center;margin-top:2.5rem}
+.btn{display:inline-flex;align-items:center;gap:.5rem;padding:.8rem 2rem;border:1px solid var(--border);background:transparent;color:var(--text);font-family:var(--font-display);font-size:.8rem;letter-spacing:.06em;border-radius:2px;cursor:pointer;transition:all .3s}
+.btn-primary{background:var(--accent);color:var(--bg);border-color:var(--accent)}
+.btn-primary:hover{box-shadow:var(--glow);transform:translateY(-2px)}
+.btn:hover{border-color:var(--accent);color:var(--accent)}
+
+/* CARDS */
+.card-grid{display:grid;gap:1.5rem}
+.card-grid-2{grid-template-columns:repeat(auto-fill,minmax(380px,1fr))}
+.card-grid-3{grid-template-columns:repeat(auto-fill,minmax(300px,1fr))}
+.card-grid-4{grid-template-columns:repeat(auto-fill,minmax(240px,1fr))}
+.card{background:var(--surface-2);border:1px solid var(--border);border-radius:4px;padding:1.8rem;position:relative;overflow:hidden;transition:all .4s}
+.card:hover{border-color:var(--accent);transform:translateY(-4px);box-shadow:0 12px 40px rgba(0,212,170,.08)}
+.card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--accent),transparent);opacity:0;transition:opacity .4s}
+.card:hover::before{opacity:1}
+.card-icon{width:48px;height:48px;margin-bottom:1rem;opacity:.9}
+.card-title{font-family:var(--font-display);font-size:1.1rem;margin-bottom:.5rem;color:var(--text)}
+.card-badge{display:inline-block;font-size:.55rem;padding:.2rem .6rem;border:1px solid var(--accent);color:var(--accent);letter-spacing:.1em;text-transform:uppercase;margin-bottom:.8rem;border-radius:1px}
+.card-badge-warm{border-color:var(--accent-2);color:var(--accent-2)}
+.card-text{font-size:.78rem;color:var(--text-muted);line-height:1.7}
+.card-tag{display:inline-block;font-size:.55rem;padding:.15rem .5rem;background:var(--surface-3);color:var(--text-muted);border-radius:1px;margin-right:.3rem;margin-top:.3rem}
+.card-price{font-family:var(--font-display);font-size:1.3rem;font-weight:700;color:var(--accent);margin-top:.8rem}
+.card-price span{font-size:.65rem;font-weight:400;color:var(--text-muted)}
+
+/* PROVIDER CARDS */
+.provider-card{display:grid;grid-template-columns:1fr;gap:1rem}
+.provider-header{display:flex;align-items:center;gap:1rem}
+.provider-logo{width:40px;height:40px;flex-shrink:0}
+.provider-name{font-family:var(--font-display);font-size:1.05rem;font-weight:700}
+.provider-origin{font-size:.6rem;color:var(--text-muted);letter-spacing:.1em}
+.provider-models{display:flex;flex-wrap:wrap;gap:.3rem;margin-top:.3rem}
+.model-tag{font-size:.55rem;padding:.15rem .5rem;border:1px solid var(--border);color:var(--text-muted);border-radius:1px}
+.provider-features{list-style:none;margin-top:.5rem}
+.provider-features li{font-size:.75rem;color:var(--text-muted);padding:.2rem 0;padding-left:1.2rem;position:relative}
+.provider-features li::before{content:'';position:absolute;left:0;top:.6rem;width:6px;height:1px;background:var(--accent)}
+
+/* COMPARISON TABLE */
+.table-wrap{overflow-x:auto;margin:2rem 0;border:1px solid var(--border);border-radius:4px}
+.comp-table{width:100%;border-collapse:collapse;font-size:.75rem}
+.comp-table th{background:var(--surface-3);font-family:var(--font-display);font-weight:600;text-align:left;padding:.8rem 1rem;border-bottom:1px solid var(--border);color:var(--accent);white-space:nowrap}
+.comp-table td{padding:.7rem 1rem;border-bottom:1px solid var(--border);color:var(--text-muted);vertical-align:top}
+.comp-table tr:hover td{background:rgba(0,212,170,.03);color:var(--text)}
+.comp-table .highlight{color:var(--accent);font-weight:500}
+
+/* TWO COL */
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center}
+.two-col.reverse{direction:rtl}
+.two-col.reverse > *{direction:ltr}
+
+/* TAB SYSTEM */
+.tabs{display:flex;gap:0;border-bottom:1px solid var(--border);margin-bottom:2rem}
+.tab-btn{padding:.8rem 1.5rem;font-family:var(--font-display);font-size:.75rem;letter-spacing:.06em;color:var(--text-muted);background:none;border:none;border-bottom:2px solid transparent;cursor:pointer;transition:all .3s}
+.tab-btn.active{color:var(--accent);border-bottom-color:var(--accent)}
+.tab-content{display:none}
+.tab-content.active{display:block;animation:fadeUp .5s ease}
+
+/* TICKER */
+.ticker{background:var(--surface);border-bottom:1px solid var(--border);padding:.4rem 0;overflow:hidden;white-space:nowrap}
+.ticker-inner{display:inline-flex;animation:ticker 30s linear infinite}
+.ticker-item{display:inline-flex;align-items:center;gap:.5rem;padding:0 2rem;font-size:.65rem;color:var(--text-muted)}
+.ticker-item .up{color:var(--accent)}
+.ticker-item .down{color:var(--accent-2)}
+
+/* FOOTER */
+.site-footer{background:var(--surface);border-top:1px solid var(--border);padding:4rem 2rem 2rem}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:3rem;max-width:1280px;margin:0 auto}
+.footer-brand{font-family:var(--font-display);font-weight:800;font-size:1.2rem;color:var(--accent);margin-bottom:1rem}
+.footer-desc{font-size:.75rem;color:var(--text-muted);line-height:1.8}
+.footer-col h4{font-family:var(--font-display);font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;color:var(--text);margin-bottom:1rem}
+.footer-col ul{list-style:none}
+.footer-col li{padding:.3rem 0}
+.footer-col a{font-size:.75rem;color:var(--text-muted)}
+.footer-col a:hover{color:var(--accent)}
+.footer-bottom{max-width:1280px;margin:2rem auto 0;padding-top:2rem;border-top:1px solid var(--border);display:flex;justify-content:space-between;font-size:.65rem;color:var(--text-dim)}
+
+/* ANIMATIONS */
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@keyframes pulse{0%,100%{opacity:.4}50%{opacity:1}}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+@keyframes dash{to{stroke-dashoffset:0}}
+@keyframes glow{0%,100%{filter:drop-shadow(0 0 4px var(--accent))}50%{filter:drop-shadow(0 0 20px var(--accent))}}
+
+.reveal{opacity:0;transform:translateY(30px);transition:all .7s cubic-bezier(.4,0,.2,1)}
+.reveal.visible{opacity:1;transform:translateY(0)}
+.reveal-delay-1{transition-delay:.1s}
+.reveal-delay-2{transition-delay:.2s}
+.reveal-delay-3{transition-delay:.3s}
+.reveal-delay-4{transition-delay:.4s}
+
+/* USE CASE CARDS */
+.use-case-card{border-left:3px solid var(--accent);padding-left:1.5rem}
+.use-case-card.warm{border-left-color:var(--accent-2)}
+
+/* SECTION DIVIDER */
+.section-divider{height:1px;background:linear-gradient(90deg,transparent,var(--border),transparent);margin:0}
+
+/* RESPONSIVE */
+@media(max-width:1024px){
+  .two-col{grid-template-columns:1fr}
+  .footer-grid{grid-template-columns:1fr 1fr}
+  .page-indicator{display:none}
+  .nav-links{display:none}
+}
+@media(max-width:640px){
+  .page-section{padding:6rem 1rem 3rem}
+  .card-grid-2,.card-grid-3{grid-template-columns:1fr}
+  .hero-stats{gap:1.5rem}
+  .footer-grid{grid-template-columns:1fr}
+  .hero-title{font-size:2.4rem}
+}
+</style>
+</head>
+<body>
+
+<!-- NAVIGATION -->
+<nav class="nav">
+  <div class="nav-brand">AI-VPS<span>ai-vps.github.io</span></div>
+  <ul class="nav-links">
+    <li><a href="#hero">Home</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#ai-intl">AI Intl</a></li>
+    <li><a href="#ai-cn">AI CN</a></li>
+    <li><a href="#cloud-intl">Cloud Intl</a></li>
+    <li><a href="#cloud-cn">Cloud CN</a></li>
+    <li><a href="#gpu">GPU</a></li>
+    <li><a href="#compare">Compare</a></li>
+    <li><a href="#cases">Cases</a></li>
+    <li><a href="#footer">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- PAGE INDICATOR -->
+<div class="page-indicator">
+  <div class="page-dot active" data-label="Home" data-target="hero"></div>
+  <div class="page-dot" data-label="About" data-target="about"></div>
+  <div class="page-dot" data-label="AI International" data-target="ai-intl"></div>
+  <div class="page-dot" data-label="AI China" data-target="ai-cn"></div>
+  <div class="page-dot" data-label="Cloud International" data-target="cloud-intl"></div>
+  <div class="page-dot" data-label="Cloud China" data-target="cloud-cn"></div>
+  <div class="page-dot" data-label="GPU Compute" data-target="gpu"></div>
+  <div class="page-dot" data-label="Comparison" data-target="compare"></div>
+  <div class="page-dot" data-label="Use Cases" data-target="cases"></div>
+  <div class="page-dot" data-label="Contact" data-target="footer"></div>
+</div>
+
+<!-- TICKER -->
+<div class="ticker">
+  <div class="ticker-inner">
+    <div class="ticker-item">AWS p5.48xlarge <span class="up">H100x8 $98.32/hr</span></div>
+    <div class="ticker-item">Azure ND H100 v5 <span class="up">$94.80/hr</span></div>
+    <div class="ticker-item">GCP a3-highgpu-8g <span class="up">$102.40/hr</span></div>
+    <div class="ticker-item">Alibaba Cloud GN8 <span class="up">H800x8 &yen;680/hr</span></div>
+    <div class="ticker-item">Tencent Cloud GN10X <span class="down">A100x8 &yen;520/hr</span></div>
+    <div class="ticker-item">OpenAI GPT-4o <span class="down">$5/$15 per 1M</span></div>
+    <div class="ticker-item">Claude 4 Opus <span class="up">$15/$75 per 1M</span></div>
+    <div class="ticker-item">Gemini 2.5 Pro <span class="down">$1.25/$10 per 1M</span></div>
+    <div class="ticker-item">Qwen-Max <span class="down">&yen;20/&yen;60 per 1M</span></div>
+    <div class="ticker-item">DeepSeek-V3 <span class="up">&yen;1/&yen;2 per 1M</span></div>
+    <div class="ticker-item">AWS p5.48xlarge <span class="up">H100x8 $98.32/hr</span></div>
+    <div class="ticker-item">Azure ND H100 v5 <span class="up">$94.80/hr</span></div>
+    <div class="ticker-item">GCP a3-highgpu-8g <span class="up">$102.40/hr</span></div>
+    <div class="ticker-item">Alibaba Cloud GN8 <span class="up">H800x8 &yen;680/hr</span></div>
+    <div class="ticker-item">Tencent Cloud GN10X <span class="down">A100x8 &yen;520/hr</span></div>
+  </div>
+</div>
+
+<!-- ===================== PAGE 1: HERO ===================== -->
+<section id="hero" class="page-section hero">
+  <div class="hero-bg">
+    <svg width="100%" height="100%" viewBox="0 0 1200 800" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+      <defs>
+        <radialGradient id="g1" cx="30%" cy="40%"><stop offset="0%" stop-color="#00d4aa" stop-opacity=".15"/><stop offset="100%" stop-color="#00d4aa" stop-opacity="0"/></radialGradient>
+        <radialGradient id="g2" cx="70%" cy="60%"><stop offset="0%" stop-color="#ff6b35" stop-opacity=".1"/><stop offset="100%" stop-color="#ff6b35" stop-opacity="0"/></radialGradient>
+        <linearGradient id="line-g" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#00d4aa" stop-opacity=".6"/><stop offset="100%" stop-color="#ff6b35" stop-opacity=".2"/></linearGradient>
+      </defs>
+      <rect width="1200" height="800" fill="url(#g1)"/>
+      <rect width="1200" height="800" fill="url(#g2)"/>
+      <!-- Grid -->
+      <g stroke="#1a1a36" stroke-width=".5" opacity=".5">
+        <line x1="0" y1="100" x2="1200" y2="100"/><line x1="0" y1="200" x2="1200" y2="200"/>
+        <line x1="0" y1="300" x2="1200" y2="300"/><line x1="0" y1="400" x2="1200" y2="400"/>
+        <line x1="0" y1="500" x2="1200" y2="500"/><line x1="0" y1="600" x2="1200" y2="600"/>
+        <line x1="0" y1="700" x2="1200" y2="700"/>
+        <line x1="100" y1="0" x2="100" y2="800"/><line x1="200" y1="0" x2="200" y2="800"/>
+        <line x1="300" y1="0" x2="300" y2="800"/><line x1="400" y1="0" x2="400" y2="800"/>
+        <line x1="500" y1="0" x2="500" y2="800"/><line x1="600" y1="0" x2="600" y2="800"/>
+        <line x1="700" y1="0" x2="700" y2="800"/><line x1="800" y1="0" x2="800" y2="800"/>
+        <line x1="900" y1="0" x2="900" y2="800"/><line x1="1000" y1="0" x2="1000" y2="800"/>
+        <line x1="1100" y1="0" x2="1100" y2="800"/>
+      </g>
+      <!-- Neural Network -->
+      <g>
+        <!-- Nodes -->
+        <circle cx="200" cy="200" r="4" fill="#00d4aa" opacity=".7"><animate attributeName="opacity" values=".3;1;.3" dur="3s" repeatCount="indefinite"/></circle>
+        <circle cx="400" cy="150" r="5" fill="#00d4aa" opacity=".5"><animate attributeName="opacity" values=".2;.8;.2" dur="4s" repeatCount="indefinite"/></circle>
+        <circle cx="600" cy="250" r="6" fill="#00d4aa" opacity=".6"><animate attributeName="opacity" values=".3;1;.3" dur="2.5s" repeatCount="indefinite"/></circle>
+        <circle cx="800" cy="180" r="4" fill="#ff6b35" opacity=".5"><animate attributeName="opacity" values=".2;.9;.2" dur="3.5s" repeatCount="indefinite"/></circle>
+        <circle cx="1000" cy="220" r="5" fill="#00d4aa" opacity=".4"><animate attributeName="opacity" values=".3;.8;.3" dur="4.5s" repeatCount="indefinite"/></circle>
+        <circle cx="300" cy="400" r="5" fill="#ff6b35" opacity=".5"><animate attributeName="opacity" values=".2;1;.2" dur="3s" repeatCount="indefinite"/></circle>
+        <circle cx="500" cy="450" r="7" fill="#00d4aa" opacity=".7"><animate attributeName="opacity" values=".4;1;.4" dur="2s" repeatCount="indefinite"/></circle>
+        <circle cx="700" cy="380" r="4" fill="#00d4aa" opacity=".4"><animate attributeName="opacity" values=".2;.7;.2" dur="5s" repeatCount="indefinite"/></circle>
+        <circle cx="900" cy="420" r="5" fill="#ff6b35" opacity=".6"><animate attributeName="opacity" values=".3;1;.3" dur="3s" repeatCount="indefinite"/></circle>
+        <circle cx="150" cy="550" r="4" fill="#00d4aa" opacity=".3"><animate attributeName="opacity" values=".2;.8;.2" dur="4s" repeatCount="indefinite"/></circle>
+        <circle cx="350" cy="600" r="6" fill="#00d4aa" opacity=".5"><animate attributeName="opacity" values=".3;1;.3" dur="3s" repeatCount="indefinite"/></circle>
+        <circle cx="550" cy="580" r="4" fill="#ff6b35" opacity=".4"><animate attributeName="opacity" values=".2;.9;.2" dur="3.5s" repeatCount="indefinite"/></circle>
+        <circle cx="750" cy="550" r="5" fill="#00d4aa" opacity=".6"><animate attributeName="opacity" values=".3;.8;.3" dur="2.5s" repeatCount="indefinite"/></circle>
+        <circle cx="950" cy="600" r="4" fill="#00d4aa" opacity=".3"><animate attributeName="opacity" values=".2;1;.2" dur="4s" repeatCount="indefinite"/></circle>
+        <!-- Connections -->
+        <line x1="200" y1="200" x2="400" y2="150" stroke="#00d4aa" stroke-width=".5" opacity=".2"/>
+        <line x1="400" y1="150" x2="600" y2="250" stroke="#00d4aa" stroke-width=".5" opacity=".15"/>
+        <line x1="600" y1="250" x2="800" y2="180" stroke="#00d4aa" stroke-width=".5" opacity=".2"/>
+        <line x1="800" y1="180" x2="1000" y2="220" stroke="#ff6b35" stroke-width=".5" opacity=".15"/>
+        <line x1="300" y1="400" x2="500" y2="450" stroke="#00d4aa" stroke-width=".5" opacity=".2"/>
+        <line x1="500" y1="450" x2="700" y2="380" stroke="#00d4aa" stroke-width=".5" opacity=".15"/>
+        <line x1="700" y1="380" x2="900" y2="420" stroke="#ff6b35" stroke-width=".5" opacity=".2"/>
+        <line x1="200" y1="200" x2="300" y2="400" stroke="#00d4aa" stroke-width=".3" opacity=".1"/>
+        <line x1="600" y1="250" x2="500" y2="450" stroke="#00d4aa" stroke-width=".3" opacity=".1"/>
+        <line x1="800" y1="180" x2="900" y2="420" stroke="#ff6b35" stroke-width=".3" opacity=".1"/>
+        <line x1="150" y1="550" x2="350" y2="600" stroke="#00d4aa" stroke-width=".5" opacity=".15"/>
+        <line x1="350" y1="600" x2="550" y2="580" stroke="#ff6b35" stroke-width=".5" opacity=".15"/>
+        <line x1="550" y1="580" x2="750" y2="550" stroke="#00d4aa" stroke-width=".5" opacity=".2"/>
+        <line x1="750" y1="550" x2="950" y2="600" stroke="#00d4aa" stroke-width=".5" opacity=".15"/>
+      </g>
+      <!-- Floating shapes -->
+      <g opacity=".06">
+        <rect x="100" y="100" width="80" height="80" rx="4" stroke="#00d4aa" stroke-width="1" fill="none" transform="rotate(15 140 140)"><animateTransform attributeName="transform" type="rotate" from="15 140 140" to="375 140 140" dur="20s" repeatCount="indefinite"/></rect>
+        <rect x="900" y="500" width="60" height="60" rx="4" stroke="#ff6b35" stroke-width="1" fill="none" transform="rotate(0 930 530)"><animateTransform attributeName="transform" type="rotate" from="0 930 530" to="-360 930 530" dur="25s" repeatCount="indefinite"/></rect>
+      </g>
+    </svg>
+  </div>
+  <div class="hero-content reveal">
+    <div class="section-num">Page 01 / 10</div>
+    <h1 class="hero-title"><span class="accent">AI</span>-<span class="accent-2">VPS</span></h1>
+    <p class="hero-desc">全球AI服务与GPU/VPS计算资源精选指南。覆盖国内外主流公有云与AI厂商，从推理API到万卡集群，为开发者、创业团队和企业决策者提供一站式选型参考。</p>
+    <div class="hero-stats">
+      <div class="hero-stat"><div class="hero-stat-num">30+</div><div class="hero-stat-label">AI Providers</div></div>
+      <div class="hero-stat"><div class="hero-stat-num">20+</div><div class="hero-stat-label">Cloud Platforms</div></div>
+      <div class="hero-stat"><div class="hero-stat-num">50+</div><div class="hero-stat-label">GPU Instance Types</div></div>
+      <div class="hero-stat"><div class="hero-stat-num">10</div><div class="hero-stat-label">Guides &amp; Reports</div></div>
+    </div>
+    <div class="hero-cta">
+      <a href="#ai-intl" class="btn btn-primary">Explore AI Providers</a>
+      <a href="#cloud-intl" class="btn">Explore Cloud VPS</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== PAGE 2: ABOUT ===================== -->
+<section id="about" class="page-section">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="section-num">Page 02 / 10</span>
+      <h2 class="section-title">Why AI-VPS Matters</h2>
+      <p class="section-subtitle">理解AI基础设施的全景图，找到最适合你的计算资源配置方案</p>
+    </div>
+
+    <div class="two-col reveal reveal-delay-1">
+      <div>
+        <h3 style="font-size:1.3rem;margin-bottom:1rem">AI时代的核心基础设施</h3>
+        <p class="card-text" style="font-size:.82rem;line-height:1.9">
+          云计算通过网络对可扩展的计算资源进行抽象、整合及共享。在AI时代，这些资源已经从传统的CPU虚拟机扩展到GPU集群、TPU阵列和专用AI加速器(citation:13)。选择合适的基础设施，直接决定了模型训练效率、推理成本和业务竞争力。
+        </p>
+        <p class="card-text" style="font-size:.82rem;line-height:1.9;margin-top:1rem">
+          公共云通常由非最终用户所有的IT基础架构构建而成，用户可按需获取计算、存储和网络资源(citation:13)。私有云则为单一用户或群组创建，提供更高的安全性和定制能力。混合云和多云架构正在成为企业AI落地的主流选择。
+        </p>
+        <div style="margin-top:1.5rem">
+          <span class="card-badge">IaaS</span>
+          <span class="card-badge">PaaS</span>
+          <span class="card-badge">SaaS</span>
+          <span class="card-badge">GPUaaS</span>
+          <span class="card-badge-warm card-badge">MaaS</span>
+        </div>
+      </div>
+      <div style="display:flex;justify-content:center">
+        <svg width="360" height="300" viewBox="0 0 360 300" fill="none">
+          <defs>
+            <linearGradient id="arch-g" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#00d4aa" stop-opacity=".3"/><stop offset="100%" stop-color="#ff6b35" stop-opacity=".1"/></linearGradient>
+          </defs>
+          <!-- Layer 1: Infrastructure -->
+          <rect x="20" y="230" width="320" height="50" rx="4" fill="none" stroke="#00d4aa" stroke-width="1" opacity=".5"/>
+          <text x="180" y="260" text-anchor="middle" fill="#00d4aa" font-size="11" font-family="DM Mono" opacity=".7">GPU / CPU / TPU Infrastructure</text>
+          <!-- Layer 2: Platform -->
+          <rect x="40" y="160" width="280" height="50" rx="4" fill="none" stroke="#00d4aa" stroke-width="1" opacity=".4"/>
+          <text x="180" y="190" text-anchor="middle" fill="#00d4aa" font-size="11" font-family="DM Mono" opacity=".6">Container Orchestration / K8s / OpenShift</text>
+          <!-- Layer 3: AI Platform -->
+          <rect x="60" y="90" width="240" height="50" rx="4" fill="none" stroke="#ff6b35" stroke-width="1" opacity=".4"/>
+          <text x="180" y="120" text-anchor="middle" fill="#ff6b35" font-size="11" font-family="DM Mono" opacity=".6">AI Framework / Model Serving</text>
+          <!-- Layer 4: Application -->
+          <rect x="80" y="20" width="200" height="50" rx="4" fill="url(#arch-g)" stroke="#00d4aa" stroke-width="1" opacity=".6"/>
+          <text x="180" y="50" text-anchor="middle" fill="#e4e4f0" font-size="11" font-family="DM Mono">Agent / Application / API</text>
+          <!-- Arrows -->
+          <line x1="180" y1="70" x2="180" y2="90" stroke="#00d4aa" stroke-width="1" opacity=".3" marker-end="url(#arrow)"/>
+          <line x1="180" y1="140" x2="180" y2="160" stroke="#00d4aa" stroke-width="1" opacity=".3"/>
+          <line x1="180" y1="210" x2="180" y2="230" stroke="#00d4aa" stroke-width="1" opacity=".3"/>
+          <defs><marker id="arrow" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6" fill="#00d4aa" opacity=".4"/></marker></defs>
+        </svg>
+      </div>
+    </div>
+
+    <div class="card-grid card-grid-4 reveal reveal-delay-2" style="margin-top:3rem">
+      <div class="card">
+        <svg class="card-icon" viewBox="0 0 48 48" fill="none"><rect x="8" y="12" width="32" height="24" rx="3" stroke="#00d4aa" stroke-width="1.5"/><circle cx="16" cy="24" r="3" stroke="#00d4aa" stroke-width="1"/><line x1="22" y1="22" x2="36" y2="22" stroke="#00d4aa" stroke-width="1" opacity=".5"/><line x1="22" y1="26" x2="32" y2="26" stroke="#00d4aa" stroke-width="1" opacity=".3"/></svg>
+        <h4 class="card-title">Model as a Service</h4>
+        <p class="card-text">通过API调用大语言模型，无需管理基础设施。按Token计费，适合快速原型和中小规模应用。</p>
+      </div>
+      <div class="card">
+        <svg class="card-icon" viewBox="0 0 48 48" fill="none"><rect x="6" y="8" width="14" height="32" rx="2" stroke="#00d4aa" stroke-width="1.5"/><rect x="24" y="8" width="14" height="32" rx="2" stroke="#00d4aa" stroke-width="1.5"/><circle cx="13" cy="16" r="2" fill="#00d4aa" opacity=".5"/><circle cx="31" cy="16" r="2" fill="#00d4aa" opacity=".5"/><line x1="10" y1="22" x2="16" y2="22" stroke="#00d4aa" stroke-width="1" opacity=".3"/><line x1="28" y1="22" x2="34" y2="22" stroke="#00d4aa" stroke-width="1" opacity=".3"/></svg>
+        <h4 class="card-title">GPU Instance</h4>
+        <p class="card-text">按需租用GPU虚拟机，从消费级RTX 4090到数据中心级H100/H800，灵活应对训练和推理需求。</p>
+      </div>
+      <div class="card">
+        <svg class="card-icon" viewBox="0 0 48 48" fill="none"><ellipse cx="24" cy="20" rx="18" ry="10" stroke="#ff6b35" stroke-width="1.5" fill="none"/><path d="M6 20v8c0 5.5 8.1 10 18 10s18-4.5 18-10v-8" stroke="#ff6b35" stroke-width="1.5" fill="none"/><ellipse cx="24" cy="28" rx="18" ry="10" stroke="#ff6b35" stroke-width="1" fill="none" opacity=".3"/></svg>
+        <h4 class="card-title">Serverless Inference</h4>
+        <p class="card-text">无服务器推理端点，自动扩缩容至零。适合突发性工作负载和成本敏感型应用部署。</p>
+      </div>
+      <div class="card">
+        <svg class="card-icon" viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="16" stroke="#00d4aa" stroke-width="1.5" fill="none"/><path d="M24 8c-4 4-6 10-6 16s2 12 6 16" stroke="#00d4aa" stroke-width="1" fill="none" opacity=".5"/><path d="M24 8c4 4 6 10 6 16s-2 12-6 16" stroke="#00d4aa" stroke-width="1" fill="none" opacity=".5"/><line x1="8" y1="24" x2="40" y2="24" stroke="#00d4aa" stroke-width="1" opacity=".3"/></svg>
+        <h4 class="card-title">Managed Cluster</h4>
+        <p class="card-text">托管Kubernetes集群与OpenShift平台(citation:11)，集成CI/CD、监控、服务网格，支持多云和边缘部署。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== PAGE 3: AI INTERNATIONAL ===================== -->
+<section id="ai-intl" class="page-section">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="section-num">Page 03 / 10</span>
+      <h2 class="section-title">International AI Providers</h2>
+      <p class="section-subtitle">全球领先的AI模型服务商，从闭源API到开源权重，覆盖文本、图像、多模态全场景</p>
+    </div>
+
+    <div class="card-grid card-grid-2">
+
+      <div class="card provider-card reveal">
+        <div class="provider-header">
+          <svg class="provider-logo" viewBox="0 0 40 40"><circle cx="20" cy="20" r="16" fill="none" stroke="#10a37f" stroke-width="2"/><path d="M14 26c0-6 12-6 12 0" stroke="#10a37f" stroke-width="1.5" fill="none"/><circle cx="20" cy="16" r="4" fill="none" stroke="#10a37f" stroke-width="1.5"/></svg>
+          <div><div class="provider-name">OpenAI</div><div class="provider-origin">USA / San Francisco</div></div>
+        </div>
+        <div class="provider-models">
+          <span class="model-tag">GPT-4o</span><span class="model-tag">GPT-4.1</span><span class="model-tag">o3 / o4-mini</span><span class="model-tag">DALL-E 3</span><span class="model-tag">Whisper</span>
+        </div>
+        <ul class="provider-features">
+          <li>GPT-4o: $2.50/$10 per 1M tokens (input/output)</li>
+          <li>o3 推理模型: $10/$40 per 1M tokens</li>
+          <li>支持 Function Calling、JSON Mode、Vision</li>
+          <li>全球最大的AI API服务商，企业级SLA</li>
+        </ul>
+        <div class="card-price">$2.50 <span>/ 1M input tokens</span></div>
+      </div>
+
+      <div class="card provider-card reveal reveal-delay-1">
+        <div class="provider-header">
+          <svg class="provider-logo" viewBox="0 0 40 40"><circle cx="20" cy="20" r="16" fill="none" stroke="#d4a574" stroke-width="2"/><path d="M15 15h10v10H15z" fill="none" stroke="#d4a574" stroke-width="1.5" rx="2"/><circle cx="20" cy="20" r="3" fill="#d4a574" opacity=".4"/></svg>
+          <div><div class="provider-name">Anthropic</div><div class="provider-origin">USA / San Francisco</div></div>
+        </div>
+        <div class="provider-models">
+          <span class="model-tag">Claude 4 Opus</span><span class="model-tag">Claude 4 Sonnet</span><span class="model-tag">Claude 3.5 Haiku</span>
+        </div>
+        <ul class="provider-features">
+          <li>Claude 4 Sonnet: $3/$15 per 1M tokens</li>
+          <li>Claude 4 Opus: $15/$75 per 1M tokens</li>
+          <li>200K context window, 强大的代码与推理能力</li>
+          <li>Constitutional AI 安全框架，企业合规首选</li>
+        </ul>
+        <div class="card-price">$3.00 <span>/ 1M input tokens</span></div>
+      </div>
+
+      <div class="card provider-card reveal">
+        <div class="provider-header">
+          <svg class="provider-logo" viewBox="0 0 40 40"><circle cx="20" cy="12" r="5" fill="none" stroke="#4285f4" stroke-width="1.5"/><circle cx="12" cy="26" r="5" fill="none" stroke="#ea4335" stroke-width="1.5"/><circle cx="28" cy="26" r="5" fill="none" stroke="#fbbc05" stroke-width="1.5"/><path d="M20 12 L12 26 L28 26 Z" fill="none" stroke="#34a853" stroke-width="1" opacity=".4"/></svg>
+          <div><div class="provider-name">Google AI / Vertex AI</div><div class="provider-origin">USA / Mountain View</div></div>
+        </div>
+        <div class="provider-models">
+          <span class="model-tag">Gemini 2.5 Pro</span><span class="model-tag">Gemini 2.5 Flash</span><span class="model-tag">Imagen 3</span><span class="model-tag">Veo 2</span>
+        </div>
+        <ul class="provider-features">
+          <li>Gemini 2.5 Pro: $1.25/$10 per 1M tokens</li>
+          <li>Gemini 2.5 Flash: $0.15/$0.60 per 1M tokens</li>
+          <li>1M token context window, 原生多模态</li>
+          <li>深度集成Google Cloud生态与Vertex AI平台</li>
+        </ul>
+        <div class="card-price">$0.15 <span>/ 1M input tokens (Flash)</span></div>
+      </div>
+
+      <div class="card provider-card reveal reveal-delay-1">
+        <div class="provider-header">
+          <svg class="provider-logo" viewBox="0 0 40 40"><path d="M10 28c0-10 10-18 20-18" stroke="#0668e1" stroke-width="2" fill="none"/><circle cx="12" cy="28" r="3" fill="#0668e1" opacity=".6"/><circle cx="30" cy="10" r="3" fill="#0668e1" opacity=".6"/><path d="M16 24c0-6 6-10 12-10" stroke="#0668e1" stroke-width="1" fill="none" opacity=".4"/></svg>
+          <div><div class="provider-name">Meta AI (Llama)</div><div class="provider-origin">USA / Menlo Park (Open Source)</div></div>
+        </div>
+        <div class="provider-models">
+          <span class="model-tag">Llama 4 Scout</span><span class="model-tag">Llama 4 Maverick</span><span class="model-tag">Llama 3.3</span><span class="model-tag">Code Llama</span>
+        </div>
+        <ul class="provider-features">
+          <li>完全开源权重，可本地部署和微调</li>
+          <li>Llama 4 Maverick: 400B MoE (17B active)</li>
+          <li>支持 10M+ token context (Scout)</li>
+          <li>各云平台均有托管服务，生态最广泛的开源模型</li>
+        </ul>
+        <div class="card-price">Free <span>/ open weight</span></div>
+      </div>
+
+      <div class="card provider-card reveal">
+        <div class="provider-header">
+          <svg class="provider-logo" viewBox="0 0 40 40"><polygon points="20,5 35,30 5,30" fill="none" stroke="#ff7000" stroke-width="1.5"/><circle cx="20" cy="22" r="5" fill="none" stroke="#ff7000" stroke-width="1"/></svg>
+          <div><div class="provider-name">Mistral AI</div><div class="provider-origin">France / Paris</div></div>
+        </div>
+        <div class="provider-models">
+          <span class="model-tag">Mistral Large</span><span class="model-tag">Codestral</span><span class="model-tag">Mistral Small</span><span class="model-tag">Pixtral</span>
+        </div>
+        <ul class="provider-features">
+          <li>Mistral Large: $2/$6 per 1M tokens</li>
+          <li>欧洲领先的AI公司，注重数据合规</li>
+          <li>Codestral: 256K context 代码专用模型</li>
+          <li>提供开源与闭源两条产品线</li>
+        </ul>
+        <div class="card-price">$0.10 <span>/ 1M input (Small)</span></div>
+      </div>
+
+      <div class="card provider-card reveal reveal-delay-1">
+        <div class="provider-header">
+          <svg class="provider-logo" viewBox="0 0 40 40"><rect x="10" y="10" width="20" height="20" rx="4" fill="none" stroke="#39594d" stroke-width="1.5"/><path d="M16 16h8M16 20h8M16 24h5" stroke="#39594d" stroke-width="1" opacity=".6"/></svg>
+          <div><div class="provider-name">Cohere</div><div class="provider-origin">Canada / Toronto</div></div>
+        </div>
+        <div class="provider-models">
+          <span class="model-tag">Command R+</span><span class="model-tag">Command R</span><span class="model-tag">Embed v3</span><span class="model-tag">Rerank</span>
+        </div>
+        <ul class="provider-features">
+          <li>企业级RAG与搜索优化</li>
+          <li>Command R+: $2.50/$10 per 1M tokens</li>
+          <li>行业领先的文本嵌入与重排序模型</li>
+          <li>支持128K context，可部署到私有云</li>
+        </ul>
+        <div class="card-price">$0.15 <span>/ 1M input (Command R)</span></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===================== PAGE 4: AI CHINA ===================== -->
+<section id="ai-cn" class="page-section">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="section-num">Page 04 / 10</span>
+      <h2 class="section-title">China AI Providers</h2>
+      <p class="section-subtitle">中国主流AI大模型服务商，涵盖互联网巨头、AI独角兽和行业垂直玩家</p>
+    </div>
+
+    <div class="card-grid card-grid-3">
+
+      <div class="card provider-card reveal">
+        <div class="provider-header">
+          <svg class="provider-logo" viewBox="0 0 40 40"><circle cx="20" cy="20" r="14" fill="none" stroke="#2932e1" stroke-width="1.5"/><text x="20" y="24" text-anchor="middle" fill="#2932e1" font-size="10" font-weight="bold">B</text></svg>
+          <div><div class="provider-name">百度 / 文心一言</div><div class="provider-origin">China / Beijing</div></div>
+        </div>
+        <div class="provider-models">
+          <span class="model-tag">ERNIE 4.5</span><span class="model-tag">ERNIE 4.0 Turbo</span><span class="model-tag">ERNIE Speed</span>
+        </div>
+        <ul class="provider-features">
+          <li>ERNIE 4.5: &yen;4/&yen;8 per 1M tokens</li>
+          <li>ERNIE Speed/Lite 免费调用</li>
+          <li>深度整合百度搜索与知识图谱</li>
+          <li>百度智能云一站式AI开发平台</li>
+        </ul>
+        <div class="card-price">&yen;4 <span>/ 1M input tokens</span></div>
+      </div>
+
+      <div class="card provider-card reveal reveal-delay-1">
+        <div class="provider-header">
+          <svg class="provider-logo" viewBox="0 0 40 40"><circle cx="20" cy="20" r="14" fill="none" stroke="#ff6a00" stroke-width="1.5"/><path d="M14 20c0-4 3-8 6-8s6 4 6 8-3 8-6 8-6-4-6-8z" fill="none" stroke="#ff6a00" stroke-width="1"/></svg>
+          <div><div class="provider-name">阿里云 / 通义千问</div><div class="provider-origin">China / Hangzhou</div></div>
+        </div>
+        <div class="provider-models">
+          <span class="model-tag">Qwen-Max</span><span class="model-tag">Qwen-Plus</span><span class="model-tag">Qwen-Turbo</span><span class="model-tag">Qwen-VL</span><span class="model-tag">QwQ</span>
+        </div>
+        <ul class="provider-features">
+          <li>Qwen-Max: &yen;20/&yen;60 per 1M tokens</li>
+          <li>Qwen-Turbo: &yen;0.3/&yen;0.6 per 1M tokens</li>
+          <li>开源Qwen系列全球下载量领先</li>
+          <li>阿里云百炼平台一站式模型服务</li>
+        </ul>
+        <div class="card-price">&yen;0.3 <span>/ 1M input (Turbo)</span></div>
+      </div>
+
+      <div class="card provider-card reveal reveal-delay-2">
+        <div class="provider-header">
+          <svg class="provider-logo" viewBox="0 0 40 40"><circle cx="20" cy="20" r="14" fill="none" stroke="#07c160" stroke-width="1.5"/><path d="M14 16h12v8c0 2-2 4-6 4s-6-2-6-4z" fill="none" stroke="#07c160" stroke-width="1"/></svg>
+          <div><div class="provider-name">腾讯 / 混元</div><div class="provider-origin">China / Shenzhen</div></div>
+        </div>
+        <div class="provider-models">
+          <span class="model-tag">混元 Turbo</span><span class="model-tag">混元 Pro</span><span class="model-tag">混元 Standard</span><span class="model-tag">混元 Lite</span>
+        </div>
+        <ul class="provider-features">
+          <li>混元 Turbo: &yen;15/&yen;50 per 1M tokens</li>
+          <li>混元 Lite: 免费使用</li>
+          <li>深度集成微信生态与腾讯云</li>
+          <li>MoE架构，万亿参数规模</li>
+        </ul>
+        <div class="card-price">Free <span>/ Lite tier</span></div>
+      </div>
+
+      <div class="card provider-card reveal">
+        <div class="provider-header">
+          <svg class="provider-logo" viewBox="0 0 40 40"><circle cx="20" cy="20" r="14" fill="none" stroke="#cf0a2c" stroke-width="1.5"/><path d="M15 25l5-15 5 15" fill="none" stroke="#cf0a2c" stroke-width="1.5"/></svg>
+          <div><div class="provider-name">华为 / 盘古大模型</div><div class="provider-origin">China / Shenzhen</div></div>
+        </div>
+        <div class="provider-models">
+          <span class="model-tag">Pangu-NLP</span><span class="model-tag">Pangu-CV</span><span class="model-tag">Pangu-Scientific</span>
+        </div>
+        <ul class="provider-features">
+          <li>深耕政企、气象、矿山等垂直行业</li>
+          <li>昇腾AI全栈自主可控</li>
+          <li>ModelArts一站式AI开发平台</li>
+          <li>华为云盘古药物分子大模型等创新应用</li>
+        </ul>
+        <div class="card-price">Custom <span>/ enterprise pricing</span></div>
+      </div>
+
+      <div class="card provider-card reveal reveal-delay-1">
+        <div class="provider-header">
+          <svg class="provider-logo" viewBox="0 0 40 40"><circle cx="20" cy="20" r="14" fill="none" stroke="#3c8eff" stroke-width="1.5"/><circle cx="20" cy="16" r="4" fill="none" stroke="#3c8eff" stroke-width="1"/><path d="M12 28c0-5 4-8 8-8s8 3 8 8" fill="none" stroke="#3c8eff" stroke-width="1"/></svg>
+          <div><div class="provider-name">字节跳动 / 豆包</div><div class="provider-origin">China / Beijing</div></div>
+        </div>
+        <div class="provider-models">
+          <span class="model-tag">豆包 Pro</span><span class="model-tag">豆包 Lite</span><span class="model-tag">豆包 Vision</span><span class="model-tag">Seed-Music</span>
+        </div>
+        <ul class="provider-features">
+          <li>火山引擎方舟平台提供服务</li>
+          <li>豆包Lite: &yen;0.3/&yen;0.6 per 1M tokens</li>
+          <li>音视频理解能力突出</li>
+          <li>抖音生态内容理解与推荐支撑</li>
+        </ul>
+        <div class="card-price">&yen;0.3 <span>/ 1M input (Lite)</span></div>
+      </div>
+
+      <div class="card provider-card reveal reveal-delay-2">
+        <div class="provider-header">
+          <svg class="provider-logo" viewBox="0 0 40 40"><circle cx="20" cy="20" r="14" fill="none" stroke="#6c5ce7" stroke-width="1.5"/><path d="M13 17h14M13 23h10" stroke="#6c5ce7" stroke-width="1.5"/><circle cx="28" cy="23" r="3" fill="#6c5ce7" opacity=".4"/></svg>
+          <div><div class="provider-name">智谱AI / ChatGLM</div><div class="provider-origin">China / Beijing</div></div>
+        </div>
+        <div class="provider-models">
+          <span class="model-tag">GLM-4</span><span class="model-tag">GLM-4-Flash</span><span class="model-tag">CogView-4</span><span class="model-tag">CogVideoX</span>
+        </div>
+        <ul class="provider-features">
+          <li>GLM-4-Flash: 免费使用</li>
+          <li>清华大学技术背景，学术实力强</li>
+          <li>多模态能力覆盖文本、图像、视频</li>
+          <li>Agent能力突出，支持长链推理</li>
+        </ul>
+        <div class="card-price">Free <span>/ Flash tier</span></div>
+      </div>
+
+      <div class="card provider-card reveal">
+        <div class="provider-header">
+          <svg class="provider-logo" viewBox="0 0 40 40"><circle cx="20" cy="20" r="14" fill="none" stroke="#f9ca24" stroke-width="1.5"/><path d="M14 14l12 12M14 26l12-12" stroke="#f9ca24" stroke-width="1" opacity=".5"/><circle cx="20" cy="20" r="5" fill="none" stroke="#f9ca24" stroke-width="1.5"/></svg>
+          <div><div class="provider-name">月之暗面 / Kimi</div><div class="provider-origin">China / Beijing</div></div>
+        </div>
+        <div class="provider-models">
+          <span class="model-tag">Kimi k2</span><span class="model-tag">Kimi-Long</span><span class="model-tag">Moonshot-v1</span>
+        </div>
+        <ul class="provider-features">
+          <li>超长上下文能力领先，支持200K+ tokens</li>
+          <li>Kimi k2: MoE架构，万亿参数</li>
+          <li>C端产品月活突破千万</li>
+          <li>长文档处理与知识检索场景优势明显</li>
+        </ul>
+        <div class="card-price">&yen;12 <span>/ 1M input tokens</span></div>
+      </div>
+
+      <div class="card provider-card reveal reveal-delay-1">
+        <div class="provider-header">
+          <svg class="provider-logo" viewBox="0 0 40 40"><circle cx="20" cy="20" r="14" fill="none" stroke="#00d4aa" stroke-width="1.5"/><path d="M14 18c2-4 10-4 12 0M14 22c2 4 10 4 12 0" stroke="#00d4aa" stroke-width="1.5" fill="none"/></svg>
+          <div><div class="provider-name">DeepSeek</div><div class="provider-origin">China / Hangzhou</div></div>
+        </div>
+        <div class="provider-models">
+          <span class="model-tag">DeepSeek-V3</span><span class="model-tag">DeepSeek-R1</span><span class="model-tag">DeepSeek Coder</span>
+        </div>
+        <ul class="provider-features">
+          <li>DeepSeek-V3: &yen;1/&yen;2 per 1M tokens (极致性价比)</li>
+          <li>DeepSeek-R1: 开源推理模型标杆</li>
+          <li>开源社区热度最高的中国大模型</li>
+          <li>代码与数学推理能力突出</li>
+        </ul>
+        <div class="card-price">&yen;1 <span>/ 1M input tokens</span></div>
+      </div>
+
+      <div class="card provider-card reveal reveal-delay-2">
+        <div class="provider-header">
+          <svg class="provider-logo" viewBox="0 0 40 40"><circle cx="20" cy="20" r="14" fill="none" stroke="#e056a0" stroke-width="1.5"/><path d="M15 15h10v10H15z" fill="none" stroke="#e056a0" stroke-width="1" rx="2"/><circle cx="20" cy="20" r="3" fill="#e056a0" opacity=".3"/></svg>
+          <div><div class="provider-name">MiniMax</div><div class="provider-origin">China / Shanghai</div></div>
+        </div>
+        <div class="provider-models">
+          <span class="model-tag">abab-7</span><span class="model-tag">abab-6.5</span><span class="model-tag">T2A (语音)</span><span class="model-tag">T2V (视频)</span>
+        </div>
+        <ul class="provider-features">
+          <li>语音合成与克隆能力行业领先</li>
+          <li>海螺AI日活超百万</li>
+          <li>视频生成与多模态交互</li>
+          <li>API定价极具竞争力</li>
+        </ul>
+        <div class="card-price">&yen;1 <span>/ 1M input tokens</span></div>
+      </div>
+
+      <div class="card provider-card reveal">
+        <div class="provider-header">
+          <svg class="provider-logo" viewBox="0 0 40 40"><circle cx="20" cy="20" r="14" fill="none" stroke="#5b7fff" stroke-width="1.5"/><path d="M12 20h16M20 12v16" stroke="#5b7fff" stroke-width="1" opacity=".4"/><circle cx="20" cy="20" r="6" fill="none" stroke="#5b7fff" stroke-width="1.5"/></svg>
+          <div><div class="provider-name">商汤科技</div><div class="provider-origin">China / Shanghai / Hong Kong</div></div>
+        </div>
+        <div class="provider-models">
+          <span class="model-tag">日日新 5.5</span><span class="model-tag">SenseNova</span><span class="model-tag">SenseChat</span>
+        </div>
+        <ul class="provider-features">
+          <li>计算机视觉与多模态技术领先</li>
+          <li>大装置算力集群支撑训练</li>
+          <li>医疗、自动驾驶、智慧城市深耕</li>
+          <li>港交所上市，合规透明</li>
+        </ul>
+        <div class="card-price">Custom <span>/ enterprise</span></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===================== PAGE 5: CLOUD INTERNATIONAL ===================== -->
+<section id="cloud-intl" class="page-section">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="section-num">Page 05 / 10</span>
+      <h2 class="section-title">International Cloud &amp; VPS</h2>
+      <p class="section-subtitle">全球主流公有云与VPS平台，从超大规模到轻量级开发者方案</p>
+    </div>
+
+    <div class="card-grid card-grid-2">
+
+      <div class="card provider-card reveal">
+        <div class="provider-header">
+          <svg class="provider-logo" viewBox="0 0 40 40"><path d="M8 24c2-8 6-14 12-14s10 6 12 14" stroke="#ff9900" stroke-width="2" fill="none"/><path d="M6 26h28" stroke="#ff9900" stroke-width="2"/><text x="20" y="20" text-anchor="middle" fill="#ff9900" font-size="7" font-weight="bold">AWS</text></svg>
+          <div><div class="provider-name">Amazon Web Services</div><div class="provider-origin">USA / Global (33 Regions)</div></div>
+        </div>
+        <div class="provider-models">
+          <span class="model-tag">EC2</span><span class="model-tag">SageMaker</span><span class="model-tag">Bedrock</span><span class="model-tag">Lambda</span><span class="model-tag">EKS</span><span class="model-tag">Braket</span>
+        </div>
+        <ul class="provider-features">
+          <li>全球最大云平台，33个Region，105+ AZ(citation:14)</li>
+          <li>P5实例: 8x NVIDIA H100, $98.32/hr</li>
+          <li>Bedrock: 一站式AI模型服务，支持多家模型(citation:8)</li>
+          <li>Amazon Braket量子计算服务，按需访问多种量子硬件(citation:8)</li>
+          <li>SageMaker: 端到端机器学习平台</li>
+        </ul>
+        <div class="card-price">$98.32 <span>/ hr (p5.48xlarge H100x8)</span></div>
+      </div>
+
+      <div class="card provider-card reveal reveal-delay-1">
+        <div class="provider-header">
+          <svg class="provider-logo" viewBox="0 0 40 40"><path d="M10 30L20 8L30 30" fill="none" stroke="#00a4ef" stroke-width="2"/><line x1="14" y1="22" x2="26" y2="22" stroke="#00a4ef" stroke-width="1.5"/></svg>
+          <div><div class="provider-name">Microsoft Azure</div><div class="provider-origin">USA / Global (60+ Regions)</div></div>
+        </div>
+        <div class="provider-models">
+          <span class="model-tag">Virtual Machines</span><span class="model-tag">Azure OpenAI</span><span class="model-tag">AKS</span><span class="model-tag">Functions</span>
+        </div>
+        <ul class="provider-features">
+          <li>60+个Region，覆盖最广(citation:14)</li>
+          <li>ND H100 v5: 8x H100, $94.80/hr</li>
+          <li>独家OpenAI企业级服务授权</li>
+          <li>Azure AI Studio统一AI开发平台</li>
+          <li>深度集成Microsoft 365与GitHub生态</li>
+        </ul>
+        <div class="card-price">$94.80 <span>/ hr (ND H100 v5)</span></div>
+      </div>
+
+      <div class="card provider-card reveal">
+        <div class="provider-header">
+          <svg class="provider-logo" viewBox="0 0 40 40"><circle cx="20" cy="20" r="14" fill="none" stroke="#4285f4" stroke-width="1.5"/><circle cx="14" cy="17" r="4" fill="#4285f4" opacity=".3"/><circle cx="26" cy="17" r="4" fill="#34a853" opacity=".3"/><circle cx="20" cy="26" r="4" fill="#fbbc05" opacity=".3"/></svg>
+          <div><div class="provider-name">Google Cloud Platform</div><div class="provider-origin">USA / Global (40+ Regions)</div></div>
+        </div>
+        <div class="provider-models">
+          <span class="model-tag">Compute Engine</span><span class="model-tag">GKE</span><span class="model-tag">Vertex AI</span><span class="model-tag">Cloud Run</span><span class="model-tag">TPU v5p</span>
+        </div>
+        <ul class="provider-features">
+          <li>40+个Region，全球网络骨干(citation:14)</li>
+          <li>a3-highgpu-8g: 8x H100, $102.40/hr</li>
+          <li>TPU v5p: 自研AI加速器，极致性价比</li>
+          <li>GKE: 最成熟的托管Kubernetes(citation:2)</li>
+          <li>Tau VM 性价比比同类高42%(citation:2)</li>
+        </ul>
+        <div class="card-price">$102.40 <span>/ hr (a3-highgpu-8g)</span></div>
+      </div>
+
+      <div class="card provider-card reveal reveal-delay-1">
+        <div class="provider-header">
+          <svg class="provider-logo" viewBox="0 0 40 40"><circle cx="20" cy="20" r="14" fill="none" stroke="#0080ff" stroke-width="1.5"/><path d="M14 14l12 12" stroke="#0080ff" stroke-width="1.5"/><circle cx="16" cy="16" r="3" fill="#0080ff" opacity=".3"/></svg>
+          <div><div class="provider-name">DigitalOcean</div><div class="provider-origin">USA / Global (15 Regions)</div></div>
+        </div>
+        <div class="provider-models">
+          <span class="model-tag">Droplets</span><span class="model-tag">GPU Droplets</span><span class="model-tag">App Platform</span><span class="model-tag">Kubernetes</span>
+        </div>
+        <ul class="provider-features">
+          <li>开发者友好，界面简洁直观</li>
+          <li>GPU Droplets: H100 从 $1.99/GPU/hr</li>
+          <li>基础VPS从$4/月起</li>
+          <li>丰富的教程与社区文档</li>
+        </ul>
+        <div class="card-price">$4 <span>/ month (basic)</span></div>
+      </div>
+
+      <div class="card provider-card reveal">
+        <div class="provider-header">
+          <svg class="provider-logo" viewBox="0 0 40 40"><circle cx="20" cy="20" r="14" fill="none" stroke="#0071f5" stroke-width="1.5"/><path d="M12 20h16" stroke="#0071f5" stroke-width="2"/><path d="M20 12v16" stroke="#0071f5" stroke-width="2"/></svg>
+          <div><div class="provider-name">Vultr</div><div class="provider-origin">USA / Global (32 Locations)</div></div>
+        </div>
+        <div class="provider-models">
+          <span class="model-tag">Cloud Compute</span><span class="model-tag">GPU (A100/H100)</span><span class="model-tag">Bare Metal</span><span class="model-tag">Kubernetes</span>
+        </div>
+        <ul class="provider-features">
+          <li>32个数据中心，亚太覆盖优秀</li>
+          <li>A100 80GB 从 $2.23/GPU/hr</li>
+          <li>按小时计费，灵活升降</li>
+          <li>Bare Metal 无虚拟化开销</li>
+        </ul>
+        <div class="card-price">$2.23 <span>/ GPU/hr (A100)</span></div>
+      </div>
+
+      <div class="card provider-card reveal reveal-delay-1">
+        <div class="provider-header">
+          <svg class="provider-logo" viewBox="0 0 40 40"><circle cx="20" cy="20" r="14" fill="none" stroke="#d50c2d" stroke-width="1.5"/><path d="M15 25V15l10 5-10 5z" fill="#d50c2d" opacity=".4"/></svg>
+          <div><div class="provider-name">Hetzner</div><div class="provider-origin">Germany / EU (4 Locations)</div></div>
+        </div>
+        <div class="provider-models">
+          <span class="model-tag">Cloud Server</span><span class="model-tag">GPU (A100)</span><span class="model-tag">Dedicated</span><span class="model-tag">Storage Box</span>
+        </div>
+        <ul class="provider-features">
+          <li>欧洲最具性价比的云服务商</li>
+          <li>A100 80GB: ~$1.50/GPU/hr (业界最低)</li>
+          <li>基础云服务器从 $4.50/月起</li>
+          <li>适合欧洲合规需求 (GDPR)</li>
+        </ul>
+        <div class="card-price">$1.50 <span>/ GPU/hr (A100)</span></div>
+      </div>
+
+      <div class="card provider-card reveal">
+        <div class="provider-header">
+          <svg class="provider-logo" viewBox="0 0 40 40"><circle cx="20" cy="20" r="14" fill="none" stroke="#f80000" stroke-width="1.5"/><text x="20" y="24" text-anchor="middle" fill="#f80000" font-size="8" font-weight="bold">O</text></svg>
+          <div><div class="provider-name">Oracle Cloud (OCI)</div><div class="provider-origin">USA / Global (49 Regions)</div></div>
+        </div>
+        <div class="provider-models">
+          <span class="model-tag">Compute</span><span class="model-tag">OKE (K8s)</span><span class="model-tag">AI Services</span><span class="model-tag">Dedicated Regions</span>
+        </div>
+        <ul class="provider-features">
+          <li>49个Region，Always Free慷慨免费额度</li>
+          <li>Supercluster: 最大规模GPU集群之一</li>
+          <li>A100/H100 集群支持 RDMA 网络</li>
+          <li>与NVIDIA深度合作的AI超算服务</li>
+        </ul>
+        <div class="card-price">Free <span>/ Always Free tier</span></div>
+      </div>
+
+      <div class="card provider-card reveal reveal-delay-1">
+        <div class="provider-header">
+          <svg class="provider-logo" viewBox="0 0 40 40"><circle cx="20" cy="20" r="14" fill="none" stroke="#02b279" stroke-width="1.5"/><circle cx="20" cy="20" r="6" fill="none" stroke="#02b279" stroke-width="1"/><circle cx="20" cy="20" r="2" fill="#02b279" opacity=".5"/></svg>
+          <div><div class="provider-name">Linode (Akamai)</div><div class="provider-origin">USA / Global (25+ Regions)</div></div>
+        </div>
+        <div class="provider-models">
+          <span class="model-tag">Shared/Dedicated CPU</span><span class="model-tag">GPU</span><span class="model-tag">Kubernetes</span><span class="model-tag">Object Storage</span>
+        </div>
+        <ul class="provider-features">
+          <li>2022年被Akamai收购，CDN集成优势</li>
+          <li>GPU: RTX6000 Ada从$1.50/GPU/hr</li>
+          <li>基础VPS从$5/月起</li>
+          <li>99.99% SLA，API完善</li>
+        </ul>
+        <div class="card-price">$5 <span>/ month (basic)</span></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===================== PAGE 6: CLOUD CHINA ===================== -->
+<section id="cloud-cn" class="page-section">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="section-num">Page 06 / 10</span>
+      <h2 class="section-title">China Cloud &amp; VPS</h2>
+      <p class="section-subtitle">中国主流公有云平台，从互联网云到运营商云，覆盖全场景AI基础设施</p>
+    </div>
+
+    <div class="card-grid card-grid-2">
+
+      <div class="card provider-card reveal">
+        <div class="provider-header">
+          <svg class="provider-logo" viewBox="0 0 40 40"><circle cx="20" cy="20" r="14" fill="none" stroke="#ff6a00" stroke-width="1.5"/><ellipse cx="20" cy="18" rx="10" ry="6" fill="none" stroke="#ff6a00" stroke-width="1"/><path d="M10 18c0 6 4.5 10 10 10s10-4 10-10" fill="none" stroke="#ff6a00" stroke-width="1" opacity=".5"/></svg>
+          <div><div class="provider-name">阿里云 (Alibaba Cloud)</div><div class="provider-origin">China / Global (29 Regions)</div></div>
+        </div>
+        <div class="provider-models">
+          <span class="model-tag">ECS</span><span class="model-tag">PAI</span><span class="model-tag">百炼</span><span class="model-tag">函数计算</span><span class="model-tag">ACK (K8s)</span>
+        </div>
+        <ul class="provider-features">
+          <li>亚太市场份额第一，29个Region(citation:14)</li>
+          <li>GN8实例: 8x H800, ~&yen;680/hr</li>
+          <li>PAI平台: 端到端AI训练与推理</li>
+          <li>百炼平台: 大模型一站式服务，支持多模型调用</li>
+          <li>9个多AZ Region在中国，基础设施最为完善(citation:14)</li>
+        </ul>
+        <div class="card-price">&yen;680 <span>/ hr (GN8 H800x8)</span></div>
+      </div>
+
+      <div class="card provider-card reveal reveal-delay-1">
+        <div class="provider-header">
+          <svg class="provider-logo" viewBox="0 0 40 40"><circle cx="20" cy="20" r="14" fill="none" stroke="#07c160" stroke-width="1.5"/><path d="M12 22c2-8 14-8 16 0" fill="none" stroke="#07c160" stroke-width="1.5"/></svg>
+          <div><div class="provider-name">腾讯云 (Tencent Cloud)</div><div class="provider-origin">China / Global (21 Regions)</div></div>
+        </div>
+        <div class="provider-models">
+          <span class="model-tag">CVM</span><span class="model-tag">TI平台</span><span class="model-tag">TKE</span><span class="model-tag">Serverless</span><span class="model-tag">混元API</span>
+        </div>
+        <ul class="provider-features">
+          <li>GN10X实例: 8x A100 80GB, ~&yen;520/hr</li>
+          <li>TI平台: AI模型训练与推理一体化</li>
+          <li>TKE: 托管Kubernetes，集成微信生态</li>
+          <li>音视频、游戏行业深耕经验丰富</li>
+          <li>混元大模型API无缝接入云服务</li>
+        </ul>
+        <div class="card-price">&yen;520 <span>/ hr (GN10X A100x8)</span></div>
+      </div>
+
+      <div class="card provider-card reveal">
+        <div class="provider-header">
+          <svg class="provider-logo" viewBox="0 0 40 40"><circle cx="20" cy="20" r="14" fill="none" stroke="#cf0a2c" stroke-width="1.5"/><path d="M13 25l7-18 7 18" fill="none" stroke="#cf0a2c" stroke-width="1.5"/><line x1="15" y1="20" x2="25" y2="20" stroke="#cf0a2c" stroke-width="1"/></svg>
+          <div><div class="provider-name">华为云 (Huawei Cloud)</div><div class="provider-origin">China / Global (29 Regions)</div></div>
+        </div>
+        <div class="provider-models">
+          <span class="model-tag">ECS</span><span class="model-tag">ModelArts</span><span class="model-tag">CCE (K8s)</span><span class="model-tag">盘古大模型</span><span class="model-tag">昇腾AI</span>
+        </div>
+        <ul class="provider-features">
+          <li>29个Region，政企市场份额领先</li>
+          <li>昇腾910B: 国产AI芯片全栈方案</li>
+          <li>ModelArts: 一站式AI开发平台</li>
+          <li>盘古大模型深耕行业应用(citation:4)</li>
+          <li>鲲鹏+昇腾双引擎，全栈国产化</li>
+        </ul>
+        <div class="card-price">Custom <span>/ enterprise pricing</span></div>
+      </div>
+
+      <div class="card provider-card reveal reveal-delay-1">
+        <div class="provider-header">
+          <svg class="provider-logo" viewBox="0 0 40 40"><circle cx="20" cy="20" r="14" fill="none" stroke="#2932e1" stroke-width="1.5"/><circle cx="20" cy="16" r="5" fill="none" stroke="#2932e1" stroke-width="1"/><path d="M12 28c0-4 3.5-7 8-7s8 3 8 7" fill="none" stroke="#2932e1" stroke-width="1"/></svg>
+          <div><div class="provider-name">百度智能云</div><div class="provider-origin">China / 10+ Regions</div></div>
+        </div>
+        <div class="provider-models">
+          <span class="model-tag">BCC</span><span class="model-tag">千帆平台</span><span class="model-tag">BCE (K8s)</span><span class="model-tag">昆仑芯</span>
+        </div>
+        <ul class="provider-features">
+          <li>千帆大模型平台: 一站式模型训练与部署</li>
+          <li>昆仑芯2代: 自研AI推理芯片</li>
+          <li>文心大模型深度整合云服务</li>
+          <li>智能交通、智慧金融等行业方案</li>
+        </ul>
+        <div class="card-price">&yen;300 <span>/ hr (GPU instance est.)</span></div>
+      </div>
+
+      <div class="card provider-card reveal">
+        <div class="provider-header">
+          <svg class="provider-logo" viewBox="0 0 40 40"><circle cx="20" cy="20" r="14" fill="none" stroke="#0066ff" stroke-width="1.5"/><path d="M12 20c2-6 14-6 16 0" fill="none" stroke="#0066ff" stroke-width="1"/><path d="M12 20c2 6 14 6 16 0" fill="none" stroke="#0066ff" stroke-width="1" opacity=".4"/></svg>
+          <div><div class="provider-name">天翼云 (China Telecom)</div><div class="provider-origin">China / 31 Provinces</div></div>
+        </div>
+        <div class="provider-models">
+          <span class="model-tag">弹性云主机</span><span class="model-tag">GPU云主机</span><span class="model-tag">TeleDB</span><span class="model-tag">智能边缘</span>
+        </div>
+        <ul class="provider-features">
+          <li>运营商背景，网络与安全合规优势突出</li>
+          <li>覆盖全国31省市，边缘节点最密</li>
+          <li>政务云市场份额领先</li>
+          <li>央企合规认证齐全，等保三级</li>
+        </ul>
+        <div class="card-price">&yen;200 <span>/ hr (GPU instance est.)</span></div>
+      </div>
+
+      <div class="card provider-card reveal reveal-delay-1">
+        <div class="provider-header">
+          <svg class="provider-logo" viewBox="0 0 40 40"><circle cx="20" cy="20" r="14" fill="none" stroke="#3c8eff" stroke-width="1.5"/><text x="20" y="24" text-anchor="middle" fill="#3c8eff" font-size="8" font-weight="bold">V</text></svg>
+          <div><div class="provider-name">火山引擎 (ByteDance)</div><div class="provider-origin">China / 6 Regions</div></div>
+        </div>
+        <div class="provider-models">
+          <span class="model-tag">ECS</span><span class="model-tag">MLPlatform</span><span class="model-tag">方舟 (AI)</span><span class="model-tag">veStack</span>
+        </div>
+        <ul class="provider-features">
+          <li>抖音/头条技术底座对外开放</li>
+          <li>方舟平台: 豆包大模型API服务</li>
+          <li>推荐系统、音视频处理技术领先</li>
+          <li>增长迅猛，AI算力储备充足</li>
+        </ul>
+        <div class="card-price">&yen;350 <span>/ hr (GPU instance est.)</span></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===================== PAGE 7: GPU COMPUTE ===================== -->
+<section id="gpu" class="page-section">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="section-num">Page 07 / 10</span>
+      <h2 class="section-title">GPU Compute Resources</h2>
+      <p class="section-subtitle">主流GPU型号对比与云平台实例选型指南</p>
+    </div>
+
+    <div class="two-col reveal" style="margin-bottom:3rem">
+      <div>
+        <h3 style="font-size:1.2rem;margin-bottom:1rem">GPU选型核心指标</h3>
+        <p class="card-text" style="font-size:.82rem;line-height:1.9">
+          AI工作负载对GPU的选择至关重要。HBM显存决定了可加载的模型大小，FP16/BF16算力决定了训练和推理速度，NVLink/NVSwitch互联带宽决定了多卡并行效率。在当前NISQ时代向更大模型演进的趋势下，合理配置GPU资源是平衡成本与性能的关键(citation:8)。
+        </p>
+        <p class="card-text" style="font-size:.82rem;line-height:1.9;margin-top:1rem">
+          中国市场由于出口管制，H800和昇腾910B成为主力训练卡，A800和L40S用于推理和中小规模训练。海外则以H100/B200为主，部分平台已提供H200实例。
+        </p>
+      </div>
+      <div style="display:flex;justify-content:center">
+        <svg width="320" height="240" viewBox="0 0 320 240" fill="none">
+          <!-- GPU Chip SVG -->
+          <rect x="60" y="40" width="200" height="160" rx="8" fill="#141424" stroke="#00d4aa" stroke-width="1.5"/>
+          <!-- Core grid -->
+          <g opacity=".3">
+            <rect x="80" y="60" width="20" height="20" rx="2" fill="#00d4aa"/><rect x="108" y="60" width="20" height="20" rx="2" fill="#00d4aa"/>
+            <rect x="136" y="60" width="20" height="20" rx="2" fill="#00d4aa"/><rect x="164" y="60" width="20" height="20" rx="2" fill="#00d4aa"/>
+            <rect x="192" y="60" width="20" height="20" rx="2" fill="#00d4aa"/><rect x="220" y="60" width="20" height="20" rx="2" fill="#00d4aa"/>
+            <rect x="80" y="88" width="20" height="20" rx="2" fill="#00d4aa"/><rect x="108" y="88" width="20" height="20" rx="2" fill="#00d4aa"/>
+            <rect x="136" y="88" width="20" height="20" rx="2" fill="#ff6b35"/><rect x="164" y="88" width="20" height="20" rx="2" fill="#ff6b35"/>
+            <rect x="192" y="88" width="20" height="20" rx="2" fill="#00d4aa"/><rect x="220" y="88" width="20" height="20" rx="2" fill="#00d4aa"/>
+            <rect x="80" y="116" width="20" height="20" rx="2" fill="#00d4aa"/><rect x="108" y="116" width="20" height="20" rx="2" fill="#00d4aa"/>
+            <rect x="136" y="116" width="20" height="20" rx="2" fill="#00d4aa"/><rect x="164" y="116" width="20" height="20" rx="2" fill="#00d4aa"/>
+            <rect x="192" y="116" width="20" height="20" rx="2" fill="#00d4aa"/><rect x="220" y="116" width="20" height="20" rx="2" fill="#00d4aa"/>
+            <rect x="80" y="144" width="20" height="20" rx="2" fill="#00d4aa"/><rect x="108" y="144" width="20" height="20" rx="2" fill="#00d4aa"/>
+            <rect x="136" y="144" width="20" height="20" rx="2" fill="#00d4aa"/><rect x="164" y="144" width="20" height="20" rx="2" fill="#00d4aa"/>
+            <rect x="192" y="144" width="20" height="20" rx="2" fill="#00d4aa"/><rect x="220" y="144" width="20" height="20" rx="2" fill="#00d4aa"/>
+          </g>
+          <!-- Labels -->
+          <text x="160" y="20" text-anchor="middle" fill="#00d4aa" font-size="10" font-family="DM Mono">GPU Tensor Core Array</text>
+          <!-- Pins bottom -->
+          <g opacity=".4">
+            <line x1="80" y1="200" x2="80" y2="220" stroke="#00d4aa" stroke-width="1.5"/>
+            <line x1="100" y1="200" x2="100" y2="220" stroke="#00d4aa" stroke-width="1.5"/>
+            <line x1="120" y1="200" x2="120" y2="220" stroke="#00d4aa" stroke-width="1.5"/>
+            <line x1="140" y1="200" x2="140" y2="220" stroke="#00d4aa" stroke-width="1.5"/>
+            <line x1="160" y1="200" x2="160" y2="220" stroke="#00d4aa" stroke-width="1.5"/>
+            <line x1="180" y1="200" x2="180" y2="220" stroke="#00d4aa" stroke-width="1.5"/>
+            <line x1="200" y1="200" x2="200" y2="220" stroke="#00d4aa" stroke-width="1.5"/>
+            <line x1="220" y1="200" x2="220" y2="220" stroke="#00d4aa" stroke-width="1.5"/>
+            <line x1="240" y1="200" x2="240" y2="220" stroke="#00d4aa" stroke-width="1.5"/>
+          </g>
+          <!-- Glow -->
+          <rect x="130" y="82" width="60" height="32" rx="4" fill="#ff6b35" opacity=".15"><animate attributeName="opacity" values=".1;.25;.1" dur="2s" repeatCount="indefinite"/></rect>
+        </svg>
+      </div>
+    </div>
+
+    <div class="table-wrap reveal">
+      <table class="comp-table">
+        <thead>
+          <tr>
+            <th>GPU Model</th>
+            <th>VRAM</th>
+            <th>FP16 TFLOPS</th>
+            <th>Interconnect</th>
+            <th>Best For</th>
+            <th>Avg Price/GPU/hr</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td class="highlight">NVIDIA H100 SXM</td><td>80GB HBM3</td><td>989</td><td>NVLink 900GB/s</td><td>LLM Training &amp; Inference</td><td>$2.50 - $3.50</td></tr>
+          <tr><td class="highlight">NVIDIA H800 SXM</td><td>80GB HBM3</td><td>989</td><td>NVLink 400GB/s</td><td>Training (China Export)</td><td>&yen;18 - &yen;25</td></tr>
+          <tr><td>NVIDIA A100 SXM</td><td>80GB HBM2e</td><td>312</td><td>NVLink 600GB/s</td><td>Training &amp; Inference</td><td>$1.50 - $2.50</td></tr>
+          <tr><td>NVIDIA A800</td><td>80GB HBM2e</td><td>312</td><td>NVLink 400GB/s</td><td>Training (China Export)</td><td>&yen;10 - &yen;18</td></tr>
+          <tr><td>NVIDIA L40S</td><td>48GB GDDR6X</td><td>362</td><td>NVLink (limited)</td><td>Inference, Fine-tuning</td><td>$1.00 - $1.80</td></tr>
+          <tr><td>NVIDIA RTX 4090</td><td>24GB GDDR6X</td><td>165</td><td>None</td><td>Inference, Small Training</td><td>$0.40 - $0.80</td></tr>
+          <tr><td>Huawei Ascend 910B</td><td>64GB HBM2e</td><td>~320</td><td>HCCS 392GB/s</td><td>Training (China Domestic)</td><td>&yen;12 - &yen;20</td></tr>
+          <tr><td>Google TPU v5p</td><td>95GB HBM2e</td><td>459</td><td>ICI 4.8Tb/s</td><td>Training (GCP only)</td><td>$3.20/chip/hr</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== PAGE 8: COMPARISON ===================== -->
+<section id="compare" class="page-section">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="section-num">Page 08 / 10</span>
+      <h2 class="section-title">Platform Comparison</h2>
+      <p class="section-subtitle">AI API与云平台多维对比，帮你快速选型</p>
+    </div>
+
+    <!-- Tab system -->
+    <div class="tabs reveal">
+      <button class="tab-btn active" data-tab="ai-api">AI API Comparison</button>
+      <button class="tab-btn" data-tab="cloud-vps">Cloud VPS Comparison</button>
+      <button class="tab-btn" data-tab="k8s">Kubernetes Platforms</button>
+    </div>
+
+    <div id="tab-ai-api" class="tab-content active reveal">
+      <div class="table-wrap">
+        <table class="comp-table">
+          <thead>
+            <tr><th>Provider</th><th>Model</th><th>Input Price</th><th>Output Price</th><th>Context</th><th>Highlights</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>OpenAI</td><td>GPT-4o</td><td>$2.50/1M</td><td>$10/1M</td><td>128K</td><td>综合能力最强，生态最大</td></tr>
+            <tr><td>Anthropic</td><td>Claude 4 Sonnet</td><td>$3/1M</td><td>$15/1M</td><td>200K</td><td>代码能力突出，安全合规</td></tr>
+            <tr><td>Google</td><td>Gemini 2.5 Flash</td><td>$0.15/1M</td><td>$0.60/1M</td><td>1M</td><td>性价比极高，长上下文</td></tr>
+            <tr><td>DeepSeek</td><td>DeepSeek-V3</td><td>&yen;1/1M</td><td>&yen;2/1M</td><td>128K</td><td class="highlight">中国API性价比之王</td></tr>
+            <tr><td>Alibaba</td><td>Qwen-Turbo</td><td>&yen;0.3/1M</td><td>&yen;0.6/1M</td><td>1M</td><td>价格最低，长上下文</td></tr>
+            <tr><td>Baidu</td><td>ERNIE Speed</td><td>Free</td><td>Free</td><td>128K</td><td>免费使用，中文优化</td></tr>
+            <tr><td>Zhipu</td><td>GLM-4-Flash</td><td>Free</td><td>Free</td><td>128K</td><td>免费使用，Agent能力强</td></tr>
+            <tr><td>Mistral</td><td>Mistral Small</td><td>$0.10/1M</td><td>$0.30/1M</td><td>32K</td><td>欧洲合规，代码能力好</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div id="tab-cloud-vps" class="tab-content">
+      <div class="table-wrap">
+        <table class="comp-table">
+          <thead>
+            <tr><th>Platform</th><th>Region Count</th><th>GPU H100/hr</th><th>Basic VPS/mo</th><th>Free Tier</th><th>Strengths</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>AWS</td><td>33</td><td>$98.32 (x8)</td><td>$3.80</td><td>Yes (12mo)</td><td>生态最完整，服务最全</td></tr>
+            <tr><td>Azure</td><td>60+</td><td>$94.80 (x8)</td><td>$4.60</td><td>Yes (12mo)</td><td>Region最广，OpenAI集成</td></tr>
+            <tr><td>GCP</td><td>40+</td><td>$102.40 (x8)</td><td>$5.46</td><td>Yes ($300)</td><td>GKE领先，TPU独家</td></tr>
+            <tr><td>Alibaba Cloud</td><td>29</td><td>&yen;680 (H800x8)</td><td>&yen;48</td><td>Yes</td><td class="highlight">中国基础设施最强</td></tr>
+            <tr><td>DigitalOcean</td><td>15</td><td>$1.99/GPU</td><td>$4</td><td>$200 (60d)</td><td>开发者体验最佳</td></tr>
+            <tr><td>Vultr</td><td>32</td><td>$2.23/GPU</td><td>$2.50</td><td>$250 (30d)</td><td>亚太节点多，按小时计费</td></tr>
+            <tr><td>Hetzner</td><td>4</td><td>~$1.50/GPU</td><td>$4.50</td><td>No</td><td class="highlight">欧洲最具性价比</td></tr>
+            <tr><td>Tencent Cloud</td><td>21</td><td>&yen;520 (A100x8)</td><td>&yen;50</td><td>Yes</td><td>微信生态整合</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div id="tab-k8s" class="tab-content">
+      <div class="table-wrap">
+        <table class="comp-table">
+          <thead>
+            <tr><th>Platform</th><th>Type</th><th>Auto-scaling</th><th>GPU Support</th><th>Multi-cluster</th><th>Key Differentiator</th></tr>
+          </thead>
+          <tbody>
+            <tr><td class="highlight">GKE</td><td>Managed K8s</td><td>Autopilot + Node</td><td>GPU/TPU</td><td>Multi-cluster Ingress</td><td>最成熟，Tau VM性价比高42%(citation:2)</td></tr>
+            <tr><td>EKS</td><td>Managed K8s</td><td>Karpenter</td><td>GPU (Inf2/P5)</td><td>EKS Anywhere</td><td>AWS生态深度集成</td></tr>
+            <tr><td>AKS</td><td>Managed K8s</td><td>Node Autoprofile</td><td>GPU</td><td>Azure Arc</td><td>Azure生态，免费控制面</td></tr>
+            <tr><td class="highlight">OpenShift</td><td>Enterprise Platform</td><td>Built-in</td><td>GPU Operator</td><td>ACM</td><td>企业级全栈方案，9年支持(citation:11)</td></tr>
+            <tr><td>ACK (Alibaba)</td><td>Managed K8s</td><td>Auto-scaling</td><td>GPU (H800/A100)</td><td>ACK One</td><td>中国最大K8s集群托管</td></tr>
+            <tr><td>TKE (Tencent)</td><td>Managed K8s</td><td>Auto-scaling</td><td>GPU</td><td>Global Cluster</td><td>Serverless容器 + GPU</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="card-text" style="margin-top:1rem;font-size:.75rem">
+        Kubernetes能力上限取决于其运行的基础架构。托管式产品可帮助用户免除手动集成网络、监控、日志、CI/CD等组件的负担(citation:11)。
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== PAGE 9: USE CASES ===================== -->
+<section id="cases" class="page-section">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="section-num">Page 09 / 10</span>
+      <h2 class="section-title">Use Cases &amp; Recommendations</h2>
+      <p class="section-subtitle">根据你的场景，选择最佳AI与VPS配置方案</p>
+    </div>
+
+    <div class="card-grid card-grid-2">
+
+      <div class="card reveal">
+        <div class="use-case-card">
+          <h4 style="font-size:1rem;margin-bottom:.8rem">Student / Hobbyist</h4>
+          <span class="card-badge">Budget: Free - $20/mo</span>
+          <p class="card-text" style="margin-top:.5rem">学习AI开发和小规模实验。利用免费API额度和低成本VPS搭建开发环境。</p>
+          <div style="margin-top:1rem">
+            <p class="card-text" style="font-size:.7rem"><strong style="color:var(--accent)">AI API:</strong> DeepSeek-V3 (&yen;1/1M), GLM-4-Flash (Free), ERNIE Speed (Free)</p>
+            <p class="card-text" style="font-size:.7rem"><strong style="color:var(--accent)">VPS:</strong> Oracle Cloud Always Free, Hetzner CX22 ($4.50/mo)</p>
+            <p class="card-text" style="font-size:.7rem"><strong style="color:var(--accent)">GPU:</strong> Google Colab Free (T4), Kaggle Notebooks (P100)</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="card reveal reveal-delay-1">
+        <div class="use-case-card warm">
+          <h4 style="font-size:1rem;margin-bottom:.8rem">Startup / Indie Developer</h4>
+          <span class="card-badge-warm card-badge">Budget: $50 - $500/mo</span>
+          <p class="card-text" style="margin-top:.5rem">MVP快速迭代，中等规模推理调用，需要可靠的基础设施和弹性伸缩。</p>
+          <div style="margin-top:1rem">
+            <p class="card-text" style="font-size:.7rem"><strong style="color:var(--accent-2)">AI API:</strong> GPT-4o Mini, Gemini 2.5 Flash, Qwen-Plus</p>
+            <p class="card-text" style="font-size:.7rem"><strong style="color:var(--accent-2)">VPS:</strong> DigitalOcean Droplets, Vultr Cloud Compute, Alibaba Cloud ECS</p>
+            <p class="card-text" style="font-size:.7rem"><strong style="color:var(--accent-2)">GPU:</strong> RunPod (A100 $1.20/hr), Lambda Cloud, Vast.ai</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="card reveal">
+        <div class="use-case-card">
+          <h4 style="font-size:1rem;margin-bottom:.8rem">Mid-size Enterprise</h4>
+          <span class="card-badge">Budget: $2K - $20K/mo</span>
+          <p class="card-text" style="margin-top:.5rem">生产级AI应用部署，需要SLA保障、数据合规、多团队协作和成本管理。</p>
+          <div style="margin-top:1rem">
+            <p class="card-text" style="font-size:.7rem"><strong style="color:var(--accent)">AI API:</strong> Claude 4 Sonnet, GPT-4o, Qwen-Max (企业级SLA)</p>
+            <p class="card-text" style="font-size:.7rem"><strong style="color:var(--accent)">VPS:</strong> AWS EC2 + SageMaker, Azure AI Studio, Alibaba Cloud PAI</p>
+            <p class="card-text" style="font-size:.7rem"><strong style="color:var(--accent)">K8s:</strong> EKS/AKS/ACK 托管集群, OpenShift (全栈管控)(citation:11)</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="card reveal reveal-delay-1">
+        <div class="use-case-card warm">
+          <h4 style="font-size:1rem;margin-bottom:.8rem">Large Enterprise / Research</h4>
+          <span class="card-badge-warm card-badge">Budget: $20K+/mo</span>
+          <p class="card-text" style="margin-top:.5rem">大规模模型训练、推理集群部署，需要万卡互联、定制化安全策略和全球多区域覆盖。</p>
+          <div style="margin-top:1rem">
+            <p class="card-text" style="font-size:.7rem"><strong style="color:var(--accent-2)">AI:</strong> 私有化部署 Llama/Qwen + 微调, Bedrock/Vertex AI 托管</p>
+            <p class="card-text" style="font-size:.7rem"><strong style="color:var(--accent-2)">GPU Cluster:</strong> AWS P5 (H100x8), OCI Supercluster, 华为昇腾集群</p>
+            <p class="card-text" style="font-size:.7rem"><strong style="color:var(--accent-2)">Platform:</strong> OpenShift + ACM 多集群管理(citation:11), 混合云架构(citation:13)</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="card reveal" style="grid-column:1/-1">
+        <div class="use-case-card">
+          <h4 style="font-size:1rem;margin-bottom:.8rem">AI Agent Development</h4>
+          <span class="card-badge">Emerging Scenario</span>
+          <p class="card-text" style="margin-top:.5rem">
+            智能体(Agent)应用对基础设施有独特需求：需要长期记忆模块存储跨会话数据、多轮推理的上下文管理、工具调用的低延迟网络(citation:1)。随着智能体AI从试点走向规模化，企业平台正从传统记录系统演进为人、平台与智能体协同的执行系统(citation:4)。
+          </p>
+          <div style="margin-top:1rem;display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1rem">
+            <div>
+              <p class="card-text" style="font-size:.7rem"><strong style="color:var(--accent)">Memory Stack:</strong></p>
+              <p class="card-text" style="font-size:.7rem">向量数据库(Milvus/Pinecone) + 摘要记忆 + 结构化知识库(citation:1)</p>
+            </div>
+            <div>
+              <p class="card-text" style="font-size:.7rem"><strong style="color:var(--accent)">Inference Layer:</strong></p>
+              <p class="card-text" style="font-size:.7rem">低延迟API (Gemini Flash / Qwen-Turbo) + 本地小模型路由</p>
+            </div>
+            <div>
+              <p class="card-text" style="font-size:.7rem"><strong style="color:var(--accent)">Infrastructure:</strong></p>
+              <p class="card-text" style="font-size:.7rem">K8s Auto-scaling + Redis缓存 + PostgreSQL持久化</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===================== PAGE 10: FOOTER ===================== -->
+<footer id="footer" class="site-footer">
+  <div class="footer-grid">
+    <div>
+      <div class="footer-brand">AI-VPS</div>
+      <p class="footer-desc">全球AI服务与VPS计算资源精选指南。我们致力于为开发者、创业团队和企业提供一站式AI基础设施选型参考，覆盖全球30+AI厂商和20+云平台。</p>
+      <p class="footer-desc" style="margin-top:1rem;font-size:.7rem;color:var(--text-dim)">ai-vps.github.io | Last Updated: July 2026</p>
+    </div>
+    <div class="footer-col">
+      <h4>AI Providers</h4>
+      <ul>
+        <li><a href="#ai-intl">OpenAI</a></li>
+        <li><a href="#ai-intl">Anthropic</a></li>
+        <li><a href="#ai-intl">Google AI</a></li>
+        <li><a href="#ai-cn">DeepSeek</a></li>
+        <li><a href="#ai-cn">Alibaba Qwen</a></li>
+        <li><a href="#ai-cn">Baidu ERNIE</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Cloud Platforms</h4>
+      <ul>
+        <li><a href="#cloud-intl">AWS</a></li>
+        <li><a href="#cloud-intl">Azure</a></li>
+        <li><a href="#cloud-intl">Google Cloud</a></li>
+        <li><a href="#cloud-cn">Alibaba Cloud</a></li>
+        <li><a href="#cloud-cn">Tencent Cloud</a></li>
+        <li><a href="#cloud-cn">Huawei Cloud</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Resources</h4>
+      <ul>
+        <li><a href="#gpu">GPU Guide</a></li>
+        <li><a href="#compare">Comparison</a></li>
+        <li><a href="#cases">Use Cases</a></li>
+        <li><a href="#">Blog</a></li>
+        <li><a href="#">GitHub Repo</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>2024 - 2026 AI-VPS. Open Source Project.</span>
+    <span>Disclaimer: Prices are approximate and subject to change. Always verify with official provider websites.</span>
+  </div>
+</footer>
+
+<!-- JAVASCRIPT -->
+<script>
+// Scroll reveal
+const reveals = document.querySelectorAll('.reveal');
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if(e.isIntersecting){e.target.classList.add('visible');} });
+},{threshold:0.1});
+reveals.forEach(r => revealObserver.observe(r));
+
+// Page indicator & nav active state
+const sections = document.querySelectorAll('.page-section, .site-footer');
+const dots = document.querySelectorAll('.page-dot');
+const navLinks = document.querySelectorAll('.nav-links a');
+
+const sectionObserver = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if(e.isIntersecting){
+      const id = e.target.id;
+      dots.forEach(d => d.classList.toggle('active', d.dataset.target === id));
+      navLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + id));
+    }
+  });
+},{threshold:0.3});
+sections.forEach(s => {if(s.id) sectionObserver.observe(s);});
+
+// Page dot click
+dots.forEach(d => {
+  d.addEventListener('click', () => {
+    const target = document.getElementById(d.dataset.target);
+    if(target) target.scrollIntoView({behavior:'smooth'});
+  });
+});
+
+// Tab system
+document.querySelectorAll('.tab-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const tab = btn.dataset.tab;
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('tab-' + tab).classList.add('active');
+  });
+});
+
+// Staggered card animation
+document.querySelectorAll('.card-grid .card').forEach((card, i) => {
+  card.style.animationDelay = (i * 0.08) + 's';
+});
+</script>
+</body>
+</html>
