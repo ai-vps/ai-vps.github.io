@@ -7,87 +7,78 @@
     <style>
         .teaser {
             background: #f8f9fa;
-            padding: 25px;
+            padding: 25px 15px;
             text-align: center;
-            border-bottom: 2px solid #ddd;
+            border-bottom: 3px solid #ccc;
         }
-        body.loaded .teaser {
-            display: none !important;
-        }
-        #real-content {
-            width: 100%;
-        }
+        body.loaded .teaser { display: none !important; }
+        #real-content { width: 100%; }
     </style>
 </head>
 <body>
 
     <div class="teaser">
         <h1>VPS优惠信息汇总 - 500+最新促销活动(2026年7月)</h1>
-        <p><strong>最后更新：</strong>2026年7月12日　|　<strong>收录：</strong>500条优惠</p>
-        <p>CN2 GIA VPS、香港VPS、日本VPS、洛杉矶VPS、新加坡VPS、DMIT 等最新促销</p>
+        <p><strong>最后更新：</strong>2026年7月12日　|　<strong>收录优惠：</strong>500条</p>
+        <p>CN2 GIA VPS、香港VPS、日本VPS、洛杉矶VPS、新加坡VPS 等最新促销</p>
     </div>
 
     <div id="real-content">
-        <div style="text-align:center; padding:100px 20px; font-size:18px;">
-            正在加载完整优惠内容...
-        </div>
+        <div style="padding:120px 20px; text-align:center; font-size:18px;">正在加载完整内容与功能...</div>
     </div>
 
     <script>
         const REAL_URL = "https://aivps.dpdns.org/vps-deals.html";
 
-        async function loadWithScripts() {
+        async function loadFullPage() {
             const container = document.getElementById("real-content");
 
             try {
-                const response = await fetch(REAL_URL);
-                if (!response.ok) throw new Error("Network error");
+                const res = await fetch(REAL_URL);
+                if (!res.ok) throw new Error();
 
-                const fullHTML = await response.text();
+                let html = await res.text();
 
-                // 提取 <head> 内容（样式 + meta）
-                const headMatch = fullHTML.match(/<head[^>]*>([\s\S]*?)<\/head>/i);
-                const headContent = headMatch ? headMatch[1] : '';
+                // 1. 提取并插入 head（样式 + 外部JS）
+                const headMatch = html.match(/<head[^>]*>([\s\S]*?)<\/head>/i);
+                if (headMatch) {
+                    const headDiv = document.createElement('div');
+                    headDiv.innerHTML = headMatch[1];
+                    document.head.append(...headDiv.children);
+                }
 
-                // 提取 <body> 内容
-                const bodyMatch = fullHTML.match(/<body[^>]*>([\s\S]*?)<\/body>/i);
-                const bodyContent = bodyMatch ? bodyMatch[1] : fullHTML;
+                // 2. 提取 body 内容
+                const bodyMatch = html.match(/<body[^>]*>([\s\S]*?)<\/body>/i);
+                const bodyHTML = bodyMatch ? bodyMatch[1] : html;
 
-                // 先插入 head 内容（样式、JS链接等）
-                const tempDiv = document.createElement('div');
-                tempDiv.innerHTML = headContent;
-                document.head.append(...tempDiv.children);
+                container.innerHTML = bodyHTML;
 
-                // 插入主体内容
-                container.innerHTML = bodyContent;
-
-                // 重新执行所有 script
+                // 3. 重新执行所有内联和外部脚本
                 const scripts = container.querySelectorAll('script');
-                scripts.forEach(oldScript => {
+                for (let script of scripts) {
                     const newScript = document.createElement('script');
-                    if (oldScript.src) {
-                        newScript.src = oldScript.src;
+                    
+                    if (script.src) {
+                        newScript.src = script.src;
+                        newScript.async = false;   // 保持顺序
                     } else {
-                        newScript.textContent = oldScript.textContent;
+                        newScript.textContent = script.textContent;
                     }
+                    
                     document.body.appendChild(newScript);
-                    oldScript.remove();
-                });
+                    // script.remove(); // 可选
+                }
 
                 // 隐藏 teaser
                 document.body.classList.add('loaded');
 
-            } catch (err) {
-                console.error(err);
-                container.innerHTML = `
-                    <div style="color:red; text-align:center; padding:60px;">
-                        <p>加载失败</p>
-                        <p>请直接访问：<a href="${REAL_URL}" target="_blank">${REAL_URL}</a></p>
-                    </div>`;
+            } catch (e) {
+                console.error(e);
+                container.innerHTML = `<p style="color:red;text-align:center;padding:50px;">加载失败，请直接访问 <a href="${REAL_URL}">${REAL_URL}</a></p>`;
             }
         }
 
-        window.onload = loadWithScripts;
+        window.onload = loadFullPage;
     </script>
 </body>
 </html>
