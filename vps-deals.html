@@ -23,12 +23,11 @@
     </div>
 
     <div id="real-content">
-        <div style="padding:120px 20px; text-align:center;">正在加载完整优惠列表...</div>
+        <div style="padding:120px; text-align:center;">正在加载完整优惠列表...</div>
     </div>
 
     <script>
         const REAL_URL = "https://aivps.dpdns.org/vps-deals.html";
-        const SEARCH_JS = "https://ai-vps.github.io/search-index.js";
 
         async function loadPage() {
             const container = document.getElementById("real-content");
@@ -39,7 +38,7 @@
 
                 let html = await res.text();
 
-                // 插入 head 样式
+                // 插入样式
                 const headMatch = html.match(/<head[^>]*>([\s\S]*?)<\/head>/i);
                 if (headMatch) {
                     const temp = document.createElement('div');
@@ -47,30 +46,35 @@
                     document.head.append(...temp.children);
                 }
 
-                // 插入 body 内容
+                // 插入页面主体
                 const bodyMatch = html.match(/<body[^>]*>([\s\S]*?)<\/body>/i);
                 container.innerHTML = bodyMatch ? bodyMatch[1] : html;
 
-                // 隐藏 teaser
                 document.body.classList.add('loaded');
 
-                // === 关键：加载你自己的 search-index.js ===
-                const script = document.createElement('script');
-                script.src = SEARCH_JS;
-                script.onload = function() {
-                    console.log("search-index.js 加载完成");
-                    // 这里可以尝试重新初始化搜索
+                // 加载搜索 JS
+                const searchScript = document.createElement('script');
+                searchScript.src = "https://ai-vps.github.io/search-index.js";
+                searchScript.onload = function() {
+                    console.log("✅ search-index.js 加载成功，SEARCH_INDEX 已就绪");
+                    
+                    // 强制触发搜索初始化
                     setTimeout(() => {
-                        if (typeof doSearch === "function") {
-                            console.log("doSearch 函数可用");
+                        const event = new Event('DOMContentLoaded');
+                        document.dispatchEvent(event);
+                        
+                        // 如果有 searchInput，强制再绑定一次
+                        const searchInput = document.getElementById('searchInput');
+                        if (searchInput) {
+                            console.log("找到搜索框，正在绑定事件");
                         }
                     }, 800);
                 };
-                document.body.appendChild(script);
+                document.body.appendChild(searchScript);
 
             } catch (e) {
                 console.error(e);
-                container.innerHTML = `<p style="color:red; text-align:center; padding:60px;">加载失败</p>`;
+                container.innerHTML = `<p style="color:red;text-align:center;padding:60px;">加载失败</p>`;
             }
         }
 
