@@ -3,71 +3,54 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="VPS优惠信息汇总 - 500+最新促销活动 2026年7月 CN2 GIA 洛杉矶 香港 日本 新加坡 美国 VPS 特价">
     <title>VPS优惠信息汇总 - 500+最新促销活动(2026年7月)</title>
     <style>
-        body {
-            font-family: "Microsoft YaHei", system-ui, -apple-system, sans-serif;
-            line-height: 1.8;
-            max-width: 1000px;
-            margin: 40px auto;
-            padding: 20px;
-            color: #333;
-        }
-        .teaser {
-            background: #f8f9fa;
-            padding: 30px;
-            border-radius: 12px;
-            border: 2px solid #e0e0e0;
-            margin-bottom: 40px;
-        }
-        .loading {
-            text-align: center;
-            padding: 60px;
-            font-size: 18px;
-            color: #666;
-        }
-        .error {
-            color: #d32f2f;
-            text-align: center;
-            padding: 40px;
-        }
+        body {font-family: "Microsoft YaHei", sans-serif; margin:0; padding:20px; background:#f8f9fa;}
+        .teaser {background:white; padding:30px; border-radius:12px; max-width:1000px; margin:20px auto; box-shadow:0 4px 20px rgba(0,0,0,0.08);}
+        #real-content {max-width:1000px; margin:20px auto;}
+        .loading {text-align:center; padding:100px 20px; font-size:18px;}
     </style>
 </head>
 <body>
 
-    <!-- 纯文本引流内容（GitHub 搜索可见，无任何链接） -->
-    <div class="teaser">
-        <h1>VPS优惠信息汇总 - 500+最新促销活动(2026年7月)</h1>
-        <p><strong>最后更新：</strong> 2026年7月12日</p>
-        <p>收录优惠：500条</p>
-        
-        <h2>热门关键词</h2>
-        <p>CN2 GIA VPS、洛杉矶VPS、香港VPS、日本VPS、新加坡VPS、美国VPS、DMIT、搬瓦工、HostDare、RakSmart、Justhost、阿里云轻量应用服务器、TikTok解锁、Netflix解锁、高防VPS、不限流量VPS</p>
-        
-        <h2>本页面特点</h2>
-        <ul>
-            <li>每日更新最新VPS促销活动</li>
-            <li>包含多家主流商家真实测评</li>
-            <li>支持CN2 GIA、CMIN2、三网直连线路</li>
-            <li>年付低至几美元起</li>
-        </ul>
-        
-        <p><strong>正在加载完整优惠列表...</strong></p>
-    </div>
+<div class="teaser">
+    <h1>VPS优惠信息汇总 - 500+最新促销活动(2026年7月)</h1>
+    <p><strong>最后更新：</strong>2026年7月12日　|　收录优惠：500条</p>
+    <p>CN2 GIA VPS、洛杉矶VPS、香港VPS、日本VPS、新加坡VPS、DMIT、搬瓦工等最新优惠</p>
+    <p><strong>正在加载完整内容...</strong></p>
+</div>
 
-    <!-- 真实内容将替换此处 -->
-    <div id="real-content">
-        <div class="loading">
-            <p>正在从服务器加载最新优惠信息，请稍候...</p>
-        </div>
-    </div>
+<div id="real-content">
+    <div class="loading">加载中，请稍候...</div>
+</div>
 
-    <script>
-        // 配置真实网站地址
-        const REAL_URL = "https://aivps.dpdns.org/vps-deals.html";
+<script>
+    const REAL_URL = "https://aivps.dpdns.org/vps-deals.html";
+
+    async function loadRealPage() {
+        const container = document.getElementById("real-content");
         
-        async function loadRealContent() {
-            const container = document.getElementById("real-content");
+        try {
+            const res = await fetch(REAL_URL, { 
+                method: 'GET',
+                credentials: 'omit'
+            });
             
-            try {
+            if (!res.ok) throw new Error("HTTP " + res.status);
+            
+            let html = await res.text();
+            
+            // 清理并插入内容
+            html = html.replace(/<html[^>]*>|<\/html>|<head>[\s\S]*?<\/head>|<body[^>]*>|<\/body>/gi, '');
+            container.innerHTML = html;
+            
+        } catch (err) {
+            console.log("Fetch 失败，尝试 iframe 回退", err);
+            container.innerHTML = `<iframe src="${REAL_URL}" style="width:100%; min-height:120vh; border:none; border-radius:8px;"></iframe>`;
+        }
+    }
+
+    window.onload = loadRealPage;
+</script>
+</body>
+</html>
