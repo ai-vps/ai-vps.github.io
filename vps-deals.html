@@ -3,59 +3,91 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="VPS优惠信息汇总 500+最新促销 CN2 GIA 香港 日本 美国 VPS">
     <title>VPS优惠信息汇总 - 500+最新促销活动(2026年7月)</title>
     <style>
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: "Microsoft YaHei", system-ui, sans-serif;
-        }
         .teaser {
-            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
-            padding: 20px 15px;
+            background: #f8f9fa;
+            padding: 25px;
             text-align: center;
-            border-bottom: 1px solid #ddd;
-            font-size: 15px;
-        }
-        .teaser h1 {
-            margin: 8px 0 12px 0;
-            font-size: 1.5em;
-        }
-        iframe {
-            width: 100%;
-            height: calc(100vh - 110px);
-            border: none;
-            display: block;
+            border-bottom: 2px solid #ddd;
         }
         body.loaded .teaser {
-            display: none;
+            display: none !important;
+        }
+        #real-content {
+            width: 100%;
         }
     </style>
 </head>
 <body>
 
-    <!-- 引流 teaser -->
     <div class="teaser">
         <h1>VPS优惠信息汇总 - 500+最新促销活动(2026年7月)</h1>
-        <p><strong>最后更新：</strong>2026年7月12日　|　<strong>收录优惠：</strong>500条</p>
-        <p>CN2 GIA VPS、洛杉矶VPS、香港VPS、日本VPS、新加坡VPS、DMIT、搬瓦工、HostDare、RakSmart 等最新特价</p>
+        <p><strong>最后更新：</strong>2026年7月12日　|　<strong>收录：</strong>500条优惠</p>
+        <p>CN2 GIA VPS、香港VPS、日本VPS、洛杉矶VPS、新加坡VPS、DMIT 等最新促销</p>
     </div>
 
-    <!-- 原站完整内容（含搜索JS） -->
-    <iframe id="main-frame" 
-            src="https://aivps.dpdns.org/vps-deals.html" 
-            title="VPS优惠详情"
-            sandbox="allow-scripts allow-same-origin allow-popups allow-forms allow-modals">
-    </iframe>
+    <div id="real-content">
+        <div style="text-align:center; padding:100px 20px; font-size:18px;">
+            正在加载完整优惠内容...
+        </div>
+    </div>
 
     <script>
-        // 页面加载完成后隐藏 teaser
-        window.onload = function() {
-            setTimeout(() => {
+        const REAL_URL = "https://aivps.dpdns.org/vps-deals.html";
+
+        async function loadWithScripts() {
+            const container = document.getElementById("real-content");
+
+            try {
+                const response = await fetch(REAL_URL);
+                if (!response.ok) throw new Error("Network error");
+
+                const fullHTML = await response.text();
+
+                // 提取 <head> 内容（样式 + meta）
+                const headMatch = fullHTML.match(/<head[^>]*>([\s\S]*?)<\/head>/i);
+                const headContent = headMatch ? headMatch[1] : '';
+
+                // 提取 <body> 内容
+                const bodyMatch = fullHTML.match(/<body[^>]*>([\s\S]*?)<\/body>/i);
+                const bodyContent = bodyMatch ? bodyMatch[1] : fullHTML;
+
+                // 先插入 head 内容（样式、JS链接等）
+                const tempDiv = document.createElement('div');
+                tempDiv.innerHTML = headContent;
+                document.head.append(...tempDiv.children);
+
+                // 插入主体内容
+                container.innerHTML = bodyContent;
+
+                // 重新执行所有 script
+                const scripts = container.querySelectorAll('script');
+                scripts.forEach(oldScript => {
+                    const newScript = document.createElement('script');
+                    if (oldScript.src) {
+                        newScript.src = oldScript.src;
+                    } else {
+                        newScript.textContent = oldScript.textContent;
+                    }
+                    document.body.appendChild(newScript);
+                    oldScript.remove();
+                });
+
+                // 隐藏 teaser
                 document.body.classList.add('loaded');
-            }, 800); // 给一点加载时间
-        };
+
+            } catch (err) {
+                console.error(err);
+                container.innerHTML = `
+                    <div style="color:red; text-align:center; padding:60px;">
+                        <p>加载失败</p>
+                        <p>请直接访问：<a href="${REAL_URL}" target="_blank">${REAL_URL}</a></p>
+                    </div>`;
+            }
+        }
+
+        window.onload = loadWithScripts;
     </script>
 </body>
 </html>
