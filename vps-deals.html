@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="汇总500+条VPS优惠信息：搬瓦工、DMIT、Vultr、RackNerd等商家促销活动，CN2 GIA线路、年付优惠、新用户赠金，每日更新。">
-    <title>VPS优惠信息汇总 - 500+最新促销活动(2026年7月)</title>
+    <title>VPS优惠信息汇总 - 500+最新促销活动(2026年7月)模板好用了</title>
     <style>
         .teaser {
             background: #f8f9fa;
@@ -18,18 +17,17 @@
 <body>
 
     <div class="teaser">
-        <h1>VPS优惠信息汇总</h1>
-        <p><strong>最后更新：</strong>2026年7月12日　|　<strong>收录：</strong>大量优质内容</p>
-        <p>VPS优惠,VPS促销,搬瓦工优惠,DMIT优惠,RackNerd优惠,CN2 GIA优惠,VPS折扣</p>
+        <h1>VPS优惠信息汇总 - 500+最新促销活动(2026年7月)</h1>
+        <p><strong>最后更新：</strong>2026年7月12日　|　<strong>收录优惠：</strong>500条</p>
+        <p>CN2 GIA VPS、香港VPS、日本VPS、洛杉矶VPS、新加坡VPS、DMIT 等最新促销</p>
     </div>
 
     <div id="real-content">
-        <div style="padding:120px; text-align:center;">正在加载完整内容...</div>
+        <div style="padding:120px; text-align:center;">正在加载完整优惠列表...</div>
     </div>
 
     <script>
         const REAL_URL = "https://aivps.dpdns.org/vps-deals.html";
-        const SEARCH_JS = "https://ai-vps.github.io/search-index.js";
 
         async function loadPage() {
             const container = document.getElementById("real-content");
@@ -40,6 +38,7 @@
 
                 let html = await res.text();
 
+                // 插入样式
                 const headMatch = html.match(/<head[^>]*>([\s\S]*?)<\/head>/i);
                 if (headMatch) {
                     const temp = document.createElement('div');
@@ -47,18 +46,28 @@
                     document.head.append(...temp.children);
                 }
 
+                // 插入页面主体
                 const bodyMatch = html.match(/<body[^>]*>([\s\S]*?)<\/body>/i);
                 container.innerHTML = bodyMatch ? bodyMatch[1] : html;
 
                 document.body.classList.add('loaded');
 
+                // 加载搜索 JS
                 const searchScript = document.createElement('script');
-                searchScript.src = SEARCH_JS;
-                searchScript.onload = () => {
-                    console.log("搜索功能已加载");
+                searchScript.src = "https://ai-vps.github.io/search-index.js";
+                searchScript.onload = function() {
+                    console.log("✅ search-index.js 加载成功，SEARCH_INDEX 已就绪");
+                    
+                    // 强制触发搜索初始化
                     setTimeout(() => {
                         const event = new Event('DOMContentLoaded');
                         document.dispatchEvent(event);
+                        
+                        // 如果有 searchInput，强制再绑定一次
+                        const searchInput = document.getElementById('searchInput');
+                        if (searchInput) {
+                            console.log("找到搜索框，正在绑定事件");
+                        }
                     }, 800);
                 };
                 document.body.appendChild(searchScript);
