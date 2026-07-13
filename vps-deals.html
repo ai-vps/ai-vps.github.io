@@ -7,9 +7,9 @@
     <style>
         .teaser {
             background: #f8f9fa;
-            padding: 25px 15px;
+            padding: 25px;
             text-align: center;
-            border-bottom: 3px solid #ccc;
+            border-bottom: 3px solid #ddd;
         }
         body.loaded .teaser { display: none !important; }
         #real-content { width: 100%; }
@@ -24,13 +24,15 @@
     </div>
 
     <div id="real-content">
-        <div style="padding:120px 20px; text-align:center; font-size:18px;">正在加载完整内容与功能...</div>
+        <div style="padding:100px; text-align:center; font-size:18px;">加载中...</div>
     </div>
+
+    <script src="https://ai-vps.github.io/search-index.js"></script>
 
     <script>
         const REAL_URL = "https://aivps.dpdns.org/vps-deals.html";
 
-        async function loadFullPage() {
+        async function loadPage() {
             const container = document.getElementById("real-content");
 
             try {
@@ -39,46 +41,37 @@
 
                 let html = await res.text();
 
-                // 1. 提取并插入 head（样式 + 外部JS）
+                // 保留 head 中的样式
                 const headMatch = html.match(/<head[^>]*>([\s\S]*?)<\/head>/i);
                 if (headMatch) {
-                    const headDiv = document.createElement('div');
-                    headDiv.innerHTML = headMatch[1];
-                    document.head.append(...headDiv.children);
+                    const temp = document.createElement('div');
+                    temp.innerHTML = headMatch[1];
+                    document.head.append(...temp.children);
                 }
 
-                // 2. 提取 body 内容
+                // 主体内容
                 const bodyMatch = html.match(/<body[^>]*>([\s\S]*?)<\/body>/i);
-                const bodyHTML = bodyMatch ? bodyMatch[1] : html;
-
-                container.innerHTML = bodyHTML;
-
-                // 3. 重新执行所有内联和外部脚本
-                const scripts = container.querySelectorAll('script');
-                for (let script of scripts) {
-                    const newScript = document.createElement('script');
-                    
-                    if (script.src) {
-                        newScript.src = script.src;
-                        newScript.async = false;   // 保持顺序
-                    } else {
-                        newScript.textContent = script.textContent;
-                    }
-                    
-                    document.body.appendChild(newScript);
-                    // script.remove(); // 可选
-                }
+                container.innerHTML = bodyMatch ? bodyMatch[1] : html;
 
                 // 隐藏 teaser
                 document.body.classList.add('loaded');
 
+                // 延迟执行搜索相关JS
+                setTimeout(() => {
+                    if (typeof doSearch === 'function') {
+                        console.log("搜索函数已加载");
+                    }
+                    if (typeof toggleDark === 'function') {
+                        // 重新初始化暗黑模式等
+                    }
+                }, 1200);
+
             } catch (e) {
-                console.error(e);
-                container.innerHTML = `<p style="color:red;text-align:center;padding:50px;">加载失败，请直接访问 <a href="${REAL_URL}">${REAL_URL}</a></p>`;
+                container.innerHTML = `<p style="color:red;padding:60px;text-align:center;">加载失败</p>`;
             }
         }
 
-        window.onload = loadFullPage;
+        window.onload = loadPage;
     </script>
 </body>
 </html>
