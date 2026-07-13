@@ -3,67 +3,59 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="VPS优惠信息汇总 500+最新促销 CN2 GIA 香港 日本 美国 VPS">
     <title>VPS优惠信息汇总 - 500+最新促销活动(2026年7月)</title>
     <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: "Microsoft YaHei", system-ui, sans-serif;
+        }
         .teaser {
-            background: #f8f9fa;
-            padding: 25px;
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            padding: 20px 15px;
             text-align: center;
-            border-bottom: 3px solid #ddd;
+            border-bottom: 1px solid #ddd;
+            font-size: 15px;
+        }
+        .teaser h1 {
+            margin: 8px 0 12px 0;
+            font-size: 1.5em;
+        }
+        iframe {
+            width: 100%;
+            height: calc(100vh - 110px);
+            border: none;
+            display: block;
         }
         body.loaded .teaser {
-            display: none !important;
-        }
-        iframe, #real-content {
-            width: 100%;
-            min-height: 100vh;
-            border: none;
+            display: none;
         }
     </style>
 </head>
 <body>
 
-    <!-- GitHub 引流内容 -->
+    <!-- 引流 teaser -->
     <div class="teaser">
         <h1>VPS优惠信息汇总 - 500+最新促销活动(2026年7月)</h1>
-        <p><strong>最后更新：</strong>2026年7月12日　|　<strong>收录：</strong>500条</p>
-        <p>CN2 GIA・洛杉矶VPS・香港VPS・日本VPS・新加坡VPS・DMIT・搬瓦工 等最新优惠</p>
+        <p><strong>最后更新：</strong>2026年7月12日　|　<strong>收录优惠：</strong>500条</p>
+        <p>CN2 GIA VPS、洛杉矶VPS、香港VPS、日本VPS、新加坡VPS、DMIT、搬瓦工、HostDare、RakSmart 等最新特价</p>
     </div>
 
-    <!-- 真实内容容器 -->
-    <div id="real-content"></div>
+    <!-- 原站完整内容（含搜索JS） -->
+    <iframe id="main-frame" 
+            src="https://aivps.dpdns.org/vps-deals.html" 
+            title="VPS优惠详情"
+            sandbox="allow-scripts allow-same-origin allow-popups allow-forms allow-modals">
+    </iframe>
 
     <script>
-        const REAL_URL = "https://aivps.dpdns.org/vps-deals.html";
-
-        async function loadFullPage() {
-            const container = document.getElementById("real-content");
-
-            try {
-                // 优先尝试 fetch + 保留 head
-                const res = await fetch(REAL_URL);
-                if (!res.ok) throw new Error();
-
-                let fullHTML = await res.text();
-
-                // 把整个页面内容放进去（保留 head 中的样式和脚本）
-                container.innerHTML = fullHTML;
-
-                // 隐藏 teaser
+        // 页面加载完成后隐藏 teaser
+        window.onload = function() {
+            setTimeout(() => {
                 document.body.classList.add('loaded');
-
-            } catch (e) {
-                console.log("直接加载失败，使用 iframe");
-                container.innerHTML = `
-                    <iframe src="${REAL_URL}" 
-                            sandbox="allow-scripts allow-same-origin allow-popups allow-forms"
-                            allowfullscreen>
-                    </iframe>`;
-                document.body.classList.add('loaded');
-            }
-        }
-
-        window.onload = loadFullPage;
+            }, 800); // 给一点加载时间
+        };
     </script>
 </body>
 </html>
