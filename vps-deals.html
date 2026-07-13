@@ -12,7 +12,6 @@
             border-bottom: 3px solid #ddd;
         }
         body.loaded .teaser { display: none !important; }
-        #real-content { width: 100%; }
     </style>
 </head>
 <body>
@@ -20,17 +19,16 @@
     <div class="teaser">
         <h1>VPS优惠信息汇总 - 500+最新促销活动(2026年7月)</h1>
         <p><strong>最后更新：</strong>2026年7月12日　|　<strong>收录优惠：</strong>500条</p>
-        <p>CN2 GIA VPS、香港VPS、日本VPS、洛杉矶VPS、新加坡VPS 等最新促销</p>
+        <p>CN2 GIA VPS、香港VPS、日本VPS、洛杉矶VPS、新加坡VPS、DMIT 等最新促销</p>
     </div>
 
     <div id="real-content">
-        <div style="padding:100px; text-align:center; font-size:18px;">加载中...</div>
+        <div style="padding:120px 20px; text-align:center;">正在加载完整优惠列表...</div>
     </div>
-
-    <script src="https://ai-vps.github.io/search-index.js"></script>
 
     <script>
         const REAL_URL = "https://aivps.dpdns.org/vps-deals.html";
+        const SEARCH_JS = "https://ai-vps.github.io/search-index.js";
 
         async function loadPage() {
             const container = document.getElementById("real-content");
@@ -41,7 +39,7 @@
 
                 let html = await res.text();
 
-                // 保留 head 中的样式
+                // 插入 head 样式
                 const headMatch = html.match(/<head[^>]*>([\s\S]*?)<\/head>/i);
                 if (headMatch) {
                     const temp = document.createElement('div');
@@ -49,25 +47,30 @@
                     document.head.append(...temp.children);
                 }
 
-                // 主体内容
+                // 插入 body 内容
                 const bodyMatch = html.match(/<body[^>]*>([\s\S]*?)<\/body>/i);
                 container.innerHTML = bodyMatch ? bodyMatch[1] : html;
 
                 // 隐藏 teaser
                 document.body.classList.add('loaded');
 
-                // 延迟执行搜索相关JS
-                setTimeout(() => {
-                    if (typeof doSearch === 'function') {
-                        console.log("搜索函数已加载");
-                    }
-                    if (typeof toggleDark === 'function') {
-                        // 重新初始化暗黑模式等
-                    }
-                }, 1200);
+                // === 关键：加载你自己的 search-index.js ===
+                const script = document.createElement('script');
+                script.src = SEARCH_JS;
+                script.onload = function() {
+                    console.log("search-index.js 加载完成");
+                    // 这里可以尝试重新初始化搜索
+                    setTimeout(() => {
+                        if (typeof doSearch === "function") {
+                            console.log("doSearch 函数可用");
+                        }
+                    }, 800);
+                };
+                document.body.appendChild(script);
 
             } catch (e) {
-                container.innerHTML = `<p style="color:red;padding:60px;text-align:center;">加载失败</p>`;
+                console.error(e);
+                container.innerHTML = `<p style="color:red; text-align:center; padding:60px;">加载失败</p>`;
             }
         }
 
