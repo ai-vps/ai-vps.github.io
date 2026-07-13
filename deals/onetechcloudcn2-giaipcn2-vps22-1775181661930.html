@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="OneTechCloud是一家成立于2019年的专业VPS及独立服务器提供商，拥有美国洛杉矶CN2 GIA、中国香港CN2/CMI、以及英国伦敦多机房选择。其美国线路支持CN2 GIA、AS9929、AS4837原生IP及双ISP，并提供住宅IP选项，满足不">
+    <title>OneTechCloud美国CN2 GIA原生IP&中国香港CN2 VPS月付22元起限时折扣 - AI-VPS比价网</title>
+    <style>
+        .teaser {
+            background: #f8f9fa;
+            padding: 25px;
+            text-align: center;
+            border-bottom: 3px solid #ddd;
+        }
+        body.loaded .teaser { display: none !important; }
+    </style>
+</head>
+<body>
+
+    <div class="teaser">
+        <h1>OneTechCloud美国CN2 GIA原生IP&中国香港CN2 VPS月付22元起限时折扣</h1>
+        <p><strong>最后更新：</strong>2026年7月12日　|　<strong>收录：</strong>大量优质内容</p>
+        <p>年付优惠, 年付优惠, 大带宽VPS,VPS优惠,促销</p>
+    </div>
+
+    <div id="real-content">
+        <div style="padding:120px; text-align:center;">正在加载完整内容...</div>
+    </div>
+
+    <script>
+        const REAL_URL = "https://aivps.dpdns.org/deals/onetechcloudcn2-giaipcn2-vps22-1775181661930.html";
+        const SEARCH_JS = "https://ai-vps.github.io/search-index.js";
+
+        async function loadPage() {
+            const container = document.getElementById("real-content");
+
+            try {
+                const res = await fetch(REAL_URL);
+                if (!res.ok) throw new Error();
+
+                let html = await res.text();
+
+                const headMatch = html.match(/<head[^>]*>([\s\S]*?)<\/head>/i);
+                if (headMatch) {
+                    const temp = document.createElement('div');
+                    temp.innerHTML = headMatch[1];
+                    document.head.append(...temp.children);
+                }
+
+                const bodyMatch = html.match(/<body[^>]*>([\s\S]*?)<\/body>/i);
+                container.innerHTML = bodyMatch ? bodyMatch[1] : html;
+
+                document.body.classList.add('loaded');
+
+                const searchScript = document.createElement('script');
+                searchScript.src = SEARCH_JS;
+                searchScript.onload = () => {
+                    console.log("搜索功能已加载");
+                    setTimeout(() => {
+                        const event = new Event('DOMContentLoaded');
+                        document.dispatchEvent(event);
+                    }, 800);
+                };
+                document.body.appendChild(searchScript);
+
+            } catch (e) {
+                console.error(e);
+                container.innerHTML = `<p style="color:red;text-align:center;padding:60px;">加载失败</p>`;
+            }
+        }
+
+        window.onload = loadPage;
+    </script>
+</body>
+</html>

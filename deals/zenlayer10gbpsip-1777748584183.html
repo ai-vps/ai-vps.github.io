@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Zenlayer在印度尼西亚雅加达机房运营自有数据中心，专注于提供高性能的云服务器、裸金属服务器及CDN节点。此次评测重点聚焦Zenlayer印尼云服务器，详细解析其强劲的AMD EPYC架构CPU表现、10Gbps带宽默认配置以及支持自有IP的网络优势。通过实测国内三网回程路由及连接稳定性，帮助用">
+    <title>Zenlayer印尼云服务器低价10Gbps高性能测评，含原生IP与三网回程路由分析 - AI-VPS比价网</title>
+    <style>
+        .teaser {
+            background: #f8f9fa;
+            padding: 25px;
+            text-align: center;
+            border-bottom: 3px solid #ddd;
+        }
+        body.loaded .teaser { display: none !important; }
+    </style>
+</head>
+<body>
+
+    <div class="teaser">
+        <h1>Zenlayer印尼云服务器低价10Gbps高性能测评，含原生IP与三网回程路由分析</h1>
+        <p><strong>最后更新：</strong>2026年7月12日　|　<strong>收录：</strong>大量优质内容</p>
+        <p>新加坡VPS, 印尼云服务器, 10Gbps带宽,VPS优惠,促销</p>
+    </div>
+
+    <div id="real-content">
+        <div style="padding:120px; text-align:center;">正在加载完整内容...</div>
+    </div>
+
+    <script>
+        const REAL_URL = "https://aivps.dpdns.org/deals/zenlayer10gbpsip-1777748584183.html";
+        const SEARCH_JS = "https://ai-vps.github.io/search-index.js";
+
+        async function loadPage() {
+            const container = document.getElementById("real-content");
+
+            try {
+                const res = await fetch(REAL_URL);
+                if (!res.ok) throw new Error();
+
+                let html = await res.text();
+
+                const headMatch = html.match(/<head[^>]*>([\s\S]*?)<\/head>/i);
+                if (headMatch) {
+                    const temp = document.createElement('div');
+                    temp.innerHTML = headMatch[1];
+                    document.head.append(...temp.children);
+                }
+
+                const bodyMatch = html.match(/<body[^>]*>([\s\S]*?)<\/body>/i);
+                container.innerHTML = bodyMatch ? bodyMatch[1] : html;
+
+                document.body.classList.add('loaded');
+
+                const searchScript = document.createElement('script');
+                searchScript.src = SEARCH_JS;
+                searchScript.onload = () => {
+                    console.log("搜索功能已加载");
+                    setTimeout(() => {
+                        const event = new Event('DOMContentLoaded');
+                        document.dispatchEvent(event);
+                    }, 800);
+                };
+                document.body.appendChild(searchScript);
+
+            } catch (e) {
+                console.error(e);
+                container.innerHTML = `<p style="color:red;text-align:center;padding:60px;">加载失败</p>`;
+            }
+        }
+
+        window.onload = loadPage;
+    </script>
+</body>
+</html>

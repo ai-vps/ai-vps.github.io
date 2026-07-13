@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="618狂欢购正式开启！西柚洞察本次活动力度空前，全场套餐低至51折，活动期间新购、增购、续费均可享受折扣优惠。个人或团队用户提前续费、过期后续费均可额外加赠2周VIP，购买后还可参与抽奖，中奖率100%，最高可抽免单。活动时间为 2026年6">
+    <title>西柚洞察618狂欢购 全场低至51折+续费加赠2周+抽免单 - AI-VPS比价网</title>
+    <style>
+        .teaser {
+            background: #f8f9fa;
+            padding: 25px;
+            text-align: center;
+            border-bottom: 3px solid #ddd;
+        }
+        body.loaded .teaser { display: none !important; }
+    </style>
+</head>
+<body>
+
+    <div class="teaser">
+        <h1>西柚洞察618狂欢购 全场低至51折+续费加赠2周+抽免单</h1>
+        <p><strong>最后更新：</strong>2026年7月12日　|　<strong>收录：</strong>大量优质内容</p>
+        <p>年付优惠, 年付优惠, 限时折扣,VPS优惠,促销</p>
+    </div>
+
+    <div id="real-content">
+        <div style="padding:120px; text-align:center;">正在加载完整内容...</div>
+    </div>
+
+    <script>
+        const REAL_URL = "https://aivps.dpdns.org/deals/618-512-1780894890212.html";
+        const SEARCH_JS = "https://ai-vps.github.io/search-index.js";
+
+        async function loadPage() {
+            const container = document.getElementById("real-content");
+
+            try {
+                const res = await fetch(REAL_URL);
+                if (!res.ok) throw new Error();
+
+                let html = await res.text();
+
+                const headMatch = html.match(/<head[^>]*>([\s\S]*?)<\/head>/i);
+                if (headMatch) {
+                    const temp = document.createElement('div');
+                    temp.innerHTML = headMatch[1];
+                    document.head.append(...temp.children);
+                }
+
+                const bodyMatch = html.match(/<body[^>]*>([\s\S]*?)<\/body>/i);
+                container.innerHTML = bodyMatch ? bodyMatch[1] : html;
+
+                document.body.classList.add('loaded');
+
+                const searchScript = document.createElement('script');
+                searchScript.src = SEARCH_JS;
+                searchScript.onload = () => {
+                    console.log("搜索功能已加载");
+                    setTimeout(() => {
+                        const event = new Event('DOMContentLoaded');
+                        document.dispatchEvent(event);
+                    }, 800);
+                };
+                document.body.appendChild(searchScript);
+
+            } catch (e) {
+                console.error(e);
+                container.innerHTML = `<p style="color:red;text-align:center;padding:60px;">加载失败</p>`;
+            }
+        }
+
+        window.onload = loadPage;
+    </script>
+</body>
+</html>

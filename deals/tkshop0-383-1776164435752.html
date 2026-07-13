@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="面向 TikTok Shop 卖家的网络与运营环境，紫鸟浏览器此次推出了更具吸引力的 TKShop 专区优惠活动：在原本 ¥48/月 的基础上进一步降价，新人首月可 0元用，老用户新购或续费也可享受 38元/月 的活动价。对">
+    <title>紫鸟浏览器TKShop专区首月0元起 新用户专享38元3个月优惠 - AI-VPS比价网</title>
+    <style>
+        .teaser {
+            background: #f8f9fa;
+            padding: 25px;
+            text-align: center;
+            border-bottom: 3px solid #ddd;
+        }
+        body.loaded .teaser { display: none !important; }
+    </style>
+</head>
+<body>
+
+    <div class="teaser">
+        <h1>紫鸟浏览器TKShop专区首月0元起 新用户专享38元3个月优惠</h1>
+        <p><strong>最后更新：</strong>2026年7月12日　|　<strong>收录：</strong>大量优质内容</p>
+        <p>CN2 VPS, 老用户续费, TikTok Shop,VPS优惠,促销</p>
+    </div>
+
+    <div id="real-content">
+        <div style="padding:120px; text-align:center;">正在加载完整内容...</div>
+    </div>
+
+    <script>
+        const REAL_URL = "https://aivps.dpdns.org/deals/tkshop0-383-1776164435752.html";
+        const SEARCH_JS = "https://ai-vps.github.io/search-index.js";
+
+        async function loadPage() {
+            const container = document.getElementById("real-content");
+
+            try {
+                const res = await fetch(REAL_URL);
+                if (!res.ok) throw new Error();
+
+                let html = await res.text();
+
+                const headMatch = html.match(/<head[^>]*>([\s\S]*?)<\/head>/i);
+                if (headMatch) {
+                    const temp = document.createElement('div');
+                    temp.innerHTML = headMatch[1];
+                    document.head.append(...temp.children);
+                }
+
+                const bodyMatch = html.match(/<body[^>]*>([\s\S]*?)<\/body>/i);
+                container.innerHTML = bodyMatch ? bodyMatch[1] : html;
+
+                document.body.classList.add('loaded');
+
+                const searchScript = document.createElement('script');
+                searchScript.src = SEARCH_JS;
+                searchScript.onload = () => {
+                    console.log("搜索功能已加载");
+                    setTimeout(() => {
+                        const event = new Event('DOMContentLoaded');
+                        document.dispatchEvent(event);
+                    }, 800);
+                };
+                document.body.appendChild(searchScript);
+
+            } catch (e) {
+                console.error(e);
+                container.innerHTML = `<p style="color:red;text-align:center;padding:60px;">加载失败</p>`;
+            }
+        }
+
+        window.onload = loadPage;
+    </script>
+</body>
+</html>

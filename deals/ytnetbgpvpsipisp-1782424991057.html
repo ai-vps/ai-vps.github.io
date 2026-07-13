@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="本文深入解析云途YT.NET在日本东京BGP线路提供的VPS服务，突出其加拿大原生IP优势，支持解锁南非TikTok、ChatGPT、加拿大地区的Disney+、Netflix和Reddit等热门内容。采用Intel Xeon Gold 6138处理器，搭配DDR4内存和SSD存储，Unix">
+    <title>云途YT.NET日本东京BGP线路VPS详测：加拿大原生IP+优质ISP回程网络 - AI-VPS比价网</title>
+    <style>
+        .teaser {
+            background: #f8f9fa;
+            padding: 25px;
+            text-align: center;
+            border-bottom: 3px solid #ddd;
+        }
+        body.loaded .teaser { display: none !important; }
+    </style>
+</head>
+<body>
+
+    <div class="teaser">
+        <h1>云途YT.NET日本东京BGP线路VPS详测</h1>
+        <p><strong>最后更新：</strong>2026年7月12日　|　<strong>收录：</strong>大量优质内容</p>
+        <p>年付优惠, 年付优惠, 东京机房,VPS优惠,促销</p>
+    </div>
+
+    <div id="real-content">
+        <div style="padding:120px; text-align:center;">正在加载完整内容...</div>
+    </div>
+
+    <script>
+        const REAL_URL = "https://aivps.dpdns.org/deals/ytnetbgpvpsipisp-1782424991057.html";
+        const SEARCH_JS = "https://ai-vps.github.io/search-index.js";
+
+        async function loadPage() {
+            const container = document.getElementById("real-content");
+
+            try {
+                const res = await fetch(REAL_URL);
+                if (!res.ok) throw new Error();
+
+                let html = await res.text();
+
+                const headMatch = html.match(/<head[^>]*>([\s\S]*?)<\/head>/i);
+                if (headMatch) {
+                    const temp = document.createElement('div');
+                    temp.innerHTML = headMatch[1];
+                    document.head.append(...temp.children);
+                }
+
+                const bodyMatch = html.match(/<body[^>]*>([\s\S]*?)<\/body>/i);
+                container.innerHTML = bodyMatch ? bodyMatch[1] : html;
+
+                document.body.classList.add('loaded');
+
+                const searchScript = document.createElement('script');
+                searchScript.src = SEARCH_JS;
+                searchScript.onload = () => {
+                    console.log("搜索功能已加载");
+                    setTimeout(() => {
+                        const event = new Event('DOMContentLoaded');
+                        document.dispatchEvent(event);
+                    }, 800);
+                };
+                document.body.appendChild(searchScript);
+
+            } catch (e) {
+                console.error(e);
+                container.innerHTML = `<p style="color:red;text-align:center;padding:60px;">加载失败</p>`;
+            }
+        }
+
+        window.onload = loadPage;
+    </script>
+</body>
+</html>
