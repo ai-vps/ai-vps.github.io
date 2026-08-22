@@ -181,6 +181,7 @@
       <li><strong>国产：</strong>长江 SE006、大普微、忆联 UH 系列、小海豚、华为 ES3500 系列、铠侠 CD6——信创项目指定国产盘的直接对型号</li>
       <li><strong>大容量：</strong>华为 116P-30.72T，冷数据归档、监控存储的大杀器</li>
     </ul>
+    <p style="font-size:13px;color:#666;background:#f8f9fa;border-radius:4px;padding:10px 14px;margin-top:8px">很多企业 GPU 利用率只有两三成，瓶颈不在卡而在存储 IO——拿 SATA 盘喂训练数据，GPU 再强也是空转。训练存储至少 NVMe 起步，读取带宽要跟上显存填充速度。</p>
   </div>
 </div>
 
@@ -209,7 +210,7 @@
   <div class="section-header"><h2><span class="icon"></span>6. 网卡、配件、其他</h2></div>
   <div class="section-body">
     <ul style="line-height:2;font-size:14px;color:#555">
-      <li>高速 IB / 以太网网卡 XP、XC 系列；迈洛斯（Mellanox）网卡、交换机——组 GPU 集群 RDMA 网络的配套件</li>
+      <li>高速 IB / 以太网网卡 XP、XC 系列；迈洛斯（Mellanox）网卡、交换机——组 GPU 集群的命脉件。H200 标配 8 张 400G IB（单套含税约 7 万），多机训练走 RDMA 必须配；顺带提醒：NVLink 互联带宽 900GB/s，PCIe 5.0 只有 64GB/s，分布式训练别指望 PCIe 撑场面</li>
       <li>少量平板、NUC 迷你主机；电子元器件散货</li>
       <li>社群资源互换（服务器群、打印机办公群）</li>
     </ul>
@@ -271,6 +272,25 @@
   <li><strong>H20 分清 96G / 141G：</strong>96G HBM3 是老款（带宽4TB/s），141G HBM3e 升级款贵 15%-22%，但单机可跑 671B 满血大模型，是当下推理刚需款。96G 库存渐少部分已停产</li>
   <li><strong>A100 趁早：</strong>A100-80G 八卡购置价两月涨近七成到 117 万，自购设备基本全租出去了。老机型 GPU 不易坏、部件可换，保值属性强</li>
 </ol>
+</div>
+
+<h3 style="font-size:16px;color:#2c3e50;border-bottom:2px solid #f39c12;padding-bottom:6px;margin:25px 0 12px">加映：买不到 H100/H200？不受限型号和国产替代怎么选</h3>
+
+<div style="background:#fff;padding:15px 20px;border-radius:6px;margin-bottom:20px;box-shadow:0 2px 8px rgba(0,0,0,.05)">
+<p style="font-size:13px;color:#555;line-height:1.9;margin-bottom:10px">出口管制下，<strong>旗舰 Pro6000 已进对华管制清单</strong>（国内无官方渠道，第三方货源有质保和审计风险，价格也从 10 万内炒到 14 万还缺货），但中国特供的 <strong>Pro6000D / 5090D V2</strong> 和国产的 <strong>昇腾 910B</strong> 把中端市场填上了。SMM 8 月报道：华东某运营商拟投 128 台 Pro6000 集群，"未受限替代型号正填补中间需求缺口"。四张卡怎么选，一张表说清：</p>
+<table class="price-table">
+  <thead><tr><th>维度</th><th>PRO 6000D</th><th>5090D V2</th><th>昇腾 910B</th></tr></thead>
+  <tbody>
+    <tr><td>定位</td><td>专业级（中国特供）</td><td>消费级（中国特供）</td><td>国产训练/推理</td></tr>
+    <tr><td>显存</td><td>84-96GB GDDR7</td><td>32GB GDDR7</td><td>64GB HBM2e</td></tr>
+    <tr><td>7×24 高负载</td><td style="color:#27ae60">✓ 设计支持</td><td style="color:#e74c3c">✗ 散热余量有限</td><td style="color:#27ae60">✓ 支持需验证</td></tr>
+    <tr><td>CUDA 生态</td><td>✓ 完整</td><td>✓ 完整</td><td>✗ 需 CANN/MindSpore 迁移</td></tr>
+    <tr><td>适合场景</td><td>70B 以下推理、生产环境</td><td>30B 以下、开发测试</td><td>信创合规（政务/金融）</td></tr>
+    <tr><td>单卡参考价</td><td class="price">≈¥48,000 起</td><td class="price">中端</td><td class="price">中端看量</td></tr>
+  </tbody>
+</table>
+<p style="font-size:13px;color:#555;line-height:1.9;margin-top:10px"><strong>一句话结论：</strong>推理为主、模型 70B 以下 → Pro6000D 当前最稳（原生 FP8 跑 70B 推理，同任务比 Pro5000 效率高 30%，三年 TCO 低 15% 以上）；预算紧、模型 30B 以下做测试 → 5090D V2 够用但别拿消费卡当生产卡；信创合规场景 → 昇腾 910B 已在中国移动、六大行跑起来，前提是框架能过 CANN 适配。<strong>最贵的坑不是买错卡，是买了卡发现散热扛不住、驱动不兼容、交付等三个月。</strong></p>
+<p style="font-size:13px;color:#666;background:#f8f9fa;border-radius:4px;padding:10px 14px;margin-top:8px">顺带两个硬核数据：Akamai 实测 RTX PRO 6000 Blackwell 推理吞吐最高到 H100 的 1.63 倍（FP4 精度），"专业卡打不过数据中心卡"的老观念可以放放了；另外 8 卡机器满载超 3000W，<strong>4 卡以下风冷勉强，8 卡基本必上液冷</strong>——配机柜前先想清楚这个。</p>
 </div>
 
 <h2 style="color:#2c3e50;border-bottom:2px solid #e74c3c;padding-bottom:8px;margin-bottom:15px">四、自购还是租？拿真实数字算笔账</h2>
