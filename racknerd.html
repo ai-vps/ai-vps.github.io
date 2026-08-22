@@ -1,75 +1,238 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="RackNerd 2026年最新优惠码和促销活动汇总，VPS低至$21.99/年，支持支付宝付款，9个数据中心可选。">
-    <title>RackNerd优惠码汇总 - 2026年最新VPS折扣 | 低至$21.99/年</title>
-    <style>
-        .teaser {
-            background: #f8f9fa;
-            padding: 25px;
-            text-align: center;
-            border-bottom: 3px solid #ddd;
-        }
-        body.loaded .teaser { display: none !important; }
-    </style>
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+<link rel="icon" type="image/png" href="favicon.png">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>RackNerd优惠码汇总 - 2026年最新VPS折扣 | 低至$21.99/年</title>
+<meta name="description" content="RackNerd 2026年最新优惠码和促销活动汇总，VPS低至$21.99/年，支持支付宝付款，9个数据中心可选。">
+<meta name="keywords" content="RackNerd优惠码,RackNerd折扣,VPS优惠,RackNerd 2026,便宜VPS">
+<meta name="robots" content="index,follow">
+<link rel="canonical" href="racknerd.html">
+<link rel="stylesheet" href="css/style.css">
+
+  <link rel="dns-prefetch" href="//www.google-analytics.com">
+  <meta name="theme-color" content="#e74c3c">
+
+  <meta property="og:updated_time" content="2026-08-21">
 </head>
 <body>
 
-    <div class="teaser">
-        <h1>RackNerd优惠码汇总</h1>
-        <p><strong>最后更新：</strong>2026年7月12日　|　<strong>收录：</strong>大量优质内容</p>
-        <p>RackNerd优惠码,RackNerd折扣,VPS优惠,RackNerd 2026,便宜VPS</p>
+<header class="header">
+  <div class="header-inner">
+    <div style="display:flex;align-items:center;gap:10px">
+      <button class="menu-toggle" onclick="toggleMenu()" aria-label="打开菜单">☰</button>
+      <div class="logo"><a href="index.html" style="color:#e74c3c;text-decoration:none">AI-VPS比价网</a><span>AI中转站 · VPS优惠 · API比价</span></div>
     </div>
-
-    <div id="real-content">
-        <div style="padding:120px; text-align:center;">正在加载完整内容...</div>
+    <div style="display:flex;align-items:center;gap:10px">
+      <div class="search-box">
+        <input type="text" placeholder="搜索VPS主机、AI订阅、API中转..." id="searchInput">
+        <button onclick="doSearch()">搜索</button>
+      </div>
+      <button id="darkToggle" onclick="toggleDark()" style="background:none;border:2px solid #ddd;padding:6px 10px;border-radius:3px;cursor:pointer;font-size:16px" title="切换暗色模式">🌙</button>
     </div>
+  </div>
+</header>
+</div>
 
-    <script>
-        const REAL_URL = "https://ai-vps.cc.cd/racknerd.html";
-        const SEARCH_JS = "https://ai-vps.github.io/search-index.js";
+<div class="nav">
+<div class="nav-inner">
+<a href="index.html">首页</a>
+<a href="vps-deals.html" class="active">VPS优惠</a>
+<a href="free-resources.html">免费资源</a>
+<a href="ai-subscriptions.html">AI订阅</a>
+<a href="ai-api.html">API比价</a>
+    <a href="ai-transit.html">AI中转站</a>
+<a href="tools.html">在线工具</a>
+<a href="domain.html">域名注册</a>
+<a href="guides.html">使用指南</a>
+<a href="vps-compare.html">主机对比</a>
+<a href="hkvps.html">香港VPS</a>
+<a href="jp-vps.html">日本VPS</a>
+</div>
+</div>
 
-        async function loadPage() {
-            const container = document.getElementById("real-content");
+<div class="container">
+<div class="breadcrumb"><a href="index.html">首页</a> &gt; <a href="vps-deals.html">VPS优惠</a> &gt; RackNerd优惠码</div>
 
-            try {
-                const res = await fetch(REAL_URL);
-                if (!res.ok) throw new Error();
+<!-- GEO优化：页面元信息 -->
+<div style="background:#f8f9fa;border:1px solid #e0e0e0;border-radius:6px;padding:15px 20px;margin-bottom:15px;font-size:13px">
+  <div style="display:flex;flex-wrap:wrap;gap:15px;margin-bottom:10px">
+    <div><strong>最后更新：2026年8月21日</span></div>
+    <div><strong>数据来源：</strong>官方信息</div>
+  </div>
 
-                let html = await res.text();
+<div style="background:#fff;border-left:4px solid #34495e;padding:15px 20px;margin-bottom:20px;border-radius:0 6px 6px 0;box-shadow:0 2px 8px rgba(0,0,0,.08)">
+  <div style="font-size:15px;font-weight:600;color:#2c3e50;margin-bottom:10px">全面解析：帮你深入了解相关知识</div>
+  <div style="font-size:13px;color:#666;line-height:1.8">
+    本页提供详细的介绍和分析，帮你全面了解相关内容。所有信息均来自官方来源，价格和配置可能随时变化，请以官网最新信息为准。
+  </div>
+</div>
+  <div style="color:#666;line-height:1.6">
+    <strong>页面说明：</strong>本页信息来自官方来源，价格和配置可能随时变化，请以官网最新信息为准。
+  </div>
+</div>
 
-                const headMatch = html.match(/<head[^>]*>([\s\S]*?)<\/head>/i);
-                if (headMatch) {
-                    const temp = document.createElement('div');
-                    temp.innerHTML = headMatch[1];
-                    document.head.append(...temp.children);
-                }
+<div class="main-wrap">
+<div class="main-content">
 
-                const bodyMatch = html.match(/<body[^>]*>([\s\S]*?)<\/body>/i);
-                container.innerHTML = bodyMatch ? bodyMatch[1] : html;
+<div class="section">
+<div class="section-header">
+<h2><span class="icon"></span>RackNerd 2026年最新优惠</h2>
+</div>
+<div class="section-body">
+<div class="page-desc">
+RackNerd 2026年最新优惠已经发布，VPS最低$21.99/年。优惠特价VPS支持多个数据中心，包括美国西部洛杉矶、圣何塞、西雅图、东部亚特兰大、纽约、芝加哥、达拉斯、亚洲新加坡、欧洲爱尔兰。支持PayPal、支付宝、信用卡、银联卡付款。
+</div>
+<p style="margin-bottom:12px;font-size:13px;color:#666"><strong>无需优惠码</strong>，通过优惠链接购买即可享受优惠价格。</p>
+<table class="price-table">
+<thead>
+<tr><th>CPU</th><th>内存</th><th>SSD</th><th>流量</th><th>价格</th><th>购买</th></tr>
+</thead>
+<tbody>
+<tr><td>1核</td><td>1G</td><td>20G</td><td>3T/月</td><td><span class="price">$21.99/年</span></td><td><a href="https://my.racknerd.com/aff.php?aff=20729&pid=952" target="_blank" rel="nofollow" class="buy-btn">购买</a></td></tr>
+<tr><td>2核</td><td>2G</td><td>35G</td><td>5T/月</td><td><span class="price">$35.99/年</span></td><td><a href="https://my.racknerd.com/aff.php?aff=20729&pid=953" target="_blank" rel="nofollow" class="buy-btn">购买</a></td></tr>
+<tr><td>3核</td><td>4G</td><td>60G</td><td>7T/月</td><td><span class="price">$59.99/年</span></td><td><a href="https://my.racknerd.com/aff.php?aff=20729&pid=954" target="_blank" rel="nofollow" class="buy-btn">购买</a></td></tr>
+<tr><td>6核</td><td>6G</td><td>100G</td><td>12T/月</td><td><span class="price">$89.99/年</span></td><td><a href="https://my.racknerd.com/aff.php?aff=20729&pid=955" target="_blank" rel="nofollow" class="buy-btn">购买</a></td></tr>
+<tr><td>7核</td><td>8G</td><td>150G</td><td>20T/月</td><td><span class="price">$119.99/年</span></td><td><a href="https://my.racknerd.com/aff.php?aff=20729&pid=956" target="_blank" rel="nofollow" class="buy-btn">购买</a></td></tr>
+</tbody>
+</table>
+</div>
+</div>
+<p style="font-size:11px;color:#999;text-align:right;margin-top:8px">最后更新：2026年8月 · 价格以官网为准</p>
 
-                document.body.classList.add('loaded');
+<div class="section">
+<div class="section-header">
+<h2><span class="icon"></span>RackNerd套餐怎么选</h2>
+</div>
+<div class="section-body">
+<div style="line-height:2;font-size:14px;color:#555">
+<p><strong>1核1G $21.99/年</strong> — 适合搭博客、跑轻量爬虫、做开发测试。最低成本入门。</p>
+<p><strong>2核2G $35.99/年</strong> — 适合搭小网站、跑Docker容器、做个人API服务。性价比最高的档位。</p>
+<p><strong>3核4G $59.99/年</strong> — 适合跑多个服务、做轻量数据库、跑AI推理（小模型）。够用的配置。</p>
+<p><strong>6核6G $89.99/年</strong> — 适合跑生产环境、多个站点、需要稳定性的项目。</p>
+<p><strong>7核8G $119.99/年</strong> — 重度用户、需要大内存的场景。</p>
+<p style="margin-top:10px">大多数人选1核1G或2核2G就够了，别为了"以后可能用到"多花钱。</p>
+</div>
 
-                const searchScript = document.createElement('script');
-                searchScript.src = SEARCH_JS;
-                searchScript.onload = () => {
-                    console.log("搜索功能已加载");
-                    setTimeout(() => {
-                        const event = new Event('DOMContentLoaded');
-                        document.dispatchEvent(event);
-                    }, 800);
-                };
-                document.body.appendChild(searchScript);
 
-            } catch (e) {
-                console.error(e);
-                container.innerHTML = `<p style="color:red;text-align:center;padding:60px;">加载失败</p>`;
-            }
-        }
+<!-- 广告位：内容中间 -->
+<div class="ad-slot ad-incontent" id="ad-incontent">
+  <span class="ad-slot-label">广告位</span>
+  <!-- 在此插入广告代码 -->
+</div>
+</div>
+</div>
 
-        window.onload = loadPage;
-    </script>
+<div class="section">
+<div class="section-header">
+<h2><span class="icon"></span>RackNerd相关教程</h2>
+</div>
+<div class="section-body">
+<div class="link-grid">
+<div class="link-item"><a href="articles/racknerd-ssh.html">SSH连不上怎么解决 <span class="tag tag-hot">热</span></a></div>
+<div class="link-item"><a href="racknerd-review.html">真实使用评测 <span class="tag tag-hot">新</span></a></div>
+<div class="link-item"><a href="articles/racknerd-paolu.html">会不会跑路</a></div>
+<div class="link-item"><a href="guides/vps-beginner.html">VPS新手入门</a></div>
+<div class="link-item"><a href="vps-compare.html">VPS商家对比</a></div>
+<div class="link-item"><a href="cloudcone-review.html">CloudCone评测</a></div>
+<div class="link-item"><a href="bandwagonhost-review.html">搬瓦工评测</a></div>
+</div>
+</div>
+</div>
+
+</div>
+
+<div class="sidebar">
+<div class="side-block">
+<div class="side-title"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:4px"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>热门套餐</div>
+<div class="side-body">
+<ul class="side-list">
+<li><a href="https://my.racknerd.com/aff.php?aff=20729&pid=952" target="_blank" rel="nofollow"><span class="num">1</span>1核1G $21.99/年</a></li>
+<li><a href="https://my.racknerd.com/aff.php?aff=20729&pid=953" target="_blank" rel="nofollow"><span class="num">2</span>2核2G $35.99/年</a></li>
+<li><a href="https://my.racknerd.com/aff.php?aff=20729&pid=954" target="_blank" rel="nofollow"><span class="num">3</span>3核4G $59.99/年</a></li>
+</ul>
+</div>
+</div>
+<div class="side-block">
+<div class="side-title"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:4px"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>数据中心</div>
+<div class="side-body">
+<div class="tag-nav">
+<a href="#la">洛杉矶</a><a href="#sjc">圣何塞</a><a href="#seattle">西雅图</a>
+<a href="#atlanta">亚特兰大</a><a href="#newyork">纽约</a><a href="#chicago">芝加哥</a>
+<a href="#dallas">达拉斯</a><a href="#sg">新加坡</a><a href="#ie">爱尔兰</a>
+</div>
+</div>
+</div>
+<div class="side-block">
+<div class="side-title"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:4px"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>相关导航</div>
+<div class="side-body">
+<ul class="side-list">
+<li><a href="index.html">省钱导航首页</a></li>
+<li><a href="vps-deals.html">VPS优惠汇总</a></li>
+<li><a href="guides.html">购买指南</a></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+
+</div>
+
+<div class="footer">
+<div class="links">
+<a href="index.html">首页</a> |
+<a href="vps-deals.html">VPS优惠</a> |
+<a href="ai-subscriptions.html">AI订阅</a> |
+<a href="ai-api.html">API价格</a> |
+<a href="guides.html">购买指南</a>
+</div>
+<p>本站内容仅供参考，购买前请回到商家官网确认价格和服务条款</p>
+<p>&copy; 2016-2026 AI-VPS比价网 · 运营10年</p>
+</div>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "首页",
+      "item": "https://ai-vps.cc.cd/index.html"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "VPS优惠",
+      "item": "https://ai-vps.cc.cd/vps-deals.html"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "首页 &gt; VPS优惠 &gt; RackNerd优惠码"
+    }
+  ]
+}
+</script>
+
+<div id="back-to-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" style="position:fixed;bottom:20px;right:20px;width:40px;height:40px;background:#e74c3c;color:#fff;border-radius:50%;display:none;align-items:center;justify-content:center;cursor:pointer;z-index:999;font-size:18px;box-shadow:0 2px 8px rgba(0,0,0,.3)">↑</div>
+<script>
+window.addEventListener('scroll',function(){
+  document.getElementById('back-to-top').style.display = window.scrollY > 300 ? 'flex' : 'none';
+});
+</script>
+
+<script>
+document.querySelectorAll('.buy-btn').forEach(function(btn){
+  btn.addEventListener('click',function(){
+    if(typeof gtag==='function') gtag('event','affiliate_click',{event_category:'monetization',event_label:this.href});
+  });
+});
+</script>
+<script src="search-index.js"></script>
+<script src="js/prefetch.js"></script>
 </body>
 </html>

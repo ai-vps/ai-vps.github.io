@@ -1,75 +1,317 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="对比主流域名注册商的价格、服务和优惠。NameSilo、GoDaddy、Namecheap、Name.com域名注册价格一览。">
-    <title>域名注册 - NameSilo/GoDaddy/Namecheap域名注册商对比</title>
-    <style>
-        .teaser {
-            background: #f8f9fa;
-            padding: 25px;
-            text-align: center;
-            border-bottom: 3px solid #ddd;
-        }
-        body.loaded .teaser { display: none !important; }
-    </style>
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+<link rel="icon" type="image/png" href="favicon.png">
+<meta name="robots" content="index,follow">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>域名注册 - NameSilo/GoDaddy/Namecheap域名注册商对比</title>
+<meta name="description" content="对比主流域名注册商的价格、服务和优惠。NameSilo、GoDaddy、Namecheap、Name.com域名注册价格一览。">
+<meta name="keywords" content="域名注册,NameSilo,GoDaddy,Namecheap,域名注册商,com域名,便宜域名,域名优惠">
+<link rel="canonical" href="domain.html">
+<link rel="stylesheet" href="css/style.css">
+
+  <link rel="dns-prefetch" href="//www.google-analytics.com">
+  <meta name="theme-color" content="#e74c3c">
+
+  <meta property="og:updated_time" content="2026-08-21">
 </head>
 <body>
 
-    <div class="teaser">
-        <h1>域名注册</h1>
-        <p><strong>最后更新：</strong>2026年7月12日　|　<strong>收录：</strong>大量优质内容</p>
-        <p>域名注册,NameSilo,GoDaddy,Namecheap,域名注册商,com域名,便宜域名,域名优惠</p>
+<header class="header">
+  <div class="header-inner">
+    <div style="display:flex;align-items:center;gap:10px">
+      <button class="menu-toggle" onclick="toggleMenu()" aria-label="打开菜单">☰</button>
+      <div class="logo"><a href="index.html" style="color:#e74c3c;text-decoration:none">AI-VPS比价网</a><span>AI中转站 · VPS优惠 · API比价</span></div>
     </div>
-
-    <div id="real-content">
-        <div style="padding:120px; text-align:center;">正在加载完整内容...</div>
+    <div style="display:flex;align-items:center;gap:10px">
+      <div class="search-box">
+        <input type="text" placeholder="搜索VPS主机、AI订阅、API中转..." id="searchInput">
+        <button onclick="doSearch()">搜索</button>
+      </div>
+      <button id="darkToggle" onclick="toggleDark()" style="background:none;border:2px solid #ddd;padding:6px 10px;border-radius:3px;cursor:pointer;font-size:16px" title="切换暗色模式">🌙</button>
     </div>
+  </div>
+</header>
 
-    <script>
-        const REAL_URL = "https://ai-vps.cc.cd/domain.html";
-        const SEARCH_JS = "https://ai-vps.github.io/search-index.js";
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="index.html">首页</a>
+    <a href="vps-deals.html">VPS优惠</a>
+    <a href="free-resources.html">免费资源</a>
+    <a href="ai-subscriptions.html">AI订阅</a>
+    <a href="ai-api.html">API比价</a>
+    <a href="ai-transit.html">AI中转站</a>
+    <a href="tools.html">在线工具</a>
+    <a href="domain.html">域名注册</a>
+    <a href="guides.html">使用指南</a>
+    <a href="vps-compare.html">主机对比</a>
+    <a href="hkvps.html">香港VPS</a>
+    <a href="jp-vps.html">日本VPS</a>
+  </div>
+</nav>
 
-        async function loadPage() {
-            const container = document.getElementById("real-content");
+<!-- 广告位：导航下方 -->
+<div class="ad-slot ad-header" id="ad-header">
+  <span class="ad-slot-label">广告位</span>
+  <!-- 在此插入广告代码 -->
+</div>
 
-            try {
-                const res = await fetch(REAL_URL);
-                if (!res.ok) throw new Error();
 
-                let html = await res.text();
+<div class="container">
 
-                const headMatch = html.match(/<head[^>]*>([\s\S]*?)<\/head>/i);
-                if (headMatch) {
-                    const temp = document.createElement('div');
-                    temp.innerHTML = headMatch[1];
-                    document.head.append(...temp.children);
-                }
+<div class="breadcrumb"><a href="index.html">首页</a> &gt; 域名注册</div>
 
-                const bodyMatch = html.match(/<body[^>]*>([\s\S]*?)<\/body>/i);
-                container.innerHTML = bodyMatch ? bodyMatch[1] : html;
+<h1 class="page-title">域名注册商对比</h1>
 
-                document.body.classList.add('loaded');
+<!-- GEO优化：页面元信息 -->
+<div style="background:#f8f9fa;border:1px solid #e0e0e0;border-radius:6px;padding:15px 20px;margin-bottom:15px;font-size:13px">
+  <div style="display:flex;flex-wrap:wrap;gap:15px;margin-bottom:10px">
+    <div><strong>最后更新：2026年8月21日</span></div>
+    <div><strong>数据来源：</strong>官方信息</div>
+  </div>
 
-                const searchScript = document.createElement('script');
-                searchScript.src = SEARCH_JS;
-                searchScript.onload = () => {
-                    console.log("搜索功能已加载");
-                    setTimeout(() => {
-                        const event = new Event('DOMContentLoaded');
-                        document.dispatchEvent(event);
-                    }, 800);
-                };
-                document.body.appendChild(searchScript);
+<div style="background:#fff;border-left:4px solid #34495e;padding:15px 20px;margin-bottom:20px;border-radius:0 6px 6px 0;box-shadow:0 2px 8px rgba(0,0,0,.08)">
+  <div style="font-size:15px;font-weight:600;color:#2c3e50;margin-bottom:10px">全面解析：帮你深入了解相关知识</div>
+  <div style="font-size:13px;color:#666;line-height:1.8">
+    本页提供详细的介绍和分析，帮你全面了解相关内容。所有信息均来自官方来源，价格和配置可能随时变化，请以官网最新信息为准。
+  </div>
+</div>
+  <div style="color:#666;line-height:1.6">
+    <strong>页面说明：</strong>本页信息来自官方来源，价格和配置可能随时变化，请以官网最新信息为准。
+  </div>
+</div>
+<p class="page-desc">对比主流域名注册商的价格、续费价格、隐私保护和转让政策。选域名注册商不仅要看首年价格，更要看续费价格和长期成本。</p>
+<p style="font-size:11px;color:#999;margin-bottom:10px">阅读时间约 3 分钟</p>
 
-            } catch (e) {
-                console.error(e);
-                container.innerHTML = `<p style="color:red;text-align:center;padding:60px;">加载失败</p>`;
-            }
-        }
+<div class="main-wrap">
+<div class="main-content">
 
-        window.onload = loadPage;
-    </script>
+<div class="section">
+  <div class="section-header">
+    <h2><span class="icon"></span>主流域名注册商</h2>
+  </div>
+  <div class="section-body">
+    <table class="price-table">
+      <thead><tr><th>注册商</th><th>.com首年</th><th>.com续费</th><th>隐私保护</th><th>支付宝</th><th>特点</th></tr></thead>
+      <tbody>
+        <tr><td>NameSilo</td><td class="price">~$8.99</td><td>~$13.99</td><td>免费永久</td><td>支持</td><td>最便宜的续费价，隐私保护免费</td></tr>
+        <tr><td>GoDaddy</td><td class="price">~$9.99</td><td>~$20+</td><td>付费</td><td>支持</td><td>全球最大，但续费贵</td></tr>
+        <tr><td>Namecheap</td><td class="price">~$5.98</td><td>~$14+</td><td>免费1年</td><td>支持</td><td>首年便宜，常有促销</td></tr>
+        <tr><td>Name.com</td><td class="price">~$9.99</td><td>~$15+</td><td>付费</td><td>支持</td><td>界面简洁，支持新后缀多</td></tr>
+      </tbody>
+    </table>
+    <p style="font-size:12px;color:#999;margin-top:8px">价格为参考价，实际价格以各注册商官网为准。不同后缀（.com/.net/.org等）价格不同。</p>
+  
+
+<!-- 广告位：内容中间 -->
+<div class="ad-slot ad-incontent" id="ad-incontent">
+  <span class="ad-slot-label">广告位</span>
+  <!-- 在此插入广告代码 -->
+</div>
+</div>
+</div>
+
+<div class="section">
+  <div class="section-header">
+    <h2><span class="icon"></span>各注册商详细分析</h2>
+  </div>
+  <div class="section-body">
+    <div class="card-list">
+      <div class="card-item">
+        <div class="card-icon" style="background:#27ae60">NS</div>
+        <div class="card-info">
+          <div class="name">NameSilo - 性价比之王</div>
+          <div class="desc">优势：隐私保护免费永久（其他家大多要付费）、续费价格最低、支持支付宝。劣势：界面比较朴素，没有花哨功能。如果你只想安安稳稳持有域名，NameSilo是最省心的选择。转让域名也很方便。</div>
+        </div>
+      </div>
+      <div class="card-item">
+        <div class="card-icon" style="background:#f39c12">GD</div>
+        <div class="card-info">
+          <div class="name">GoDaddy - 全球最大但最贵</div>
+          <div class="desc">优势：品牌知名度高、服务全面（域名+主机+邮箱一站式）。劣势：续费价格贵（.com续费可能到$20+）、隐私保护要额外付费、界面广告多。首年促销便宜但长期持有成本高，不推荐。</div>
+        </div>
+      </div>
+      <div class="card-item">
+        <div class="card-icon" style="background:#e74c3c">NC</div>
+        <div class="card-info">
+          <div class="name">Namecheap - 首年最便宜</div>
+          <div class="desc">优势：首年促销价极低（.com可能低至$5.98）、经常有优惠活动。劣势：续费价格偏高、隐私保护只免费1年。适合短期持有或经常换域名的用户。</div>
+        </div>
+      </div>
+      <div class="card-item">
+        <div class="card-icon" style="background:#3498db">ND</div>
+        <div class="card-info">
+          <div class="name">Name.com - 中规中矩</div>
+          <div class="desc">优势：界面简洁、支持的新后缀多。劣势：价格没有特别优势、隐私保护要付费。适合喜欢简洁界面的用户。</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-header">
+    <h2><span class="icon"></span>免费域名平台</h2>
+  </div>
+  <div class="section-body">
+    <p style="color:#666;font-size:13px;margin-bottom:15px">适合学习测试、临时项目使用。长期使用建议购买独立域名。</p>
+
+    <h3 style="font-size:14px;color:#2c3e50;margin:15px 0 10px">一、长期免费域名平台</h3>
+    <table class="price-table">
+      <thead><tr><th>#</th><th>平台</th><th>类型</th><th>后缀示例</th><th>备注</th><th>状态</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td><a href="https://nic.eu.org" target="_blank" rel="noopener">EU.org</a></td><td>二级域名</td><td>.eu.org</td><td>1996年运营，永久免费，支持Cloudflare，审核3-7天</td><td style="color:#27ae60">正常</td></tr>
+        <tr><td>2</td><td><a href="https://dns.qiip.cc" target="_blank" rel="noopener">DNSBEE</a></td><td>二级/三级</td><td>多后缀</td><td>非营利平台，审核快，支持全类型DNS记录</td><td style="color:#27ae60">正常</td></tr>
+        <tr><td>3</td><td><a href="https://desec.io" target="_blank" rel="noopener">deSEC</a></td><td>二级域名</td><td>.dedyn.io</td><td>开源DNS，德国非营利，支持Cloudflare，解析不限</td><td style="color:#27ae60">正常</td></tr>
+        <tr><td>4</td><td><a href="https://www.cloudns.net" target="_blank" rel="noopener">ClouDNS</a></td><td>二级域名</td><td>cloud-ip.cc / abrdns.org</td><td>50条解析记录，需干净IP注册，秒级生效</td><td style="color:#27ae60">正常</td></tr>
+        <tr><td>5</td><td><a href="https://zoneabc.net/register" target="_blank" rel="noopener">ZoneABC</a></td><td>二级域名</td><td>webn.cc / zabc.net 等7个</td><td>每人5个，完善资料获积分，高级域名需积分</td><td style="color:#27ae60">正常</td></tr>
+        <tr><td>6</td><td><a href="https://www.dns.he.net" target="_blank" rel="noopener">DNSHe</a></td><td>顶级域名</td><td>.tk / .ml / .ga / .cf / .gq</td><td>国内平台，免费用户最多3个，可对接Cloudflare</td><td style="color:#27ae60">正常</td></tr>
+        <tr><td>7</td><td><a href="https://freedns.afraid.org" target="_blank" rel="noopener">FreeDNS</a></td><td>二级域名</td><td>数千个共享域</td><td>社区共享域名池，注册即用，适合快速测试</td><td style="color:#27ae60">正常</td></tr>
+        <tr><td>8</td><td><a href="https://www.duckdns.org" target="_blank" rel="noopener">DuckDNS</a></td><td>二级域名</td><td>.duckdns.org</td><td>完全免费，专注动态DNS，适合家庭服务器/NAS</td><td style="color:#27ae60">正常</td></tr>
+        <tr><td>9</td><td><a href="https://www.noip.com" target="_blank" rel="noopener">No-IP</a></td><td>二级域名</td><td>.ddns.net / .hopto.org</td><td>免费动态DNS，每30天需确认，付费可免</td><td style="color:#27ae60">正常</td></tr>
+        <tr><td>10</td><td><a href="https://nic.us.kg" target="_blank" rel="noopener">us.kg</a></td><td>二级域名</td><td>.us.kg</td><td>免费注册，支持自定义NS，可托管至Cloudflare</td><td style="color:#27ae60">正常</td></tr>
+      </tbody>
+    </table>
+
+    <h3 style="font-size:14px;color:#2c3e50;margin:20px 0 10px">二、免费子域名（附赠于托管/部署平台）</h3>
+    <table class="price-table">
+      <thead><tr><th>#</th><th>平台</th><th>分配方式</th><th>后缀示例</th><th>备注</th><th>状态</th></tr></thead>
+      <tbody>
+        <tr><td>11</td><td><a href="https://infinityfree.net" target="_blank" rel="noopener">InfinityFree</a></td><td>免费主机附赠</td><td>username.epizy.com</td><td>免费虚拟主机，自动分配子域名，支持PHP</td><td style="color:#27ae60">正常</td></tr>
+        <tr><td>12</td><td><a href="https://pages.github.com" target="_blank" rel="noopener">GitHub Pages</a></td><td>代码托管附赠</td><td>username.github.io</td><td>静态站点托管，支持自定义域名，Jekyll原生支持</td><td style="color:#27ae60">正常</td></tr>
+        <tr><td>13</td><td><a href="https://pages.cloudflare.com" target="_blank" rel="noopener">Cloudflare Pages</a></td><td>部署平台附赠</td><td>project.pages.dev</td><td>全球CDN，自动HTTPS，Git集成，构建速度快</td><td style="color:#27ae60">正常</td></tr>
+        <tr><td>14</td><td><a href="https://www.netlify.com" target="_blank" rel="noopener">Netlify</a></td><td>部署平台附赠</td><td>project.netlify.app</td><td>持续部署，表单处理，Serverless Functions</td><td style="color:#27ae60">正常</td></tr>
+        <tr><td>15</td><td><a href="https://vercel.com" target="_blank" rel="noopener">Vercel</a></td><td>部署平台附赠</td><td>project.vercel.app</td><td>前端框架优化（Next.js等），边缘网络，自动CI/CD</td><td style="color:#27ae60">正常</td></tr>
+        <tr><td>16</td><td><a href="https://wordpress.com" target="_blank" rel="noopener">WordPress.com</a></td><td>博客平台附赠</td><td>site.wordpress.com</td><td>免费博客，丰富的主题和插件生态</td><td style="color:#27ae60">正常</td></tr>
+      </tbody>
+    </table>
+
+    <h3 style="font-size:14px;color:#2c3e50;margin:20px 0 10px">三、首年极低价付费域名（接近免费）</h3>
+    <table class="price-table">
+      <thead><tr><th>#</th><th>平台</th><th>类型</th><th>低价后缀</th><th>价格参考</th><th>状态</th></tr></thead>
+      <tbody>
+        <tr><td>17</td><td><a href="https://www.namecheap.com" target="_blank" rel="noopener">Namecheap</a></td><td>顶级域名</td><td>.xyz / .site / .online / .top</td><td>首年低至$0.99，含WHOIS隐私保护</td><td style="color:#27ae60">正常</td></tr>
+        <tr><td>18</td><td><a href="https://porkbun.com" target="_blank" rel="noopener">Porkbun</a></td><td>顶级域名</td><td>.xyz / .top / .site</td><td>首年$1-2，界面简洁，透明定价</td><td style="color:#27ae60">正常</td></tr>
+        <tr><td>19</td><td><a href="https://www.cloudflare.com/products/registrar" target="_blank" rel="noopener">Cloudflare Registrar</a></td><td>顶级域名</td><td>全后缀支持</td><td>成本价销售，无加价，续费同价，集成安全防护</td><td style="color:#27ae60">正常</td></tr>
+        <tr><td>20</td><td><a href="https://wanwang.aliyun.com" target="_blank" rel="noopener">阿里云（万网）</a></td><td>顶级域名</td><td>.top / .xyz / .cn</td><td>新用户首年.top低至1元，支持备案</td><td style="color:#27ae60">正常</td></tr>
+      </tbody>
+    </table>
+
+    <p style="font-size:12px;color:#999;margin-top:10px">免费域名适合测试用途，正式项目建议使用付费域名以确保稳定性。ClouDNS/ZoneABC域名不支持Cloudflare免费计划。</p>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-header">
+    <h2><span class="icon"></span>域名选购建议</h2>
+  </div>
+  <div class="section-body">
+    <div class="card-list">
+      <div class="card-item">
+        <div class="card-icon" style="background:#1abc9c">!</div>
+        <div class="card-info">
+          <div class="name">首年便宜不等于长期便宜</div>
+          <div class="desc">很多注册商用首年低价吸引你注册，但续费价格很高。GoDaddy的.com首年$9.99，续费可能到$22+。NameSilo首年$8.99，续费$13.99。长期持有域名的话，NameSilo最划算。</div>
+        </div>
+      </div>
+      <div class="card-item">
+        <div class="card-icon" style="background:#1abc9c">!</div>
+        <div class="card-info">
+          <div class="name">隐私保护很重要</div>
+          <div class="desc">注册域名时会公开你的WHOIS信息（姓名、邮箱、地址）。隐私保护服务可以用注册商的代理信息替代你的真实信息。NameSilo免费提供永久隐私保护，其他家大多要额外付费。</div>
+        </div>
+      </div>
+      <div class="card-item">
+        <div class="card-icon" style="background:#1abc9c">!</div>
+        <div class="card-info">
+          <div class="name">域名转移要提前准备</div>
+          <div class="desc">如果你想从一个注册商转到另一个，需要：1. 域名注册满60天 2. 获取转移码（Auth Code） 3. 关闭域名锁 4. 确保WHOIS邮箱可用。整个转移过程通常需要5-7天。</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<aside class="sidebar">
+
+<!-- 广告位：侧边栏 -->
+<div class="ad-slot ad-sidebar" id="ad-sidebar">
+  <span class="ad-slot-label">广告位</span>
+  <!-- 在此插入广告代码 -->
+</div>
+
+  <div class="side-block">
+    <div class="side-title">相关页面</div>
+    <div class="side-body">
+      <ul class="side-list">
+        <li><a href="vps-deals.html">VPS主机优惠</a></li>
+        <li><a href="guides/vps-beginner.html">VPS新手入门</a></li>
+        <li><a href="tools.html">在线工具箱</a></li>
+        <li><a href="vps-compare.html">VPS商家对比</a></li>
+      </ul>
+    </div>
+  </div>
+</aside>
+
+</div>
+</div>
+
+
+
+<!-- 广告位：底部 -->
+<div class="ad-slot ad-footer" id="ad-footer">
+  <span class="ad-slot-label">广告位</span>
+  <!-- 在此插入广告代码 -->
+</div>
+
+
+<footer class="footer">
+  <div class="links">
+    <a href="index.html">首页</a>
+    <a href="vps-deals.html">VPS优惠</a>
+    <a href="free-resources.html">免费资源</a>
+    <a href="ai-subscriptions.html">AI订阅</a>
+    <a href="ai-api.html">API比价</a>
+    <a href="ai-transit.html">AI中转站</a>
+    <a href="domain.html">域名注册</a>
+    <a href="guides.html">使用指南</a>
+  </div>
+  <p>本站信息仅供参考，价格以各平台官网为准。推广链接不影响您的购买价格。</p>
+  <p>© 2016-2026 AI-VPS比价网 · 运营10年</p>
+</footer>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "首页",
+      "item": "https://ai-vps.cc.cd/index.html"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "首页 &gt; 域名注册"
+    }
+  ]
+}
+</script>
+
+<div id="back-to-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" style="position:fixed;bottom:20px;right:20px;width:40px;height:40px;background:#e74c3c;color:#fff;border-radius:50%;display:none;align-items:center;justify-content:center;cursor:pointer;z-index:999;font-size:18px;box-shadow:0 2px 8px rgba(0,0,0,.3)">↑</div>
+<script>
+window.addEventListener('scroll',function(){
+  document.getElementById('back-to-top').style.display = window.scrollY > 300 ? 'flex' : 'none';
+});
+</script>
+<script src="search-index.js"></script>
+<script src="js/prefetch.js"></script>
 </body>
 </html>

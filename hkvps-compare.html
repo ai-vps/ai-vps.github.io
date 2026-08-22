@@ -1,75 +1,263 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="按价格分档对比香港VPS：20元档(狗云/野草云)、50元档(恒创/HostKVM)、100元档(搬瓦工/DMIT)。配置、线路、支付方式一目了然。">
-    <title>香港VPS价格对比 - 20元/50元/100元档位推荐(2026)</title>
-    <style>
-        .teaser {
-            background: #f8f9fa;
-            padding: 25px;
-            text-align: center;
-            border-bottom: 3px solid #ddd;
-        }
-        body.loaded .teaser { display: none !important; }
-    </style>
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+<link rel="icon" type="image/png" href="favicon.png">
+<meta name="robots" content="index,follow">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>香港VPS价格对比 - 20元/50元/100元档位推荐(2026)</title>
+<meta name="description" content="按价格分档对比香港VPS：20元档(狗云/野草云)、50元档(恒创/HostKVM)、100元档(搬瓦工/DMIT)。配置、线路、支付方式一目了然。">
+<meta name="keywords" content="香港VPS价格,便宜香港VPS,20元香港VPS,50元香港VPS,香港VPS对比,CN2 GIA价格">
+<link rel="canonical" href="hkvps-compare.html">
+<link rel="stylesheet" href="css/style.css">
+<link rel="dns-prefetch" href="//www.google-analytics.com">
+<meta name="theme-color" content="#e74c3c">
+<meta property="og:title" content="香港VPS价格对比 - 20元/50元/100元档位推荐(2026)">
+<meta property="og:description" content="按价格分档对比香港VPS，帮你快速找到预算内的最优方案。">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://ai-vps.cc.cd/hkvps-compare.html">
+<meta property="og:site_name" content="AI-VPS比价网">
 </head>
 <body>
 
-    <div class="teaser">
-        <h1>香港VPS价格对比</h1>
-        <p><strong>最后更新：</strong>2026年7月12日　|　<strong>收录：</strong>大量优质内容</p>
-        <p>香港VPS价格,便宜香港VPS,20元香港VPS,50元香港VPS,香港VPS对比,CN2 GIA价格</p>
+<header class="header">
+  <div class="header-inner">
+    <div style="display:flex;align-items:center;gap:10px">
+      <button class="menu-toggle" onclick="toggleMenu()" aria-label="打开菜单">☰</button>
+      <div class="logo"><a href="index.html" style="color:#e74c3c;text-decoration:none">AI-VPS比价网</a><span>AI中转站 · VPS优惠 · API比价</span></div>
     </div>
-
-    <div id="real-content">
-        <div style="padding:120px; text-align:center;">正在加载完整内容...</div>
+    <div style="display:flex;align-items:center;gap:10px">
+      <div class="search-box">
+        <input type="text" placeholder="搜索VPS主机、AI订阅、API中转..." id="searchInput">
+        <button onclick="doSearch()">搜索</button>
+      </div>
+      <button id="darkToggle" onclick="toggleDark()" style="background:none;border:2px solid #ddd;padding:6px 10px;border-radius:3px;cursor:pointer;font-size:16px" title="切换暗色模式">🌙</button>
     </div>
+  </div>
+</header>
+<div class="nav-overlay" onclick="closeMenu()"></div>
 
-    <script>
-        const REAL_URL = "https://ai-vps.cc.cd/hkvps-compare.html";
-        const SEARCH_JS = "https://ai-vps.github.io/search-index.js";
+<nav class="nav">
+  <button class="nav-close" onclick="closeMenu()" aria-label="关闭菜单">✕</button>
+  <div class="nav-inner">
+    <a href="index.html">首页</a>
+    <a href="vps-deals.html">VPS优惠</a>
+    <a href="free-resources.html">免费资源</a>
+    <a href="ai-subscriptions.html">AI订阅</a>
+    <a href="ai-api.html">API比价</a>
+    <a href="ai-transit.html">AI中转站</a>
+    <a href="tools.html">在线工具</a>
+    <a href="domain.html">域名注册</a>
+    <a href="guides.html">使用指南</a>
+    <a href="vps-compare.html">主机对比</a>
+  </div>
+</nav>
 
-        async function loadPage() {
-            const container = document.getElementById("real-content");
+<div class="container">
+<div class="breadcrumb"><a href="index.html">首页</a> &gt; <a href="vps-compare.html">主机对比</a> &gt; 香港VPS价格对比</div>
 
-            try {
-                const res = await fetch(REAL_URL);
-                if (!res.ok) throw new Error();
+<h1 class="page-title">香港VPS价格对比 - 按预算选最划算方案</h1>
 
-                let html = await res.text();
+<div style="background:#f8f9fa;border:1px solid #e0e0e0;border-radius:6px;padding:15px 20px;margin-bottom:15px;font-size:13px">
+  <div style="display:flex;flex-wrap:wrap;gap:15px;margin-bottom:10px">
+    <div><strong>最后更新：2026年8月21日</span></div>
+    <div><strong>对比维度：</strong>价格/配置/线路/支付方式</div>
+  </div>
+  <div style="color:#666;line-height:1.6">
+    按预算分档对比香港VPS，帮你快速找到最适合的方案。价格均为月付价，年付通常更优惠。
+  </div>
+</div>
 
-                const headMatch = html.match(/<head[^>]*>([\s\S]*?)<\/head>/i);
-                if (headMatch) {
-                    const temp = document.createElement('div');
-                    temp.innerHTML = headMatch[1];
-                    document.head.append(...temp.children);
-                }
+<div class="main-wrap">
+<div class="main-content">
 
-                const bodyMatch = html.match(/<body[^>]*>([\s\S]*?)<\/body>/i);
-                container.innerHTML = bodyMatch ? bodyMatch[1] : html;
+<!-- 20元档 -->
+<h2 style="color:#27ae60;border-bottom:2px solid #27ae60;padding-bottom:8px;margin-bottom:15px">
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#27ae60" stroke-width="2" style="vertical-align:middle;margin-right:5px"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+  20元/月档 - 入门尝鲜
+</h2>
 
-                document.body.classList.add('loaded');
+<div style="overflow-x:auto;margin-bottom:20px">
+<table class="price-table" style="width:100%">
+<thead>
+<tr style="background:#27ae60;color:#fff">
+  <th>商家</th>
+  <th>配置</th>
+  <th>带宽</th>
+  <th>流量</th>
+  <th>线路</th>
+  <th>支付</th>
+</tr>
+</thead>
+<tbody>
+<tr><td><strong><a href="https://www.dogyun.com/?ref=jv98open" target="_blank" rel="nofollow">狗云 DogYun</a></strong></td><td>1核/512M/10G</td><td>10Mbps</td><td>不限</td><td>BGP</td><td>支付宝/微信</td></tr>
+<tr><td><strong><a href="https://my.yecaoyun.com/aff.php?aff=1601" target="_blank" rel="nofollow">野草云</a></strong></td><td>1核/512M/10G</td><td>10Mbps</td><td>不限</td><td>BGP</td><td>支付宝/PayPal</td></tr>
+<tr><td><strong><a href="https://my.hostyun.com/page.aspx?c=referral&u=26481" target="_blank" rel="nofollow">HostYun</a></strong></td><td>1核/1G/15G</td><td>15Mbps</td><td>不限</td><td>BGP</td><td>支付宝/银联</td></tr>
+<tr><td><strong><a href="https://billing.raksmart.com/whmcs/aff.php?aff=3737&pid=138" target="_blank" rel="nofollow">RAKsmart</a></strong></td><td>1核/1G/20G</td><td>10Mbps</td><td>1T</td><td>CN2可选</td><td>支付宝/加密货币</td></tr>
+</tbody>
+</table>
+</div>
 
-                const searchScript = document.createElement('script');
-                searchScript.src = SEARCH_JS;
-                searchScript.onload = () => {
-                    console.log("搜索功能已加载");
-                    setTimeout(() => {
-                        const event = new Event('DOMContentLoaded');
-                        document.dispatchEvent(event);
-                    }, 800);
-                };
-                document.body.appendChild(searchScript);
+<div style="background:#e8f5e9;border-left:4px solid #27ae60;padding:12px 15px;border-radius:0 6px 6px 0;margin-bottom:20px;font-size:13px">
+<strong>适用场景：</strong>测试机、工具机、轻量业务、个人博客<br>
+<strong>注意事项：</strong>低价套餐通常带宽小、可能有流量限制，不适合核心生产业务
+</div>
 
-            } catch (e) {
-                console.error(e);
-                container.innerHTML = `<p style="color:red;text-align:center;padding:60px;">加载失败</p>`;
-            }
-        }
+<!-- 50元档 -->
+<h2 style="color:#e67e22;border-bottom:2px solid #e67e22;padding-bottom:8px;margin-bottom:15px">
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#e67e22" stroke-width="2" style="vertical-align:middle;margin-right:5px"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+  50元/月档 - 性价比之选
+</h2>
 
-        window.onload = loadPage;
-    </script>
-</body>
-</html>
+<div style="overflow-x:auto;margin-bottom:20px">
+<table class="price-table" style="width:100%">
+<thead>
+<tr style="background:#e67e22;color:#fff">
+  <th>商家</th>
+  <th>配置</th>
+  <th>带宽</th>
+  <th>流量</th>
+  <th>线路</th>
+  <th>支付</th>
+</tr>
+</thead>
+<tbody>
+<tr><td><strong><a href="http://my.henghost.com/aff.php?aff=7209" target="_blank" rel="nofollow">恒创科技</a></strong></td><td>1核/1G/20G</td><td>30Mbps</td><td>不限</td><td>CN2/BGP</td><td>支付宝/银联</td></tr>
+<tr><td><strong><a href="https://my.hostkvm.com/aff.php?aff=1175" target="_blank" rel="nofollow">HostKVM</a></strong></td><td>1核/1G/20G</td><td>30Mbps</td><td>不限</td><td>CN2优化</td><td>支付宝/PayPal</td></tr>
+<tr><td><strong><a href="https://www.vpsor.cn/activity/cloudsite?userCode=ph15c53" target="_blank" rel="nofollow">硅云</a></strong></td><td>1核/1G/25G</td><td>30Mbps</td><td>不限</td><td>CN2+BGP</td><td>支付宝/微信</td></tr>
+<tr><td><strong><a href="https://www.diyvm.com/page.aspx?c=referral&u=86008" target="_blank" rel="nofollow">DIYVM</a></strong></td><td>1核/1G/20G</td><td>20Mbps</td><td>不限</td><td>BGP</td><td>支付宝/微信</td></tr>
+<tr><td><strong><a href="https://www.jtti.cc/zh/offers?k=6PFTD10" target="_blank" rel="nofollow">JTTI</a></strong></td><td>1核/1G/25G</td><td>30Mbps</td><td>不限</td><td>CN2 GIA</td><td>支付宝/USDT</td></tr>
+<tr><td><strong><a href="https://console.ygcloud.com/quick.html?ref=s37pp3yy&promoteWay=LINK" target="_blank" rel="nofollow">萤光云</a></strong></td><td>1核/1G/25G</td><td>30Mbps</td><td>不限</td><td>多节点</td><td>支付宝/微信</td></tr>
+</tbody>
+</table>
+</div>
+
+<div style="background:#fff3cd;border-left:4px solid #e67e22;padding:12px 15px;border-radius:0 6px 6px 0;margin-bottom:20px;font-size:13px">
+<strong>适用场景：</strong>企业官网、外贸站、个人博客、开发测试<br>
+<strong>推荐：</strong>恒创科技(建站首选)、HostKVM(CN2性价比)、硅云(外贸常用)
+</div>
+
+<!-- 100元档 -->
+<h2 style="color:#e74c3c;border-bottom:2px solid #e74c3c;padding-bottom:8px;margin-bottom:15px">
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#e74c3c" stroke-width="2" style="vertical-align:middle;margin-right:5px"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+  100元/月档 - 高速稳定
+</h2>
+
+<div style="overflow-x:auto;margin-bottom:20px">
+<table class="price-table" style="width:100%">
+<thead>
+<tr style="background:#e74c3c;color:#fff">
+  <th>商家</th>
+  <th>配置</th>
+  <th>带宽</th>
+  <th>流量</th>
+  <th>线路</th>
+  <th>支付</th>
+</tr>
+</thead>
+<tbody>
+<tr><td><strong><a href="https://bandwagonhost.com/aff.php?aff=68113&pid=44" target="_blank" rel="nofollow">搬瓦工</a></strong></td><td>2核/2G/40G</td><td>1Gbps</td><td>1T</td><td>CN2 GIA</td><td>支付宝/PayPal</td></tr>
+<tr><td><strong><a href="https://www.dmit.io/aff.php?aff=3484" target="_blank" rel="nofollow">DMIT</a></strong></td><td>2核/2G/40G</td><td>500Mbps</td><td>1T</td><td>CN2 GIA</td><td>支付宝/信用卡</td></tr>
+<tr><td><strong><a href="https://www.simcentric.com/sc/" target="_blank" rel="nofollow">新天域互联</a></strong></td><td>2核/2G/40G</td><td>100Mbps</td><td>不限</td><td>三网CN2</td><td>支付宝/加密货币</td></tr>
+<tr><td><strong><a href="https://www.lightnode.com/?inviteCode=MOGNKA&promoteWay=LINK" target="_blank" rel="nofollow">LightNode</a></strong></td><td>2核/2G/40G</td><td>50Mbps</td><td>不限</td><td>多地区</td><td>支付宝/信用卡</td></tr>
+<tr><td><strong><a href="http://my.henghost.com/aff.php?aff=7209" target="_blank" rel="nofollow">恒创科技</a></strong></td><td>2核/4G/60G</td><td>50Mbps</td><td>不限</td><td>CN2 GIA</td><td>支付宝/银联</td></tr>
+</tbody>
+</table>
+</div>
+
+<div style="background:#fde8e8;border-left:4px solid #e74c3c;padding:12px 15px;border-radius:0 6px 6px 0;margin-bottom:20px;font-size:13px">
+<strong>适用场景：</strong>生产环境、企业官网、电商站、API服务<br>
+<strong>推荐：</strong>搬瓦工(CN2 GIA标杆)、DMIT(高端线路)、新天域(企业级)
+</div>
+
+<!-- 200元+档 -->
+<h2 style="color:#8e44ad;border-bottom:2px solid #8e44ad;padding-bottom:8px;margin-bottom:15px">
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#8e44ad" stroke-width="2" style="vertical-align:middle;margin-right:5px"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+  200元+/月档 - 企业级
+</h2>
+
+<div style="overflow-x:auto;margin-bottom:20px">
+<table class="price-table" style="width:100%">
+<thead>
+<tr style="background:#8e44ad;color:#fff">
+  <th>商家</th>
+  <th>配置</th>
+  <th>带宽</th>
+  <th>线路</th>
+  <th>特点</th>
+</tr>
+</thead>
+<tbody>
+<tr><td><strong><a href="https://www.simcentric.com/sc/" target="_blank" rel="nofollow">新天域互联</a></strong></td><td>4核/8G/100G</td><td>100Mbps</td><td>三网CN2</td><td>企业级SLA</td></tr>
+<tr><td><strong><a href="https://koddos.net/" target="_blank" rel="nofollow">KoDDoS</a></strong></td><td>4核/8G/100G</td><td>100Mbps</td><td>高防</td><td>DDoS防护</td></tr>
+<tr><td><strong><a href="https://www.citictel-cpc.com/sc/" target="_blank" rel="nofollow">CITIC Telecom</a></strong></td><td>定制</td><td>定制</td><td>企业专线</td><td>企业级服务</td></tr>
+<tr><td><strong><a href="https://www.huaweicloud.com/intl/zh-cn/" target="_blank" rel="nofollow">华为云</a></strong></td><td>2核/4G/40G</td><td>100Mbps</td><td>BGP</td><td>大厂生态</td></tr>
+<tr><td><strong><a href="https://cloud.tencent.com/product/cvm" target="_blank" rel="nofollow">腾讯云</a></strong></td><td>2核/4G/40G</td><td>100Mbps</td><td>BGP</td><td>活动价低</td></tr>
+<tr><td><strong><a href="https://www.alibabacloud.com/product/ecs" target="_blank" rel="nofollow">阿里云</a></strong></td><td>2核/4G/40G</td><td>100Mbps</td><td>BGP</td><td>生态完善</td></tr>
+</tbody>
+</table>
+</div>
+
+<div style="background:#f3e5f5;border-left:4px solid #8e44ad;padding:12px 15px;border-radius:0 6px 6px 0;margin-bottom:20px;font-size:13px">
+<strong>适用场景：</strong>大型企业站、电商平台、高并发API、游戏服务<br>
+<strong>特点：</strong>高可用SLA、DDoS防护、专属客服、企业级合同
+</div>
+
+<h2 style="color:#2c3e50;border-bottom:2px solid #e74c3c;padding-bottom:8px;margin-bottom:15px">选购避坑指南</h2>
+
+<div style="background:#fff;padding:15px 20px;border-radius:6px;margin-bottom:20px;box-shadow:0 2px 8px rgba(0,0,0,.05)">
+<ol style="line-height:2">
+  <li><strong>看清续费价</strong> - 很多商家首年低价，续费翻倍。购买前务必确认续费价格</li>
+  <li><strong>线路要实测</strong> - 宣传CN2 GIA不代表实际质量，建议用ping/traceroute测试</li>
+  <li><strong>流量要够用</strong> - 不限流量更省心，有限流量要估算好月用量</li>
+  <li><strong>支付方式</strong> - 确认支持支付宝/微信，避免付款麻烦</li>
+  <li><strong>退款政策</strong> - 优先选择有30天退款保障的商家</li>
+  <li><strong>备份习惯</strong> - 无论哪家，定期异地备份是必要操作</li>
+</ol>
+</div>
+
+</div>
+
+<div class="sidebar">
+
+<div style="background:#f8f9fa;border:1px solid #e0e0e0;border-radius:6px;padding:15px;margin-bottom:15px">
+<h3 style="color:#2c3e50;font-size:16px;margin-bottom:10px"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align:middle;margin-right:5px"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>相关推荐</h3>
+<ul style="line-height:2;font-size:14px">
+  <li><a href="hkvps.html">香港VPS总览(52+家)</a></li>
+  <li><a href="vps-deals.html">VPS优惠汇总</a></li>
+  <li><a href="vps-compare.html">VPS价格对比</a></li>
+  <li><a href="racknerd-review.html">RackNerd评测</a></li>
+  <li><a href="guides.html">VPS使用指南</a></li>
+</ul>
+</div>
+
+<div style="background:#e8f5e9;border:1px solid #a5d6a7;border-radius:6px;padding:15px;margin-bottom:15px">
+<h3 style="color:#2e7d32;font-size:16px;margin-bottom:10px"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align:middle;margin-right:5px"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>预算推荐</h3>
+<ul style="line-height:2;font-size:13px">
+  <li><strong>20元档：</strong>狗云、野草云</li>
+  <li><strong>50元档：</strong>恒创科技、HostKVM</li>
+  <li><strong>100元档：</strong>搬瓦工、DMIT</li>
+  <li><strong>200元+：</strong>新天域、大厂云</li>
+</ul>
+</div>
+
+</div>
+</div>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-links">
+      <a href="index.html">首页</a> | <a href="vps-deals.html">VPS优惠</a> | <a href="ai-subscriptions.html">AI订阅</a> | <a href="ai-api.html">API比价</a> | <a href="about.html">关于我们</a>
+    </div>
+    <div class="footer-copyright">© 2016-2026 AI-VPS比价网 · 运营10年 | 本站部分链接为推广链接</div>
+  </div>
+</footer>
+
+<script>
+function toggleMenu(){document.querySelector('.nav').classList.toggle('open');document.querySelector('.nav-overlay').classList.toggle('open')}
+function closeMenu(){document.querySelector('.nav').classList.remove('open');document.querySelector('.nav-overlay').classList.remove('open')}
+function toggleDark(){document.body.classList.toggle('dark');localStorage.setItem('dark',document.body.classList.contains('dark'))}
+</script>
+<script src="search-index.js"></script>
+</body></html>

@@ -1,75 +1,278 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="大带宽香港VPS推荐。50Mbps、100Mbps、1Gbps带宽香港VPS，适合视频站、下载站、大流量业务。">
-    <title>大带宽香港VPS推荐 - 50M/1Gbps带宽(2026)</title>
-    <style>
-        .teaser {
-            background: #f8f9fa;
-            padding: 25px;
-            text-align: center;
-            border-bottom: 3px solid #ddd;
-        }
-        body.loaded .teaser { display: none !important; }
-    </style>
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+<link rel="icon" type="image/png" href="favicon.png">
+<meta name="robots" content="index,follow">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>大带宽香港VPS推荐 - 50M/1Gbps带宽(2026)</title>
+<meta name="description" content="大带宽香港VPS推荐。50Mbps、100Mbps、1Gbps带宽香港VPS，适合视频站、下载站、大流量业务。">
+<meta name="keywords" content="大带宽香港VPS,1Gbps香港VPS,50M带宽VPS,香港大带宽服务器,视频站VPS,下载站VPS">
+<link rel="canonical" href="hkvps-bandwidth.html">
+<link rel="stylesheet" href="css/style.css">
+<link rel="dns-prefetch" href="//www.google-analytics.com">
+<meta name="theme-color" content="#e74c3c">
+<meta property="og:title" content="大带宽香港VPS推荐 - 50M/1Gbps带宽(2026)">
+<meta property="og:description" content="大带宽香港VPS推荐，50Mbps-1Gbps。">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://ai-vps.cc.cd/hkvps-bandwidth.html">
+<meta property="og:site_name" content="AI-VPS比价网">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "什么是大带宽VPS？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "大带宽VPS指提供50Mbps以上带宽的VPS，适合视频站、下载站、大流量业务。带宽越大，传输速度越快，用户体验越好。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "哪些香港VPS提供大带宽？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "搬瓦工(1Gbps)、新天域互联(100Mbps)、恒创科技(50Mbps)、LightNode(50Mbps)等提供大带宽香港VPS。选择时要确认是独享带宽还是共享带宽。"
+      }
+    }
+  ]
+}
+</script>
 </head>
 <body>
 
-    <div class="teaser">
-        <h1>大带宽香港VPS推荐</h1>
-        <p><strong>最后更新：</strong>2026年7月12日　|　<strong>收录：</strong>大量优质内容</p>
-        <p>大带宽香港VPS,1Gbps香港VPS,50M带宽VPS,香港大带宽服务器,视频站VPS,下载站VPS</p>
+<header class="header">
+  <div class="header-inner">
+    <div style="display:flex;align-items:center;gap:10px">
+      <button class="menu-toggle" onclick="toggleMenu()" aria-label="打开菜单">☰</button>
+      <div class="logo"><a href="index.html" style="color:#e74c3c;text-decoration:none">AI-VPS比价网</a><span>AI中转站 · VPS优惠 · API比价</span></div>
     </div>
-
-    <div id="real-content">
-        <div style="padding:120px; text-align:center;">正在加载完整内容...</div>
+    <div style="display:flex;align-items:center;gap:10px">
+      <div class="search-box">
+        <input type="text" placeholder="搜索VPS主机、AI订阅、API中转..." id="searchInput">
+        <button onclick="doSearch()">搜索</button>
+      </div>
+      <button id="darkToggle" onclick="toggleDark()" style="background:none;border:2px solid #ddd;padding:6px 10px;border-radius:3px;cursor:pointer;font-size:16px" title="切换暗色模式">🌙</button>
     </div>
+  </div>
+</header>
+<div class="nav-overlay" onclick="closeMenu()"></div>
 
-    <script>
-        const REAL_URL = "https://ai-vps.cc.cd/hkvps-bandwidth.html";
-        const SEARCH_JS = "https://ai-vps.github.io/search-index.js";
+<nav class="nav">
+  <button class="nav-close" onclick="closeMenu()" aria-label="关闭菜单">✕</button>
+  <div class="nav-inner">
+    <a href="index.html">首页</a>
+    <a href="vps-deals.html">VPS优惠</a>
+    <a href="free-resources.html">免费资源</a>
+    <a href="ai-subscriptions.html">AI订阅</a>
+    <a href="ai-api.html">API比价</a>
+    <a href="ai-transit.html">AI中转站</a>
+    <a href="tools.html">在线工具</a>
+    <a href="domain.html">域名注册</a>
+    <a href="guides.html">使用指南</a>
+    <a href="vps-compare.html">主机对比</a>
+    <a href="hkvps.html">香港VPS</a>
+    <a href="jp-vps.html">日本VPS</a>
+  </div>
+</nav>
 
-        async function loadPage() {
-            const container = document.getElementById("real-content");
+<div class="container">
+<div class="breadcrumb"><a href="index.html">首页</a> &gt; <a href="hkvps.html">香港VPS</a> &gt; 大带宽VPS</div>
 
-            try {
-                const res = await fetch(REAL_URL);
-                if (!res.ok) throw new Error();
+<h1 class="page-title">大带宽香港VPS推荐 - 50M/1Gbps带宽</h1>
 
-                let html = await res.text();
+<div style="background:#f8f9fa;border:1px solid #e0e0e0;border-radius:6px;padding:15px 20px;margin-bottom:15px;font-size:13px">
+  <div style="display:flex;flex-wrap:wrap;gap:15px;margin-bottom:10px">
+    <div><strong>最后更新：2026年8月21日</span></div>
+    <div><strong>带宽范围：</strong>50Mbps-1Gbps</div>
+    <div><strong>收录商家：</strong>6家</div>
+  </div>
+  <div style="color:#666;line-height:1.6">
+    大带宽VPS适合视频站、下载站、大流量业务。带宽越大，传输速度越快，用户体验越好。
+  </div>
+</div>
 
-                const headMatch = html.match(/<head[^>]*>([\s\S]*?)<\/head>/i);
-                if (headMatch) {
-                    const temp = document.createElement('div');
-                    temp.innerHTML = headMatch[1];
-                    document.head.append(...temp.children);
-                }
+<div style="background:linear-gradient(135deg,#27ae60,#1e8449);color:#fff;padding:15px 20px;border-radius:4px;margin-bottom:15px">
+    <strong>快速选择：</strong>1Gbps→搬瓦工 | 100Mbps→新天域 | 50Mbps→恒创科技/LightNode
+</div>
 
-                const bodyMatch = html.match(/<body[^>]*>([\s\S]*?)<\/body>/i);
-                container.innerHTML = bodyMatch ? bodyMatch[1] : html;
+<div class="main-wrap">
+<div class="main-content">
 
-                document.body.classList.add('loaded');
+<h2 style="color:#2c3e50;border-bottom:2px solid #e74c3c;padding-bottom:8px;margin-bottom:15px">大带宽VPS服务商</h2>
 
-                const searchScript = document.createElement('script');
-                searchScript.src = SEARCH_JS;
-                searchScript.onload = () => {
-                    console.log("搜索功能已加载");
-                    setTimeout(() => {
-                        const event = new Event('DOMContentLoaded');
-                        document.dispatchEvent(event);
-                    }, 800);
-                };
-                document.body.appendChild(searchScript);
+<div style="overflow-x:auto;margin-bottom:20px">
+<table class="price-table" style="width:100%">
+<thead>
+<tr style="background:#27ae60;color:#fff">
+  <th>商家</th>
+  <th>配置</th>
+  <th>带宽</th>
+  <th>流量</th>
+  <th>价格</th>
+  <th>支付</th>
+  <th>购买</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><strong><a href="https://bandwagonhost.com/aff.php?aff=68113&pid=44" target="_blank" rel="nofollow">搬瓦工</a></strong></td>
+  <td>2核/2G/40G</td>
+  <td><strong>1Gbps</strong></td>
+  <td>1T/月</td>
+  <td>$49.99/年起</td>
+  <td>支付宝/PayPal</td>
+  <td><a href="https://bandwagonhost.com/aff.php?aff=68113&pid=44" target="_blank" rel="nofollow" class="buy-btn">购买</a></td>
+</tr>
+<tr>
+  <td><strong><a href="https://www.simcentric.com/sc/" target="_blank" rel="nofollow">新天域互联</a></strong></td>
+  <td>2核/2G/40G</td>
+  <td><strong>100Mbps</strong></td>
+  <td>不限</td>
+  <td>千元/月级</td>
+  <td>支付宝/加密货币</td>
+  <td><a href="https://www.simcentric.com/sc/" target="_blank" rel="nofollow" class="buy-btn">购买</a></td>
+</tr>
+<tr>
+  <td><strong><a href="http://my.henghost.com/aff.php?aff=7209" target="_blank" rel="nofollow">恒创科技</a></strong></td>
+  <td>1核/1G/20G</td>
+  <td><strong>50Mbps</strong></td>
+  <td>不限</td>
+  <td>¥296/年起</td>
+  <td>支付宝/银联</td>
+  <td><a href="http://my.henghost.com/aff.php?aff=7209" target="_blank" rel="nofollow" class="buy-btn">购买</a></td>
+</tr>
+<tr>
+  <td><strong><a href="https://www.lightnode.com/?inviteCode=MOGNKA&promoteWay=LINK" target="_blank" rel="nofollow">LightNode</a></strong></td>
+  <td>2核/2G/40G</td>
+  <td><strong>50Mbps</strong></td>
+  <td>不限</td>
+  <td>$7/月起</td>
+  <td>支付宝/信用卡</td>
+  <td><a href="https://www.lightnode.com/?inviteCode=MOGNKA&promoteWay=LINK" target="_blank" rel="nofollow" class="buy-btn">购买</a></td>
+</tr>
+<tr>
+  <td><strong><a href="https://www.dmit.io/aff.php?aff=3484" target="_blank" rel="nofollow">DMIT</a></strong></td>
+  <td>2核/2G/40G</td>
+  <td><strong>500Mbps</strong></td>
+  <td>1T/月</td>
+  <td>$6.9/月起</td>
+  <td>支付宝/信用卡</td>
+  <td><a href="https://www.dmit.io/aff.php?aff=3484" target="_blank" rel="nofollow" class="buy-btn">购买</a></td>
+</tr>
+<tr>
+  <td><strong><a href="https://www.dmit.io/aff.php?aff=3484" target="_blank" rel="nofollow">DMIT</a></strong></td>
+  <td>4核/8G/80G</td>
+  <td><strong>1Gbps</strong></td>
+  <td>2T/月</td>
+  <td>$29.99/月起</td>
+  <td>支付宝/信用卡</td>
+  <td><a href="https://www.dmit.io/aff.php?aff=3484" target="_blank" rel="nofollow" class="buy-btn">购买</a></td>
+</tr>
+</tbody>
+</table>
+</div>
 
-            } catch (e) {
-                console.error(e);
-                container.innerHTML = `<p style="color:red;text-align:center;padding:60px;">加载失败</p>`;
-            }
-        }
+<h2 style="color:#2c3e50;border-bottom:2px solid #e74c3c;padding-bottom:8px;margin-bottom:15px">带宽档位说明</h2>
 
-        window.onload = loadPage;
-    </script>
-</body>
-</html>
+<div style="overflow-x:auto;margin-bottom:20px">
+<table class="price-table" style="width:100%">
+<thead>
+<tr style="background:#3498db;color:#fff">
+  <th>带宽档位</th>
+  <th>理论下载速度</th>
+  <th>适用场景</th>
+  <th>价格区间</th>
+</tr>
+</thead>
+<tbody>
+<tr><td><strong>10Mbps</strong></td><td>1.25MB/s</td><td>轻量博客、工具机</td><td>¥10-30/月</td></tr>
+<tr><td><strong>30Mbps</strong></td><td>3.75MB/s</td><td>企业站、外贸站</td><td>¥30-80/月</td></tr>
+<tr><td><strong>50Mbps</strong></td><td>6.25MB/s</td><td>内容站、小流量视频</td><td>¥50-150/月</td></tr>
+<tr><td><strong>100Mbps</strong></td><td>12.5MB/s</td><td>视频站、下载站</td><td>¥100-300/月</td></tr>
+<tr><td><strong>500Mbps</strong></td><td>62.5MB/s</td><td>大流量业务、CDN节点</td><td>¥200-500/月</td></tr>
+<tr><td><strong>1Gbps</strong></td><td>125MB/s</td><td>高并发、大文件传输</td><td>¥300-1000/月</td></tr>
+</tbody>
+</table>
+</div>
+
+<h2 style="color:#2c3e50;border-bottom:2px solid #e74c3c;padding-bottom:8px;margin-bottom:15px">大带宽VPS适用场景</h2>
+
+<div style="background:#fff;padding:15px 20px;border-radius:6px;margin-bottom:20px;box-shadow:0 2px 8px rgba(0,0,0,.05)">
+<ol style="line-height:2">
+  <li><strong>视频站/直播</strong> - 需要高带宽支持视频流传输</li>
+  <li><strong>下载站/网盘</strong> - 大文件传输需要高带宽</li>
+  <li><strong>CDN节点</strong> - 边缘分发需要大带宽</li>
+  <li><strong>游戏加速</strong> - 低延迟+大带宽</li>
+  <li><strong>企业官网</strong> - 大流量访问需要稳定带宽</li>
+</ol>
+</div>
+
+<h2 style="color:#2c3e50;border-bottom:2px solid #e74c3c;padding-bottom:8px;margin-bottom:15px">常见问题 FAQ</h2>
+
+<div style="background:#fff;padding:15px 20px;border-radius:6px;margin-bottom:15px;box-shadow:0 2px 8px rgba(0,0,0,.05)">
+<h3 style="color:#333">Q：什么是大带宽VPS？</h3>
+<p>大带宽VPS指提供50Mbps以上带宽的VPS，适合视频站、下载站、大流量业务。带宽越大，传输速度越快，用户体验越好。</p>
+</div>
+
+<div style="background:#fff;padding:15px 20px;border-radius:6px;margin-bottom:15px;box-shadow:0 2px 8px rgba(0,0,0,.05)">
+<h3 style="color:#333">Q：哪些香港VPS提供大带宽？</h3>
+<p>搬瓦工(1Gbps)、新天域互联(100Mbps)、恒创科技(50Mbps)、LightNode(50Mbps)等提供大带宽香港VPS。选择时要确认是独享带宽还是共享带宽。</p>
+</div>
+
+<div style="background:#fff;padding:15px 20px;border-radius:6px;margin-bottom:15px;box-shadow:0 2px 8px rgba(0,0,0,.05)">
+<h3 style="color:#333">Q：大带宽VPS贵吗？</h3>
+<p>带宽越大价格越高。10Mbps VPS约¥10-30/月，1Gbps VPS约¥300-1000/月。建议根据实际需求选择，避免过度配置浪费预算。</p>
+</div>
+
+</div>
+
+<div class="sidebar">
+
+<div style="background:#f8f9fa;border:1px solid #e0e0e0;border-radius:6px;padding:15px;margin-bottom:15px">
+<h3 style="color:#2c3e50;font-size:16px;margin-bottom:10px"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align:middle;margin-right:5px"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>香港VPS子页</h3>
+<ul style="line-height:2;font-size:14px">
+  <li><a href="hkvps.html">香港VPS总览</a></li>
+  <li><a href="hkvps-cheap.html">便宜香港VPS</a></li>
+  <li><a href="hkvps-mid.html">中档香港VPS</a></li>
+  <li><a href="hkvps-premium.html">高端香港VPS</a></li>
+  <li><a href="hkvps-gia.html">CN2 GIA专题</a></li>
+  <li><a href="hkvps-iplc.html">IPLC专线</a></li>
+  <li><a href="hkvps-bandwidth.html" style="color:#e74c3c;font-weight:600">大带宽VPS</a></li>
+  <li><a href="hkvps-use.html">用途指南</a></li>
+</ul>
+</div>
+
+<div style="background:#e8f5e9;border:1px solid #a5d6a7;border-radius:6px;padding:15px;margin-bottom:15px">
+<h3 style="color:#2e7d32;font-size:16px;margin-bottom:10px"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align:middle;margin-right:5px"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>带宽推荐</h3>
+<ul style="line-height:2;font-size:13px">
+  <li><strong>1Gbps：</strong>搬瓦工</li>
+  <li><strong>500Mbps：</strong>DMIT</li>
+  <li><strong>100Mbps：</strong>新天域</li>
+  <li><strong>50Mbps：</strong>恒创/LightNode</li>
+</ul>
+</div>
+
+</div>
+</div>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-links">
+      <a href="index.html">首页</a> | <a href="vps-deals.html">VPS优惠</a> | <a href="ai-subscriptions.html">AI订阅</a> | <a href="ai-api.html">API比价</a> | <a href="about.html">关于我们</a>
+    </div>
+    <div class="footer-copyright">© 2016-2026 AI-VPS比价网 · 运营10年 | 本站部分链接为推广链接</div>
+  </div>
+</footer>
+
+<script>
+function toggleMenu(){document.querySelector('.nav').classList.toggle('open');document.querySelector('.nav-overlay').classList.toggle('open')}
+function closeMenu(){document.querySelector('.nav').classList.remove('open');document.querySelector('.nav-overlay').classList.remove('open')}
+function toggleDark(){document.body.classList.toggle('dark');localStorage.setItem('dark',document.body.classList.contains('dark'))}
+</script>
+<script src="search-index.js"></script>
+</body></html>

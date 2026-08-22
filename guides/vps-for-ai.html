@@ -1,75 +1,242 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="想在VPS上跑Ollama或vLLM？不同显存和CPU配置能跑什么模型、每小时成本多少，这里有详细对比和配置推荐。">
-    <title>用VPS跑AI推理：配置推荐和成本计算</title>
-    <style>
-        .teaser {
-            background: #f8f9fa;
-            padding: 25px;
-            text-align: center;
-            border-bottom: 3px solid #ddd;
-        }
-        body.loaded .teaser { display: none !important; }
-    </style>
+<link rel="icon" type="image/x-icon" href="../favicon.ico">
+<link rel="icon" type="image/png" href="../favicon.png">
+<meta name="robots" content="index,follow">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>用VPS跑AI推理：配置推荐和成本计算</title>
+<meta name="description" content="想在VPS上跑Ollama或vLLM？不同显存和CPU配置能跑什么模型、每小时成本多少，这里有详细对比和配置推荐。">
+<meta name="keywords" content="VPS跑AI,Ollama部署,vLLM,GPU VPS,AI推理服务器,VPS配置推荐">
+<link rel="canonical" href="vps-for-ai.html">
+<link rel="stylesheet" href="../css/style.css">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="dns-prefetch" href="//www.google-analytics.com">
+  <meta name="theme-color" content="#e74c3c">
+
+  <meta property="og:updated_time" content="2026-08-21">
 </head>
 <body>
 
-    <div class="teaser">
-        <h1>用VPS跑AI推理</h1>
-        <p><strong>最后更新：</strong>2026年7月12日　|　<strong>收录：</strong>大量优质内容</p>
-        <p>VPS跑AI,Ollama部署,vLLM,GPU VPS,AI推理服务器,VPS配置推荐</p>
+<header class="header">
+  <div class="header-inner">
+    <div style="display:flex;align-items:center;gap:10px">
+      <button class="menu-toggle" onclick="toggleMenu()" aria-label="打开菜单">☰</button>
+      <div class="logo"><a href="../index.html" style="color:#e74c3c;text-decoration:none">AI-VPS比价网</a><span>AI中转站 · VPS优惠 · API比价</span></div>
+    </div>
+    <div style="display:flex;align-items:center;gap:10px">
+      <div class="search-box">
+        <input type="text" placeholder="搜索VPS主机、AI订阅、API中转..." id="searchInput">
+        <button onclick="doSearch()">搜索</button>
+      </div>
+      <button id="darkToggle" onclick="toggleDark()" style="background:none;border:2px solid #ddd;padding:6px 10px;border-radius:3px;cursor:pointer;font-size:16px" title="切换暗色模式">🌙</button>
+    </div>
+  </div>
+</header>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="../index.html">首页</a>
+    <a href="../vps-deals.html">VPS优惠</a>
+    <a href="../free-resources.html">免费资源</a>
+    <a href="../ai-subscriptions.html">AI订阅</a>
+    <a href="../ai-api.html">API比价</a>
+    <a href="../ai-transit.html">AI中转站</a>
+    <a href="../tools.html">在线工具</a>
+    <a href="../domain.html">域名注册</a>
+    <a href="../guides.html">使用指南</a>
+    <a href="../vps-compare.html">主机对比</a>
+    <a href="../hkvps.html">香港VPS</a>
+    <a href="../jp-vps.html">日本VPS</a>
+  </div>
+</nav>
+
+<div class="container">
+
+<div class="breadcrumb"><a href="../index.html">首页</a> &gt; <a href="../guides.html">使用指南</a> &gt; VPS跑AI推理配置推荐</div>
+
+<h1 class="page-title">用VPS跑AI推理：配置推荐和成本计算</h1>
+
+<div class="main-wrap">
+<div class="main-content">
+
+<div class="section">
+  <div class="section-header">
+    <h2><span class="icon"></span>什么情况下需要自己跑AI？</h2>
+  </div>
+  <div class="section-body">
+    <p style="font-size:14px;line-height:1.8;color:#555;margin-bottom:12px">大部分场景下，直接调用云端API（DeepSeek、OpenAI、Groq等）是最划算的选择。但有些情况下，你可能想自己部署：</p>
+    <p style="font-size:14px;line-height:1.8;color:#555;margin-bottom:12px">1. <strong>隐私敏感：</strong>数据不能上传到第三方服务器（医疗、法律、企业内部）</p>
+    <p style="font-size:14px;line-height:1.8;color:#555;margin-bottom:12px">2. <strong>离线场景：</strong>网络不稳定或需要在内网运行</p>
+    <p style="font-size:14px;line-height:1.8;color:#555;margin-bottom:12px">3. <strong>大量调用：</strong>每天需要处理海量请求，自建比调API便宜</p>
+    <p style="font-size:14px;line-height:1.8;color:#555">4. <strong>学习研究：</strong>想了解模型推理的底层原理</p>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-header">
+    <h2><span class="icon"></span>主流部署方案</h2>
+  </div>
+  <div class="section-body">
+    <h3 style="font-size:14px;color:#2c3e50;margin:10px 0">Ollama（最简单）</h3>
+    <p style="font-size:14px;line-height:1.8;color:#555;margin-bottom:12px">一行命令就能跑起来的AI推理工具，适合新手。支持Llama、Qwen、Gemma等主流开源模型。</p>
+    <div style="background:#f8f9fa;border:1px solid #e9ecef;border-radius:6px;padding:16px;margin:12px 0;font-family:monospace;font-size:13px;line-height:1.6">
+<pre style="margin:0"># 安装 Ollama
+curl -fsSL https://ollama.com/install.sh | sh
+
+# 运行模型（自动下载）
+ollama run llama3.3:8b
+ollama run qwen2.5:7b
+ollama run gemma2:9b</pre>
+    </div>
+    <p style="font-size:14px;line-height:1.8;color:#555">Ollama默认监听11434端口，兼容OpenAI API格式。</p>
+
+    <h3 style="font-size:14px;color:#2c3e50;margin:20px 0 10px">vLLM（性能最强）</h3>
+    <p style="font-size:14px;line-height:1.8;color:#555;margin-bottom:12px">高性能推理引擎，支持PagedAttention、连续批处理等优化。适合需要高吞吐的生产环境。</p>
+    <div style="background:#f8f9fa;border:1px solid #e9ecef;border-radius:6px;padding:16px;margin:12px 0;font-family:monospace;font-size:13px;line-height:1.6">
+<pre style="margin:0"># 安装
+pip install vllm
+
+# 启动服务
+vllm serve meta-llama/Llama-3.3-70B-Instruct \
+  --tensor-parallel-size 2 \
+  --max-model-len 4096</pre>
     </div>
 
-    <div id="real-content">
-        <div style="padding:120px; text-align:center;">正在加载完整内容...</div>
+    <h3 style="font-size:14px;color:#2c3e50;margin:20px 0 10px">llama.cpp（CPU专用）</h3>
+    <p style="font-size:14px;line-height:1.8;color:#555">纯CPU推理方案，不需要GPU。适合只有CPU的VPS。性能比GPU慢很多，但小模型（7B以下）在高配CPU上也能用。</p>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-header">
+    <h2><span class="icon"></span>配置推荐：能跑什么模型？</h2>
+  </div>
+  <div class="section-body">
+    <table class="price-table">
+      <thead><tr><th>配置</th><th>可跑模型</th><th>速度参考</th><th>适用场景</th><th>VPS价格参考</th></tr></thead>
+      <tbody>
+        <tr><td>4核CPU + 8G RAM</td><td>Qwen2.5-3B, Llama-3.2-3B</td><td>~5 tok/s</td><td>简单对话、测试</td><td class="price">$10-15/月</td></tr>
+        <tr><td>8核CPU + 16G RAM</td><td>Qwen2.5-7B, Llama-3.3-8B</td><td>~8 tok/s</td><td>日常使用</td><td class="price">$20-30/月</td></tr>
+        <tr><td>16核CPU + 32G RAM</td><td>Llama-3.3-8B (Q4), Qwen2.5-14B</td><td>~12 tok/s</td><td>中等负载</td><td class="price">$40-60/月</td></tr>
+        <tr><td>1×A10G (24G显存)</td><td>Llama-3.3-70B (Q4), Qwen2.5-72B</td><td>~30 tok/s</td><td>生产环境</td><td class="price">$0.5-1/时</td></tr>
+        <tr><td>1×A100 (80G显存)</td><td>Llama-3.3-70B (FP16), Qwen2.5-72B</td><td>~60 tok/s</td><td>高吞吐生产</td><td class="price">$2-4/时</td></tr>
+        <tr><td>4×A100 (320G显存)</td><td>Llama-3.3-405B (FP16)</td><td>~40 tok/s</td><td>顶级部署</td><td class="price">$10-20/时</td></tr>
+      </tbody>
+    </table>
+    <p style="font-size:12px;color:#999;margin-top:8px">价格参考：便宜VPS（RackNerd等）$10-40/月；GPU云（Vast.ai、RunPod等）按小时计费。</p>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-header">
+    <h2><span class="icon"></span>成本对比：自建 vs 调API</h2>
+  </div>
+  <div class="section-body">
+    <table class="price-table">
+      <thead><tr><th>使用量</th><th>自建VPS月成本</th><th>调API月成本</th><th>推荐</th></tr></thead>
+      <tbody>
+        <tr><td>每天100次对话</td><td>$20-40（CPU VPS）</td><td class="price">$1-5</td><td>调API</td></tr>
+        <tr><td>每天1000次对话</td><td>$40-60（CPU VPS）</td><td>$10-50</td><td>看模型</td></tr>
+        <tr><td>每天1万次对话</td><td>$100-200（GPU VPS）</td><td>$100-500</td><td>自建</td></tr>
+        <tr><td>每天10万次对话</td><td>$500-1000（多GPU）</td><td>$1000+</td><td>自建</td></tr>
+      </tbody>
+    </table>
+    <p style="font-size:14px;line-height:1.8;color:#555;margin-top:12px"><strong>结论：</strong>日常使用调API最划算，只有在请求量非常大的时候自建才划算。</p>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-header">
+    <h2><span class="icon"></span>常见问题</h2>
+  </div>
+  <div class="section-body">
+    <div class="card-list">
+      <div class="card-item">
+        <div class="card-icon" style="background:#3498db">?</div>
+        <div class="card-info">
+          <div class="name">没有GPU能跑AI吗？</div>
+          <div class="desc">可以，用llama.cpp做CPU推理。7B模型在16核CPU+32G内存上能跑，速度约5-12 tok/s，简单对话够用。</div>
+        </div>
+      </div>
+      <div class="card-item">
+        <div class="card-icon" style="background:#3498db">?</div>
+        <div class="card-info">
+          <div class="name">便宜VPS能跑什么模型？</div>
+          <div class="desc">RackNerd $10/年的768M机型只能跑最小的模型（1-3B参数），实用性有限。建议至少2G内存起步。</div>
+        </div>
+      </div>
+      <div class="card-item">
+        <div class="card-icon" style="background:#3498db">?</div>
+        <div class="card-info">
+          <div class="name">哪里可以租到便宜GPU？</div>
+          <div class="desc">Vast.ai、RunPod、Lambda Labs等平台提供按小时计费的GPU实例。A10G大约$0.2-0.5/时，适合短时间跑模型。</div>
+        </div>
+      </div>
     </div>
+  </div>
+</div>
 
-    <script>
-        const REAL_URL = "https://ai-vps.cc.cd/guides/vps-for-ai.html";
-        const SEARCH_JS = "https://ai-vps.github.io/search-index.js";
+</div>
 
-        async function loadPage() {
-            const container = document.getElementById("real-content");
+<aside class="sidebar">
+  <div class="side-block">
+    <div class="side-title">相关页面</div>
+    <div class="side-body">
+      <ul class="side-list">
+        <li><a href="../vps-deals.html">VPS优惠汇总</a></li>
+        <li><a href="../vps-compare.html">VPS商家对比</a></li>
+        <li><a href="vps-beginner.html">VPS新手入门</a></li>
+        <li><a href="../ai-api.html">API中转站比价</a></li>
+      </ul>
+    </div>
+  </div>
 
-            try {
-                const res = await fetch(REAL_URL);
-                if (!res.ok) throw new Error();
+  <div class="side-block">
+    <div class="side-title">推荐VPS</div>
+    <div class="side-body">
+      <ul class="side-list">
+        <li><a href="https://my.racknerd.com/aff.php?aff=20729&pid=794" target="_blank" rel="nofollow noopener"><span class="num">1</span>RackNerd 2G $25/年</a></li>
+        <li><a href="https://my.racknerd.com/aff.php?aff=20729&pid=795" target="_blank" rel="nofollow noopener"><span class="num">2</span>RackNerd 4G $39/年</a></li>
+        <li><a href="https://buyvm.net" target="_blank" rel="nofollow noopener"><span class="num">3</span>BuyVM 4G $96/年</a></li>
+      </ul>
+    </div>
+  </div>
+</aside>
 
-                let html = await res.text();
+</div>
+</div>
 
-                const headMatch = html.match(/<head[^>]*>([\s\S]*?)<\/head>/i);
-                if (headMatch) {
-                    const temp = document.createElement('div');
-                    temp.innerHTML = headMatch[1];
-                    document.head.append(...temp.children);
-                }
+<div class="footer">
+  <div class="links">
+    <a href="../index.html">首页</a>
+    <a href="../vps-deals.html">VPS优惠</a>
+    <a href="../ai-subscriptions.html">AI订阅</a>
+    <a href="../ai-api.html">API比价</a>
+    <a href="../guides.html">使用指南</a>
+  </div>
+  <p>本站信息仅供参考，价格以各平台官网为准。推广链接不影响您的购买价格。</p>
+  <p>© 2016-2026 AI-VPS比价网 · 运营10年</p>
+</div>
 
-                const bodyMatch = html.match(/<body[^>]*>([\s\S]*?)<\/body>/i);
-                container.innerHTML = bodyMatch ? bodyMatch[1] : html;
 
-                document.body.classList.add('loaded');
+<div id="back-to-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" style="position:fixed;bottom:20px;right:20px;width:40px;height:40px;background:#e74c3c;color:#fff;border-radius:50%;display:none;align-items:center;justify-content:center;cursor:pointer;z-index:999;font-size:18px;box-shadow:0 2px 8px rgba(0,0,0,.3)">↑</div>
+<script>
+window.addEventListener('scroll',function(){
+  document.getElementById('back-to-top').style.display = window.scrollY > 300 ? 'flex' : 'none';
+});
+</script>
 
-                const searchScript = document.createElement('script');
-                searchScript.src = SEARCH_JS;
-                searchScript.onload = () => {
-                    console.log("搜索功能已加载");
-                    setTimeout(() => {
-                        const event = new Event('DOMContentLoaded');
-                        document.dispatchEvent(event);
-                    }, 800);
-                };
-                document.body.appendChild(searchScript);
-
-            } catch (e) {
-                console.error(e);
-                container.innerHTML = `<p style="color:red;text-align:center;padding:60px;">加载失败</p>`;
-            }
-        }
-
-        window.onload = loadPage;
-    </script>
+<script>
+document.querySelectorAll('.buy-btn').forEach(function(btn){
+  btn.addEventListener('click',function(){
+    if(typeof gtag==='function') gtag('event','affiliate_click',{event_category:'monetization',event_label:this.href});
+  });
+});
+</script>
+<script src="../search-index.js"></script>
+<script src="js/prefetch.js"></script>
 </body>
 </html>

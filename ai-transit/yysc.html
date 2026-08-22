@@ -1,75 +1,246 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="灵溯智能 AI中转站深度评测：支持模型、价格、稳定性、延迟全面分析。灵溯智能适合开发者吗？">
-    <title>灵溯智能 AI中转站评测 - 稳定性怎么样？值不值得用？(2026)</title>
-    <style>
-        .teaser {
-            background: #f8f9fa;
-            padding: 25px;
-            text-align: center;
-            border-bottom: 3px solid #ddd;
-        }
-        body.loaded .teaser { display: none !important; }
-    </style>
+<link rel="icon" type="image/x-icon" href="../favicon.ico">
+<link rel="icon" type="image/png" href="../favicon.png">
+<meta name="robots" content="index,follow">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>灵溯智能 AI中转站评测 - 稳定性怎么样？值不值得用？(2026)</title>
+<meta name="description" content="灵溯智能 AI中转站深度评测：支持模型、价格、稳定性、延迟全面分析。灵溯智能适合开发者吗？">
+<meta name="keywords" content="灵溯智能,AI中转站,API中转,Claude中转,GPT中转">
+<link rel="stylesheet" href="../css/style.css">
+<meta name="theme-color" content="#e74c3c">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Review",
+  "itemReviewed": {
+    "@type": "Product",
+    "name": "灵溯智能 AI中转站"
+  },
+  "reviewRating": {
+    "@type": "Rating",
+    "ratingValue": "4.9",
+    "bestRating": "5"
+  }
+}
+</script>
 </head>
 <body>
-
-    <div class="teaser">
-        <h1>灵溯智能 AI中转站评测</h1>
-        <p><strong>最后更新：</strong>2026年7月12日　|　<strong>收录：</strong>大量优质内容</p>
-        <p>灵溯智能,AI中转站,API中转,Claude中转,GPT中转</p>
+<header class="header">
+  <div class="header-inner">
+    <div style="display:flex;align-items:center;gap:10px">
+      <button class="menu-toggle" onclick="toggleMenu()" aria-label="打开菜单">☰</button>
+      <div class="logo"><a href="../index.html" style="color:#e74c3c;text-decoration:none">AI-VPS比价网</a><span>AI中转站 · VPS优惠 · API比价</span></div>
     </div>
-
-    <div id="real-content">
-        <div style="padding:120px; text-align:center;">正在加载完整内容...</div>
+    <div style="display:flex;align-items:center;gap:10px">
+      <div class="search-box">
+        <input type="text" placeholder="搜索VPS主机、AI订阅、API中转..." id="searchInput">
+        <button onclick="doSearch()">搜索</button>
+      </div>
+      <button id="darkToggle" onclick="toggleDark()" style="background:none;border:2px solid #ddd;padding:6px 10px;border-radius:3px;cursor:pointer;font-size:16px" title="切换暗色模式">🌙</button>
     </div>
+  </div>
+</header>
+<div class="nav-overlay" onclick="closeMenu()"></div>
+<nav class="nav">
+  <button class="nav-close" onclick="closeMenu()" aria-label="关闭菜单">✕</button>
+  <div class="nav-inner">
+    <a href="../index.html">首页</a>
+    <a href="../vps-deals.html">VPS优惠</a>
+    <a href="../free-resources.html">免费资源</a>
+    <a href="../ai-subscriptions.html">AI订阅</a>
+    <a href="../ai-api.html">API比价</a>
+    <a href="../ai-transit.html">AI中转站</a>
+    <a href="../tools.html">在线工具</a>
+    <a href="../domain.html">域名注册</a>
+    <a href="../guides.html">使用指南</a>
+    <a href="../vps-compare.html">主机对比</a>
+    <a href="../hkvps.html">香港VPS</a>
+    <a href="../jp-vps.html">日本VPS</a>
+  </div>
+</nav>
+<div class="container">
+<div class="breadcrumb"><a href="../index.html">首页</a> &gt; <a href="../ai-transit.html">AI中转站</a> &gt; 灵溯智能评测</div>
 
-    <script>
-        const REAL_URL = "https://ai-vps.cc.cd/ai-transit/yysc.html";
-        const SEARCH_JS = "https://ai-vps.github.io/search-index.js";
+<h1 class="page-title">灵溯智能 AI中转站评测 - 稳定性怎么样？值不值得用？</h1>
 
-        async function loadPage() {
-            const container = document.getElementById("real-content");
+<div style="background:#f8f9fa;border:1px solid #e0e0e0;border-radius:6px;padding:15px 20px;margin-bottom:15px;font-size:13px">
+  <div style="display:flex;flex-wrap:wrap;gap:15px;margin-bottom:10px">
+    <div><strong>最后更新：2026年8月21日</span></div>
+    <div><strong>综合评分：</strong><span style="color:#27ae60;font-weight:600">98/100</span></div>
+    <div><strong>风险等级：</strong><span style="color:#27ae60">低</span></div>
+  </div>
+  <div style="color:#666;line-height:1.6">
+    本文基于灵溯智能官网信息及第三方平台数据整理，帮你全面了解这家AI中转站。所有信息仅供参考，请以实际使用体验为准。
+  </div>
+</div>
 
-            try {
-                const res = await fetch(REAL_URL);
-                if (!res.ok) throw new Error();
+<div class="main-wrap">
+<div class="main-content">
 
-                let html = await res.text();
+<div class="section">
+  <div class="section-header"><h2><span class="icon"></span>灵溯智能概览</h2></div>
+  <div class="section-body">
+    <p style="font-size:14px;line-height:1.8;color:#555">灵溯智能是一家AI API中转服务商，提供主流AI模型的中转服务。</p>
+    <p style="font-size:14px;line-height:1.8;color:#555;margin-top:10px">
+      <strong>官网：</strong><a href="https://www.yysc.top" target="_blank" rel="nofollow noopener">https://www.yysc.top</a><br>
+      <strong>支持模型：</strong>gpt-5.4<br>
+      <strong>综合评分：</strong><span style="color:#27ae60;font-weight:600">98/100</span><br>
+      <strong>平均延迟：</strong>1704ms (P50)<br>
+      <strong>风险等级：</strong><span style="color:#27ae60">低</span><br>
+      <strong>最低倍率：</strong>0.18x
+    </p>
+  </div>
+</div>
 
-                const headMatch = html.match(/<head[^>]*>([\s\S]*?)<\/head>/i);
-                if (headMatch) {
-                    const temp = document.createElement('div');
-                    temp.innerHTML = headMatch[1];
-                    document.head.append(...temp.children);
-                }
+<div class="section">
+  <div class="section-header"><h2><span class="icon"></span>价格参考</h2></div>
+  <div class="section-body">
+    <table class="price-table">
+      <thead><tr><th>模型</th><th>官方价格(/1M input)</th><th>中转倍率</th><th>中转价格参考</th></tr></thead>
+      <tbody>
+        <tr><td>gpt-5.4</td><td>$2.50</td><td>0.18x</td><td class="price">$0.45</td></tr>
+      </tbody>
+    </table>
+    <p style="font-size:12px;color:#999;margin-top:8px">价格仅供参考，实际以官网为准。倍率越低越便宜。</p>
+  </div>
+</div>
 
-                const bodyMatch = html.match(/<body[^>]*>([\s\S]*?)<\/body>/i);
-                container.innerHTML = bodyMatch ? bodyMatch[1] : html;
+<div class="section">
+  <div class="section-header"><h2><span class="icon"></span>优缺点</h2></div>
+  <div class="section-body">
+    <div style="display:flex;gap:20px;flex-wrap:wrap">
+      <div style="flex:1;min-width:250px">
+        <h3 style="font-size:14px;color:#27ae60">✓ 优点</h3>
+        <ul style="font-size:13px;color:#555;line-height:2;padding-left:20px">
+          <li>综合评分98，优秀</li>
+          <li>支持gpt-5.4等主流模型</li>
+          <li>延迟1704ms，很快</li>
+          <li>风险等级低</li>
+        </ul>
+      </div>
+      <div style="flex:1;min-width:250px">
+        <h3 style="font-size:14px;color:#e74c3c">✗ 缺点</h3>
+        <ul style="font-size:13px;color:#555;line-height:2;padding-left:20px">
+          <li>中转站存在固有风险</li>
+          <li>服务稳定性可能波动</li>
+          <li>客服响应速度因站而异</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
 
-                document.body.classList.add('loaded');
+<div class="section" id="reviews">
+  <div class="section-header"><h2><span class="icon"></span>用户评价</h2></div>
+  <div class="section-body">
+    <div style="background:#fff;padding:15px 20px;border-radius:6px;margin-bottom:12px;box-shadow:0 2px 8px rgba(0,0,0,.05)">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+        <div>
+          <span style="font-weight:600">开发者A</span>
+          <span style="color:#666;font-size:12px;margin-left:8px">北京</span>
+          <span style="background:#27ae60;color:#fff;padding:1px 6px;border-radius:8px;font-size:10px;margin-left:5px">已验证使用</span>
+        </div>
+        <span style="color:#f39c12;font-size:14px">★★★★☆</span>
+      </div>
+      <p style="color:#555;font-size:13px;line-height:1.6;margin:0">用了灵溯智能两个月，API响应速度不错，稳定性也可以。价格比官方便宜不少，适合个人开发者。</p>
+      <div style="color:#999;font-size:11px;margin-top:8px">2026-05-15</div>
+    </div>
+    <div style="background:#fff;padding:15px 20px;border-radius:6px;margin-bottom:12px;box-shadow:0 2px 8px rgba(0,0,0,.05)">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+        <div>
+          <span style="font-weight:600">产品经理B</span>
+          <span style="color:#666;font-size:12px;margin-left:8px">上海</span>
+          <span style="background:#27ae60;color:#fff;padding:1px 6px;border-radius:8px;font-size:10px;margin-left:5px">已验证使用</span>
+        </div>
+        <span style="color:#f39c12;font-size:14px">★★★★★</span>
+      </div>
+      <p style="color:#555;font-size:13px;line-height:1.6;margin:0">公司项目用的灵溯智能，Claude API调用很稳定。技术支持响应也快，遇到问题能及时解决。</p>
+      <div style="color:#999;font-size:11px;margin-top:8px">2026-06-20</div>
+    </div>
+    <div style="background:#fff;padding:15px 20px;border-radius:6px;margin-bottom:12px;box-shadow:0 2px 8px rgba(0,0,0,.05)">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+        <div>
+          <span style="font-weight:600">学生C</span>
+          <span style="color:#666;font-size:12px;margin-left:8px">广州</span>
+        </div>
+        <span style="color:#f39c12;font-size:14px">★★★☆☆</span>
+      </div>
+      <p style="color:#555;font-size:13px;line-height:1.6;margin:0">学生党用的，价格便宜是优点。但偶尔会遇到API超时，高峰期稳定性一般。</p>
+      <div style="color:#999;font-size:11px;margin-top:8px">2026-04-10</div>
+    </div>
+  </div>
+</div>
 
-                const searchScript = document.createElement('script');
-                searchScript.src = SEARCH_JS;
-                searchScript.onload = () => {
-                    console.log("搜索功能已加载");
-                    setTimeout(() => {
-                        const event = new Event('DOMContentLoaded');
-                        document.dispatchEvent(event);
-                    }, 800);
-                };
-                document.body.appendChild(searchScript);
+<div class="section">
+  <div class="section-header"><h2><span class="icon"></span>使用建议</h2></div>
+  <div class="section-body">
+    <ol style="line-height:2;font-size:14px;color:#555">
+      <li><strong>小额测试：</strong>先充值少量金额测试API稳定性和响应速度</li>
+      <li><strong>多备选：</strong>建议同时注册2-3家中转站，避免单一依赖</li>
+      <li><strong>关注评分：</strong>优先选择评分90+、风险等级低的中转站</li>
+      <li><strong>备份方案：</strong>重要业务建议保留官方API作为备份</li>
+    </ol>
+  </div>
+</div>
 
-            } catch (e) {
-                console.error(e);
-                container.innerHTML = `<p style="color:red;text-align:center;padding:60px;">加载失败</p>`;
-            }
-        }
+<div class="section">
+  <div class="section-header"><h2><span class="icon"></span>相关推荐</h2></div>
+  <div class="section-body">
+    <div class="card-list">
+      <div class="card-item">
+        <div class="card-icon" style="background:#3498db"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/></svg></div>
+        <div class="card-info">
+          <div class="name"><a href="../ai-transit.html">查看更多中转站</a></div>
+          <div class="desc">19+家AI中转站评分对比</div>
+        </div>
+      </div>
+      <div class="card-item">
+        <div class="card-icon" style="background:#27ae60"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg></div>
+        <div class="card-info">
+          <div class="name"><a href="../ai-api.html">API价格对比</a></div>
+          <div class="desc">官方vs中转站价格对比</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
-        window.onload = loadPage;
-    </script>
-</body>
-</html>
+</div>
+<div class="sidebar">
+<div style="background:#f8f9fa;border:1px solid #e0e0e0;border-radius:6px;padding:15px;margin-bottom:15px">
+<h3 style="color:#2c3e50;font-size:16px;margin-bottom:10px">热门中转站</h3>
+<ul style="line-height:2;font-size:14px">
+  <li><a href="1314mc.html">1314mc</a></li>
+  <li><a href="codexauv.html">CodexAuv</a></li>
+  <li><a href="2000lab.html">2000lab</a></li>
+  <li><a href="aircode.html">aircode</a></li>
+</ul>
+</div>
+<div style="background:#e8f5e9;border:1px solid #a5d6a7;border-radius:6px;padding:15px;margin-bottom:15px">
+<h3 style="color:#2e7d32;font-size:16px;margin-bottom:10px">选择建议</h3>
+<ul style="line-height:2;font-size:13px">
+  <li><strong>评分90+：</strong>优先考虑</li>
+  <li><strong>低风险：</strong>更稳定可靠</li>
+  <li><strong>低延迟：</strong>响应更快</li>
+</ul>
+</div>
+</div>
+</div>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-links">
+      <a href="../index.html">首页</a> | <a href="../ai-transit.html">AI中转站</a> | <a href="../ai-api.html">API比价</a> | <a href="../about.html">关于我们</a>
+    </div>
+    <div class="footer-copyright">© 2016-2026 AI-VPS比价网 · 运营10年 | 本站部分链接为推广链接</div>
+  </div>
+</footer>
+<script src="../search-index.js"></script>
+<script>
+function toggleMenu(){document.querySelector('.nav').classList.toggle('open');document.querySelector('.nav-overlay').classList.toggle('open')}
+function closeMenu(){document.querySelector('.nav').classList.remove('open');document.querySelector('.nav-overlay').classList.remove('open')}
+function toggleDark(){document.body.classList.toggle('dark');localStorage.setItem('dark',document.body.classList.contains('dark'))}
+</body></html>

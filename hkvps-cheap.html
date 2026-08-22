@@ -1,75 +1,312 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="20元以下香港VPS推荐。狗云、野草云、HostYun、RAKsmart等低价香港VPS，月付10-20元，支持支付宝，适合测试机和轻量业务。">
-    <title>便宜香港VPS推荐 - 20元以下香港VPS主机(2026)</title>
-    <style>
-        .teaser {
-            background: #f8f9fa;
-            padding: 25px;
-            text-align: center;
-            border-bottom: 3px solid #ddd;
-        }
-        body.loaded .teaser { display: none !important; }
-    </style>
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+<link rel="icon" type="image/png" href="favicon.png">
+<meta name="robots" content="index,follow">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>便宜香港VPS推荐 - 20元以下香港VPS主机(2026)</title>
+<meta name="description" content="20元以下香港VPS推荐。狗云、野草云、HostYun、RAKsmart等低价香港VPS，月付10-20元，支持支付宝，适合测试机和轻量业务。">
+<meta name="keywords" content="便宜香港VPS,20元香港VPS,10元香港VPS,低价香港VPS,香港VPS便宜,香港VPS月付">
+<link rel="canonical" href="hkvps-cheap.html">
+<link rel="stylesheet" href="css/style.css">
+<link rel="dns-prefetch" href="//www.google-analytics.com">
+<meta name="theme-color" content="#e74c3c">
+<meta property="og:title" content="便宜香港VPS推荐 - 20元以下香港VPS主机(2026)">
+<meta property="og:description" content="20元以下香港VPS推荐，月付10-20元，支持支付宝。">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://ai-vps.cc.cd/hkvps-cheap.html">
+<meta property="og:site_name" content="AI-VPS比价网">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "20元以下的香港VPS能用吗？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "能用，但要管理预期。低价香港VPS通常配置较低(1核/512M-1G)、带宽10-30Mbps、可能有流量限制。适合测试机、工具机、轻量博客，不适合核心生产业务。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "哪家香港VPS最便宜？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "狗云(DogYun)有10元/月左右的特价香港VPS。野草云、HostYun年付方案也比较便宜。RAKsmart入门方案约$5/月(约35元)。这些低价套餐适合预算有限的用户。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "便宜香港VPS有什么缺点？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "主要缺点：带宽小(10-30Mbps)、可能限流量、网络偶尔波动、售后服务响应慢、续费价格可能上涨。建议优先选择有口碑的商家，看清续费价格。"
+      }
+    }
+  ]
+}
+</script>
 </head>
 <body>
 
-    <div class="teaser">
-        <h1>便宜香港VPS推荐</h1>
-        <p><strong>最后更新：</strong>2026年7月12日　|　<strong>收录：</strong>大量优质内容</p>
-        <p>便宜香港VPS,20元香港VPS,10元香港VPS,低价香港VPS,香港VPS便宜,香港VPS月付</p>
+<header class="header">
+  <div class="header-inner">
+    <div style="display:flex;align-items:center;gap:10px">
+      <button class="menu-toggle" onclick="toggleMenu()" aria-label="打开菜单">☰</button>
+      <div class="logo"><a href="index.html" style="color:#e74c3c;text-decoration:none">AI-VPS比价网</a><span>AI中转站 · VPS优惠 · API比价</span></div>
     </div>
-
-    <div id="real-content">
-        <div style="padding:120px; text-align:center;">正在加载完整内容...</div>
+    <div style="display:flex;align-items:center;gap:10px">
+      <div class="search-box">
+        <input type="text" placeholder="搜索VPS主机、AI订阅、API中转..." id="searchInput">
+        <button onclick="doSearch()">搜索</button>
+      </div>
+      <button id="darkToggle" onclick="toggleDark()" style="background:none;border:2px solid #ddd;padding:6px 10px;border-radius:3px;cursor:pointer;font-size:16px" title="切换暗色模式">🌙</button>
     </div>
+  </div>
+</header>
+<div class="nav-overlay" onclick="closeMenu()"></div>
 
-    <script>
-        const REAL_URL = "https://ai-vps.cc.cd/hkvps-cheap.html";
-        const SEARCH_JS = "https://ai-vps.github.io/search-index.js";
+<nav class="nav">
+  <button class="nav-close" onclick="closeMenu()" aria-label="关闭菜单">✕</button>
+  <div class="nav-inner">
+    <a href="index.html">首页</a>
+    <a href="vps-deals.html">VPS优惠</a>
+    <a href="free-resources.html">免费资源</a>
+    <a href="ai-subscriptions.html">AI订阅</a>
+    <a href="ai-api.html">API比价</a>
+    <a href="ai-transit.html">AI中转站</a>
+    <a href="tools.html">在线工具</a>
+    <a href="domain.html">域名注册</a>
+    <a href="guides.html">使用指南</a>
+    <a href="vps-compare.html">主机对比</a>
+    <a href="hkvps.html">香港VPS</a>
+    <a href="jp-vps.html">日本VPS</a>
+  </div>
+</nav>
 
-        async function loadPage() {
-            const container = document.getElementById("real-content");
+<div class="container">
+<div class="breadcrumb"><a href="index.html">首页</a> &gt; <a href="hkvps.html">香港VPS</a> &gt; 便宜香港VPS</div>
 
-            try {
-                const res = await fetch(REAL_URL);
-                if (!res.ok) throw new Error();
+<h1 class="page-title">便宜香港VPS推荐 - 20元以下香港VPS主机</h1>
 
-                let html = await res.text();
+<div style="background:#f8f9fa;border:1px solid #e0e0e0;border-radius:6px;padding:15px 20px;margin-bottom:15px;font-size:13px">
+  <div style="display:flex;flex-wrap:wrap;gap:15px;margin-bottom:10px">
+    <div><strong>最后更新：2026年8月21日</span></div>
+    <div><strong>价格区间：</strong>¥10-50/月</div>
+    <div><strong>收录商家：</strong>8家</div>
+  </div>
+  <div style="color:#666;line-height:1.6">
+    本文汇总20元以下的便宜香港VPS，适合预算有限的用户。低价套餐通常配置较低，建议用于测试机、工具机或轻量博客，不适合核心生产业务。
+  </div>
+</div>
 
-                const headMatch = html.match(/<head[^>]*>([\s\S]*?)<\/head>/i);
-                if (headMatch) {
-                    const temp = document.createElement('div');
-                    temp.innerHTML = headMatch[1];
-                    document.head.append(...temp.children);
-                }
+<div style="background:#fff3cd;border-left:4px solid #ffc107;padding:12px 15px;border-radius:0 6px 6px 0;margin-bottom:15px;font-size:13px">
+<strong>重要提示：</strong>低价香港VPS通常带宽小(10-30Mbps)、可能限流量、网络偶尔波动。购买前务必看清续费价格和流量限制。
+</div>
 
-                const bodyMatch = html.match(/<body[^>]*>([\s\S]*?)<\/body>/i);
-                container.innerHTML = bodyMatch ? bodyMatch[1] : html;
+<div class="main-wrap">
+<div class="main-content">
 
-                document.body.classList.add('loaded');
+<h2 style="color:#2c3e50;border-bottom:2px solid #e74c3c;padding-bottom:8px;margin-bottom:15px">10-20元/月档</h2>
 
-                const searchScript = document.createElement('script');
-                searchScript.src = SEARCH_JS;
-                searchScript.onload = () => {
-                    console.log("搜索功能已加载");
-                    setTimeout(() => {
-                        const event = new Event('DOMContentLoaded');
-                        document.dispatchEvent(event);
-                    }, 800);
-                };
-                document.body.appendChild(searchScript);
+<div style="overflow-x:auto;margin-bottom:20px">
+<table class="price-table" style="width:100%">
+<thead>
+<tr style="background:#27ae60;color:#fff">
+  <th>商家</th>
+  <th>配置</th>
+  <th>带宽</th>
+  <th>流量</th>
+  <th>线路</th>
+  <th>支付</th>
+  <th>购买</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><strong><a href="https://www.dogyun.com/?ref=jv98open" target="_blank" rel="nofollow">狗云 DogYun</a></strong></td>
+  <td>1核/512M/10G SSD</td>
+  <td>10Mbps</td>
+  <td>不限</td>
+  <td>BGP</td>
+  <td>支付宝/微信</td>
+  <td><a href="https://www.dogyun.com/?ref=jv98open" target="_blank" rel="nofollow" class="buy-btn">购买</a></td>
+</tr>
+<tr>
+  <td><strong><a href="https://my.yecaoyun.com/aff.php?aff=1601" target="_blank" rel="nofollow">野草云</a></strong></td>
+  <td>1核/512M/10G SSD</td>
+  <td>10Mbps</td>
+  <td>不限</td>
+  <td>BGP</td>
+  <td>支付宝/PayPal</td>
+  <td><a href="https://my.yecaoyun.com/aff.php?aff=1601" target="_blank" rel="nofollow" class="buy-btn">购买</a></td>
+</tr>
+<tr>
+  <td><strong><a href="https://my.hostyun.com/page.aspx?c=referral&u=26481" target="_blank" rel="nofollow">HostYun</a></strong></td>
+  <td>1核/1G/15G SSD</td>
+  <td>15Mbps</td>
+  <td>不限</td>
+  <td>BGP</td>
+  <td>支付宝/银联</td>
+  <td><a href="https://my.hostyun.com/page.aspx?c=referral&u=26481" target="_blank" rel="nofollow" class="buy-btn">购买</a></td>
+</tr>
+<tr>
+  <td><strong><a href="https://www.hostyun.com/" target="_blank" rel="nofollow">欧亚云</a></strong></td>
+  <td>1核/1G/15G SSD</td>
+  <td>15Mbps</td>
+  <td>不限</td>
+  <td>CN2/BGP</td>
+  <td>支付宝</td>
+  <td><a href="https://www.hostyun.com/" target="_blank" rel="nofollow" class="buy-btn">购买</a></td>
+</tr>
+</tbody>
+</table>
+</div>
 
-            } catch (e) {
-                console.error(e);
-                container.innerHTML = `<p style="color:red;text-align:center;padding:60px;">加载失败</p>`;
-            }
-        }
+<div style="background:#e8f5e9;border-left:4px solid #27ae60;padding:12px 15px;border-radius:0 6px 6px 0;margin-bottom:20px;font-size:13px">
+<strong>适用场景：</strong>测试机、工具机、个人博客、开发测试环境<br>
+<strong>选购建议：</strong>优先选择不限流量的方案，避免后期流量超额产生额外费用
+</div>
 
-        window.onload = loadPage;
-    </script>
-</body>
-</html>
+<h2 style="color:#2c3e50;border-bottom:2px solid #e74c3c;padding-bottom:8px;margin-bottom:15px">30-50元/月档</h2>
+
+<div style="overflow-x:auto;margin-bottom:20px">
+<table class="price-table" style="width:100%">
+<thead>
+<tr style="background:#e67e22;color:#fff">
+  <th>商家</th>
+  <th>配置</th>
+  <th>带宽</th>
+  <th>流量</th>
+  <th>线路</th>
+  <th>支付</th>
+  <th>购买</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><strong><a href="https://billing.raksmart.com/whmcs/aff.php?aff=3737&pid=138" target="_blank" rel="nofollow">RAKsmart</a></strong></td>
+  <td>1核/1G/20G SSD</td>
+  <td>10Mbps</td>
+  <td>1T/月</td>
+  <td>CN2可选</td>
+  <td>支付宝/加密货币</td>
+  <td><a href="https://billing.raksmart.com/whmcs/aff.php?aff=3737&pid=138" target="_blank" rel="nofollow" class="buy-btn">购买</a></td>
+</tr>
+<tr>
+  <td><strong><a href="https://www.jtti.cc/zh/offers?k=6PFTD10" target="_blank" rel="nofollow">JTTI</a></strong></td>
+  <td>1核/1G/25G SSD</td>
+  <td>30Mbps</td>
+  <td>不限</td>
+  <td>CN2 GIA</td>
+  <td>支付宝/USDT</td>
+  <td><a href="https://www.jtti.cc/zh/offers?k=6PFTD10" target="_blank" rel="nofollow" class="buy-btn">购买</a></td>
+</tr>
+<tr>
+  <td><strong><a href="http://my.henghost.com/aff.php?aff=7209" target="_blank" rel="nofollow">恒创科技</a></strong></td>
+  <td>1核/1G/20G SSD</td>
+  <td>30Mbps</td>
+  <td>不限</td>
+  <td>CN2/BGP</td>
+  <td>支付宝/银联</td>
+  <td><a href="http://my.henghost.com/aff.php?aff=7209" target="_blank" rel="nofollow" class="buy-btn">购买</a></td>
+</tr>
+<tr>
+  <td><strong><a href="https://console.ygcloud.com/quick.html?ref=s37pp3yy&promoteWay=LINK" target="_blank" rel="nofollow">萤光云</a></strong></td>
+  <td>1核/1G/25G SSD</td>
+  <td>30Mbps</td>
+  <td>不限</td>
+  <td>多节点</td>
+  <td>支付宝/微信</td>
+  <td><a href="https://console.ygcloud.com/quick.html?ref=s37pp3yy&promoteWay=LINK" target="_blank" rel="nofollow" class="buy-btn">购买</a></td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<div style="background:#fff3cd;border-left:4px solid #e67e22;padding:12px 15px;border-radius:0 6px 6px 0;margin-bottom:20px;font-size:13px">
+<strong>适用场景：</strong>企业官网、外贸站、个人博客、轻量应用<br>
+<strong>推荐：</strong>恒创科技(CN2线路+建站稳定)、JTTI(CN2 GIA性价比)
+</div>
+
+<h2 style="color:#2c3e50;border-bottom:2px solid #e74c3c;padding-bottom:8px;margin-bottom:15px">便宜VPS避坑指南</h2>
+
+<div style="background:#fff;padding:15px 20px;border-radius:6px;margin-bottom:20px;box-shadow:0 2px 8px rgba(0,0,0,.05)">
+<ol style="line-height:2">
+  <li><strong>看清续费价</strong> - 很多商家首月/首年低价，续费翻倍甚至更高。购买前务必确认续费价格</li>
+  <li><strong>流量要够用</strong> - 不限流量更省心，有限流量要估算好月用量，避免超额费用</li>
+  <li><strong>线路要实测</strong> - 宣传CN2不代表实际质量，建议用ping/traceroute测试</li>
+  <li><strong>商家口碑</strong> - 优先选择有社区口碑的商家，避免"打一波就跑"的小商家</li>
+  <li><strong>退款政策</strong> - 优先选择有30天退款保障的商家，降低试错成本</li>
+  <li><strong>备份习惯</strong> - 无论哪家，定期异地备份是必要操作</li>
+  <li><strong>用途匹配</strong> - 低价VPS适合测试/工具/轻量业务，不适合核心生产环境</li>
+</ol>
+</div>
+
+<h2 style="color:#2c3e50;border-bottom:2px solid #e74c3c;padding-bottom:8px;margin-bottom:15px">常见问题 FAQ</h2>
+
+<div style="background:#fff;padding:15px 20px;border-radius:6px;margin-bottom:15px;box-shadow:0 2px 8px rgba(0,0,0,.05)">
+<h3 style="color:#333">Q：20元以下的香港VPS能用吗？</h3>
+<p>能用，但要管理预期。低价香港VPS通常配置较低(1核/512M-1G)、带宽10-30Mbps、可能有流量限制。适合测试机、工具机、轻量博客，不适合核心生产业务。</p>
+</div>
+
+<div style="background:#fff;padding:15px 20px;border-radius:6px;margin-bottom:15px;box-shadow:0 2px 8px rgba(0,0,0,.05)">
+<h3 style="color:#333">Q：便宜香港VPS有什么缺点？</h3>
+<p>主要缺点：带宽小(10-30Mbps)、可能限流量、网络偶尔波动、售后服务响应慢、续费价格可能上涨。建议优先选择有口碑的商家，看清续费价格。</p>
+</div>
+
+<div style="background:#fff;padding:15px 20px;border-radius:6px;margin-bottom:15px;box-shadow:0 2px 8px rgba(0,0,0,.05)">
+<h3 style="color:#333">Q：便宜VPS能搭建网站吗？</h3>
+<p>可以搭建个人博客、小型网站。如果是企业官网或流量较大的站点，建议选择配置更高的方案(50元+/月)，确保稳定性和访问速度。</p>
+</div>
+
+</div>
+
+<div class="sidebar">
+
+<div style="background:#f8f9fa;border:1px solid #e0e0e0;border-radius:6px;padding:15px;margin-bottom:15px">
+<h3 style="color:#2c3e50;font-size:16px;margin-bottom:10px"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align:middle;margin-right:5px"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>香港VPS子页</h3>
+<ul style="line-height:2;font-size:14px">
+  <li><a href="hkvps.html">香港VPS总览</a></li>
+  <li><a href="hkvps-cheap.html" style="color:#e74c3c;font-weight:600">便宜香港VPS</a></li>
+  <li><a href="hkvps-mid.html">中档香港VPS</a></li>
+  <li><a href="hkvps-premium.html">高端香港VPS</a></li>
+  <li><a href="hkvps-gia.html">CN2 GIA专题</a></li>
+  <li><a href="hkvps-iplc.html">IPLC专线</a></li>
+  <li><a href="hkvps-bandwidth.html">大带宽VPS</a></li>
+  <li><a href="hkvps-use.html">用途指南</a></li>
+</ul>
+</div>
+
+<div style="background:#e8f5e9;border:1px solid #a5d6a7;border-radius:6px;padding:15px;margin-bottom:15px">
+<h3 style="color:#2e7d32;font-size:16px;margin-bottom:10px"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align:middle;margin-right:5px"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>价格档位</h3>
+<ul style="line-height:2;font-size:13px">
+  <li><strong>10-20元：</strong>狗云、野草云</li>
+  <li><strong>30-50元：</strong>恒创、JTTI</li>
+  <li><strong>100元+：</strong>搬瓦工、DMIT</li>
+</ul>
+</div>
+
+</div>
+</div>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-links">
+      <a href="index.html">首页</a> | <a href="vps-deals.html">VPS优惠</a> | <a href="ai-subscriptions.html">AI订阅</a> | <a href="ai-api.html">API比价</a> | <a href="about.html">关于我们</a>
+    </div>
+    <div class="footer-copyright">© 2016-2026 AI-VPS比价网 · 运营10年 | 本站部分链接为推广链接</div>
+  </div>
+</footer>
+
+<script>
+function toggleMenu(){document.querySelector('.nav').classList.toggle('open');document.querySelector('.nav-overlay').classList.toggle('open')}
+function closeMenu(){document.querySelector('.nav').classList.remove('open');document.querySelector('.nav-overlay').classList.remove('open')}
+function toggleDark(){document.body.classList.toggle('dark');localStorage.setItem('dark',document.body.classList.contains('dark'))}
+</script>
+<script src="search-index.js"></script>
+</body></html>

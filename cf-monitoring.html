@@ -1,75 +1,162 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Analytics和日志">
-    <title>Cloudflare监控教程</title>
-    <style>
-        .teaser {
-            background: #f8f9fa;
-            padding: 25px;
-            text-align: center;
-            border-bottom: 3px solid #ddd;
-        }
-        body.loaded .teaser { display: none !important; }
-    </style>
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+<link rel="icon" type="image/png" href="favicon.png">
+<meta name="robots" content="index,follow">
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Cloudflare监控教程</title>
+<meta name="description" content="Analytics和日志">
+<meta name="keywords" content="Cloudflare监控教程,网站监控">
+<link rel="canonical" href="cf-monitoring.html"><link rel="stylesheet" href="css/style.css">
+
+  <link rel="dns-prefetch" href="//www.google-analytics.com">
+  <meta name="theme-color" content="#e74c3c">
+
+  <meta property="og:updated_time" content="2026-08-21">
 </head>
 <body>
-
-    <div class="teaser">
-        <h1>Cloudflare监控教程</h1>
-        <p><strong>最后更新：</strong>2026年7月12日　|　<strong>收录：</strong>大量优质内容</p>
-        <p>Cloudflare监控教程,网站监控</p>
+<header class="header">
+  <div class="header-inner">
+    <div style="display:flex;align-items:center;gap:10px">
+      <button class="menu-toggle" onclick="toggleMenu()" aria-label="打开菜单">☰</button>
+      <div class="logo"><a href="index.html" style="color:#e74c3c;text-decoration:none">AI-VPS比价网</a><span>AI中转站 · VPS优惠 · API比价</span></div>
     </div>
-
-    <div id="real-content">
-        <div style="padding:120px; text-align:center;">正在加载完整内容...</div>
+    <div style="display:flex;align-items:center;gap:10px">
+      <div class="search-box">
+        <input type="text" placeholder="搜索VPS主机、AI订阅、API中转..." id="searchInput">
+        <button onclick="doSearch()">搜索</button>
+      </div>
+      <button id="darkToggle" onclick="toggleDark()" style="background:none;border:2px solid #ddd;padding:6px 10px;border-radius:3px;cursor:pointer;font-size:16px" title="切换暗色模式">🌙</button>
     </div>
+  </div>
+</header>
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="index.html">首页</a>
+    <a href="vps-deals.html">VPS优惠</a>
+    <a href="free-resources.html">免费资源</a>
+    <a href="ai-subscriptions.html">AI订阅</a>
+    <a href="ai-api.html">API比价</a>
+    <a href="ai-transit.html">AI中转站</a>
+    <a href="tools.html">在线工具</a>
+    <a href="domain.html">域名注册</a>
+    <a href="guides.html">使用指南</a>
+    <a href="vps-compare.html">主机对比</a>
+    <a href="hkvps.html">香港VPS</a>
+    <a href="jp-vps.html">日本VPS</a>
+  </div>
+</nav>
 
-    <script>
-        const REAL_URL = "https://ai-vps.cc.cd/cf-monitoring.html";
-        const SEARCH_JS = "https://ai-vps.github.io/search-index.js";
+<!-- 广告位：导航下方 -->
+<div class="ad-slot ad-header" id="ad-header">
+  <span class="ad-slot-label">广告位</span>
+  <!-- 在此插入广告代码 -->
+</div>
 
-        async function loadPage() {
-            const container = document.getElementById("real-content");
+<div class="container">
+<div class="breadcrumb"><a href="index.html">首页</a> &gt; 使用指南 > 监控</div>
 
-            try {
-                const res = await fetch(REAL_URL);
-                if (!res.ok) throw new Error();
+<!-- GEO优化：页面元信息 -->
+<div style="background:#f8f9fa;border:1px solid #e0e0e0;border-radius:6px;padding:15px 20px;margin-bottom:15px;font-size:13px">
+  <div style="display:flex;flex-wrap:wrap;gap:15px;margin-bottom:10px">
+    <div><strong>最后更新：2026年8月21日</span></div>
+    <div><strong>数据来源：</strong>Cloudflare官方文档</div>
+  </div>
 
-                let html = await res.text();
+<div style="background:#fff;border-left:4px solid #f39c12;padding:15px 20px;margin-bottom:20px;border-radius:0 6px 6px 0;box-shadow:0 2px 8px rgba(0,0,0,.08)">
+  <div style="font-size:15px;font-weight:600;color:#2c3e50;margin-bottom:10px">Cloudflare功能详解：从入门到精通</div>
+  <div style="font-size:13px;color:#666;line-height:1.8">
+    Cloudflare是全球最大的CDN和网络安全服务商之一，提供<strong>免费CDN、DDoS防护、SSL证书、DNS解析</strong>等多项服务。无论你是个人博客还是企业网站，都可以从Cloudflare获益。本教程基于Cloudflare官方文档整理，帮你快速掌握各项功能的配置方法。
+  </div>
+</div>
+  <div style="color:#666;line-height:1.6">
+    <strong>页面说明：</strong>本页为Cloudflare相关功能的教程和说明，内容基于官方文档整理。
+  </div>
+</div>
+<div class="main-wrap"><div class="main-content">
+<div class='section'><div class='section-header'><h2><span class='icon'></span>监控配置</h2></div><div class='section-body'><p style='font-size:14px;line-height:1.8;color:#555'>Web Analytics免费统计，Logpush推送日志，Health Checks监控URL。</p></div></div>
+</div><aside class="sidebar">
 
-                const headMatch = html.match(/<head[^>]*>([\s\S]*?)<\/head>/i);
-                if (headMatch) {
-                    const temp = document.createElement('div');
-                    temp.innerHTML = headMatch[1];
-                    document.head.append(...temp.children);
-                }
+<!-- 广告位：侧边栏 -->
+<div class="ad-slot ad-sidebar" id="ad-sidebar">
+  <span class="ad-slot-label">广告位</span>
+  <!-- 在此插入广告代码 -->
+</div>
 
-                const bodyMatch = html.match(/<body[^>]*>([\s\S]*?)<\/body>/i);
-                container.innerHTML = bodyMatch ? bodyMatch[1] : html;
+<div class="side-block"><div class="side-title">相关页面</div><div class="side-body"><ul class="side-list">
+<li><a href="free-resources.html">免费资源汇总</a></li><li><a href="guides.html">使用指南</a></li><li><a href="tools.html">在线工具</a></li>
+</ul></div></div>
+</aside></div></div>
 
-                document.body.classList.add('loaded');
 
-                const searchScript = document.createElement('script');
-                searchScript.src = SEARCH_JS;
-                searchScript.onload = () => {
-                    console.log("搜索功能已加载");
-                    setTimeout(() => {
-                        const event = new Event('DOMContentLoaded');
-                        document.dispatchEvent(event);
-                    }, 800);
-                };
-                document.body.appendChild(searchScript);
+<div class="section">
+  <div class="section-header">
+    <h2><span class="icon"></span>Cloudflare相关教程</h2>
+  </div>
+  <div class="section-body">
+    <div style="font-size:13px;color:#666;line-height:1.8">
+      <strong>热门教程：</strong>
+      <a href="cf-ssl.html" style="display:inline-block;background:#f0f0f0;padding:3px 8px;border-radius:3px;margin:2px;font-size:12px;text-decoration:none">SSL证书配置</a>
+      <a href="cf-cdn.html" style="display:inline-block;background:#f0f0f0;padding:3px 8px;border-radius:3px;margin:2px;font-size:12px;text-decoration:none">CDN加速配置</a>
+      <a href="cf-ddos-protection.html" style="display:inline-block;background:#f0f0f0;padding:3px 8px;border-radius:3px;margin:2px;font-size:12px;text-decoration:none">DDoS防护设置</a>
+      <a href="cf-dns.html" style="display:inline-block;background:#f0f0f0;padding:3px 8px;border-radius:3px;margin:2px;font-size:12px;text-decoration:none">DNS解析配置</a>
+      <a href="cf-waf-rules.html" style="display:inline-block;background:#f0f0f0;padding:3px 8px;border-radius:3px;margin:2px;font-size:12px;text-decoration:none">WAF防火墙规则</a>
+      <a href="cf-workers.html" style="display:inline-block;background:#f0f0f0;padding:3px 8px;border-radius:3px;margin:2px;font-size:12px;text-decoration:none">Workers边缘计算</a>
+    </div>
+  </div>
+</div>
 
-            } catch (e) {
-                console.error(e);
-                container.innerHTML = `<p style="color:red;text-align:center;padding:60px;">加载失败</p>`;
-            }
-        }
 
-        window.onload = loadPage;
-    </script>
-</body>
-</html>
+
+<!-- 广告位：底部 -->
+<div class="ad-slot ad-footer" id="ad-footer">
+  <span class="ad-slot-label">广告位</span>
+  <!-- 在此插入广告代码 -->
+</div>
+
+
+<footer class="footer">
+  <div class="links">
+    <a href="index.html">首页</a>
+    <a href="vps-deals.html">VPS优惠</a>
+    <a href="free-resources.html">免费资源</a>
+    <a href="ai-subscriptions.html">AI订阅</a>
+    <a href="ai-api.html">API比价</a>
+    <a href="ai-transit.html">AI中转站</a>
+    <a href="domain.html">域名注册</a>
+    <a href="guides.html">使用指南</a>
+  </div>
+  <p>本站信息仅供参考，价格以各平台官网为准。推广链接不影响您的购买价格。</p>
+  <p>© 2016-2026 AI-VPS比价网 · 运营10年</p>
+</footer>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "首页",
+      "item": "https://ai-vps.cc.cd/index.html"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "监控"
+    }
+  ]
+}
+</script>
+
+<div id="back-to-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" style="position:fixed;bottom:20px;right:20px;width:40px;height:40px;background:#e74c3c;color:#fff;border-radius:50%;display:none;align-items:center;justify-content:center;cursor:pointer;z-index:999;font-size:18px;box-shadow:0 2px 8px rgba(0,0,0,.3)">↑</div>
+<script>
+window.addEventListener('scroll',function(){
+  document.getElementById('back-to-top').style.display = window.scrollY > 300 ? 'flex' : 'none';
+});
+</script>
+<script src="search-index.js"></script>
+<script src="js/prefetch.js"></script>
+</body></html>

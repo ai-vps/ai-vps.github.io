@@ -1,75 +1,518 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="聚合VPS主机优惠信息与AI订阅/API比价数据。RackNerd、CloudCone等主机年付低至$10起；ChatGPT、Claude、Gemini订阅最低价实时更新；API中转站倍率对比一目了然。">
-    <title>AI-VPS比价网 - VPS优惠、AI中转站、API比价一站式导航</title>
-    <style>
-        .teaser {
-            background: #f8f9fa;
-            padding: 25px;
-            text-align: center;
-            border-bottom: 3px solid #ddd;
-        }
-        body.loaded .teaser { display: none !important; }
-    </style>
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+<link rel="icon" type="image/png" href="favicon.png">
+<meta name="robots" content="index,follow">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>AI-VPS比价网 - VPS优惠、AI中转站、API比价一站式导航</title>
+<meta name="description" content="聚合VPS主机优惠信息与AI订阅/API比价数据。RackNerd、CloudCone等主机年付低至$10起；ChatGPT、Claude、Gemini订阅最低价实时更新；API中转站倍率对比一目了然。">
+<meta name="keywords" content="VPS优惠,廉价VPS,RackNerd,CloudCone,搬瓦工,ChatGPT订阅,Claude订阅,Gemini会员,AI API中转,DeepSeek API,API比价,VPS主机推荐">
+<link rel="canonical" href="index.html">
+<link rel="stylesheet" href="css/style.css">
+
+  <link rel="dns-prefetch" href="//www.google-analytics.com">
+  <meta name="theme-color" content="#e74c3c">
+
+
+  <meta property="og:title" content="主机与AI优惠导航 - VPS主机折扣、AI订阅比价、API中转站一站直达">
+  <meta property="og:description" content="聚合VPS主机优惠信息与AI订阅/API比价数据。RackNerd、CloudCone等主机年付低至$10起；ChatGPT、Claude、Gemini订阅最低价实时更新；API中转站倍率对比一目了然。">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://ai-vps.cc.cd/index.html">
+  <meta property="og:site_name" content="AI-VPS比价网">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="主机与AI优惠导航 - VPS主机折扣、AI订阅比价、API中转站一站直达">
+  <meta name="twitter:description" content="聚合VPS主机优惠信息与AI订阅/API比价数据。RackNerd、CloudCone等主机年付低至$10起；ChatGPT、Claude、Gemini订阅最低价实时更新；API中转站倍率对比一目了然。">
+  <meta property="og:updated_time" content="2026-08-21">
 </head>
 <body>
 
-    <div class="teaser">
-        <h1>AI-VPS比价网</h1>
-        <p><strong>最后更新：</strong>2026年7月12日　|　<strong>收录：</strong>大量优质内容</p>
-        <p>VPS优惠,廉价VPS,RackNerd,CloudCone,搬瓦工,ChatGPT订阅,Claude订阅,Gemini会员,AI API中转,DeepSeek API,API比价,VPS主机推荐</p>
+<header class="header">
+  <div class="header-inner">
+    <div style="display:flex;align-items:center;gap:10px">
+      <button class="menu-toggle" onclick="toggleMenu()" aria-label="打开菜单">☰</button>
+      <div class="logo"><a href="index.html" style="color:#e74c3c;text-decoration:none">AI-VPS比价网</a><span>AI中转站 · VPS优惠 · API比价</span></div>
     </div>
-
-    <div id="real-content">
-        <div style="padding:120px; text-align:center;">正在加载完整内容...</div>
+    <div style="display:flex;align-items:center;gap:10px">
+      <div class="search-box">
+        <input type="text" placeholder="搜索VPS主机、AI订阅、API中转..." id="searchInput">
+        <button onclick="doSearch()">搜索</button>
+      </div>
+      <button id="darkToggle" onclick="toggleDark()" style="background:none;border:2px solid #ddd;padding:6px 10px;border-radius:3px;cursor:pointer;font-size:16px" title="切换暗色模式">🌙</button>
     </div>
+  </div>
+</header>
+<div class="nav-overlay" onclick="closeMenu()"></div>
 
-    <script>
-        const REAL_URL = "https://ai-vps.cc.cd/index.html";
-        const SEARCH_JS = "https://ai-vps.github.io/search-index.js";
+<nav class="nav">
+  <button class="nav-close" onclick="closeMenu()" aria-label="关闭菜单">✕</button>
+  <div class="nav-inner">
+    <a href="index.html">首页</a>
+    <a href="vps-deals.html">VPS优惠</a>
+    <a href="free-resources.html">免费资源</a>
+    <a href="ai-subscriptions.html">AI订阅</a>
+    <a href="ai-api.html">API比价</a>
+    <a href="ai-transit.html">AI中转站</a>
+    <a href="tools.html">在线工具</a>
+    <a href="domain.html">域名注册</a>
+    <a href="guides.html">使用指南</a>
+    <a href="vps-compare.html">主机对比</a>
+    <a href="hkvps.html">香港VPS</a>
+    <a href="jp-vps.html">日本VPS</a>
+  </div>
+</nav>
 
-        async function loadPage() {
-            const container = document.getElementById("real-content");
+<!-- 广告位：导航下方 -->
+<div class="ad-slot ad-header" id="ad-header">
+  <span class="ad-slot-label">广告位</span>
+  <!-- 在此插入广告代码 -->
+</div>
 
-            try {
-                const res = await fetch(REAL_URL);
-                if (!res.ok) throw new Error();
 
-                let html = await res.text();
+<div class="container">
 
-                const headMatch = html.match(/<head[^>]*>([\s\S]*?)<\/head>/i);
-                if (headMatch) {
-                    const temp = document.createElement('div');
-                    temp.innerHTML = headMatch[1];
-                    document.head.append(...temp.children);
-                }
+<!-- GEO优化：页面元信息 -->
+<div style="background:#f8f9fa;border:1px solid #e0e0e0;border-radius:6px;padding:15px 20px;margin-bottom:15px;font-size:13px">
+  <div style="display:flex;flex-wrap:wrap;gap:15px;margin-bottom:10px">
+    <div><strong>最后更新：</strong><span style="color:#e74c3c;font-weight:600">2026年8月21日</span></div>
+    <div><strong>数据来源：</strong>各厂商官网 + 第三方渠道公开报价</div>
+  </div>
 
-                const bodyMatch = html.match(/<body[^>]*>([\s\S]*?)<\/body>/i);
-                container.innerHTML = bodyMatch ? bodyMatch[1] : html;
+<div style="background:#fff;border-left:4px solid #34495e;padding:15px 20px;margin-bottom:20px;border-radius:0 6px 6px 0;box-shadow:0 2px 8px rgba(0,0,0,.08)">
+  <div style="font-size:15px;font-weight:600;color:#2c3e50;margin-bottom:10px">全面解析：帮你深入了解相关知识</div>
+  <div style="font-size:13px;color:#666;line-height:1.8">
+    本页提供详细的介绍和分析，帮你全面了解相关内容。所有信息均来自官方来源，价格和配置可能随时变化，请以官网最新信息为准。
+  </div>
+</div>
+  <div style="color:#666;line-height:1.6">
+    <strong>页面说明：</strong>本站聚合VPS主机优惠、AI订阅比价、API中转站价格等信息。所有价格均可通过链接追溯至官方厂商页面核实。本站不卖货、不收款，部分链接为推广链接（不影响购买价格）。
+  </div>
+</div>
 
-                document.body.classList.add('loaded');
+<!-- 公告 -->
+<div class="notice-bar">
+  <span class="label">公告</span>
+  <div class="marquee">
+    <span>RackNerd限时特惠：VPS年付$10.18起（最低价） | 黑五套餐$21.99起仍在售 | ChatGPT Plus第三方渠道低至￥5/月 | Claude Max 20x渠道价￥318起 | API中转站Claude最低0.20x倍率 | DeepSeek V4 Flash官方免费额度仍在持续</span>
+  </div>
+</div>
 
-                const searchScript = document.createElement('script');
-                searchScript.src = SEARCH_JS;
-                searchScript.onload = () => {
-                    console.log("搜索功能已加载");
-                    setTimeout(() => {
-                        const event = new Event('DOMContentLoaded');
-                        document.dispatchEvent(event);
-                    }, 800);
-                };
-                document.body.appendChild(searchScript);
+<!-- 快速入口 -->
+<div class="section">
+  <div class="section-body">
+    <div class="quick-entry">
+      <a href="vps-deals.html#racknerd"><span class="qicon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/></svg></span><span class="qtext">RackNerd</span></a>
+      <a href="free-resources.html"><span class="qicon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg></span><span class="qtext">免费资源</span></a>
+      <a href="vps-deals.html#buyvm"><span class="qicon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg></span><span class="qtext">BuyVM</span></a>
+      <a href="vps-deals.html#cloudcone"><span class="qicon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/></svg></span><span class="qtext">CloudCone</span></a>
+      <a href="vps-deals.html#bandwagon"><span class="qicon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="9" y1="22" x2="9" y2="18"/><line x1="15" y1="22" x2="15" y2="18"/><line x1="4" y1="10" x2="20" y2="10"/><line x1="4" y1="14" x2="20" y2="14"/><line x1="4" y1="18" x2="20" y2="18"/></svg></span><span class="qtext">搬瓦工</span></a>
+      <a href="vps-deals.html#vultr"><span class="qicon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></span><span class="qtext">Vultr</span></a>
+      <a href="ai-subscriptions.html#chatgpt"><span class="qicon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></span><span class="qtext">ChatGPT</span></a>
+      <a href="ai-subscriptions.html#claude"><span class="qicon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="10" rx="2"/><circle cx="9" cy="16" r="1"/><circle cx="15" cy="16" r="1"/><path d="M12 11V7a4 4 0 0 0-4-4h0a4 4 0 0 0-4 4v0"/><path d="M12 11V7a4 4 0 0 1 4-4h0a4 4 0 0 1 4 4v0"/></svg></span><span class="qtext">Claude</span></a>
+      <a href="ai-subscriptions.html#gemini"><span class="qicon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></span><span class="qtext">Gemini</span></a>
+      <a href="ai-api.html#deepseek"><span class="qicon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.5 2A2.5 2.5 0 0 1 12 4.5v15a2.5 2.5 0 0 1-4.96.44 2.5 2.5 0 0 1-2.96-3.08 3 3 0 0 1-.34-5.58 2.5 2.5 0 0 1 1.32-4.24 2.5 2.5 0 0 1 1.98-3A2.5 2.5 0 0 1 9.5 2z"/><path d="M14.5 2A2.5 2.5 0 0 0 12 4.5v15a2.5 2.5 0 0 0 4.96.44 2.5 2.5 0 0 0 2.96-3.08 3 3 0 0 0 .34-5.58 2.5 2.5 0 0 0-1.32-4.24 2.5 2.5 0 0 0-1.98-3A2.5 2.5 0 0 0 14.5 2z"/></svg></span><span class="qtext">DeepSeek</span></a>
+      <a href="ai-transit.html"><span class="qicon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></span><span class="qtext">AI中转站</span></a>
+      <a href="tools.html"><span class="qicon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg></span><span class="qtext">在线工具</span></a>
+      <a href="domain.html"><span class="qicon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></span><span class="qtext">域名注册</span></a>
+      <a href="guides.html"><span class="qicon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></span><span class="qtext">购买指南</span></a>
+    </div>
+  </div>
+</div>
 
-            } catch (e) {
-                console.error(e);
-                container.innerHTML = `<p style="color:red;text-align:center;padding:60px;">加载失败</p>`;
-            }
-        }
+<!-- 主体两栏 -->
+<div class="main-wrap">
+<div class="main-content">
 
-        window.onload = loadPage;
-    </script>
+<!-- VPS主机优惠 -->
+<div class="section">
+  <div class="section-header">
+    <h2><span class="icon"></span>VPS主机优惠</h2>
+    <a href="vps-deals.html" class="more">查看更多 &raquo;</a>
+  </div>
+  <div class="section-body">
+    <div class="tag-nav">
+      <a href="vps-deals.html#racknerd" class="active">RackNerd</a>
+      <a href="vps-deals.html#cloudcone">CloudCone</a>
+      <a href="vps-deals.html#bandwagon">搬瓦工</a>
+      <a href="vps-deals.html#colocrossing">ColoCrossing</a>
+      <a href="vps-deals.html#dmv">DMV</a>
+    </div>
+    <table class="price-table">
+      <thead>
+        <tr><th>商家</th><th>配置</th><th>流量</th><th>价格</th><th>购买</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>RackNerd</td><td>1核/1G/20G SSD</td><td>3T/月</td><td class="price">$21.99/年</td><td><a class="buy-btn" href="https://my.racknerd.com/aff.php?aff=20729&pid=952" target="_blank" rel="nofollow noopener">购买</a></td></tr>
+        <tr><td>RackNerd</td><td>2核/2G/35G SSD</td><td>5T/月</td><td class="price">$35.99/年</td><td><a class="buy-btn" href="https://my.racknerd.com/aff.php?aff=20729&pid=953" target="_blank" rel="nofollow noopener">购买</a></td></tr>
+        <tr><td>RackNerd</td><td>3核/4G/60G SSD</td><td>7T/月</td><td class="price">$59.99/年</td><td><a class="buy-btn" href="https://my.racknerd.com/aff.php?aff=20729&pid=954" target="_blank" rel="nofollow noopener">购买</a></td></tr>
+        <tr><td>RackNerd</td><td>768M/1核/15G</td><td>1T/月</td><td class="price">$10.18/年</td><td><a class="buy-btn" href="https://my.racknerd.com/aff.php?aff=20729&pid=695" target="_blank" rel="nofollow noopener">购买</a></td></tr>
+        <tr><td>RackNerd</td><td>1G/1核/17G</td><td>3T/月</td><td class="price">$10.98/年</td><td><a class="buy-btn" href="https://my.racknerd.com/aff.php?aff=20729&pid=358" target="_blank" rel="nofollow noopener">购买</a></td></tr>
+        <tr><td>RackNerd</td><td>1.5G/1核/25G</td><td>4T/月</td><td class="price">$16.88/年</td><td><a class="buy-btn" href="https://my.racknerd.com/aff.php?aff=20729&pid=839" target="_blank" rel="nofollow noopener">购买</a></td></tr>
+        <tr><td>RackNerd</td><td>2G/2核/50G</td><td>5T/月</td><td class="price">$25.49/年</td><td><a class="buy-btn" href="https://my.racknerd.com/aff.php?aff=20729&pid=794" target="_blank" rel="nofollow noopener">购买</a></td></tr>
+        <tr><td>RackNerd</td><td>4G/2核/80G</td><td>8T/月</td><td class="price">$38.88/年</td><td><a class="buy-btn" href="https://my.racknerd.com/aff.php?aff=20729&pid=795" target="_blank" rel="nofollow noopener">购买</a></td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<p style="font-size:11px;color:#999;text-align:right;margin-top:8px">最后更新：2026年8月 · 价格以官网为准</p>
+
+<!-- AI订阅比价 -->
+<div class="section">
+  <div class="section-header">
+    <h2><span class="icon"></span>AI订阅比价</h2>
+    <a href="ai-subscriptions.html" class="more">查看更多 &raquo;</a>
+  </div>
+  <div class="section-body">
+    <div class="tag-nav">
+      <a href="ai-subscriptions.html#chatgpt" class="active">ChatGPT</a>
+      <a href="ai-subscriptions.html#claude">Claude</a>
+      <a href="ai-subscriptions.html#gemini">Gemini</a>
+      <a href="ai-subscriptions.html#grok">Grok</a>
+      <a href="ai-subscriptions.html#cursor">Cursor</a>
+      <a href="ai-subscriptions.html#kiro">Kiro</a>
+    </div>
+    <table class="price-table">
+      <thead>
+        <tr><th>产品</th><th>类型</th><th>最低价</th><th>库存</th><th>渠道数</th><th>详情</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>ChatGPT Plus</td><td>订阅会员</td><td class="price">¥5/月</td><td>有货</td><td>1183</td><td><a class="buy-btn" href="ai-subscriptions.html#chatgpt-plus">查看</a></td></tr>
+        <tr><td>ChatGPT Pro 20x</td><td>订阅会员</td><td class="price">¥149/月</td><td>有货</td><td>230</td><td><a class="buy-btn" href="ai-subscriptions.html#chatgpt-pro">查看</a></td></tr>
+        <tr><td>Claude Pro</td><td>订阅会员</td><td class="price">¥130/月</td><td>有货</td><td>138</td><td><a class="buy-btn" href="ai-subscriptions.html#claude-pro">查看</a></td></tr>
+        <tr><td>Claude Max 20x</td><td>订阅会员</td><td class="price">¥318/月</td><td>有货</td><td>188</td><td><a class="buy-btn" href="ai-subscriptions.html#claude-max">查看</a></td></tr>
+        <tr><td>Gemini Pro</td><td>成品号</td><td class="price">¥2.05</td><td>有货</td><td>482</td><td><a class="buy-btn" href="ai-subscriptions.html#gemini-pro">查看</a></td></tr>
+        <tr><td>Super Grok</td><td>订阅会员</td><td class="price">¥2.50/周</td><td>有货</td><td>318</td><td><a class="buy-btn" href="ai-subscriptions.html#grok">查看</a></td></tr>
+        <tr><td>Cursor</td><td>工具账号</td><td class="price">¥0.84</td><td>有货</td><td>39</td><td><a class="buy-btn" href="ai-subscriptions.html#cursor">查看</a></td></tr>
+        <tr><td>Kiro Free</td><td>工具账号</td><td class="price">¥0.30</td><td>有货</td><td>19</td><td><a class="buy-btn" href="ai-subscriptions.html#kiro">查看</a></td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- API中转站比价 -->
+<div class="section">
+  <div class="section-header">
+    <h2><span class="icon"></span>API中转站比价</h2>
+    <a href="ai-api.html" class="more">查看更多 &raquo;</a>
+  </div>
+  <div class="section-body">
+    <div class="tag-nav">
+      <a href="ai-api.html#deepseek" class="active">DeepSeek</a>
+      <a href="ai-api.html#openai">OpenAI</a>
+      <a href="ai-api.html#claude-api">Claude</a>
+      <a href="ai-api.html#gemini-api">Gemini</a>
+      <a href="ai-api.html#qwen">千问</a>
+      <a href="ai-api.html#glm">GLM</a>
+      <a href="ai-api.html#kimi">Kimi</a>
+      <a href="ai-api.html#minimax">MiniMax</a>
+    </div>
+    <table class="price-table">
+      <thead>
+        <tr><th>模型</th><th>厂商</th><th>输入</th><th>输出</th><th>备注</th><th>来源</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>DeepSeek V4 Flash</td><td>DeepSeek</td><td class="price">免费</td><td class="price">免费</td><td>官方有免费额度</td><td><a class="buy-btn" href="ai-api.html#deepseek">查看</a></td></tr>
+        <tr><td>DeepSeek V4 Pro</td><td>DeepSeek</td><td class="price">¥2/百万token</td><td class="price">¥8/百万token</td><td>长上下文128K</td><td><a class="buy-btn" href="ai-api.html#deepseek">查看</a></td></tr>
+        <tr><td>Qwen3.5 Plus</td><td>阿里云</td><td class="price">免费额度</td><td class="price">免费额度</td><td>Token Plan可选</td><td><a class="buy-btn" href="ai-api.html#qwen">查看</a></td></tr>
+        <tr><td>GLM-5</td><td>智谱AI</td><td class="price">免费额度</td><td class="price">免费额度</td><td>Token Plan可选</td><td><a class="buy-btn" href="ai-api.html#glm">查看</a></td></tr>
+        <tr><td>Kimi K2.5</td><td>Moonshot</td><td class="price">免费额度</td><td class="price">免费额度</td><td>Token Plan可选</td><td><a class="buy-btn" href="ai-api.html#kimi">查看</a></td></tr>
+        <tr><td>GPT-5.4</td><td>OpenAI</td><td class="price">$2.5/百万token</td><td class="price">$10/百万token</td><td>中转站0.2x起</td><td><a class="buy-btn" href="ai-api.html#openai">查看</a></td></tr>
+        <tr><td>Claude Sonnet 5</td><td>Anthropic</td><td class="price">$3/百万token</td><td class="price">$15/百万token</td><td>中转站0.2x起</td><td><a class="buy-btn" href="ai-api.html#claude-api">查看</a></td></tr>
+        <tr><td>MiniMax M2.5</td><td>MiniMax</td><td class="price">免费额度</td><td class="price">免费额度</td><td>Token Plan可选</td><td><a class="buy-btn" href="ai-api.html#minimax">查看</a></td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- 官方订阅对比 -->
+<div class="section">
+  <div class="section-header">
+    <h2><span class="icon"></span>官方订阅套餐</h2>
+    <a href="ai-subscriptions.html#official" class="more">查看更多 &raquo;</a>
+  </div>
+  <div class="section-body">
+    <table class="price-table">
+      <thead>
+        <tr><th>产品</th><th>套餐</th><th>月费</th><th>额度</th><th>覆盖模型</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>ChatGPT Plus</td><td>Plus</td><td class="price">$20/月</td><td>5h限额$25</td><td>GPT-5.5/5.4/5.4 Mini等</td></tr>
+        <tr><td>ChatGPT Pro 5x</td><td>Pro 5x</td><td class="price">$100/月</td><td>5h限额$150</td><td>GPT-5.5/5.4全系列</td></tr>
+        <tr><td>ChatGPT Pro 20x</td><td>Pro 20x</td><td class="price">$200/月</td><td>5h限额$300</td><td>GPT-5.5/5.4全系列</td></tr>
+        <tr><td>Claude Pro</td><td>Pro</td><td class="price">$20/月</td><td>5h限额$5</td><td>Claude Fable 5/Opus 4.8等</td></tr>
+        <tr><td>Claude Max 5x</td><td>Max 5x</td><td class="price">$100/月</td><td>5h限额$60</td><td>Claude全系列</td></tr>
+        <tr><td>Claude Max 20x</td><td>Max 20x</td><td class="price">$200/月</td><td>5h限额$150</td><td>Claude全系列</td></tr>
+        <tr><td>OpenCode Go</td><td>Go</td><td class="price">$10/月</td><td>月限额$60</td><td>DeepSeek/Qwen/Kimi等12款</td></tr>
+        <tr><td>StepFun Step Plan</td><td>Flash Pro</td><td class="price">¥199/月</td><td>1500 prompts/5h</td><td>Step 3.7 Flash</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- 购买指南 -->
+<div class="section">
+  <div class="section-header">
+    <h2><span class="icon"></span>购买指南</h2>
+    <a href="guides.html" class="more">查看更多 &raquo;</a>
+  </div>
+  <div class="section-body">
+    <div class="card-list">
+      <div class="card-item">
+        <div class="card-icon" style="background:#3498db">1</div>
+        <div class="card-info">
+          <div class="name"><a href="guides/vps-beginner.html">VPS新手入门：从零开始选主机</a></div>
+          <div class="desc">什么是VPS？怎么选机房？KVM和OpenVZ有什么区别？新手最常问的十个问题一次讲清。</div>
+        </div>
+      </div>
+      <div class="card-item">
+        <div class="card-icon" style="background:#e74c3c">2</div>
+        <div class="card-info">
+          <div class="name"><a href="guides/ai-sub-guide.html">AI订阅怎么买最划算？官方、代充、卡网渠道对比</a></div>
+          <div class="desc">同一个ChatGPT Plus，为什么有人花$20有人花￥5？搞清官网直购、地区价、代充值和第三方渠道的区别。</div>
+        </div>
+      </div>
+      <div class="card-item">
+        <div class="card-icon" style="background:#27ae60">3</div>
+        <div class="card-info">
+          <div class="name"><a href="guides/api-transit-guide.html">API中转站怎么选？倍率、稳定性和风险一次讲清</a></div>
+          <div class="desc">中转站的0.2x倍率到底什么意思？哪些站跑路风险高？怎么判断一个中转站靠不靠谱。</div>
+        </div>
+      </div>
+      <div class="card-item">
+        <div class="card-icon" style="background:#f39c12">4</div>
+        <div class="card-info">
+          <div class="name"><a href="guides/deepseek-api-guide.html">DeepSeek API免费额度怎么用？注册到接入全流程</a></div>
+          <div class="desc">DeepSeek V4 Flash目前仍有免费额度，本文手把手教你注册、获取API Key、接入项目。</div>
+        </div>
+      </div>
+      <div class="card-item">
+        <div class="card-icon" style="background:#9b59b6">5</div>
+        <div class="card-info">
+          <div class="name"><a href="guides/vps-for-ai.html">用VPS跑AI推理：配置推荐和成本计算</a></div>
+          <div class="desc">想自己部署Ollama或vLLM？不同显存和CPU配置能跑什么模型，每小时成本多少，这里有详细对比。</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<!-- 侧边栏 -->
+<aside class="sidebar">
+
+<!-- 广告位：侧边栏 -->
+<div class="ad-slot ad-sidebar" id="ad-sidebar">
+  <span class="ad-slot-label">广告位</span>
+  <!-- 在此插入广告代码 -->
+</div>
+
+  <div class="side-block">
+    <div class="side-title">热门VPS</div>
+    <div class="side-body">
+      <ul class="side-list">
+        <li><a href="https://my.racknerd.com/aff.php?aff=20729&pid=695" target="_blank" rel="nofollow noopener"><span class="num">1</span>RackNerd $10.18/年 768M</a></li>
+        <li><a href="https://my.racknerd.com/aff.php?aff=20729&pid=358" target="_blank" rel="nofollow noopener"><span class="num">2</span>RackNerd $10.98/年 1G</a></li>
+        <li><a href="https://my.racknerd.com/aff.php?aff=20729&pid=952" target="_blank" rel="nofollow noopener"><span class="num">3</span>RackNerd $21.99/年 黑五</a></li>
+        <li><a href="https://my.racknerd.com/aff.php?aff=20729&pid=839" target="_blank" rel="nofollow noopener"><span class="num">4</span>RackNerd $16.88/年 1.5G</a></li>
+        <li><a href="https://my.racknerd.com/aff.php?aff=20729&pid=840" target="_blank" rel="nofollow noopener"><span class="num">5</span>RackNerd $23.88/年 2.5G</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="side-block">
+    <div class="side-title">AI订阅低价</div>
+    <div class="side-body">
+      <ul class="side-list">
+        <li><a href="ai-subscriptions.html#chatgpt-plus"><span class="num">1</span>ChatGPT Plus ¥5/月</a></li>
+        <li><a href="ai-subscriptions.html#grok"><span class="num">2</span>Super Grok ¥2.50/周</a></li>
+        <li><a href="ai-subscriptions.html#gemini-pro"><span class="num">3</span>Gemini Pro ¥2.05</a></li>
+        <li><a href="ai-subscriptions.html#cursor"><span class="num">4</span>Cursor ¥0.84</a></li>
+        <li><a href="ai-subscriptions.html#kiro"><span class="num">5</span>Kiro Free ¥0.30</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="side-block">
+    <div class="side-title">中转站最低倍率</div>
+    <div class="side-body">
+      <ul class="side-list">
+        <li><a href="ai-transit.html#claude"><span class="num">1</span>Claude 中转 0.20x</a></li>
+        <li><a href="ai-transit.html#openai"><span class="num">2</span>GPT 中转 0.30x</a></li>
+        <li><a href="ai-transit.html#gemini"><span class="num">3</span>Gemini 中转 0.30x</a></li>
+        <li><a href="ai-transit.html#free"><span class="num">4</span>Groq/Cerebras 全免费</a></li>
+        <li><a href="ai-transit.html#free"><span class="num">5</span>智谱GLM 7+免费模型</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="side-block">
+    <div class="side-title">友情链接</div>
+    <div class="side-body">
+      <ul class="side-list">
+        <li><a href="https://racknerd8.com/" target="_blank" rel="nofollow">RackNerd中文网</a></li>
+        <li><a href="https://priceai.cc/" target="_blank" rel="nofollow">PriceAI 比价雷达</a></li>
+        <li><a href="https://www.v2ex.com/" target="_blank" rel="nofollow">V2EX</a></li>
+        <li><a href="https://hostloc.com/" target="_blank" rel="nofollow">全球主机交流</a></li>
+      </ul>
+    </div>
+  </div>
+</aside>
+
+</div><!-- main-wrap -->
+
+
+<div class="section" style="background:linear-gradient(135deg,#2c3e50,#34495e);color:#fff;border-radius:4px;padding:25px;margin-top:15px">
+  <div style="text-align:center">
+    <h2 style="color:#fff;margin-bottom:8px;font-size:18px">订阅优惠提醒</h2>
+    <p style="font-size:13px;opacity:0.8;margin-bottom:15px">第一时间获取VPS特价、AI订阅折扣、免费资源上线通知。已有5000+订阅者。</p>
+    <form id="subscribeForm" style="display:flex;max-width:400px;margin:0 auto;gap:0">
+      <input type="email" id="emailInput" placeholder="your@email.com" required style="flex:1;padding:10px 15px;border:none;border-radius:3px 0 0 3px;font-size:13px">
+      <button type="submit" style="background:#e74c3c;color:#fff;border:none;padding:10px 20px;border-radius:0 3px 3px 0;cursor:pointer;font-size:13px;font-weight:bold">订阅</button>
+    </form>
+    <p id="subscribeMsg" style="font-size:12px;margin-top:8px;display:none"></p>
+    <p style="font-size:11px;opacity:0.6;margin-top:8px">我们尊重您的隐私，不会发送垃圾邮件。随时可退订。</p>
+  </div>
+</div>
+</div>
+
+
+
+<!-- 广告位：底部 -->
+<div class="ad-slot ad-footer" id="ad-footer">
+  <span class="ad-slot-label">广告位</span>
+  <!-- 在此插入广告代码 -->
+</div>
+
+
+<footer class="footer">
+  <div class="links">
+    <a href="index.html">首页</a>
+    <a href="vps-deals.html">VPS优惠</a>
+    <a href="free-resources.html">免费资源</a>
+    <a href="ai-subscriptions.html">AI订阅</a>
+    <a href="ai-api.html">API比价</a>
+    <a href="ai-transit.html">AI中转站</a>
+    <a href="domain.html">域名注册</a>
+    <a href="guides.html">使用指南</a>
+  </div>
+  <div style="max-width:800px;margin:0 auto;text-align:left;font-size:12px;line-height:1.8;color:#95a5a6">
+    <strong>数据说明：</strong>本站所有价格、配置、优惠信息均来自各厂商官网或第三方渠道公开报价，最后更新时间见各页面顶部。价格可能随时变化，请以购买时官网实际价格为准。<br>
+    <strong>推广说明：</strong>本站部分链接为推广链接（Affiliate Link），点击后您不会支付额外费用，但本站会获得少量佣金。推广链接与非推广链接的价格完全一致。<br>
+    <strong>免责条款：</strong>本站信息仅供参考，不构成购买建议。交易前请自行核实价格、库存和售后规则。本站不参与任何交易，不对交易结果负责。
+  </div>
+  <p style="margin-top:15px">© 2016-2026 AI-VPS比价网 · 运营10年</p>
+</footer>
+
+<script>
+</script>
+<script>
+function toggleDark(){
+  document.body.classList.toggle('dark');
+  var isDark = document.body.classList.contains('dark');
+  localStorage.setItem('darkMode', isDark ? '1' : '0');
+  document.getElementById('darkToggle').textContent = isDark ? '☀️' : '🌙';
+}
+(function(){
+  if(localStorage.getItem('darkMode')==='1'){
+    document.body.classList.add('dark');
+    document.getElementById('darkToggle').textContent='☀️';
+  }
+})();
+</script>
+<script>
+function toggleMenu(){
+  document.querySelector('.nav').classList.toggle('mobile-open');
+  document.querySelector('.nav-overlay').classList.toggle('active');
+}
+function closeMenu(){
+  document.querySelector('.nav').classList.remove('mobile-open');
+  document.querySelector('.nav-overlay').classList.remove('active');
+}
+</script>
+<script>
+function sortTable(table, colIndex, type) {
+  var tbody = table.querySelector('tbody');
+  var rows = Array.from(tbody.querySelectorAll('tr'));
+  var th = table.querySelectorAll('th')[colIndex];
+  var isAsc = th.classList.contains('sort-asc');
+  
+  table.querySelectorAll('th').forEach(function(h) {
+    h.classList.remove('sort-asc', 'sort-desc');
+  });
+  
+  rows.sort(function(a, b) {
+    var aVal = a.cells[colIndex].textContent.trim();
+    var bVal = b.cells[colIndex].textContent.trim();
+    
+    if (type === 'price') {
+      aVal = parseFloat(aVal.replace(/[^0-9.]/g, '')) || 0;
+      bVal = parseFloat(bVal.replace(/[^0-9.]/g, '')) || 0;
+    } else if (type === 'number') {
+      aVal = parseFloat(aVal.replace(/[^0-9.]/g, '')) || 0;
+      bVal = parseFloat(bVal.replace(/[^0-9.]/g, '')) || 0;
+    }
+    
+    if (aVal < bVal) return isAsc ? 1 : -1;
+    if (aVal > bVal) return isAsc ? -1 : 1;
+    return 0;
+  });
+  
+  th.classList.add(isAsc ? 'sort-desc' : 'sort-asc');
+  rows.forEach(function(row) { tbody.appendChild(row); });
+}
+
+document.querySelectorAll('.price-table').forEach(function(table) {
+  table.querySelectorAll('th').forEach(function(th, index) {
+    th.addEventListener('click', function() {
+      var text = th.textContent.toLowerCase();
+      var type = 'text';
+      if (text.includes('价') || text.includes('价格') || text.includes('price')) type = 'price';
+      else if (text.includes('数') || text.includes('库存') || text.includes('渠道')) type = 'number';
+      sortTable(table, index, type);
+    });
+  });
+});
+</script>
+
+<script type="application/ld+json">
+{"@context": "https://schema.org", "@type": "WebSite", "name": "AI-VPS比价网", "url": "https://ai-vps.cc.cd/index.html", "description": "聚合VPS主机优惠信息与AI订阅/API比价数据", "potentialAction": {"@type": "SearchAction", "target": "https://ai-vps.cc.cd/search?q={search_term_string}", "query-input": "required name=search_term_string"}}
+</script>
+
+<div id="back-to-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" style="position:fixed;bottom:20px;right:20px;width:40px;height:40px;background:#e74c3c;color:#fff;border-radius:50%;display:none;align-items:center;justify-content:center;cursor:pointer;z-index:999;font-size:18px;box-shadow:0 2px 8px rgba(0,0,0,.3)">↑</div>
+<script>
+window.addEventListener('scroll',function(){
+  document.getElementById('back-to-top').style.display = window.scrollY > 300 ? 'flex' : 'none';
+});
+</script>
+
+<script>
+document.querySelectorAll('.buy-btn').forEach(function(btn){
+  btn.addEventListener('click',function(){
+    if(typeof gtag==='function') gtag('event','affiliate_click',{event_category:'monetization',event_label:this.href});
+  });
+});
+</script>
+<script>
+document.getElementById('subscribeForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+  var email = document.getElementById('emailInput').value;
+  var msg = document.getElementById('subscribeMsg');
+  if (email && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    msg.textContent = '订阅成功！我们将发送确认邮件到 ' + email;
+    msg.style.color = '#27ae60';
+    msg.style.display = 'block';
+    document.getElementById('emailInput').value = '';
+    setTimeout(function() { msg.style.display = 'none'; }, 5000);
+  } else {
+    msg.textContent = '请输入有效的邮箱地址';
+    msg.style.color = '#e74c3c';
+    msg.style.display = 'block';
+  }
+});
+</script>
+<script src="search-index.js"></script>
+<script src="js/prefetch.js"></script>
 </body>
 </html>
