@@ -7,8 +7,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>AI算力硬件现货与回收 - 5090/H200整机 · DDR5内存 · 企业级SSD 深港京现货</title>
-<meta name="description" content="GPU算力硬件现货出货与高价回收：5090涡轮/风扇卡、8卡5090整机及期货，H200/H20/A100/A800/H800整机，DDR5 64G-5600等服务器内存，PM9A3等企业级SSD。附2026年8月行情参考、行业行话科普与验货指南。深圳/香港/北京现货仓，现款秒结。">
-<meta name="keywords" content="5090整机价格,H200现货,A100回收,H800整机,DDR5 64G 5600价格,PM9A3,企业级SSD回收,服务器内存回收,GPU算力服务器,DC25批次">
+<meta name="description" content="GPU算力硬件现货出货与高价回收：5090涡轮/风扇卡、8卡5090整机及期货，H200/H20/A100/A800/H800整机，DDR5 64G-5600等服务器内存，PM9A3等企业级SSD。附2026年8月行情参考、模型显存选型对照表、行业行话科普、验货指南、包装运输与质保说明。硬盘回收含消磁销毁出报告。深圳/香港/北京现货仓，现款秒结。">
+<meta name="keywords" content="5090整机价格,H200现货,A100回收,H800整机,H100整机价格,GPU服务器租赁价格,DDR5 64G 5600价格,PM9A3,企业级SSD回收,服务器内存回收,GPU算力服务器,DC25批次,大模型显存需求,70B推理显卡,DeepSeek R1部署配置,大模型微调显存,服务器回收流程,硬盘消磁销毁,二手服务器质保">
 <link rel="canonical" href="gpu-server-trade.html">
 <link rel="stylesheet" href="css/style.css">
 <meta name="theme-color" content="#e74c3c">
@@ -44,10 +44,15 @@
   "@context": "https://schema.org",
   "@type": "FAQPage",
   "mainEntity": [
-    {"@type":"Question","name":"8卡5090服务器现在什么价？","acceptedAnswer":{"@type":"Answer","text":"按2026年8月行情，单张5090涡轮卡渠道价约2.9万-3.5万元，全新8卡整机组齐参考35万-40万元（CPU/内存/SSD配置不同差异较大）。我们支持期货锁价锁量，交期以确认为准。"}},
+    {"@type":"Question","name":"8卡5090服务器现在什么价？","acceptedAnswer":{"@type":"Answer","text":"单张5090涡轮卡渠道价约2.9万-3.5万元，八卡整机采购价半月内从47万涨至55万左右（中介渠道成交见过44.5万的）。自用可入，放租回本要三年半以上需谨慎。支持期货锁价锁量，交期以确认为准。"}},
+    {"@type":"Question","name":"H100整机多少钱？租一个月多少？","acceptedAnswer":{"@type":"Answer","text":"全新8卡H100整机采购报价约300万元/台（数月前不足200万）。月租主流7.8万-8.5万元，西部闭口长协成交7.5万-7.6万，零散单台可谈到7.6万左右。运营商对承租方风控趋严，租前备齐资质材料。"}},
+    {"@type":"Question","name":"本地部署DeepSeek R1满血版671B需要什么配置？","acceptedAnswer":{"@type":"Answer","text":"满血版是MoE架构，671B权重需全部常驻显存：FP8精度要700G以上显存，标准配置为8×H200整机（1128G显存，350万起）；INT4量化可压到350-400G。多数业务场景用14B/32B蒸馏版即可，32B的INT4版单张4090-48G可跑。"}},
     {"@type":"Question","name":"DDR5 64G-5600 现在多少钱？DC25+是什么意思？","acceptedAnswer":{"@type":"Answer","text":"64G DDR5 RDIMM 合约价2026年8月约1590美元且仍在逐季上涨，国内现货人民币报价大致1.2万-1.6万元区间波动。DC25+指生产批次码为2025年及以后的料，越新体质和保修剩余越好，也是当前回收重点。"}},
     {"@type":"Question","name":"WS 结算是什么意思？香港仓交易有什么区别？","acceptedAnswer":{"@type":"Answer","text":"WS即未税美金离岸价，在香港仓交割，适合有美金结算需求的客户；内地仓则支持含税/未税人民币两种模式。现货都是秒款现结，不做账期。"}},
-    {"@type":"Question","name":"二手显卡和企业级硬盘怎么验货？","acceptedAnswer":{"@type":"Answer","text":"显卡看金手指磨损、PCB有无维修痕迹、上机跑FurMark烤机看温度和功耗墙；企业级SSD用smartctl查通电时长和写入量；内存条核对料号批次码与标签是否一致。深圳/北京仓支持上门验货，香港仓可安排第三方验货。"}}
+    {"@type":"Question","name":"二手显卡和企业级硬盘怎么验货？","acceptedAnswer":{"@type":"Answer","text":"显卡看金手指磨损、PCB有无维修痕迹、上机跑FurMark烤机看温度和功耗墙；企业级SSD用smartctl查通电时长和写入量；内存条核对料号批次码与标签是否一致。深圳/北京仓支持上门验货，香港仓可安排第三方验货。"}},
+    {"@type":"Question","name":"个人能买吗，还是只做企业单？","acceptedAnswer":{"@type":"Answer","text":"都接。个人买一两张卡走深圳仓现结当天拿货；企业采购整机与批量内存硬盘走对公合同开发票。零售非主业但老客户介绍的单子照接。"}},
+    {"@type":"Question","name":"期货订单的定金和违约条款怎么定？","acceptedAnswer":{"@type":"Answer","text":"常规定金两到三成锁价锁量，尾款到港提货前结清。合同写明双向违约：供应商逾期交付按日赔付，客户弃单定金不退。签约前把交期宽限天数和赔付上限谈清楚。"}},
+    {"@type":"Question","name":"跟电商平台比，找渠道货源图什么？","acceptedAnswer":{"@type":"Answer","text":"三样：料号透明（批次码与通电数据提前给）、量价阶梯（批量有阶梯价平台做不到）、回收闭环（设备退役后按行情回收，资产有出口）。小额零售电商更方便，量大渠道优势明显。"}}
   ]
 }
 </script>
@@ -107,18 +112,19 @@
 <div class="main-wrap">
 <div class="main-content">
 
-<h2 style="color:#2c3e50;border-bottom:2px solid #e74c3c;padding-bottom:8px;margin-bottom:15px">行情速览（2026年8月参考价）</h2>
+<h2 id="market" style="color:#2c3e50;border-bottom:2px solid #e74c3c;padding-bottom:8px;margin-bottom:15px">行情速览（2026年8月参考价）</h2>
 
 <div style="background:#fff;padding:15px 20px;border-radius:6px;margin-bottom:20px;box-shadow:0 2px 8px rgba(0,0,0,.05)">
 <table class="price-table">
   <thead><tr><th>品类</th><th>规格</th><th>参考行情</th><th>趋势</th></tr></thead>
   <tbody>
     <tr><td rowspan="2">RTX 5090</td><td>涡轮/风扇卡 32G 单卡</td><td class="price">¥29,000 - 35,300</td><td style="color:#e74c3c;font-weight:600">↑ 一周涨约4000元</td></tr>
-    <tr><td>8×5090 全新整机</td><td class="price">¥350,000 - 400,000</td><td style="color:#e74c3c">↑ 随卡上涨</td></tr>
+    <tr><td>8×5090 全新整机</td><td class="price">¥445,000 - 550,000</td><td style="color:#e74c3c;font-weight:600">↑ 半月涨17%</td></tr>
     <tr><td>A800 80G</td><td>原厂含税单卡</td><td class="price">≈¥106,000</td><td>—</td></tr>
     <tr><td>H800 NVL 94G</td><td>PCIE 含税</td><td class="price">≈¥188,000</td><td>—</td></tr>
     <tr><td>H100 80G</td><td>PCIE 含税</td><td class="price">≈¥256,000</td><td style="color:#e74c3c">↑ 供应收紧</td></tr>
-    <tr><td>A100 80G 八卡整机</td><td>含质保购置价</td><td class="price">≈¥1,170,000</td><td style="color:#e74c3c;font-weight:600">↑ 两月涨近七成</td></tr>
+    <tr><td>H100 80G 八卡整机</td><td>全新采购价</td><td class="price">≈¥3,000,000</td><td style="color:#e74c3c;font-weight:600">↑ 数月前不足200万</td></tr>
+    <tr><td>A100 80G 八卡整机</td><td>含质保购置价</td><td class="price">≈¥1,170,000</td><td style="color:#f39c12">↑ 高位盘整，租金现回落信号</td></tr>
     <tr><td rowspan="2">H200 八卡整机</td><td>全新标配现货</td><td class="price">≈¥3,500,000</td><td style="color:#e74c3c;font-weight:600">↑ 月租报价至14万/台</td></tr>
     <tr><td>品牌整机(超微/戴尔等)</td><td class="price">¥2,100,000 - 2,700,000</td><td style="color:#f39c12">期货8-12周</td></tr>
     <tr><td rowspan="3">DDR5 RDIMM<br>服务器内存</td><td>32G（合约价）</td><td class="price">$900（涨23%）</td><td style="color:#e74c3c;font-weight:600">↑ Q3预计再涨~20%</td></tr>
@@ -128,15 +134,15 @@
     <tr><td>PM9A3 1.92T 批发</td><td class="price">≈¥4,400 起</td><td style="color:#e74c3c">↑ 同比+800元</td></tr>
   </tbody>
 </table>
-<p style="font-size:12px;color:#999;margin-top:10px">数据来源：中关村在线商家报价、CFM闪存市场月度报告（2026-08）、DiscTech/iPCstore 渠道价。以上均为参考价，实际以当日确认为准。</p>
+<p style="font-size:12px;color:#999;margin-top:10px">数据来源：上海有色网 SMM 算力日报（8月18日等）、中关村在线商家报价、CFM闪存市场月度报告、DiscTech/iPCstore 渠道价。以上均为参考价，实际以当日确认为准。</p>
 </div>
 
 <div style="background:#fff3e0;border-left:4px solid #f39c12;border-radius:0 6px 6px 0;padding:13px 18px;margin-bottom:25px;font-size:13px;color:#555;line-height:1.9">
 <p style="margin:0 0 8px"><strong>当前市场一句话：</strong>这轮是 CPU、内存、SSD 先涨，7 月底轮到显卡全面跟涨——5090 单周一晚就是四千块，原厂颗粒被 AI 服务器产能挤占，DDR5 供应短期看不到松动的迹象。<strong>要买趁早锁价，要卖趁高出手</strong>，两边我们都接。</p>
-<p style="margin:0">高端整机更夸张（上海有色网 SMM 8 月数据）：A100-80G 八卡购置价两个月从约 70 万涨到 117 万；H200 月租从年初的 6 万一路报到现在 13-14 万/台，现货全新标配 350 万起；B300 整机更是从 450 万被报到 1300 万往上。<strong>越是这种时候，越要找一手货源、签清楚违约条款</strong>——现在市面上假货源和层层居间比货还多。</p>
+<p style="margin:0">高端整机更夸张（上海有色网 SMM 数据）：H100 八卡整机采购价从数月前的不足 200 万被报到 300 万；5090 整机采购价半月涨了 17%；H200 月租从年初的 6 万一路报到现在 13-14 万/台，现货全新标配 350 万起；B300 整机更是从 450 万被报到 1300 万往上。但也有分化信号：A100 长三角租金均价开始回落 2%，低端卡在企稳，910B2 清货都费劲——<strong>这轮行情是结构性的，高端紧缺、中低端松动</strong>。越是这种时候，越要找一手货源、签清楚违约条款——现在市面上假货源和层层居间比货还多。</p>
 </div>
 
-<h2 style="color:#2c3e50;border-bottom:2px solid #e74c3c;padding-bottom:8px;margin-bottom:15px">一、现货出货</h2>
+<h2 style="color:#2c3e50;border-bottom:2px solid #e74c3c;padding-bottom:8px;margin-bottom:15px" id="spot">一、现货出货</h2>
 
 <div class="section">
   <div class="section-header"><h2><span class="icon"></span>1. GPU 显卡 &amp; AI 整机</h2></div>
@@ -217,7 +223,7 @@
   </div>
 </div>
 
-<h2 style="color:#2c3e50;border-bottom:2px solid #e74c3c;padding-bottom:8px;margin:10px 0 15px">二、高价回收</h2>
+<h2 style="color:#2c3e50;border-bottom:2px solid #e74c3c;padding-bottom:8px;margin:10px 0 15px" id="recycle">二、高价回收</h2>
 
 <div class="section">
   <div class="section-header"><h2><span class="icon"></span>1. 显卡类回收</h2></div>
@@ -225,6 +231,7 @@
     <ul style="line-height:2;font-size:14px;color:#555">
       <li>5090 风扇卡 / 涡轮卡、Pro6000 服务器版 / Pro6000D、P6000 机头</li>
       <li>4090 / A100 / A800 / H100 / H200 整机 &amp; 模组——机房退役、项目下线的货直接报配置清单</li>
+      <li>矿卡、维修卡也分等级收，但会如实按成色砍价——<strong>提前说明维修史比验货时被查出来强</strong>，诚实报价反而拿得多</li>
     </ul>
   </div>
 </div>
@@ -241,16 +248,55 @@
 </div>
 
 <div class="section">
-  <div class="section-header"><h2><span class="icon"></span>3. 硬盘回收</h2></div>
+  <div class="section-header"><h2><span class="icon"></span>3. 硬盘回收（含数据销毁）</h2></div>
   <div class="section-body">
     <ul style="line-height:2;font-size:14px;color:#555">
       <li>回收 PM9A3-960G 等企业级固态</li>
       <li>求购西数企业拆机盘 20-24T 大批量货源</li>
+      <li><strong>数据安全：</strong>涉密硬盘可做消磁 + 物理销毁，出<strong>销毁报告</strong>——金融、政务客户退网盘子的硬要求，报告归档能过审计</li>
     </ul>
   </div>
 </div>
 
-<h2 style="color:#2c3e50;border-bottom:2px solid #e74c3c;padding-bottom:8px;margin:10px 0 15px">三、高端整机行情与选型避坑</h2>
+<div class="section">
+  <div class="section-header"><h2><span class="icon"></span>4. CPU、整机、网卡也在收</h2></div>
+  <div class="section-body">
+    <ul style="line-height:2;font-size:14px;color:#555">
+      <li><strong>CPU：</strong>至强金牌/银牌、AMD EPYC 全系，量大优先；拆机针脚完好的比想象中保值</li>
+      <li><strong>整机/准系统：</strong>退役机架服务器按吨位和配置估价，GPU 整机看卡型单谈</li>
+      <li><strong>网卡/交换机：</strong>Mellanox CX 系列、IB 交换机——集群解散时整套出的价格最好</li>
+    </ul>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-header"><h2><span class="icon"></span>5. 回收怎么算价（四个变量）</h2></div>
+  <div class="section-body">
+    <table class="price-table">
+      <thead><tr><th>变量</th><th>影响有多大</th></tr></thead>
+      <tbody>
+        <tr><td>批次年份</td><td>DDR5 看 DC 码，25+ 比 23+ 单条贵出一截；显卡看出厂日期判断保修剩余</td></tr>
+        <tr><td>数量与整齐度</td><td>同型号同批次凑整批（如 20 条起、整箱原包）溢价明显；散条混装按零售价折算</td></tr>
+        <tr><td>外观与包装</td><td>原箱原封 &gt; 拆新带静电袋 &gt; 裸条；防静电袋别扔，值钱</td></tr>
+        <tr><td>行情节奏</td><td>涨价周期里今天报的价明天可能就作废——出货前先问当日价，成交快才拿得住高点</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-header"><h2><span class="icon"></span>6. 回收流程（四步走完）</h2></div>
+  <div class="section-body">
+    <ol style="line-height:2;font-size:14px;color:#555">
+      <li><strong>报价：</strong>邮件/微信发清单（型号+数量+批次+成色描述），当天回参考价区间</li>
+      <li><strong>验货：</strong>深圳/北京上门收货现场验，外地走顺丰保价到仓，验货视频全程可录</li>
+      <li><strong>复检定价：</strong>以实测数据为准（通电时长、坏道扫描、烤机），与描述不符会重新报价，先沟通再动手</li>
+      <li><strong>现款结算：</strong>对公转账/微信/支付宝均可，验完当场打款，不打欠条不压账期</li>
+    </ol>
+  </div>
+</div>
+
+<h2 style="color:#2c3e50;border-bottom:2px solid #e74c3c;padding-bottom:8px;margin:10px 0 15px" id="guide">三、高端整机行情与选型避坑</h2>
 
 <div style="background:#fff;padding:15px 20px;border-radius:6px;margin-bottom:20px;box-shadow:0 2px 8px rgba(0,0,0,.05)">
 <p style="font-size:14px;color:#555;line-height:1.9;margin-bottom:12px">H200 是目前能合规对华供应的最高端训练卡型之一，现货流通量稀少，"每有释放即被迅速消化"。给一张品牌整机参考表（8×H200 141G SXM、双路铂金、2T 内存基础配置）：</p>
@@ -293,21 +339,40 @@
 <p style="font-size:13px;color:#666;background:#f8f9fa;border-radius:4px;padding:10px 14px;margin-top:8px">顺带两个硬核数据：Akamai 实测 RTX PRO 6000 Blackwell 推理吞吐最高到 H100 的 1.63 倍（FP4 精度），"专业卡打不过数据中心卡"的老观念可以放放了；另外 8 卡机器满载超 3000W，<strong>4 卡以下风冷勉强，8 卡基本必上液冷</strong>——配机柜前先想清楚这个。</p>
 </div>
 
-<h2 style="color:#2c3e50;border-bottom:2px solid #e74c3c;padding-bottom:8px;margin-bottom:15px">四、自购还是租？拿真实数字算笔账</h2>
+<h3 style="font-size:16px;color:#2c3e50;border-bottom:2px solid #f39c12;padding-bottom:6px;margin:25px 0 12px">再加映：手上的模型到底要多大的卡？一张对照表</h3>
+
+<div style="background:#fff;padding:15px 20px;border-radius:6px;margin-bottom:20px;box-shadow:0 2px 8px rgba(0,0,0,.05)">
+<p style="font-size:13px;color:#555;line-height:1.9;margin-bottom:10px">天天有人问"我跑个 XX 模型要什么卡"。粗算法子：<strong>FP16 推理显存 ≈ 参数量（B）× 2，再多留两三成给 KV cache 和运行开销</strong>。量化能省一半（INT8）甚至四分之三（INT4），但精度有损，生产环境慎用 INT4。对照着看：</p>
+<table class="price-table">
+  <thead><tr><th>模型规模</th><th>FP16推理显存(约)</th><th>省钱跑法</th><th>生产环境推荐</th></tr></thead>
+  <tbody>
+    <tr><td><strong>7B-9B</strong></td><td>16G 左右</td><td>T4 / 4090 量化随便跑</td><td>5090 单卡，并发和吞吐都宽裕</td></tr>
+    <tr><td><strong>14B</strong></td><td>30G 上下的样子</td><td>单张 4090-48G 刚好</td><td>Pro6000D / 双 4090-48G</td></tr>
+    <tr><td><strong>32B</strong></td><td>70G 上下</td><td>双 4090-48G 张量并行</td><td>Pro6000D 单卡（84G 版本贴线，96G 稳）</td></tr>
+    <tr><td><strong>70B</strong></td><td>150G 往上</td><td>4×5090；INT4 一张 80G 卡能塞但别用于生产</td><td>Pro6000D 原生 FP8 单卡可跑；多并发就 4 卡起</td></tr>
+    <tr><td><strong>百亿级以上 / 671B 满血</strong></td><td>300G 起，上不封顶</td><td>没有省钱的玩法，只有相对便宜的</td><td>8×H200 / 8×H20-141G 整机起步</td></tr>
+    <tr><td><strong>MoE 大杯（如满血 R1 671B）</strong></td><td>别被"活跃参数37B"骗了——全部权重都得驻留显存，FP8 就要 700G+</td><td>INT4 压到 350-400G，8×H100 勉强塞下</td><td>8×H200（1128G 显存）是标准答案</td></tr>
+  </tbody>
+</table>
+<p style="font-size:13px;color:#666;background:#f8f9fa;border-radius:4px;padding:10px 14px;margin-top:10px">三个实战提醒：<strong>一</strong>，显存算得刚刚好的配置一定会在高峰期 OOM，留余量不是浪费；<strong>二</strong>，长上下文场景（32K 以上）KV cache 会吃掉大量显存——70B 模型 10 个并发跑 32K 上下文，光 KV cache 就要 800G，比模型本身还大，高并发务必按"参数量×精度字节×上下文×并发数"细算；<strong>三</strong>，训练比推理贵得多——全参微调大约每 10 亿参数要 16G 显存（7B 就得 100G+），多数团队实际需要的是 LoRA（7B 约 30-40G）甚至 QLoRA（7B 一张 24G 卡就能微调，70B 也只要一张 80G 卡）。拿不准把模型名和并发数发来，帮你对着现货配。</p>
+</div>
+
+<h2 style="color:#2c3e50;border-bottom:2px solid #e74c3c;padding-bottom:8px;margin-bottom:15px" id="buy-vs-rent">四、自购还是租？拿真实数字算笔账</h2>
 
 <div style="background:#fff;padding:15px 20px;border-radius:6px;margin-bottom:20px;box-shadow:0 2px 8px rgba(0,0,0,.05)">
 <table class="price-table">
   <thead><tr><th>档位</th><th>自购投入(参考)</th><th>市场月租(参考)</th><th>粗算回本周期</th><tr></thead>
   <tbody>
-    <tr><td><strong>8×H200</strong></td><td>350万起（现货全新）</td><td>11.5万-14万/台·月</td><td>满租状态下约两年半；空置风险高，建议长协锁租</td></tr>
-    <tr><td><strong>8×A100 80G</strong></td><td>≈117万（含质保）</td><td>≈3.8万/台·月</td><td>满租约两年半出头；需求旺盛出租率高</td></tr>
-    <tr><td><strong>8×5090</strong></td><td>35万-40万</td><td>1.15万-1.8万/台·月</td><td>满租约两年；推理/渲染场景性价比之王</td></tr>
+    <tr><td><strong>8×H200</strong></td><td>350万起（现货全新）</td><td>13万-14万/台·月</td><td>满租状态下约两年；空置风险高，建议长协锁租</td></tr>
+    <tr><td><strong>8×H100</strong></td><td>300万上下（全新）</td><td>7.5万-8.5万/台·月，零散单台可谈低</td><td>满租约三年；西部长协成交活跃，风控条款趋严</td></tr>
+    <tr><td><strong>8×A100 80G</strong></td><td>≈117万（含质保）</td><td>≈3.6万/台·月（现回落信号）</td><td>满租约两年半出头；老卡需求仍在但别追高</td></tr>
+    <tr><td><strong>8×5090</strong></td><td>44.5万-55万</td><td>1.15万-1.35万/台·月（PCIE4.0半年起签）</td><td>按55万进价月租1.3万算要三年半——<strong>涨价追高的账要算清楚</strong></td></tr>
   </tbody>
 </table>
 <p style="font-size:13px;color:#666;background:#f8f9fa;border-radius:4px;padding:10px 14px;margin-top:10px">另外别忘了电费：一台 8 卡机器满负荷 3500W 起步，一天 84 度电，工业电价下一年光电费就 2.5 万上下，托管机柜费另算。<strong>结论：长期满载自购划算，波动需求先租后买</strong>——我们两头都能接，采购和租赁资源都有。</p>
 </div>
 
-<h2 style="color:#2c3e50;border-bottom:2px solid #e74c3c;padding-bottom:8px;margin:10px 0 15px">五、行话速查（买前必读）</h2>
+<h2 style="color:#2c3e50;border-bottom:2px solid #e74c3c;padding-bottom:8px;margin:10px 0 15px" id="jargon">五、行话速查（买前必读）</h2>
 
 <div style="background:#fff;padding:15px 20px;border-radius:6px;margin-bottom:20px;box-shadow:0 2px 8px rgba(0,0,0,.05)">
 <table class="price-table">
@@ -327,7 +392,7 @@
 </table>
 </div>
 
-<h2 style="color:#2c3e50;border-bottom:2px solid #e74c3c;padding-bottom:8px;margin-bottom:15px">六、验货要点</h2>
+<h2 style="color:#2c3e50;border-bottom:2px solid #e74c3c;padding-bottom:8px;margin-bottom:15px" id="inspection">六、验货要点</h2>
 
 <div style="background:#fff;padding:15px 20px;border-radius:6px;margin-bottom:20px;box-shadow:0 2px 8px rgba(0,0,0,.05)">
 <ol style="line-height:2;font-size:14px;color:#555">
@@ -340,7 +405,7 @@
 <p style="font-size:13px;color:#666;background:#f8f9fa;border-radius:4px;padding:10px 14px;margin-top:10px">嫌麻烦？深圳/北京仓支持上门验货，香港仓可安排第三方机构代验。我们欢迎验货——敢让验的货才值得买。</p>
 </div>
 
-<h2 style="color:#2c3e50;border-bottom:2px solid #e74c3c;padding-bottom:8px;margin-bottom:15px">七、交货与交易方式</h2>
+<h2 style="color:#2c3e50;border-bottom:2px solid #e74c3c;padding-bottom:8px;margin-bottom:15px" id="delivery">七、交货与交易方式</h2>
 
 <div style="background:#fff;padding:15px 20px;border-radius:6px;margin-bottom:20px;box-shadow:0 2px 8px rgba(0,0,0,.05)">
 <ol style="line-height:2.1;font-size:14px;color:#555">
@@ -350,6 +415,22 @@
 </ol>
 </div>
 
+<h2 style="color:#2c3e50;border-bottom:2px solid #e74c3c;padding-bottom:8px;margin-bottom:15px" id="warranty">八、包装、运输与质保</h2>
+
+<div style="background:#fff;padding:15px 20px;border-radius:6px;margin-bottom:20px;box-shadow:0 2px 8px rgba(0,0,0,.05)">
+<table class="price-table">
+  <thead><tr><th>环节</th><th>怎么做</th></tr></thead>
+  <tbody>
+    <tr><td><strong>包装</strong></td><td>显卡单卡防静电袋+独立盒装；内存条原托盘或防静电袋分装；硬盘防静电袋+气泡柱，企业盘尽量原箱；整机木架+珍珠棉固定，GPU 卡槽独立加固</td></tr>
+    <tr><td><strong>物流</strong></td><td>高值件顺丰足额保价（保价额=成交价），大件走德邦/货运专线；深圳同城可送货上门；香港仓支持自提或安排跨境物流</td></tr>
+    <tr><td><strong>运费</strong></td><td>采购默认买家承担（可代发并垫付）；回收件满一定量我们上门自提、运费我方出</td></tr>
+    <tr><td><strong>质保口径</strong></td><td>拆新/二手件按品类店保（常见 90 天起，整机可谈更长）；全新盒装走原厂保修；<strong>所有质保以出货单标注为准</strong>，口头承诺不算数</td></tr>
+    <tr><td><strong>售后时效</strong></td><td>到货先别撕标签，48 小时内验收；有问题拍照留证联系对接人，确属货不对板的运费我方担、退换全包</td></tr>
+  </tbody>
+</table>
+<p style="font-size:13px;color:#666;background:#f8f9fa;border-radius:4px;padding:10px 14px;margin-top:10px">一句实在话：这行没有"七天无理由"，靠的是出货单写清楚 + 双方都留证据。收货时全程录开箱视频的老客户，到现在没一个吃过亏。</p>
+</div>
+
 <div style="background:#fff8e1;border:1px solid #ffe082;border-radius:6px;padding:15px 20px;margin-bottom:20px">
 <p style="font-size:14px;line-height:1.8;color:#555;margin-bottom:6px">有采购需求或者手上有货要出，直接发邮件说明型号和数量：</p>
 <p style="font-size:15px;font-weight:600">业务对接邮箱：<span style="color:#e74c3c">admin<!--x-->@amer.de5.net</span>&nbsp;&nbsp;<a href="mailto:admin@amer.de5.net" style="color:#e74c3c">邮件联系 &raquo;</a></p>
@@ -357,13 +438,28 @@
 </div>
 
 <!-- 常见问题 -->
-<div class="section">
+<div class="section" id="faq">
   <div class="section-header"><h2><span class="icon"></span>常见问题</h2></div>
   <div class="section-body">
 
     <div style="background:#fff;padding:15px 20px;border-radius:6px;margin-bottom:12px;box-shadow:0 2px 8px rgba(0,0,0,.05)">
       <h3 style="font-size:14px;color:#2c3e50;margin:0 0 8px">Q：现在这个行情，该买还是该等？</h3>
       <p style="color:#555;font-size:13px;line-height:1.8;margin:0">说实话没人能精准抄底。但几个事实摆着：原厂 DDR5 产能优先供 CSP 大客户、长协签完散单更紧张；CFM 预计三季度合约还要涨 20% 左右；显卡这边 5090 已经连续几周上行。<strong>刚需就别赌回调，用期货锁价把风险锁住</strong>；非刚需可以分批建仓。</p>
+    </div>
+
+    <div style="background:#fff;padding:15px 20px;border-radius:6px;margin-bottom:12px;box-shadow:0 2px 8px rgba(0,0,0,.05)">
+      <h3 style="font-size:14px;color:#2c3e50;margin:0 0 8px">Q：8×5090 整机现在到底什么价？还能入手吗？</h3>
+      <p style="color:#555;font-size:13px;line-height:1.8;margin:0">行情跑得快：单张涡轮卡渠道价约2.9万-3.5万元，整机采购价半个月内从47万被报到55万（中介渠道成交见过44.5万的）。<strong>能不能入看用途</strong>：自己用、按当前租金刚账能接受就买；指望买了放租回本的，按55万进价、月租1.3万算要三年半才回本，追高前想清楚。我们支持期货锁价锁量，交期以确认为准。</p>
+    </div>
+
+    <div style="background:#fff;padding:15px 20px;border-radius:6px;margin-bottom:12px;box-shadow:0 2px 8px rgba(0,0,0,.05)">
+      <h3 style="font-size:14px;color:#2c3e50;margin:0 0 8px">Q：H100 整机什么价？租一台一个月要多少？</h3>
+      <p style="color:#555;font-size:13px;line-height:1.8;margin:0">采购端：全新八卡整机报价已到300万/台上下，数月前还不足200万，7月初华硕全新机三年质保报过274万。租赁端：主流月租7.8万-8.5万，西部闭口长协成交在7.5万-7.6万；零散单台流通性差，见过7.6万一年起签的让利盘。<strong>注意运营商对承租方风控越收越紧</strong>，部分集群已被锁定，租之前先把资质材料备齐。</p>
+    </div>
+
+    <div style="background:#fff;padding:15px 20px;border-radius:6px;margin-bottom:12px;box-shadow:0 2px 8px rgba(0,0,0,.05)">
+      <h3 style="font-size:14px;color:#2c3e50;margin:0 0 8px">Q：想本地部署 DeepSeek R1 满血版（671B），得备什么家当？</h3>
+      <p style="color:#555;font-size:13px;line-height:1.8;margin:0">先泼冷水：满血版是 MoE 架构，虽然每个 token 只激活 37B 参数，但<strong>全部 671B 权重都得常驻显存</strong>——FP8 精度就要 700G 以上，标准答案是 8×H200（1128G 显存）整机，350 万起。INT4 量化能压到 350-400G，但精度有损。<strong>务实路线</strong>：绝大多数业务场景用 R1 蒸馏版（14B/32B）就够了，32B 的 INT4 版一张 4090-48G 就能跑，70B 蒸馏版 INT4 双 4090 可跑——先拿蒸馏版测业务，真不够再上满血，别反过来。</p>
     </div>
 
     <div style="background:#fff;padding:15px 20px;border-radius:6px;margin-bottom:12px;box-shadow:0 2px 8px rgba(0,0,0,.05)">
@@ -389,6 +485,21 @@
     <div style="background:#fff;padding:15px 20px;border-radius:6px;margin-bottom:12px;box-shadow:0 2px 8px rgba(0,0,0,.05)">
       <h3 style="font-size:14px;color:#2c3e50;margin:0 0 8px">Q：H200 为什么这么贵，还会涨吗？</h3>
       <p style="color:#555;font-size:13px;line-height:1.8;margin:0">三层原因叠加：存量稀缺（流通量少，释放即被消化）、推理需求真实增长、灰色链路把运输资金风险计入了价格。有情景模型估算合理中枢在 250 万左右，但那是建立在 B300 放开供应的假设上。<strong>与其猜顶，不如盯三个信号：新卡交付节奏、月租有没有回落、期货现货价差是否收窄。</strong>这三个一起变的时候，行情才真的转向。</p>
+    </div>
+
+    <div style="background:#fff;padding:15px 20px;border-radius:6px;margin-bottom:12px;box-shadow:0 2px 8px rgba(0,0,0,.05)">
+      <h3 style="font-size:14px;color:#2c3e50;margin:0 0 8px">Q：个人能买吗，还是只做企业单？</h3>
+      <p style="color:#555;font-size:13px;line-height:1.8;margin:0">都接，玩法不一样。个人买一两张卡走深圳仓现结最顺，当天拿货；企业采购整机、批量内存硬盘走对公合同+发票。实话实说：单张零售不是我们的主业，图的是量大价稳，但老客户带朋友来买卡从来不拒。</p>
+    </div>
+
+    <div style="background:#fff;padding:15px 20px;border-radius:6px;margin-bottom:12px;box-shadow:0 2px 8px rgba(0,0,0,.05)">
+      <h3 style="font-size:14px;color:#2c3e50;margin:0 0 8px">Q：期货订单的定金和违约条款怎么定？</h3>
+      <p style="color:#555;font-size:13px;line-height:1.8;margin:0">常规做法：定金两到三成锁价锁量，尾款到港提货前结清。合同里写清双向违约——我们逾期交付按日赔付，客户弃单定金不退，谁毁约谁担责，没有霸王条款。<strong>签之前把交期宽限天数和赔付上限谈死</strong>，这轮涨价里因为供应商毁约闹扯皮的案例不少。</p>
+    </div>
+
+    <div style="background:#fff;padding:15px 20px;border-radius:6px;margin-bottom:12px;box-shadow:0 2px 8px rgba(0,0,0,.05)">
+      <h3 style="font-size:14px;color:#2c3e50;margin:0 0 8px">Q：跟电商平台比，找渠道货源图什么？</h3>
+      <p style="color:#555;font-size:13px;line-height:1.8;margin:0">三样东西。一是<strong>料号透明</strong>——批次码、通电数据提前给，电商页面不会告诉你这些；二是<strong>量价阶梯</strong>——二十条内存和两百条内存是两个价，平台做不到；三是<strong>回收闭环</strong>——今天卖你的设备两年后退役我们还按行情收回去，资产有出口。小额零售确实电商更方便，量上来了渠道的优势就出来了。</p>
     </div>
 
   </div>
@@ -469,6 +580,14 @@
     <div style="font-weight:600;color:#8e44ad;margin-bottom:5px"><a href="racknerd-review.html" style="color:#8e44ad;text-decoration:none">RackNerd评测</a></div>
     <div style="font-size:12px;color:#666">低预算入门首选</div>
   </div>
+  <div style="background:#fff;padding:12px;border-radius:6px;box-shadow:0 2px 8px rgba(0,0,0,.05);text-align:center">
+    <div style="font-weight:600;color:#16a085;margin-bottom:5px"><a href="guides/vps-for-ai.html" style="color:#16a085;text-decoration:none">VPS跑AI指南</a></div>
+    <div style="font-size:12px;color:#666">预算不够先租算力</div>
+  </div>
+  <div style="background:#fff;padding:12px;border-radius:6px;box-shadow:0 2px 8px rgba(0,0,0,.05);text-align:center">
+    <div style="font-weight:600;color:#d35400;margin-bottom:5px"><a href="ai-api.html" style="color:#d35400;text-decoration:none">API比价</a></div>
+    <div style="font-size:12px;color:#666">不买卡也能用上大模型</div>
+  </div>
 </div>
 
 </div>
@@ -476,11 +595,18 @@
 <div class="sidebar">
 <div style="background:#f8f9fa;border:1px solid #e0e0e0;border-radius:6px;padding:15px;margin-bottom:15px">
 <h3 style="color:#2c3e50;font-size:16px;margin-bottom:10px">本页导航</h3>
-<ul style="line-height:2;font-size:14px">
+<ul style="line-height:1.9;font-size:13px">
+  <li><a href="#market">行情速览</a></li>
+  <li><a href="#spot">现货出货清单</a></li>
+  <li><a href="#recycle">高价回收</a></li>
+  <li><a href="#guide">整机行情与选型避坑</a></li>
+  <li><a href="#buy-vs-rent">自购还是租</a></li>
+  <li><a href="#jargon">行话速查</a></li>
+  <li><a href="#inspection">验货要点</a></li>
+  <li><a href="#delivery">交货与交易方式</a></li>
+  <li><a href="#warranty">包装运输与质保</a></li>
+  <li><a href="#faq">常见问题</a></li>
   <li><a href="#reviews">客户反馈</a></li>
-  <li><a href="vps-deals.html">VPS优惠汇总</a></li>
-  <li><a href="ai-transit.html">AI中转站评测</a></li>
-  <li><a href="hkvps.html">香港VPS推荐</a></li>
 </ul>
 </div>
 <div style="background:#e8f5e9;border:1px solid #a5d6a7;border-radius:6px;padding:15px;margin-bottom:15px">
