@@ -9,16 +9,16 @@
 <title>API中转站怎么选？倍率、稳定性和风险一次讲清</title>
 <meta name="description" content="API中转站选购指南。搞清倍率是什么意思、怎么判断中转站靠不靠谱、有哪些常见风险、怎么选到稳定的中转站。">
 <meta name="keywords" content="API中转站,中转站倍率,中转站怎么选,API中转稳定性,中转站风险">
-<link rel="canonical" href="api-transit-guide.html">
+<link rel="canonical" href="https://ai-vps.github.io/guides/api-transit-guide.html">
 <link rel="stylesheet" href="../css/style.css">
 
   <link rel="dns-prefetch" href="//www.google-analytics.com">
   <meta name="theme-color" content="#e74c3c">
 
   <meta property="og:updated_time" content="2026-08-23">
+<meta property="og:url" content="https://ai-vps.github.io/guides/api-transit-guide.html">
 </head>
 <body>
-
 <header class="header">
   <div class="header-inner">
     <div style="display:flex;align-items:center;gap:10px">
@@ -53,186 +53,21 @@
     <a href="../merchants-all.html">商家大全</a><a href="../gpu-server-trade.html">硬件现货</a>
   </div>
 </nav>
-<div class="promo-strip" id="promo-strip">
-<style>
-.promo-strip{display:flex;flex-wrap:wrap;background:linear-gradient(90deg,#16213e,#1d3a6e 50%,#16213e);border-bottom:2px solid #e74c3c}
-.promo-strip a{flex:1;min-width:270px;display:flex;align-items:center;justify-content:center;gap:9px;padding:10px 14px;color:#fff;text-decoration:none;font-size:14px;border-right:1px solid rgba(255,255,255,.16)}
-.promo-strip a:last-child{border-right:none}
-.promo-strip a:hover{background:rgba(255,255,255,.09)}
-.promo-badge{background:#e74c3c;color:#fff;font-size:12px;font-weight:700;padding:1px 8px;border-radius:10px;margin:0 4px}
-@media(max-width:640px){.promo-strip a{font-size:12px;padding:8px 10px;gap:6px}.promo-badge{font-size:11px;padding:1px 6px}}
-</style>
-<a href="../tencent-cloud-intl.html" title="腾讯云海外云服务器6折优惠">
-<svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 17.5h10a4 4 0 0 0 .8-7.92 5.5 5.5 0 0 0-10.76-1.1A4.5 4.5 0 0 0 7 17.5Z" stroke="#7ec8ff" stroke-width="1.6" stroke-linejoin="round"/><path d="m9.2 13 2 2 3.8-4.4" stroke="#ffd166" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-<span>腾讯云海外云服务器<span class="promo-badge">限时6折</span>香港/新加坡月付33.6元起</span>
-</a>
-<a href="../aliyun-global.html" title="阿里云国内外云服务器6折优惠">
-<svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 17.5h10a4 4 0 0 0 .8-7.92 5.5 5.5 0 0 0-10.76-1.1A4.5 4.5 0 0 0 7 17.5Z" stroke="#7ec8ff" stroke-width="1.6" stroke-linejoin="round"/><path d="M12.2 9v5.2m-1.8-3.9 1.8-1.3 1.8 1.3m-3.6 2.6 1.8 1.3 1.8-1.3" stroke="#ffd166" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
-<span>阿里云国内外ECS<span class="promo-badge">限时6折</span>年付412元起</span>
-</a>
-</div>
-
-
 <div class="container">
-
-<div class="breadcrumb"><a href="../index.html">首页</a> &gt; <a href="../guides.html">使用指南</a> &gt; API中转站选购指南</div>
-
-<h1 class="page-title">API中转站怎么选？</h1>
-
-<div class="main-wrap">
-<div class="main-content">
-
-<div class="section">
-  <div class="section-header">
-    <h2><span class="icon"></span>什么是API中转站？</h2>
-  </div>
-  <div class="section-body">
-    <p style="font-size:14px;line-height:1.8;color:#555;margin-bottom:12px">API中转站是一个"中间人"——它帮你转发API请求到OpenAI、Anthropic、Google等官方服务商。你调用中转站的API，中转站再帮你调用官方API，然后把结果返回给你。</p>
-    <p style="font-size:14px;line-height:1.8;color:#555;margin-bottom:12px">为什么有人用中转站？主要原因有几个：</p>
-    <p style="font-size:14px;line-height:1.8;color:#555;margin-bottom:12px">1. <strong>价格更低：</strong>中转站通常能拿到比官方更便宜的价格（通过批量采购、优惠渠道等），然后以较低的价格转售给你。</p>
-    <p style="font-size:14px;line-height:1.8;color:#555;margin-bottom:12px">2. <strong>支付方便：</strong>很多中转站支持支付宝、微信等国内支付方式，不需要外币信用卡。</p>
-    <p style="font-size:14px;line-height:1.8;color:#555">3. <strong>多模型聚合：</strong>一个中转站通常支持多个AI模型（GPT、Claude、Gemini等），你只需要注册一个账号就能用所有模型。</p>
-  </div>
+<div class="breadcrumb"><a href="/index.html">首页</a> &gt; API中转站怎么选？</div>
+<main style="max-width:820px;margin:0 auto;padding:30px 15px">
+<h1 style="color:#2c3e50;font-size:26px;line-height:1.4;margin-bottom:15px">API中转站怎么选？</h1>
+<p style="color:#666;line-height:1.9;font-size:15px">API中转站选购指南。搞清倍率是什么意思、怎么判断中转站靠不靠谱、有哪些常见风险、怎么选到稳定的中转站。</p>
+<p style="color:#999;font-size:13px;margin:18px 0">本页为摘要。完整内容（在售套餐、价格表、用户评价、常见问题）在主站持续更新：</p>
+<a href="https://ai-vps.cc.cd/guides/api-transit-guide.html" style="display:inline-block;background:#e74c3c;color:#fff;padding:12px 32px;border-radius:4px;font-size:16px;font-weight:600;text-decoration:none">阅读完整内容 &raquo;</a>
+<p style="margin-top:25px"><a href="/vps-deals.html" style="color:#e74c3c">← 返回 VPS 优惠汇总</a></p>
+</main>
 </div>
-
-<div class="section">
-  <div class="section-header">
-    <h2><span class="icon"></span>倍率到底什么意思？</h2>
-  </div>
-  <div class="section-body">
-    <p style="font-size:14px;line-height:1.8;color:#555;margin-bottom:12px">中转站的"倍率"是它的报价相对于官方价格的系数。</p>
-    <p style="font-size:14px;line-height:1.8;color:#555;margin-bottom:12px">举个例子：官方Claude Sonnet 5的输入价格是$3/百万token。如果中转站的倍率是0.2x，那中转站的报价就是$3 × 0.2 = $0.6/百万token。</p>
-    <p style="font-size:14px;line-height:1.8;color:#555;margin-bottom:12px"><strong>0.2x不代表"打两折"这么简单。</strong>低倍率可能意味着：</p>
-    <p style="font-size:14px;line-height:1.8;color:#555;margin-bottom:12px">- 中转站使用了共享的API额度（很多人共用一个账号的额度）</p>
-    <p style="font-size:14px;line-height:1.8;color:#555;margin-bottom:12px">- 中转站利用了某些优惠渠道拿到的低价额度</p>
-    <p style="font-size:14px;line-height:1.8;color:#555;margin-bottom:12px">- 中转站自己补贴引流（不可持续）</p>
-    <p style="font-size:14px;line-height:1.8;color:#555"><strong>关键是：</strong>低倍率的中转站可能随时被限流、降速或跑路。选择时不能只看价格。</p>
-  </div>
-</div>
-
-<div class="section">
-  <div class="section-header">
-    <h2><span class="icon"></span>怎么判断中转站靠不靠谱？</h2>
-  </div>
-  <div class="section-body">
-    <table class="price-table">
-      <thead><tr><th>判断维度</th><th>靠谱信号</th><th>危险信号</th></tr></thead>
-      <tbody>
-        <tr><td>运营时间</td><td>运营6个月以上</td><td>刚上线不到1个月</td></tr>
-        <tr><td>用户社区</td><td>Telegram群/QQ群活跃，有人反馈</td><td>没有社区或群不活跃</td></tr>
-        <tr><td>支持模型</td><td>主流模型齐全，有更新日志</td><td>只支持一两个模型</td></tr>
-        <tr><td>余额查询</td><td>提供余额和用量查询</td><td>不提供查询或查询不准</td></tr>
-        <tr><td>日志功能</td><td>提供API调用日志</td><td>没有日志</td></tr>
-        <tr><td>支付方式</td><td>支持支付宝/微信</td><td>只支持加密货币</td></tr>
-        <tr><td>文档质量</td><td>有完整的API文档和使用说明</td><td>文档简陋或没有</td></tr>
-      </tbody>
-    </table>
-  </div>
-</div>
-
-<div class="section">
-  <div class="section-header">
-    <h2><span class="icon"></span>常见风险</h2>
-  </div>
-  <div class="section-body">
-    <div class="card-list">
-      <div class="card-item">
-        <div class="card-icon" style="background:#e74c3c">1</div>
-        <div class="card-info">
-          <div class="name">跑路风险</div>
-          <div class="desc">中转站收了你的充值款后关闭网站失联。这种情况在行业内不算罕见，尤其是刚上线不久的小站。建议：不要一次性充太多钱，用多少充多少。</div>
-        </div>
-      </div>
-      <div class="card-item">
-        <div class="card-icon" style="background:#e74c3c">2</div>
-        <div class="card-info">
-          <div class="name">限流/降速</div>
-          <div class="desc">低价中转站在高峰期可能出现严重的限流或响应变慢。这是因为共享额度的用户太多，官方对单一账号做了速率限制。影响你的使用体验。</div>
-        </div>
-      </div>
-      <div class="card-item">
-        <div class="card-icon" style="background:#e74c3c">3</div>
-        <div class="card-info">
-          <div class="name">数据安全</div>
-          <div class="desc">你的API请求会经过中转站服务器，理论上中转站可以看到你的请求内容。如果你的场景涉及敏感数据（公司代码、商业机密），要特别注意这一点。</div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-</div>
-
-<aside class="sidebar">
-  <div class="side-block">
-    <div class="side-title">相关页面</div>
-    <div class="side-body">
-      <ul class="side-list">
-        <li><a href="../ai-api.html">API中转站比价</a></li>
-        <li><a href="deepseek-api-guide.html">DeepSeek API接入</a></li>
-        <li><a href="../ai-api.html">API中转站比价</a></li>
-        <li><a href="../ai-subscriptions.html">AI订阅比价</a></li>
-      </ul>
-    </div>
-  </div>
-</aside>
-
-</div>
-</div>
-
 <footer class="footer">
-  <div class="links">
-    <a href="../index.html">首页</a>
-    <a href="../vps-deals.html">VPS优惠</a>
-    <a href="../free-resources.html">免费资源</a>
-    <a href="../ai-subscriptions.html">AI订阅</a>
-    <a href="../ai-api.html">API比价</a>
-    <a href="../ai-transit.html">AI中转站</a>
-    <a href="../domain.html">域名注册</a>
-    <a href="../guides.html">使用指南</a>
-  </div>
-  <p>本站信息仅供参考，价格以各平台官网为准。推广链接不影响您的购买价格。</p>
   <p>© 2016-2026 AI-VPS比价网 · 运营10年</p>
+  <p><a href="https://ai-vps.cc.cd">ai-vps.cc.cd</a> · AI中转站 · VPS优惠 · API比价</p>
 </footer>
-
-
-<div id="back-to-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" style="position:fixed;bottom:20px;right:20px;width:40px;height:40px;background:#e74c3c;color:#fff;border-radius:50%;display:none;align-items:center;justify-content:center;cursor:pointer;z-index:999;font-size:18px;box-shadow:0 2px 8px rgba(0,0,0,.3)">↑</div>
-<script>
-window.addEventListener('scroll',function(){
-  document.getElementById('back-to-top').style.display = window.scrollY > 300 ? 'flex' : 'none';
-});
-</script>
-
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "HowTo",
-  "name": "API中转站选购指南",
-  "step": [
-    {
-      "@type": "HowToStep",
-      "name": "了解中转站工作原理",
-      "text": "了解中转站工作原理"
-    },
-    {
-      "@type": "HowToStep",
-      "name": "对比倍率和稳定性",
-      "text": "对比倍率和稳定性"
-    },
-    {
-      "@type": "HowToStep",
-      "name": "选择合适的中转站",
-      "text": "选择合适的中转站"
-    },
-    {
-      "@type": "HowToStep",
-      "name": "小额测试后正式使用",
-      "text": "小额测试后正式使用"
-    }
-  ]
-}
-</script>
-<script src="../search-index.js"></script>
-<script src="js/prefetch.js"></script>
+<script src="/js/theme.js"></script>
+<script src="/js/main.js"></script>
 </body>
 </html>

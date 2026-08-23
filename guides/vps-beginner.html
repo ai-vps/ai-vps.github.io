@@ -9,16 +9,16 @@
 <title>VPS新手入门：从零开始选主机 - 什么是VPS、怎么选、怎么用</title>
 <meta name="description" content="VPS新手入门教程。从什么是VPS讲起，帮你搞清楚KVM和OpenVZ的区别、怎么选机房、怎么选配置，以及购买后的基本操作。">
 <meta name="keywords" content="VPS入门,VPS是什么,怎么选VPS,KVM和OpenVZ区别,VPS机房选择,VPS新手教程">
-<link rel="canonical" href="vps-beginner.html">
+<link rel="canonical" href="https://ai-vps.github.io/guides/vps-beginner.html">
 <link rel="stylesheet" href="../css/style.css">
 
   <link rel="dns-prefetch" href="//www.google-analytics.com">
   <meta name="theme-color" content="#e74c3c">
 
   <meta property="og:updated_time" content="2026-08-23">
+<meta property="og:url" content="https://ai-vps.github.io/guides/vps-beginner.html">
 </head>
 <body>
-
 <header class="header">
   <div class="header-inner">
     <div style="display:flex;align-items:center;gap:10px">
@@ -53,198 +53,21 @@
     <a href="../merchants-all.html">商家大全</a><a href="../gpu-server-trade.html">硬件现货</a>
   </div>
 </nav>
-<div class="promo-strip" id="promo-strip">
-<style>
-.promo-strip{display:flex;flex-wrap:wrap;background:linear-gradient(90deg,#16213e,#1d3a6e 50%,#16213e);border-bottom:2px solid #e74c3c}
-.promo-strip a{flex:1;min-width:270px;display:flex;align-items:center;justify-content:center;gap:9px;padding:10px 14px;color:#fff;text-decoration:none;font-size:14px;border-right:1px solid rgba(255,255,255,.16)}
-.promo-strip a:last-child{border-right:none}
-.promo-strip a:hover{background:rgba(255,255,255,.09)}
-.promo-badge{background:#e74c3c;color:#fff;font-size:12px;font-weight:700;padding:1px 8px;border-radius:10px;margin:0 4px}
-@media(max-width:640px){.promo-strip a{font-size:12px;padding:8px 10px;gap:6px}.promo-badge{font-size:11px;padding:1px 6px}}
-</style>
-<a href="../tencent-cloud-intl.html" title="腾讯云海外云服务器6折优惠">
-<svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 17.5h10a4 4 0 0 0 .8-7.92 5.5 5.5 0 0 0-10.76-1.1A4.5 4.5 0 0 0 7 17.5Z" stroke="#7ec8ff" stroke-width="1.6" stroke-linejoin="round"/><path d="m9.2 13 2 2 3.8-4.4" stroke="#ffd166" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-<span>腾讯云海外云服务器<span class="promo-badge">限时6折</span>香港/新加坡月付33.6元起</span>
-</a>
-<a href="../aliyun-global.html" title="阿里云国内外云服务器6折优惠">
-<svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 17.5h10a4 4 0 0 0 .8-7.92 5.5 5.5 0 0 0-10.76-1.1A4.5 4.5 0 0 0 7 17.5Z" stroke="#7ec8ff" stroke-width="1.6" stroke-linejoin="round"/><path d="M12.2 9v5.2m-1.8-3.9 1.8-1.3 1.8 1.3m-3.6 2.6 1.8 1.3 1.8-1.3" stroke="#ffd166" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
-<span>阿里云国内外ECS<span class="promo-badge">限时6折</span>年付412元起</span>
-</a>
-</div>
-
-
 <div class="container">
-
-<div class="breadcrumb"><a href="../index.html">首页</a> &gt; <a href="../guides.html">使用指南</a> &gt; VPS新手入门<div style="text-align:right;margin:10px 0"><a href="javascript:window.print()" style="font-size:12px;color:#999">🖨️ 打印本页</a></div>
+<div class="breadcrumb"><a href="/index.html">首页</a> &gt; VPS新手入门：从零开始选主机</div>
+<main style="max-width:820px;margin:0 auto;padding:30px 15px">
+<h1 style="color:#2c3e50;font-size:26px;line-height:1.4;margin-bottom:15px">VPS新手入门：从零开始选主机</h1>
+<p style="color:#666;line-height:1.9;font-size:15px">VPS新手入门教程。从什么是VPS讲起，帮你搞清楚KVM和OpenVZ的区别、怎么选机房、怎么选配置，以及购买后的基本操作。</p>
+<p style="color:#999;font-size:13px;margin:18px 0">本页为摘要。完整内容（在售套餐、价格表、用户评价、常见问题）在主站持续更新：</p>
+<a href="https://ai-vps.cc.cd/guides/vps-beginner.html" style="display:inline-block;background:#e74c3c;color:#fff;padding:12px 32px;border-radius:4px;font-size:16px;font-weight:600;text-decoration:none">阅读完整内容 &raquo;</a>
+<p style="margin-top:25px"><a href="/vps-deals.html" style="color:#e74c3c">← 返回 VPS 优惠汇总</a></p>
+</main>
 </div>
-
-<h1 class="page-title">VPS新手入门：从零开始选主机</h1>
-
-<div class="main-wrap">
-<div class="main-content">
-
-<div class="section">
-  <div class="section-header">
-    <h2><span class="icon"></span>VPS到底是什么？</h2>
-  </div>
-  <div class="section-body">
-    <p style="font-size:14px;line-height:1.8;color:#555;margin-bottom:12px">VPS全称Virtual Private Server（虚拟专用服务器）。简单说就是一台物理服务器被切割成多个独立的虚拟机，每个VPS都有自己独立的操作系统、内存、硬盘和网络资源，互不干扰。</p>
-    <p style="font-size:14px;line-height:1.8;color:#555;margin-bottom:12px">你可以把VPS理解为一台"远程电脑"——它24小时运行在机房里，你可以通过SSH（命令行）或远程桌面（图形界面）连接上去，装任何你想要的软件和服务。</p>
-    <p style="font-size:14px;line-height:1.8;color:#555">VPS最常见的用途：搭建网站、运行脚本、做反向代理、搭建个人服务、跑一些轻量级的应用。现在也有不少人用VPS来跑AI相关的推理服务（不过需要配置够高）。</p>
-  </div>
-</div>
-
-<div class="section">
-  <div class="section-header">
-    <h2><span class="icon"></span>KVM和OpenVZ怎么选？</h2>
-  </div>
-  <div class="section-body">
-    <p style="font-size:14px;line-height:1.8;color:#555;margin-bottom:12px">现在主流的VPS虚拟化技术有两种：KVM和OpenVZ。</p>
-    <p style="font-size:14px;line-height:1.8;color:#555;margin-bottom:12px"><strong>KVM</strong>是完全虚拟化，每个VPS有自己独立的内核，你可以自由安装任何操作系统（包括Windows），性能更稳定，资源隔离更好。现在绝大多数商家都用KVM。</p>
-    <p style="font-size:14px;line-height:1.8;color:#555;margin-bottom:12px"><strong>OpenVZ</strong>是容器化方案，所有VPS共享宿主机的内核，所以你只能用Linux系统，不能自己编译内核或装模块。价格通常更便宜但灵活性差。</p>
-    <p style="font-size:14px;line-height:1.8;color:#555"><strong>建议：</strong>除非预算特别紧，否则直接选KVM。现在KVM VPS的价格已经很低了（年付$10起步），没必要为了省几块钱选OpenVZ。</p>
-  </div>
-</div>
-
-<div class="section">
-  <div class="section-header">
-    <h2><span class="icon"></span>机房怎么选？</h2>
-  </div>
-  <div class="section-body">
-    <p style="font-size:14px;line-height:1.8;color:#555;margin-bottom:12px">VPS机房的选择主要看两个因素：你的用途和你的地理位置。</p>
-    <p style="font-size:14px;line-height:1.8;color:#555;margin-bottom:12px"><strong>如果主要给国内用户访问：</strong>优先选洛杉矶机房（美国西海岸，到中国延迟最低）。搬瓦工的CN2 GIA线路是公认对国内最友好的，但价格贵。RackNerd的洛杉矶机房线路质量一般，但价格便宜。</p>
-    <p style="font-size:14px;line-height:1.8;color:#555;margin-bottom:12px"><strong>如果不care国内速度：</strong>随便选，哪个便宜选哪个。圣何塞、西雅图、纽约都可以。</p>
-    <p style="font-size:14px;line-height:1.8;color:#555"><strong>简单判断方法：</strong>ping一下机房的IP地址，看延迟和丢包率。延迟<200ms、丢包率<5%就算及格。</p>
-  </div>
-</div>
-
-<div class="section">
-  <div class="section-header">
-    <h2><span class="icon"></span>配置怎么选？</h2>
-  </div>
-  <div class="section-body">
-    <p style="font-size:14px;line-height:1.8;color:#555;margin-bottom:12px">不同用途需要不同配置，这里给一个大致参考：</p>
-    <table class="price-table">
-      <thead><tr><th>配置</th><th>适合用途</th><th>预算参考</th></tr></thead>
-      <tbody>
-        <tr><td>512M-768M内存</td><td>DNS、反代、轻量脚本、监控</td><td>$10-15/年</td></tr>
-        <tr><td>1G-2G内存</td><td>WordPress博客、个人网站、Telegram Bot</td><td>$15-30/年</td></tr>
-        <tr><td>2G-4G内存</td><td>宝塔面板+多站点、小型数据库</td><td>$30-60/年</td></tr>
-        <tr><td>4G-8G内存</td><td>Docker应用、轻量AI推理（Ollama）</td><td>$60-120/年</td></tr>
-        <tr><td>8G以上</td><td>多服务并行、较大模型推理</td><td>$100+/年</td></tr>
-      </tbody>
-    </table>
-  </div>
-</div>
-
-<div class="section">
-  <div class="section-header">
-    <h2><span class="icon"></span>购买后怎么用？</h2>
-  </div>
-  <div class="section-body">
-    <p style="font-size:14px;line-height:1.8;color:#555;margin-bottom:12px">1. 付款后商家会发一封邮件，里面有VPS的IP地址、root密码和SSH端口。</p>
-    <p style="font-size:14px;line-height:1.8;color:#555;margin-bottom:12px">2. 用SSH工具（Windows用PuTTY或Xshell，Mac/Linux用终端）连接上去。</p>
-    <p style="font-size:14px;line-height:1.8;color:#555;margin-bottom:12px">3. 第一次登录后建议改密码：<code style="background:#f5f5f5;padding:2px 6px;border-radius:3px">passwd root</code></p>
-    <p style="font-size:14px;line-height:1.8;color:#555;margin-bottom:12px">4. 更新系统：<code style="background:#f5f5f5;padding:2px 6px;border-radius:3px">apt update && apt upgrade -y</code>（Ubuntu/Debian）或 <code style="background:#f5f5f5;padding:2px 6px;border-radius:3px">yum update -y</code>（CentOS）</p>
-    <p style="font-size:14px;line-height:1.8;color:#555">5. 开始装你需要的服务。新手推荐装宝塔面板：<code style="background:#f5f5f5;padding:2px 6px;border-radius:3px">wget -O install.sh https://download.bt.cn/install/install_6.0.sh && sh install.sh</code></p>
-  </div>
-</div>
-
-</div>
-
-<aside class="sidebar">
-  <div class="side-block">
-    <div class="side-title">相关指南</div>
-    <div class="side-body">
-      <ul class="side-list">
-        <li><a href="../racknerd-review.html">RackNerd深度评测</a></li>
-        <li><a href="vps-for-ai.html">用VPS跑AI推理</a></li>
-        <li><a href="../vps-compare.html">VPS商家对比</a></li>
-        <li><a href="../vps-deals.html">VPS优惠汇总</a></li>
-      </ul>
-    </div>
-  </div>
-  <div class="side-block">
-    <div class="side-title">热门VPS</div>
-    <div class="side-body">
-      <ul class="side-list">
-        <li><a href="https://my.racknerd.com/aff.php?aff=20729&pid=695" target="_blank" rel="nofollow noopener"><span class="num">1</span>RackNerd $10.18/年</a></li>
-        <li><a href="https://my.racknerd.com/aff.php?aff=20729&pid=358" target="_blank" rel="nofollow noopener"><span class="num">2</span>RackNerd $10.98/年</a></li>
-        <li><a href="https://my.racknerd.com/aff.php?aff=20729&pid=952" target="_blank" rel="nofollow noopener"><span class="num">3</span>RackNerd $21.99/年</a></li>
-      </ul>
-    </div>
-  </div>
-</aside>
-
-</div>
-</div>
-
 <footer class="footer">
-  <div class="links">
-    <a href="../index.html">首页</a>
-    <a href="../vps-deals.html">VPS优惠</a>
-    <a href="../free-resources.html">免费资源</a>
-    <a href="../ai-subscriptions.html">AI订阅</a>
-    <a href="../ai-api.html">API比价</a>
-    <a href="../ai-transit.html">AI中转站</a>
-    <a href="../domain.html">域名注册</a>
-    <a href="../guides.html">使用指南</a>
-  </div>
-  <p>本站信息仅供参考，价格以各平台官网为准。推广链接不影响您的购买价格。</p>
   <p>© 2016-2026 AI-VPS比价网 · 运营10年</p>
+  <p><a href="https://ai-vps.cc.cd">ai-vps.cc.cd</a> · AI中转站 · VPS优惠 · API比价</p>
 </footer>
-
-
-<div id="back-to-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" style="position:fixed;bottom:20px;right:20px;width:40px;height:40px;background:#e74c3c;color:#fff;border-radius:50%;display:none;align-items:center;justify-content:center;cursor:pointer;z-index:999;font-size:18px;box-shadow:0 2px 8px rgba(0,0,0,.3)">↑</div>
-<script>
-window.addEventListener('scroll',function(){
-  document.getElementById('back-to-top').style.display = window.scrollY > 300 ? 'flex' : 'none';
-});
-</script>
-
-<script>
-document.querySelectorAll('.buy-btn').forEach(function(btn){
-  btn.addEventListener('click',function(){
-    if(typeof gtag==='function') gtag('event','affiliate_click',{event_category:'monetization',event_label:this.href});
-  });
-});
-</script>
-
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "HowTo",
-  "name": "VPS新手入门教程",
-  "step": [
-    {
-      "@type": "HowToStep",
-      "name": "注册VPS商家账号",
-      "text": "注册VPS商家账号"
-    },
-    {
-      "@type": "HowToStep",
-      "name": "选择套餐和机房",
-      "text": "选择套餐和机房"
-    },
-    {
-      "@type": "HowToStep",
-      "name": "完成付款",
-      "text": "完成付款"
-    },
-    {
-      "@type": "HowToStep",
-      "name": "SSH连接服务器",
-      "text": "SSH连接服务器"
-    },
-    {
-      "@type": "HowToStep",
-      "name": "安装操作系统",
-      "text": "安装操作系统"
-    }
-  ]
-}
-</script>
-<script src="../search-index.js"></script>
-<script src="js/prefetch.js"></script>
+<script src="/js/theme.js"></script>
+<script src="/js/main.js"></script>
 </body>
 </html>

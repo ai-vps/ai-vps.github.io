@@ -8,7 +8,7 @@
 <title>Cloudflare通配符SSL教程</title>
 <meta name="description" content="通配符证书">
 <meta name="keywords" content="Cloudflare通配符SSL,通配符证书">
-<link rel="canonical" href="cf-ssl-wildcard.html"><link rel="stylesheet" href="css/style.css">
+<link rel="canonical" href="https://ai-vps.github.io/cf-ssl-wildcard.html"><link rel="stylesheet" href="css/style.css">
 
   <link rel="dns-prefetch" href="//www.google-analytics.com">
   <meta name="theme-color" content="#e74c3c">
@@ -18,6 +18,7 @@
 <meta property="og:description" content="通配符证书">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="AI-VPS比价网">
+<meta property="og:url" content="https://ai-vps.github.io/cf-ssl-wildcard.html">
 </head>
 <body>
 <header class="header">
@@ -53,130 +54,21 @@
     <a href="merchants-all.html">商家大全</a><a href="gpu-server-trade.html">硬件现货</a>
   </div>
 </nav>
-<div class="promo-strip" id="promo-strip">
-<style>
-.promo-strip{display:flex;flex-wrap:wrap;background:linear-gradient(90deg,#16213e,#1d3a6e 50%,#16213e);border-bottom:2px solid #e74c3c}
-.promo-strip a{flex:1;min-width:270px;display:flex;align-items:center;justify-content:center;gap:9px;padding:10px 14px;color:#fff;text-decoration:none;font-size:14px;border-right:1px solid rgba(255,255,255,.16)}
-.promo-strip a:last-child{border-right:none}
-.promo-strip a:hover{background:rgba(255,255,255,.09)}
-.promo-badge{background:#e74c3c;color:#fff;font-size:12px;font-weight:700;padding:1px 8px;border-radius:10px;margin:0 4px}
-@media(max-width:640px){.promo-strip a{font-size:12px;padding:8px 10px;gap:6px}.promo-badge{font-size:11px;padding:1px 6px}}
-</style>
-<a href="tencent-cloud-intl.html" title="腾讯云海外云服务器6折优惠">
-<svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 17.5h10a4 4 0 0 0 .8-7.92 5.5 5.5 0 0 0-10.76-1.1A4.5 4.5 0 0 0 7 17.5Z" stroke="#7ec8ff" stroke-width="1.6" stroke-linejoin="round"/><path d="m9.2 13 2 2 3.8-4.4" stroke="#ffd166" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-<span>腾讯云海外云服务器<span class="promo-badge">限时6折</span>香港/新加坡月付33.6元起</span>
-</a>
-<a href="aliyun-global.html" title="阿里云国内外云服务器6折优惠">
-<svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 17.5h10a4 4 0 0 0 .8-7.92 5.5 5.5 0 0 0-10.76-1.1A4.5 4.5 0 0 0 7 17.5Z" stroke="#7ec8ff" stroke-width="1.6" stroke-linejoin="round"/><path d="M12.2 9v5.2m-1.8-3.9 1.8-1.3 1.8 1.3m-3.6 2.6 1.8 1.3 1.8-1.3" stroke="#ffd166" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
-<span>阿里云国内外ECS<span class="promo-badge">限时6折</span>年付412元起</span>
-</a>
-</div>
-
-
-
 <div class="container">
-<div class="breadcrumb"><a href="index.html">首页</a> &gt; 使用指南 > SSL</div>
-
-<!-- GEO优化：页面元信息 -->
-<div style="background:#f8f9fa;border:1px solid #e0e0e0;border-radius:6px;padding:15px 20px;margin-bottom:15px;font-size:13px">
-  <div style="display:flex;flex-wrap:wrap;gap:15px;margin-bottom:10px">
-    <div><strong>最后更新：2026年8月23日</span></div>
-    <div><strong>数据来源：</strong>Cloudflare官方文档</div>
-  </div>
-
-<div style="background:#fff;border-left:4px solid #f39c12;padding:15px 20px;margin-bottom:20px;border-radius:0 6px 6px 0;box-shadow:0 2px 8px rgba(0,0,0,.08)">
-  <div style="font-size:15px;font-weight:600;color:#2c3e50;margin-bottom:10px">Cloudflare功能详解：从入门到精通</div>
-  <div style="font-size:13px;color:#666;line-height:1.8">
-    Cloudflare是全球最大的CDN和网络安全服务商之一，提供<strong>免费CDN、DDoS防护、SSL证书、DNS解析</strong>等多项服务。无论你是个人博客还是企业网站，都可以从Cloudflare获益。本教程基于Cloudflare官方文档整理，帮你快速掌握各项功能的配置方法。
-  </div>
+<div class="breadcrumb"><a href="/index.html">首页</a> &gt; Cloudflare通配符SSL教程</div>
+<main style="max-width:820px;margin:0 auto;padding:30px 15px">
+<h1 style="color:#2c3e50;font-size:26px;line-height:1.4;margin-bottom:15px">Cloudflare通配符SSL教程</h1>
+<p style="color:#666;line-height:1.9;font-size:15px">通配符证书</p>
+<p style="color:#999;font-size:13px;margin:18px 0">本页为摘要。完整内容（在售套餐、价格表、用户评价、常见问题）在主站持续更新：</p>
+<a href="https://ai-vps.cc.cd/cf-ssl-wildcard.html" style="display:inline-block;background:#e74c3c;color:#fff;padding:12px 32px;border-radius:4px;font-size:16px;font-weight:600;text-decoration:none">阅读完整内容 &raquo;</a>
+<p style="margin-top:25px"><a href="/vps-deals.html" style="color:#e74c3c">← 返回 VPS 优惠汇总</a></p>
+</main>
 </div>
-  <div style="color:#666;line-height:1.6">
-    <strong>页面说明：</strong>本页为Cloudflare相关功能的教程和说明，内容基于官方文档整理。
-  </div>
-</div>
-<div class="main-wrap"><div class="main-content">
-<div class='section'><div class='section-header'><h2><span class='icon'></span>通配符SSL</h2></div><div class='section-body'><p style='font-size:14px;line-height:1.8;color:#555'>Business+可用。覆盖所有子域名。</p></div></div>
-</div><aside class="sidebar">
-
-<!-- 广告位：侧边栏 -->
-<div class="ad-slot ad-sidebar" id="ad-sidebar">
-  <span class="ad-slot-label">广告位</span>
-  <!-- 在此插入广告代码 -->
-</div>
-
-<div class="side-block"><div class="side-title">相关页面</div><div class="side-body"><ul class="side-list">
-<li><a href="free-resources.html">免费资源汇总</a></li><li><a href="guides.html">使用指南</a></li><li><a href="tools.html">在线工具</a></li>
-</ul></div></div>
-</aside></div></div>
-
-
-<div class="section">
-  <div class="section-header">
-    <h2><span class="icon"></span>Cloudflare相关教程</h2>
-  </div>
-  <div class="section-body">
-    <div style="font-size:13px;color:#666;line-height:1.8">
-      <strong>热门教程：</strong>
-      <a href="cf-ssl.html" style="display:inline-block;background:#f0f0f0;padding:3px 8px;border-radius:3px;margin:2px;font-size:12px;text-decoration:none">SSL证书配置</a>
-      <a href="cf-cdn.html" style="display:inline-block;background:#f0f0f0;padding:3px 8px;border-radius:3px;margin:2px;font-size:12px;text-decoration:none">CDN加速配置</a>
-      <a href="cf-ddos-protection.html" style="display:inline-block;background:#f0f0f0;padding:3px 8px;border-radius:3px;margin:2px;font-size:12px;text-decoration:none">DDoS防护设置</a>
-      <a href="cf-dns.html" style="display:inline-block;background:#f0f0f0;padding:3px 8px;border-radius:3px;margin:2px;font-size:12px;text-decoration:none">DNS解析配置</a>
-      <a href="cf-waf-rules.html" style="display:inline-block;background:#f0f0f0;padding:3px 8px;border-radius:3px;margin:2px;font-size:12px;text-decoration:none">WAF防火墙规则</a>
-      <a href="cf-workers.html" style="display:inline-block;background:#f0f0f0;padding:3px 8px;border-radius:3px;margin:2px;font-size:12px;text-decoration:none">Workers边缘计算</a>
-    </div>
-  </div>
-</div>
-
-
-
-<!-- 广告位：底部 -->
-<div class="ad-slot ad-footer" id="ad-footer">
-  <span class="ad-slot-label">广告位</span>
-  <!-- 在此插入广告代码 -->
-</div>
-
-
 <footer class="footer">
-  <div class="links">
-    <a href="index.html">首页</a>
-    <a href="vps-deals.html">VPS优惠</a>
-    <a href="free-resources.html">免费资源</a>
-    <a href="ai-subscriptions.html">AI订阅</a>
-    <a href="ai-api.html">API比价</a>
-    <a href="ai-transit.html">AI中转站</a>
-    <a href="domain.html">域名注册</a>
-    <a href="guides.html">使用指南</a>
-  </div>
-  <p>本站信息仅供参考，价格以各平台官网为准。推广链接不影响您的购买价格。</p>
   <p>© 2016-2026 AI-VPS比价网 · 运营10年</p>
+  <p><a href="https://ai-vps.cc.cd">ai-vps.cc.cd</a> · AI中转站 · VPS优惠 · API比价</p>
 </footer>
-
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  "itemListElement": [
-    {
-      "@type": "ListItem",
-      "position": 1,
-      "name": "首页",
-      "item": "https://ai-vps.cc.cd/index.html"
-    },
-    {
-      "@type": "ListItem",
-      "position": 2,
-      "name": "SSL"
-    }
-  ]
-}
-</script>
-
-<div id="back-to-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" style="position:fixed;bottom:20px;right:20px;width:40px;height:40px;background:#e74c3c;color:#fff;border-radius:50%;display:none;align-items:center;justify-content:center;cursor:pointer;z-index:999;font-size:18px;box-shadow:0 2px 8px rgba(0,0,0,.3)">↑</div>
-<script>
-window.addEventListener('scroll',function(){
-  document.getElementById('back-to-top').style.display = window.scrollY > 300 ? 'flex' : 'none';
-});
-</script>
-<script src="search-index.js"></script>
-<script src="js/prefetch.js"></script>
-</body></html>
+<script src="/js/theme.js"></script>
+<script src="/js/main.js"></script>
+</body>
+</html>
